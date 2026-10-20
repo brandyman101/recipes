@@ -23,5 +23,17 @@
     "created_at": "2026-10-20T12:30:40.909Z",
     "recipe_id": null,
     "fail_reason": null
+  },
+  {
+    "id": "inbox-mvh3dbw3-5j",
+    "url": "https://allwaysdelicious.com/borekas/",
+    "image": null,
+    "file": null,
+    "note": "Avi's",
+    "text": null,
+    "status": "pending",
+    "created_at": "2026-10-20T19:44:08.307Z",
+    "recipe_id": null,
+    "fail_reason": null
   }
 ]
