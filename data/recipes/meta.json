@@ -23,5 +23,30 @@
     "tags_need_review": false,
     "photo_generated": false,
     "search_text": "fluffy pancakes dairy breakfast brunch cafe delites pancakes kid-friendly make-ahead"
+  },
+  {
+    "id": "avis-beef-borekas",
+    "title": "Avi's Beef Borekas",
+    "banner_image": "assets/images/avis-beef-borekas.jpg",
+    "kosher_status": "meat",
+    "kosher_for_passover": false,
+    "categories": [
+      "Appetizers",
+      "Baked Goods"
+    ],
+    "tags": [
+      "borekas",
+      "pastelicos",
+      "appetizer",
+      "jewish",
+      "pastry"
+    ],
+    "prep_minutes": 25,
+    "cook_minutes": 35,
+    "servings": "18 borekas",
+    "leftover_friendly": true,
+    "tags_need_review": false,
+    "photo_generated": false,
+    "search_text": "avi's beef borekas pastelicos beef puff pastry appetizer jewish baked goods onion olive oil ground beef paprika lemon juice parsley pine nuts egg sesame seeds"
   }
 ]
