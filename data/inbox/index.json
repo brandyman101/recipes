@@ -18,7 +18,8 @@
     "file": "data/inbox/inbox-mvgnvu22-4pr.pdf",
     "note": null,
     "text": null,
-    "status": "pending",
+    "status": "duplicate",
+    "duplicate_of": "best-fluffy-pancakes",
     "created_at": "2026-10-20T12:30:40.909Z",
     "recipe_id": null,
     "fail_reason": null
