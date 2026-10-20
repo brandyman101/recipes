@@ -1,0 +1,120 @@
+{
+  "banner_image": "assets/images/macarone-patlotski.jpg",
+  "categories": [
+    "Main Dishes"
+  ],
+  "cook_minutes": 40,
+  "id": "macarone-patlotski",
+  "ingredients": [
+    {
+      "items": [
+        {
+          "item": "large onion",
+          "prep": "chopped",
+          "qty": "1",
+          "unit": ""
+        },
+        {
+          "item": "garlic",
+          "prep": "minced",
+          "qty": "2-3",
+          "unit": "cloves"
+        },
+        {
+          "item": "ground meat",
+          "prep": "",
+          "qty": "1",
+          "unit": "lb"
+        },
+        {
+          "item": "taco seasoning",
+          "needs_review": true,
+          "prep": "or more",
+          "qty": "1",
+          "unit": "tbsp"
+        },
+        {
+          "item": "cumin",
+          "prep": "a sprinkle",
+          "qty": "",
+          "unit": ""
+        },
+        {
+          "item": "coriander",
+          "prep": "a sprinkle",
+          "qty": "",
+          "unit": ""
+        },
+        {
+          "item": "cayenne pepper or crushed black pepper",
+          "prep": "to taste",
+          "qty": "",
+          "unit": ""
+        },
+        {
+          "item": "tomato sauce (8 oz)",
+          "prep": "",
+          "qty": "1",
+          "unit": "can"
+        },
+        {
+          "item": "water",
+          "prep": "",
+          "qty": "1/2",
+          "unit": "can"
+        },
+        {
+          "item": "pasta",
+          "prep": "cooked per package directions",
+          "qty": "1",
+          "unit": "lb"
+        }
+      ]
+    }
+  ],
+  "instructions": [
+    "Sauté the onion in a large pot over medium heat until soft and slightly browned. Add the garlic and sauté, mixing, for about 3 minutes.",
+    "Add the ground meat and break it into small pieces. Brown the meat until no longer pink.",
+    "Stir in the taco seasoning, cumin, coriander, and cayenne or crushed black pepper; mix well.",
+    "Add the tomato sauce and half a can of water. Bring to a boil, then reduce the heat and simmer for 15 minutes or longer while the pasta cooks.",
+    "Cook the pasta according to the package directions. Drain, add it to the sauce, and mix well.",
+    "Simmer for 5 to 10 minutes, then serve."
+  ],
+  "kosher_for_passover": false,
+  "kosher_status": "meat",
+  "leftover_friendly": true,
+  "notes": "Handwritten family recipe submitted as a photo of a recipe page. Meat dish. The \"seasonings — taco\" line reads as taco seasoning and is flagged for review. Pasta is cooked separately and mixed into the sauce at the end.",
+  "pairings": null,
+  "pdf": "pdfs/macarone-patlotski.pdf",
+  "photo_generated": true,
+  "prep_minutes": 10,
+  "servings": "8",
+  "source": "Submitted photo of a handwritten recipe (2026-10-20)",
+  "tags": [
+    "pasta",
+    "ground beef",
+    "tomato sauce",
+    "one-pot",
+    "weeknight",
+    "family recipe"
+  ],
+  "tags_need_review": true,
+  "tips": [
+    {
+      "text": "The handwritten note calls for 1 tablespoon or more of taco seasoning. Taste the sauce before the pasta goes in and adjust the seasonings.",
+      "title": "Season boldly"
+    }
+  ],
+  "title": "Macarone Patlotski",
+  "history": [
+    {
+      "ts": "2026-10-20T21:12:53.487Z",
+      "actor": "sous-chef",
+      "action": "intake",
+      "changes": [
+        "Created recipe"
+      ],
+      "reasoning": "Initial intake from photo of handwritten recipe"
+    }
+  ]
+}
