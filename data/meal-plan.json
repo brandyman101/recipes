@@ -157,6 +157,13 @@
           "updatedAt": 1792532451478,
           "updatedBy": "smvh7i3zoi6x0cd",
           "deleted": true
+        },
+        {
+          "id": "mmvh7jw5j",
+          "text": "Bread, Cheese, Milk",
+          "have": false,
+          "updatedAt": 1792532472967,
+          "updatedBy": "smvh7i3zoi6x0cd"
         }
       ],
       "haveGenerated": [],
