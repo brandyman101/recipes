@@ -48,5 +48,30 @@
     "tags_need_review": false,
     "photo_generated": false,
     "search_text": "avi's beef borekas pastelicos beef puff pastry appetizer jewish baked goods onion olive oil ground beef paprika lemon juice parsley pine nuts egg sesame seeds"
+  },
+  {
+    "id": "macarone-patlotski",
+    "title": "Macarone Patlotski",
+    "banner_image": "assets/images/macarone-patlotski.jpg",
+    "kosher_status": "meat",
+    "kosher_for_passover": false,
+    "categories": [
+      "Main Dishes"
+    ],
+    "tags": [
+      "pasta",
+      "ground beef",
+      "tomato sauce",
+      "one-pot",
+      "weeknight",
+      "family recipe"
+    ],
+    "prep_minutes": 10,
+    "cook_minutes": 40,
+    "servings": "8",
+    "leftover_friendly": true,
+    "tags_need_review": true,
+    "photo_generated": true,
+    "search_text": "macarone patlotski meat main dishes pasta ground beef tomato sauce onion garlic cumin coriander taco seasoning one-pot weeknight family recipe"
   }
 ]
