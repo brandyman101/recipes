@@ -124,9 +124,16 @@ async function bridgeSaveRecipe(path, recipe, actor, reasoning, baseSha, action)
 function getEditorName() {
   let name = null;
   try { name = localStorage.getItem('editor_name'); } catch (e) {}
-  if (!name) {
-    name = (window.prompt('Your name (for change history):') || '').trim() || 'Anonymous';
-    try { localStorage.setItem('editor_name', name); } catch (e) {}
+  // 'Anonymous' is a fallback label, never a stored identity: a saved
+  // 'Anonymous' (from a dismissed prompt) counts as unset so the prompt
+  // is offered again on the next save.
+  if (!name || name === 'Anonymous') {
+    const entered = (window.prompt('Your name (for change history):') || '').trim();
+    if (entered && entered !== 'Anonymous') {
+      try { localStorage.setItem('editor_name', entered); } catch (e) {}
+      return entered;
+    }
+    return 'Anonymous';
   }
   return name;
 }
@@ -201,7 +208,8 @@ async function boot() {
   try {
     const cb = '?v=' + Date.now();
     const metaRes = await fetch('data/recipes/meta.json' + cb);
-    // Treat 404 as empty (fresh install where /health?init=1 hasn't run yet)
+    // Missing metadata (e.g. a fresh install before seeding) means an empty
+    // collection, not a fatal error.
     const meta = metaRes.ok ? await metaRes.json() : [];
     metaById = {};
     recipes = [];
@@ -223,7 +231,7 @@ async function boot() {
   window.addEventListener('hashchange', route);
   route();
 
-  // Keep the meal plan fresh when someone else (e.g. a family member) saves:
+  // Keep the meal plan fresh when someone else (e.g. the other cook) saves:
   // re-fetch when the tab regains focus, unless mid-edit.
   const maybeRefreshPlan = async () => {
     if (editingSlot || document.hidden) return;
@@ -642,7 +650,7 @@ function shoppingListHTML() {
   });
   const items = buildShoppingList();
   const from = shoppingFromYmd();
-  const marks = normalizeHaveMarks(week.haveGenerated);
+  const marks = activeHaveMarks(week.haveGenerated);
   // Conflict: item marked have by 2+ distinct sessions and not acknowledged
   const conflictKeys = new Set();
   const byKey = {};
@@ -663,7 +671,7 @@ function shoppingListHTML() {
   const toBuy = [];
   const haveIts = [];
   const optionalIts = [];
-  const promoted = new Set(week.optionalPromoted || []);
+  const promoted = promotedKeySet(week);
   items.forEach(it => {
     const mark = marks.find(m => m.key === it.key);
     if (it.optional && !mark && !promoted.has(it.key)) { optionalIts.push(it); return; }
@@ -685,8 +693,8 @@ function shoppingListHTML() {
       haveIts.push(it);
     }
   });
-  const manToBuy = week.manualItems.filter(m => !m.have);
-  const manHave = week.manualItems.filter(m => m.have);
+  const manToBuy = week.manualItems.filter(m => !m.deleted && !m.have);
+  const manHave = week.manualItems.filter(m => !m.deleted && m.have);
 
   const conflictBadge = k =>
     conflictKeys.has(k)
@@ -724,7 +732,7 @@ function shoppingListHTML() {
   ).join('');
 
   let html = '';
-  if (!items.length && !week.manualItems.length) {
+  if (!items.length && !week.manualItems.some(m => !m.deleted)) {
     html = '<p class="muted">Nothing planned yet' + (from ? ' from the shopping day onward' : '') +
       ' — <a href="#/planner">plan your week</a> and your shopping list builds itself here.</p>';
   } else {
@@ -895,15 +903,23 @@ async function renderShopping(app) {
         const k = genItem.dataset.shop;
         const split = genItem.dataset.shopSplit || null;
         const existing = week.haveGenerated.find(x => x.key === k && x.session === sid);
+        // "Have" belongs to the item, not to the session that checked it:
+        // sessions live in sessionStorage, so every new tab or device is a
+        // new session. Unchecking must therefore work from ANY session —
+        // keying it to the checking session made cross-session items
+        // impossible to uncheck and added the tapper as a false second
+        // checker instead (Argon QA, 2026-10-20).
+        const anyHave = week.haveGenerated.some(x => x.key === k && !x.removed);
         // Promoted optional item: tapping "○" sends it back to Optional.
-        const isPromoted = Array.isArray(week.optionalPromoted) && week.optionalPromoted.includes(k);
-        if (isPromoted && !existing && split !== 'need') {
-          week.optionalPromoted = week.optionalPromoted.filter(x => x !== k);
+        const isPromoted = promotedKeySet(week).has(k);
+        if (isPromoted && !anyHave && split !== 'need') {
+          setPromoted(week, k, false);
           markShopDirty(); rerender(); return;
         }
-        if (existing && split !== 'need') {
-          // Uncheck: remove my mark (tapping the checked portion unchecks all).
-          week.haveGenerated = week.haveGenerated.filter(x => !(x.key === k && x.session === sid));
+        if (anyHave && split !== 'need') {
+          // Uncheck: tombstone EVERY active mark for this key (any session's)
+          // so no checked copy in sync can resurrect it.
+          week.haveGenerated.forEach(x => { if (x.key === k && !x.removed) { x.removed = true; x.at = now; } });
         } else {
           // Check: capture the quantity on the line at check time, so later additions
           // of the same ingredient split into a separate unchecked line.
@@ -915,8 +931,10 @@ async function renderShopping(app) {
             mark.unit = line.unit || '';
           }
           if (existing) {
-            // Update existing mark (split "need" tap) instead of duplicating.
+            // Update existing mark (split "need" tap, or re-check after an
+            // uncheck) instead of duplicating.
             Object.assign(existing, mark);
+            delete existing.removed;
           } else {
             week.haveGenerated.push(mark);
           }
@@ -926,12 +944,16 @@ async function renderShopping(app) {
       if (manItem) {
         const m = (week.manualItems || []).find(x => x.id === manItem.dataset.manual);
         if (m) {
-          if (m.have && m.haveSession === sid) {
-            m.have = false; m.haveSession = null; m.haveAt = 0; m.haveSessions = [];
+          if (m.have) {
+            // Any session can uncheck a manual item (the checking session may
+            // be a closed tab or another device); newest updatedAt wins in
+            // sync, so this uncheck propagates.
+            m.have = false; m.haveSession = null; m.haveAt = 0; m.haveSessions = []; m.updatedAt = now; m.updatedBy = sid;
           } else {
             m.have = true; m.haveSession = sid; m.haveAt = now;
             if (!Array.isArray(m.haveSessions)) m.haveSessions = [];
             if (!m.haveSessions.includes(sid)) m.haveSessions.push(sid);
+            m.updatedAt = now; m.updatedBy = sid;
           }
         }
         markShopDirty(); rerender(); return;
@@ -941,9 +963,8 @@ async function renderShopping(app) {
     const optAdd = e.target.closest('[data-opt-add]');
     if (optAdd) {
       const week = getWeek(thisWeekKey());
-      if (!Array.isArray(week.optionalPromoted)) week.optionalPromoted = [];
       const k = optAdd.dataset.optAdd;
-      if (!week.optionalPromoted.includes(k)) week.optionalPromoted.push(k);
+      setPromoted(week, k, true);
       markShopDirty(); rerender(); return;
     }
     const optHave = e.target.closest('[data-opt-have]');
@@ -953,16 +974,16 @@ async function renderShopping(app) {
       const k = optHave.dataset.optHave;
       week.haveGenerated = normalizeHaveMarks(week.haveGenerated);
       // Remove from promoted if it was there.
-      if (Array.isArray(week.optionalPromoted)) {
-        week.optionalPromoted = week.optionalPromoted.filter(x => x !== k);
-      }
+      setPromoted(week, k, false);
       const line = buildShoppingList().find(it => it.key === k);
       const mark = { key: k, session: sid, at: now };
       if (line && line.qty !== null && line.qty !== undefined) {
         mark.qty = line.qty;
         mark.unit = line.unit || '';
       }
-      week.haveGenerated.push(mark);
+      const exMark = week.haveGenerated.find(x => x.key === k && x.session === sid);
+      if (exMark) { Object.assign(exMark, mark); delete exMark.removed; }
+      else week.haveGenerated.push(mark);
       markShopDirty(); rerender(); return;
     }
     // Dismiss conflict warning
@@ -977,7 +998,8 @@ async function renderShopping(app) {
     const del = e.target.closest('[data-mandel]');
     if (del) {
       const week = getWeek(thisWeekKey());
-      week.manualItems = (week.manualItems || []).filter(x => x.id !== del.dataset.mandel);
+      const dm = (week.manualItems || []).find(x => x.id === del.dataset.mandel);
+      if (dm) { dm.deleted = true; dm.updatedAt = Date.now(); dm.updatedBy = getSessionId(); }
       saveShop(); rerender(); return;
     }
     // Add manual item
@@ -987,7 +1009,7 @@ async function renderShopping(app) {
       if (!text) return;
       const week = getWeek(thisWeekKey());
       if (!Array.isArray(week.manualItems)) week.manualItems = [];
-      week.manualItems.push({ id: 'm' + Date.now().toString(36), text, have: false });
+      week.manualItems.push({ id: 'm' + Date.now().toString(36), text, have: false, updatedAt: Date.now(), updatedBy: getSessionId() });
       saveShop(); rerender();
       const ni = $('#shop-new');
       if (ni) ni.focus();
@@ -1000,9 +1022,9 @@ async function renderShopping(app) {
   const copyBtn = $('#shop-copy');
   if (copyBtn) copyBtn.addEventListener('click', () => {
     const week = getWeek(thisWeekKey());
-    const haveKeys = new Set(normalizeHaveMarks(week.haveGenerated).map(m => m.key));
+    const haveKeys = new Set(activeHaveMarks(week.haveGenerated).map(m => m.key));
     const toBuy = buildShoppingList().filter(it => !haveKeys.has(it.key));
-    const manToBuy = (week.manualItems || []).filter(m => !m.have);
+    const manToBuy = (week.manualItems || []).filter(m => !m.deleted && !m.have);
     const lines = toBuy.map(it => '• ' + it.label).concat(manToBuy.map(m => '• ' + m.text));
     const text = 'Shopping list — week of ' + thisWeekKey() + '\n' + lines.join('\n');
     const done = () => toast('Shopping list copied');
@@ -1017,9 +1039,9 @@ function renderLanding(app) {
   document.title = 'Brandel Family Recipes';
   const week = getWeek(thisWeekKey());
   const items = buildShoppingList();
-  const haveKeys = new Set(normalizeHaveMarks(week.haveGenerated).map(m => m.key));
+  const haveKeys = new Set(activeHaveMarks(week.haveGenerated).map(m => m.key));
   const toBuyCount = items.filter(it => !haveKeys.has(it.key)).length +
-    (week.manualItems || []).filter(m => !m.have).length;
+    (week.manualItems || []).filter(m => !m.deleted && !m.have).length;
   const plannedCount = week.days.reduce((n, d) =>
     n + normalizeSlot(d.lunch).dishes.length + normalizeSlot(d.dinner).dishes.length, 0);
 
@@ -1318,7 +1340,7 @@ function pluralizeScaledUnit(unit, formattedQty) {
 async function renderRecipe(app, id) {
   const r = await ensureRecipe(id);
   if (!r) {
-    app.innerHTML = '<a class="back-link" href="#/">← All recipes</a>' +
+    app.innerHTML = '<a class="back-link" href="#/recipes">← All recipes</a>' +
       '<div class="empty-state"><h2>Recipe not found</h2></div>';
     return;
   }
@@ -1387,7 +1409,7 @@ async function renderRecipe(app, id) {
     (r.leftover_friendly ? 'Good for leftovers.' : 'Best eaten fresh.');
 
   app.innerHTML =
-    '<a class="back-link no-print" href="#/">← All recipes</a>' +
+    '<a class="back-link no-print" href="#/recipes">← All recipes</a>' +
     '<article class="recipe-print">' +
       '<div class="recipe-hero">' + bannerHTML(r) + '</div>' +
       '<h1 class="recipe-title">' + esc(r.title) + '</h1>' +
@@ -1833,11 +1855,12 @@ async function wireAiEdit(recipeId) {
       // Upload via the bridge (same as submissions)
       await ghPut('data/inbox/' + entryId + '.json', JSON.stringify(entry, null, 2),
         'Edit request: ' + recipeId);
-      // Update the inbox index
+      // Update the inbox index — include the request text inline so the
+      // log can show it without fetching each entry file.
       const idxRes = await fetch('data/inbox/index.json?v=' + Date.now());
       let idx = idxRes.ok ? await idxRes.json() : [];
       idx.push({ id: entryId, status: 'pending', type: 'edit', edit_target: recipeId,
-        created_at: entry.created_at });
+        created_at: entry.created_at, text: text.slice(0, 140) });
       await ghPut('data/inbox/index.json', JSON.stringify(idx, null, 2),
         'Edit request index: ' + entryId);
       st.className = 'form-status ok';
@@ -1950,6 +1973,11 @@ async function maybeUploadPhoto(d) {
   const path = 'assets/images/' + d.id + '.jpg';
   await ghPutB64(path, b64, 'Add photo for ' + d.title);
   d.banner_image = path;
+  // A fresh user photo replaces any AI-generated placeholder — and flag the
+  // replacement so saveRecipe can log it even though the banner_image path
+  // itself doesn't change (same filename).
+  d.photo_generated = false;
+  d._photoReplaced = true;
 }
 
 function drawIngEditor() {
@@ -2136,11 +2164,22 @@ async function saveRecipe(id) {
   st.className = 'form-status';
   st.textContent = 'Saving…';
   try {
+    // Resolve the editor name FIRST, synchronously inside the tap handler:
+    // window.prompt() called after an await (e.g. the photo upload) is
+    // silently swallowed by mobile browsers and returns null.
+    const editorName = getEditorName();
     await maybeUploadPhoto(d);
     // Save via the worker-side history endpoint (server diffs + appends history).
-    const actor = 'site-editor (' + getEditorName() + ')';
+    const actor = 'site-editor (' + editorName + ')';
     const reasoningEl = $('#edit-reasoning');
-    const reasoning = reasoningEl ? (reasoningEl.value.trim() || null) : null;
+    let reasoning = reasoningEl ? (reasoningEl.value.trim() || null) : null;
+    // Photo-only edit: the banner path doesn't change, so give the save a
+    // reasoning so the auto-log records it (and drop the temp flag so it
+    // never lands in the recipe JSON).
+    if (d._photoReplaced) {
+      delete d._photoReplaced;
+      if (!reasoning) reasoning = 'Replaced photo';
+    }
     let saveResult;
     try {
       saveResult = await bridgeSaveRecipe('data/recipes/' + id + '.json', d, actor, reasoning, currentEditSha, 'edit');
@@ -2187,24 +2226,8 @@ async function saveRecipe(id) {
     if (i >= 0) recipes[i] = metaEntry;
     metaById[id] = metaEntry;
     byId[id] = d;
-    // Log the direct edit in Recent submissions.
-    try {
-      const entryId = 'edit-' + Date.now().toString(36);
-      const entry = {
-        id: entryId, type: 'direct-edit', edit_target: id,
-        text: null, url: null, image: null, note: 'Direct edit via site',
-        status: 'done', created_at: new Date().toISOString(),
-        recipe_id: id, fail_reason: null
-      };
-      await ghPut('data/inbox/' + entryId + '.json', JSON.stringify(entry, null, 2),
-        'Direct edit log: ' + d.title);
-      const inboxRes = await fetch('data/inbox/index.json?v=' + Date.now());
-      let inboxIdx = inboxRes.ok ? await inboxRes.json() : [];
-      inboxIdx.push({ id: entryId, status: 'done', type: 'direct-edit',
-        edit_target: id, created_at: entry.created_at });
-      await ghPut('data/inbox/index.json', JSON.stringify(inboxIdx, null, 2),
-        'Direct edit log index: ' + entryId);
-    } catch (e) { console.warn('edit log failed', e); }
+    // The worker auto-logs this edit to Recent submissions (no separate
+    // inbox write needed here — handleSaveRecipe logs every edit itself).
     st.className = 'form-status ok';
     st.textContent = 'Saved — the site rebuilds in about a minute.';
     toast('Saved — the site rebuilds in about a minute.');
@@ -2234,11 +2257,15 @@ async function saveNewRecipe() {
   st.className = 'form-status';
   st.textContent = 'Saving…';
   try {
+    // Editor name first, inside the tap (see saveRecipe — prompt() after
+    // an await gets swallowed by mobile browsers).
+    const editorName = getEditorName();
     await maybeUploadPhoto(d);
     // Save via the worker-side history endpoint (initializes history with creation entry).
-    const actor = 'site-editor (' + getEditorName() + ')';
+    const actor = 'site-editor (' + editorName + ')';
     const reasoningEl = $('#edit-reasoning');
     const reasoning = reasoningEl ? (reasoningEl.value.trim() || null) : null;
+    delete d._photoReplaced; // temp flag from maybeUploadPhoto — never persisted
     const saveResult = await bridgeSaveRecipe('data/recipes/' + id + '.json', d, actor, reasoning, null, 'intake');
     if (saveResult.history) d.history = saveResult.history;
     const idx = JSON.parse((await ghGet('data/recipes/index.json')).text);
@@ -2569,29 +2596,103 @@ function normalizeHaveMarks(arr) {
   if (!Array.isArray(arr)) return [];
   return arr.map(x => typeof x === 'string' ? { key: x, session: 'legacy', at: 0 } : x);
 }
-// Union shopping state from `source` week into `target` week (in place).
-// Used everywhere we combine local + server state so neither side wipes the other.
+// Have-marks are {key, session, at}. Supports legacy string array format.
+// A mark with removed: true is a tombstone: the user unchecked it. Tombstones
+// are kept and merged by timestamp so an older checked copy on the server or
+// another device can never resurrect the check.
+function activeHaveMarks(arr) {
+  // Collapse to one entry per (key, session) by newest `at` first, so a stale
+  // duplicate can never shadow a tombstone; then drop tombstones.
+  return mergeHaveMarks(arr, []).filter(m => !m.removed);
+}
+// Merge have-marks by (key, session): the entry with the newest `at` wins,
+// so unchecks (removed tombstones) survive older checked copies, while
+// concurrent checks from two sessions still union (different sessions).
+function mergeHaveMarks(localArr, serverArr) {
+  const byId = new Map();
+  [...normalizeHaveMarks(localArr), ...normalizeHaveMarks(serverArr)].forEach(m => {
+    if (!m || !m.key) return;
+    const id = m.key + '|' + m.session;
+    const cur = byId.get(id);
+    if (!cur || (m.at || 0) >= (cur.at || 0)) byId.set(id, m);
+  });
+  return [...byId.values()];
+}
+// Merge manual items by id. A tombstone (deleted: true) always wins over a
+// live copy; otherwise the copy with the newest updatedAt decides the have
+// state, and haveSessions union when the merged state is "have" (so the
+// two-shopper conflict badge still works).
+function mergeManualItems(localArr, serverArr) {
+  const byId = new Map();
+  [...(Array.isArray(localArr) ? localArr : []), ...(Array.isArray(serverArr) ? serverArr : [])].forEach(item => {
+    if (!item || !item.id) return;
+    const cur = byId.get(item.id);
+    if (!cur) { byId.set(item.id, { ...item }); return; }
+    if (item.deleted || cur.deleted) {
+      byId.set(item.id, { ...cur, ...item, deleted: true, updatedAt: Math.max(cur.updatedAt || 0, item.updatedAt || 0) });
+      return;
+    }
+    const newer = (item.updatedAt || item.haveAt || 0) >= (cur.updatedAt || cur.haveAt || 0) ? item : cur;
+    const merged = { ...cur, ...newer };
+    if (merged.have) {
+      merged.haveSessions = [...new Set([...(cur.haveSessions || []), ...(item.haveSessions || [])])];
+    }
+    byId.set(item.id, merged);
+  });
+  return [...byId.values()];
+}
+// optionalPromoted entries are {key, promotedAt, removedAt}. Legacy entries
+// are plain key strings, treated as {key, promotedAt: 0, removedAt: null}.
+// An entry is ACTIVE when promotedAt is set and later than removedAt.
+// Un-promoting stamps removedAt instead of dropping the entry, so the
+// removal can win merges against older promoted copies; merges carry the
+// latest of each timestamp forward.
+function normalizePromotedList(arr) {
+  if (!Array.isArray(arr)) return [];
+  return arr.map(x => typeof x === 'string' ? { key: x, promotedAt: 0, removedAt: null } : x);
+}
+function promotedIsActive(p) {
+  return !!p && p.promotedAt !== null && p.promotedAt !== undefined &&
+    (p.removedAt === null || p.removedAt === undefined || p.promotedAt > p.removedAt);
+}
+function promotedKeySet(week) {
+  return new Set(normalizePromotedList(week && week.optionalPromoted).filter(promotedIsActive).map(p => p.key));
+}
+function setPromoted(week, key, on) {
+  const arr = normalizePromotedList(week.optionalPromoted);
+  const ex = arr.find(p => p.key === key);
+  const now = Date.now();
+  if (ex) {
+    if (on) ex.promotedAt = now; else ex.removedAt = now;
+  } else {
+    arr.push(on ? { key, promotedAt: now, removedAt: null } : { key, promotedAt: null, removedAt: now });
+  }
+  week.optionalPromoted = arr;
+}
+function mergePromoted(localArr, serverArr) {
+  const byKey = new Map();
+  const maxTs = (a, b) => (a === null || a === undefined) ? (b ?? null) : (b === null || b === undefined) ? a : Math.max(a, b);
+  [...normalizePromotedList(localArr), ...normalizePromotedList(serverArr)].forEach(p => {
+    if (!p || !p.key) return;
+    const cur = byKey.get(p.key);
+    if (!cur) { byKey.set(p.key, { ...p }); return; }
+    byKey.set(p.key, { key: p.key, promotedAt: maxTs(cur.promotedAt, p.promotedAt), removedAt: maxTs(cur.removedAt, p.removedAt) });
+  });
+  return [...byKey.values()];
+}
+// Merge shopping state from `source` week into `target` week (in place).
+// Used everywhere we combine local + server state. Merges are timestamp-
+// and tombstone-aware: concurrent "have" marks from two devices still
+// union, but deletes and unchecks are never resurrected by older copies.
 function mergeWeekState(target, source) {
   if (!target || !source) return target;
-  const tMarks = normalizeHaveMarks(target.haveGenerated);
-  const seen = new Set(tMarks.map(m => m.key + '|' + m.session));
-  normalizeHaveMarks(source.haveGenerated).forEach(m => {
-    const id = m.key + '|' + m.session;
-    if (!seen.has(id)) { tMarks.push(m); seen.add(id); }
-  });
-  target.haveGenerated = tMarks;
-  const tManual = Array.isArray(target.manualItems) ? target.manualItems : (target.manualItems = []);
-  const seenId = new Set(tManual.map(m => m.id));
-  (Array.isArray(source.manualItems) ? source.manualItems : []).forEach(m => {
-    if (m.id && !seenId.has(m.id)) { tManual.push(m); seenId.add(m.id); }
-  });
+  target.haveGenerated = mergeHaveMarks(target.haveGenerated, source.haveGenerated);
+  target.manualItems = mergeManualItems(target.manualItems, source.manualItems);
   if (source.conflictAcked) {
     target.conflictAcked = { ...(target.conflictAcked || {}), ...source.conflictAcked };
   }
   // Merge optional promotions (union) so a promotion isn't lost in sync.
-  const tPromoted = new Set(Array.isArray(target.optionalPromoted) ? target.optionalPromoted : []);
-  (Array.isArray(source.optionalPromoted) ? source.optionalPromoted : []).forEach(k => tPromoted.add(k));
-  target.optionalPromoted = [...tPromoted];
+  target.optionalPromoted = mergePromoted(target.optionalPromoted, source.optionalPromoted);
   return target;
 }
 // Fetch the meal plan from the live bridge API first (no Pages rebuild lag),
@@ -2675,26 +2776,12 @@ async function pollShopServer() {
     const localWeek = getWeek(key);
     const serverWeek = (server.weeks || {})[key];
     if (!serverWeek) return;
-    // Merge have-marks: union by (key, session)
-    const localMarks = normalizeHaveMarks(localWeek.haveGenerated);
-    const serverMarks = normalizeHaveMarks(serverWeek.haveGenerated);
-    const seen = new Set(localMarks.map(m => m.key + '|' + m.session));
-    serverMarks.forEach(m => {
-      if (!seen.has(m.key + '|' + m.session)) localMarks.push(m);
-    });
-    localWeek.haveGenerated = localMarks;
-    // Merge manual items
-    (serverWeek.manualItems || []).forEach(sm => {
-      const lm = (localWeek.manualItems || []).find(x => x.id === sm.id);
-      if (!lm) {
-        localWeek.manualItems.push(sm);
-      } else if (sm.have && !lm.have) {
-        lm.have = true; lm.haveSession = sm.haveSession; lm.haveAt = sm.haveAt;
-        lm.haveSessions = [...new Set([...(lm.haveSessions || []), ...(sm.haveSessions || [])])];
-      } else if (sm.have && lm.have) {
-        lm.haveSessions = [...new Set([...(lm.haveSessions || []), ...(sm.haveSessions || [])])];
-      }
-    });
+    // Merge have-marks (timestamp/tombstone-aware: unchecks survive)
+    localWeek.haveGenerated = mergeHaveMarks(localWeek.haveGenerated, serverWeek.haveGenerated);
+    // Merge manual items (tombstones win: deletes survive)
+    localWeek.manualItems = mergeManualItems(localWeek.manualItems, serverWeek.manualItems);
+    // Merge optional promotions (timestamp-aware: un-promotes survive)
+    localWeek.optionalPromoted = mergePromoted(localWeek.optionalPromoted, serverWeek.optionalPromoted);
     // Merge conflict acks
     if (serverWeek.conflictAcked) {
       localWeek.conflictAcked = { ...(localWeek.conflictAcked || {}), ...serverWeek.conflictAcked };
@@ -3001,7 +3088,15 @@ function removeSubmitPhoto() {
   const photoInput = $('#s-photo');
   if (photoInput) photoInput.value = '';
 }
-async function loadInboxList() {
+// Format an ISO timestamp for the log, in the user's local timezone.
+function formatLogTimestamp(iso) {
+  if (!iso) return '';
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return '';
+  return d.toLocaleString(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+}
+
+async function loadInboxList(showAll = !!window._inboxShowAll) {
   const host = $('#inbox-list');
   if (!host) return;
   let idx = [];
@@ -3010,14 +3105,15 @@ async function loadInboxList() {
     const r = await fetch('data/inbox/index.json?v=' + Date.now());
     if (r.ok) idx = await r.json();
   } catch (e) { /* no inbox yet */ }
-  // Refresh the list every 60s while the submit page is open,
-  // so entries update when the checker processes them.
+  // Refresh the list every 60s while the submit page is open, preserving
+  // whether the user expanded it with "Show all".
   if (!window._inboxRefreshTimer) {
     window._inboxRefreshTimer = setInterval(() => {
-      if (document.getElementById('inbox-list')) loadInboxList();
+      if (document.getElementById('inbox-list')) loadInboxList(!!window._inboxShowAll);
       else { clearInterval(window._inboxRefreshTimer); window._inboxRefreshTimer = null; }
     }, 60000);
   }
+  window._inboxShowAll = showAll;
   if (!idx.length) {
     host.innerHTML = '<p>Nothing submitted yet.</p>';
     return;
@@ -3027,22 +3123,32 @@ async function loadInboxList() {
     : s === 'duplicate' ? '⧉ duplicate — skipped'
     : s === 'needs_input' ? '? needs your input'
     : s === 'working' ? '… working on it' : '… in the inbox';
-  // For edit requests, fetch the full entry to show the request text
+  const visible = (showAll ? idx.slice() : idx.slice(-10)).reverse();
+  // For edit requests, show the request text: prefer the text stored inline
+  // in the index summary; for older entries without it, fetch the full
+  // entries — in parallel so "Show all" never freezes the page.
   const editDetails = {};
-  for (const s of idx.slice(-10)) {
-    if (s.type === 'edit') {
+  const needsFetch = visible.filter(s => s.type === 'edit' && !s.text);
+  if (needsFetch.length) {
+    const fetched = await Promise.all(needsFetch.map(async s => {
       try {
         const r = await fetch('data/inbox/' + s.id + '.json?v=' + Date.now());
-        if (r.ok) editDetails[s.id] = await r.json();
+        if (r.ok) return [s.id, await r.json()];
       } catch (e) { /* skip */ }
-    }
+      return [s.id, {}];
+    }));
+    for (const [id, full] of fetched) editDetails[id] = full;
   }
-  host.innerHTML = '<ul class="pairing-list">' + idx.slice(-10).reverse().map(s => {
+  const ts = s => {
+    const f = formatLogTimestamp(s.created_at);
+    return f ? ' <span style="color:var(--muted);font-size:0.85em">' + esc(f) + '</span>' : '';
+  };
+  host.innerHTML = '<ul class="pairing-list">' + visible.map(s => {
     // Edit requests get special display
     if (s.type === 'edit') {
       const full = editDetails[s.id] || {};
       const targetTitle = s.edit_target && recipeMeta(s.edit_target) ? recipeMeta(s.edit_target).title : (s.edit_target || 'recipe');
-      const reqText = full.text || '';
+      const reqText = s.text || full.text || '';
       const preview = reqText.length > 100 ? reqText.slice(0, 97) + '…' : reqText;
       const editBadge = s.status === 'done' ? '✓ applied' : badge(s.status);
       return '<li><strong>✏️ Edit: ' + esc(targetTitle) + '</strong> — ' + editBadge +
@@ -3050,19 +3156,30 @@ async function loadInboxList() {
         (s.status === 'done' && s.edit_target ?
           ' → <a href="#/recipe/' + encodeURIComponent(s.edit_target) + '">view recipe</a>' : '') +
         (s.fail_reason ? ' <span style="color:var(--danger)">' + esc(s.fail_reason) + '</span>' : '') +
+        ts(s) +
         '</li>';
     }
-    // Direct edits (via site edit page) and deletions get their own display
+    // Direct edits (via site edit page or bridge) and deletions get their
+    // own display. Direct-edit entries may carry title/actor/note from the
+    // bridge auto-log.
     if (s.type === 'direct-edit') {
-      const targetTitle = s.edit_target && recipeMeta(s.edit_target) ? recipeMeta(s.edit_target).title : (s.edit_target || 'recipe');
+      const targetTitle = s.title || (s.edit_target && recipeMeta(s.edit_target) ? recipeMeta(s.edit_target).title : (s.edit_target || 'recipe'));
+      // Strip the "site-editor (...)" wrapper only when it wraps the whole
+      // string (alternation precedence means a plain | would over-strip).
+      const cleanActor = (s.actor || '').replace(/^site-editor \((.*)\)$/, '$1').trim();
+      const actor = cleanActor && cleanActor !== 'Anonymous' ? cleanActor : null;
+      const note = s.note && s.note !== 'Direct edit via site' ? s.note : '';
       return '<li><strong>✏️ Edited: ' + esc(targetTitle) + '</strong> — ✓ saved' +
+        (actor ? ' · <span style="color:var(--muted)">by ' + esc(actor) + '</span>' : '') +
+        (note ? '<br><span style="color:var(--muted)">' + esc(note.length > 140 ? note.slice(0, 137) + '…' : note) + '</span>' : '') +
         (s.edit_target ?
           ' → <a href="#/recipe/' + encodeURIComponent(s.edit_target) + '">view recipe</a>' : '') +
+        ts(s) +
         '</li>';
     }
     if (s.type === 'delete') {
       const targetTitle = s.note ? s.note.replace(/^Deleted via site: /, '') : (s.edit_target || 'recipe');
-      return '<li><strong>🗑️ Deleted: ' + esc(targetTitle) + '</strong> — ✓ removed</li>';
+      return '<li><strong>🗑️ Deleted: ' + esc(targetTitle) + '</strong> — ✓ removed' + ts(s) + '</li>';
     }
     // Show the recipe title once it's processed
     let titlePart = '';
@@ -3096,8 +3213,19 @@ async function loadInboxList() {
     }
     return '<li><strong>' + badge(s.status) + '</strong> — ' + what + titlePart + dupPart +
       (s.fail_reason ? ' <span style="color:var(--danger)">' + esc(s.fail_reason) + '</span>' : '') +
+      ts(s) +
       '</li>';
-  }).join('') + '</ul>';
+  }).join('') + '</ul>' +
+    (!showAll && idx.length > 10
+      ? '<p><button class="btn secondary" id="inbox-show-all">Show all (' + idx.length + ')</button></p>'
+      : '') +
+    (showAll
+      ? '<p><button class="btn secondary" id="inbox-show-less">Show recent only</button></p>'
+      : '');
+  const showAllBtn = $('#inbox-show-all');
+  if (showAllBtn) showAllBtn.onclick = () => loadInboxList(true);
+  const showLessBtn = $('#inbox-show-less');
+  if (showLessBtn) showLessBtn.onclick = () => loadInboxList(false);
 }
 
 async function sendSubmission() {
