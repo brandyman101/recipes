@@ -117,6 +117,27 @@
           "updatedAt": 1792525934605,
           "updatedBy": "smvh3n8kmyf4nao",
           "deleted": true
+        },
+        {
+          "id": "mmvh4tcca",
+          "text": "bulk-test-eggs",
+          "have": false,
+          "updatedAt": 1792527875002,
+          "updatedBy": "smvh4tccb92aj6j"
+        },
+        {
+          "id": "mmvh4tccb",
+          "text": "bulk-test-milk",
+          "have": false,
+          "updatedAt": 1792527875002,
+          "updatedBy": "smvh4tccb92aj6j"
+        },
+        {
+          "id": "mmvh4tccc",
+          "text": "bulk-test-bread",
+          "have": false,
+          "updatedAt": 1792527875002,
+          "updatedBy": "smvh4tccb92aj6j"
         }
       ],
       "haveGenerated": [],
