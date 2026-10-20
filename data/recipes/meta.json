@@ -1,1 +1,27 @@
-[]
+[
+  {
+    "id": "best-fluffy-pancakes",
+    "title": "The BEST Fluffy Pancakes",
+    "banner_image": "assets/images/best-fluffy-pancakes.jpg",
+    "kosher_status": "dairy",
+    "kosher_for_passover": false,
+    "categories": [
+      "breakfast",
+      "brunch"
+    ],
+    "tags": [
+      "pancakes",
+      "breakfast",
+      "brunch",
+      "kid-friendly",
+      "make-ahead"
+    ],
+    "prep_minutes": 5,
+    "cook_minutes": 20,
+    "servings": "12",
+    "leftover_friendly": true,
+    "tags_need_review": false,
+    "photo_generated": false,
+    "search_text": "fluffy pancakes dairy breakfast brunch cafe delites pancakes kid-friendly make-ahead"
+  }
+]
