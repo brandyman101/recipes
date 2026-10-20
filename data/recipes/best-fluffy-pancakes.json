@@ -1,0 +1,123 @@
+{
+  "banner_image": "assets/images/best-fluffy-pancakes.jpg",
+  "categories": [
+    "breakfast",
+    "brunch"
+  ],
+  "cook_minutes": 20,
+  "id": "best-fluffy-pancakes",
+  "ingredients": [
+    {
+      "items": [
+        {
+          "item": "all-purpose flour",
+          "prep": "",
+          "qty": "2",
+          "unit": "cup"
+        },
+        {
+          "item": "granulated sugar or sweetener",
+          "prep": "",
+          "qty": "1/4",
+          "unit": "cup"
+        },
+        {
+          "item": "baking powder",
+          "prep": "",
+          "qty": "4",
+          "unit": "tsp"
+        },
+        {
+          "item": "baking soda",
+          "prep": "",
+          "qty": "1/4",
+          "unit": "tsp"
+        },
+        {
+          "item": "salt",
+          "prep": "",
+          "qty": "1/2",
+          "unit": "tsp"
+        },
+        {
+          "item": "milk",
+          "prep": "",
+          "qty": "1 3/4",
+          "unit": "cup"
+        },
+        {
+          "item": "butter",
+          "prep": "melted, slightly cooled",
+          "qty": "1/4",
+          "unit": "cup"
+        },
+        {
+          "item": "pure vanilla extract",
+          "prep": "",
+          "qty": "2",
+          "unit": "tsp"
+        },
+        {
+          "item": "large egg",
+          "prep": "",
+          "qty": "1",
+          "unit": ""
+        }
+      ],
+      "section": "Pancakes"
+    }
+  ],
+  "instructions": [
+    "Combine the flour, sugar (or sweetener), baking powder, baking soda, and salt in a large bowl. Make a well in the center for the wet ingredients.",
+    "Whisk together the milk, slightly cooled melted butter, vanilla, and egg. Pour into the well and slowly fold into the dry ingredients, mixing until just smooth (a couple of lumps are okay). Set the batter aside to rest while you heat the pan. The batter should be thick and creamy — if it doesn't pour smoothly off a ladle, fold in extra milk a tablespoon at a time.",
+    "Heat a nonstick pan or griddle over low-medium heat. Wipe with a little butter to lightly grease. Pour 1/4 cup of batter per pancake and spread gently into a round shape with the back of a ladle.",
+    "Cook until the underside is golden and bubbles begin to appear on the surface, then flip and cook until golden. Repeat with the remaining batter.",
+    "Serve warm with honey, maple syrup, fruit, ice cream, or frozen yoghurt — or enjoy plain."
+  ],
+  "kosher_for_passover": false,
+  "kosher_status": "dairy",
+  "leftover_friendly": true,
+  "notes": "Dairy recipe (milk and butter). Source recipe makes 12 pancakes and does not require buttermilk. Sweetener may replace the sugar for a lower-sugar version.",
+  "pdf": "pdfs/best-fluffy-pancakes.pdf",
+  "prep_minutes": 5,
+  "servings": "12",
+  "source": "https://cafedelites.com/best-fluffy-pancakes/ (Cafe Delites)",
+  "tags": [
+    "pancakes",
+    "breakfast",
+    "brunch",
+    "kid-friendly",
+    "make-ahead"
+  ],
+  "tags_need_review": false,
+  "tips": [
+    {
+      "text": "Lift a spoon of batter above the bowl: it should be thick but able to run slowly off the spoon. Too thick and the pancakes turn gluggy inside; too runny and they spread out and won't fluff up.",
+      "title": "Test the batter"
+    },
+    {
+      "text": "Keep the heat low-medium and wait for bubbles to form on the surface before flipping. Use your wrist (not your whole arm) to flip for even, round pancakes.",
+      "title": "Don't rush the flip"
+    },
+    {
+      "text": "Mix the dry ingredients ahead and store in a jar or bag; add the wet ingredients just before cooking for the best rise.",
+      "title": "Make ahead"
+    },
+    {
+      "text": "Refrigerate cooked pancakes in an airtight container up to 3-4 days, or freeze (separated by parchment) up to 3 months. Reheat in the microwave 30 seconds covered with a damp paper towel, or in a 350°F oven for 5-8 minutes.",
+      "title": "Storing leftovers"
+    }
+  ],
+  "title": "The BEST Fluffy Pancakes",
+  "history": [
+    {
+      "ts": "2026-10-20T19:23:21.561Z",
+      "actor": "sous-chef",
+      "action": "intake",
+      "changes": [
+        "Created recipe"
+      ],
+      "reasoning": "Initial intake of Cafe Delites fluffy pancakes link"
+    }
+  ]
+}
