@@ -1,1 +1,114 @@
-{"weeks": {}}
+{
+  "weeks": {
+    "2026-10-18": {
+      "days": [
+        {
+          "lunch": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          },
+          "dinner": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          }
+        },
+        {
+          "lunch": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          },
+          "dinner": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          }
+        },
+        {
+          "lunch": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          },
+          "dinner": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          }
+        },
+        {
+          "lunch": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          },
+          "dinner": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          }
+        },
+        {
+          "lunch": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          },
+          "dinner": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          }
+        },
+        {
+          "lunch": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          },
+          "dinner": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          }
+        },
+        {
+          "lunch": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          },
+          "dinner": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          }
+        }
+      ],
+      "manualItems": [
+        {
+          "id": "mmvg5v9ri",
+          "text": "Bread",
+          "have": false
+        }
+      ],
+      "haveGenerated": []
+    }
+  }
+}
