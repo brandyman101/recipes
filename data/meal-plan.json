@@ -206,15 +206,26 @@
           "id": "mmvh8ytpw",
           "text": "[ ] Cheese",
           "have": false,
-          "updatedAt": 1792534849267,
-          "updatedBy": "smvh7i3zoi6x0cd"
+          "updatedAt": 1792534860344,
+          "updatedBy": "smvh7i3zoi6x0cd",
+          "haveSession": "smvh7i3zoi6x0cd",
+          "haveAt": 1792534857575,
+          "haveSessions": [
+            "smvh7i3zoi6x0cd"
+          ],
+          "deleted": true
         },
         {
           "id": "mmvh8ytpx",
           "text": "[ ] Milk",
-          "have": false,
-          "updatedAt": 1792534849267,
-          "updatedBy": "smvh7i3zoi6x0cd"
+          "have": true,
+          "updatedAt": 1792534858142,
+          "updatedBy": "smvh7i3zoi6x0cd",
+          "haveSession": "smvh7i3zoi6x0cd",
+          "haveAt": 1792534858142,
+          "haveSessions": [
+            "smvh7i3zoi6x0cd"
+          ]
         },
         {
           "id": "mmvh8ytpy",
