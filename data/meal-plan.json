@@ -175,22 +175,25 @@
           "id": "mmvh8x8ec",
           "text": "[ ] Bread",
           "have": false,
-          "updatedAt": 1792534774980,
-          "updatedBy": "smvh8x8ecifxllj"
+          "updatedAt": 1792534781258,
+          "updatedBy": "smvh8x8ecifxllj",
+          "deleted": true
         },
         {
           "id": "mmvh8x8ed",
           "text": "[ ] Cheese",
           "have": false,
-          "updatedAt": 1792534774980,
-          "updatedBy": "smvh8x8ecifxllj"
+          "updatedAt": 1792534780896,
+          "updatedBy": "smvh8x8ecifxllj",
+          "deleted": true
         },
         {
           "id": "mmvh8x8ee",
           "text": "[ ] Milk",
           "have": false,
-          "updatedAt": 1792534774980,
-          "updatedBy": "smvh8x8ecifxllj"
+          "updatedAt": 1792534780219,
+          "updatedBy": "smvh8x8ecifxllj",
+          "deleted": true
         }
       ],
       "haveGenerated": [],
