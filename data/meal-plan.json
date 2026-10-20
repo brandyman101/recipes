@@ -161,9 +161,14 @@
         {
           "id": "mmvh7jw5j",
           "text": "Bread, Cheese, Milk",
-          "have": false,
-          "updatedAt": 1792532472967,
-          "updatedBy": "smvh7i3zoi6x0cd"
+          "have": true,
+          "updatedAt": 1792532475963,
+          "updatedBy": "smvh7i3zoi6x0cd",
+          "haveSession": "smvh7i3zoi6x0cd",
+          "haveAt": 1792532475963,
+          "haveSessions": [
+            "smvh7i3zoi6x0cd"
+          ]
         }
       ],
       "haveGenerated": [],
