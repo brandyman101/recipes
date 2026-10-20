@@ -35,5 +35,17 @@
     "created_at": "2026-10-20T19:44:08.307Z",
     "recipe_id": "avis-beef-borekas",
     "fail_reason": null
+  },
+  {
+    "id": "inbox-mvh5catf-5xu",
+    "url": null,
+    "image": "data/inbox/inbox-mvh5catf-5xu.jpg",
+    "file": null,
+    "note": null,
+    "text": null,
+    "status": "pending",
+    "created_at": "2026-10-20T20:39:24.741Z",
+    "recipe_id": null,
+    "fail_reason": null
   }
 ]
