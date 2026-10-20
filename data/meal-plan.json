@@ -105,7 +105,10 @@
         {
           "id": "mmvg5v9ri",
           "text": "Bread",
-          "have": false
+          "have": false,
+          "deleted": true,
+          "updatedAt": 1792526555296,
+          "updatedBy": "smvh4121ujq7jno"
         },
         {
           "id": "mmvh3n8km",
