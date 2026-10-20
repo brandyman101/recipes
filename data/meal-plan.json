@@ -111,8 +111,9 @@
           "id": "mmvh3n8km",
           "text": "patch-test",
           "have": false,
-          "updatedAt": 1792525910566,
-          "updatedBy": "smvh3n8kmyf4nao"
+          "updatedAt": 1792525934605,
+          "updatedBy": "smvh3n8kmyf4nao",
+          "deleted": true
         }
       ],
       "haveGenerated": [],
