@@ -199,8 +199,9 @@
           "id": "mmvh8ytpv",
           "text": "[ ] Bread",
           "have": false,
-          "updatedAt": 1792534849267,
-          "updatedBy": "smvh7i3zoi6x0cd"
+          "updatedAt": 1792534862468,
+          "updatedBy": "smvh7i3zoi6x0cd",
+          "deleted": true
         },
         {
           "id": "mmvh8ytpw",
@@ -219,13 +220,14 @@
           "id": "mmvh8ytpx",
           "text": "[ ] Milk",
           "have": true,
-          "updatedAt": 1792534858142,
+          "updatedAt": 1792534861928,
           "updatedBy": "smvh7i3zoi6x0cd",
           "haveSession": "smvh7i3zoi6x0cd",
           "haveAt": 1792534858142,
           "haveSessions": [
             "smvh7i3zoi6x0cd"
-          ]
+          ],
+          "deleted": true
         },
         {
           "id": "mmvh8ytpy",
