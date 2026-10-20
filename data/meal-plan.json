@@ -69,14 +69,7 @@
             "recipe": null,
             "custom": null,
             "skipped": false,
-            "note": "",
-            "dishes": [
-              {
-                "recipe": "macarone-patlotski",
-                "leftovers": false,
-                "cookDate": null
-              }
-            ]
+            "note": ""
           }
         },
         {
