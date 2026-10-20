@@ -122,8 +122,9 @@
           "id": "mmvh4tcca",
           "text": "bulk-test-eggs",
           "have": false,
-          "updatedAt": 1792527875002,
-          "updatedBy": "smvh4tccb92aj6j"
+          "updatedAt": 1792527884287,
+          "updatedBy": "smvh4tccb92aj6j",
+          "deleted": true
         },
         {
           "id": "mmvh4tccb",
