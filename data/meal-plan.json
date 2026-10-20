@@ -130,8 +130,9 @@
           "id": "mmvh4tccb",
           "text": "bulk-test-milk",
           "have": false,
-          "updatedAt": 1792527875002,
-          "updatedBy": "smvh4tccb92aj6j"
+          "updatedAt": 1792527903312,
+          "updatedBy": "smvh4tccb92aj6j",
+          "deleted": true
         },
         {
           "id": "mmvh4tccc",
