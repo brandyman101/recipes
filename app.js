@@ -748,7 +748,7 @@ function shoppingListHTML() {
         '<div class="shop-list" data-have="1">' + genHaveLis + manHaveLis + '</div></details>';
     }
   }
-  html += '<div class="shop-add no-print"><input type="text" id="shop-new" placeholder="Add your own item…" aria-label="Add your own item">' +
+  html += '<div class="shop-add no-print"><input type="text" id="shop-new" placeholder="Add an item — or paste a whole list…" aria-label="Add your own item">' +
     '<button class="btn secondary" id="shop-add" type="button">Add</button></div>';
   html += '<div style="margin-top:.6rem"><button class="btn secondary" id="shop-copy" type="button">Copy list</button></div>';
   return html;
@@ -890,6 +890,24 @@ async function renderShopping(app) {
   // Start 15s background sync while the shopping page is open
   startShopPoll();
 
+  // Add manual items from raw text: one line = one item, so a whole list
+  // can be pasted at once (e.g. copied from Google Keep). Bullet and
+  // checkbox prefixes from other apps are stripped.
+  const addManualItems = raw => {
+    const lines = String(raw || '').split('\n')
+      .map(s => s.replace(/^[•\-*☐☑✓\s]+/, '').trim())
+      .filter(Boolean);
+    if (!lines.length) return 0;
+    const week = getWeek(thisWeekKey());
+    if (!Array.isArray(week.manualItems)) week.manualItems = [];
+    const now = Date.now();
+    lines.forEach((text, i) => {
+      week.manualItems.push({ id: 'm' + (now + i).toString(36), text, have: false, updatedAt: now, updatedBy: getSessionId() });
+    });
+    saveShop(); rerender();
+    return lines.length;
+  };
+
   shopWrap.addEventListener('click', e => {
     // Toggle have / to-buy (local-first: works offline, syncs in background)
     const haveBtn = e.target.closest('.shop-have-btn');
@@ -1002,15 +1020,11 @@ async function renderShopping(app) {
       if (dm) { dm.deleted = true; dm.updatedAt = Date.now(); dm.updatedBy = getSessionId(); }
       saveShop(); rerender(); return;
     }
-    // Add manual item
+    // Add manual item(s) — the box accepts a whole pasted list, one
+    // item per line (see addManualItems).
     if (e.target.closest('#shop-add')) {
       const input = $('#shop-new');
-      const text = (input.value || '').trim();
-      if (!text) return;
-      const week = getWeek(thisWeekKey());
-      if (!Array.isArray(week.manualItems)) week.manualItems = [];
-      week.manualItems.push({ id: 'm' + Date.now().toString(36), text, have: false, updatedAt: Date.now(), updatedBy: getSessionId() });
-      saveShop(); rerender();
+      if (!addManualItems(input.value)) return;
       const ni = $('#shop-new');
       if (ni) ni.focus();
     }
@@ -1018,6 +1032,16 @@ async function renderShopping(app) {
   const newInput = $('#shop-new');
   if (newInput) newInput.addEventListener('keydown', e => {
     if (e.key === 'Enter') { e.preventDefault(); $('#shop-add').click(); }
+  });
+  // Paste a multi-line list straight into the box: add every line as
+  // its own item instead of letting the input flatten it to one line.
+  if (newInput) newInput.addEventListener('paste', e => {
+    const pasted = (e.clipboardData || window.clipboardData) &&
+      (e.clipboardData || window.clipboardData).getData('text');
+    if (pasted && pasted.includes('\n')) {
+      e.preventDefault();
+      addManualItems(pasted);
+    }
   });
   const copyBtn = $('#shop-copy');
   if (copyBtn) copyBtn.addEventListener('click', () => {
