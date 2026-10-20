@@ -66,15 +66,17 @@
             "note": ""
           },
           "dinner": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": "",
             "dishes": [
               {
                 "recipe": "macarone-patlotski",
                 "leftovers": false,
                 "cookDate": null
               }
-            ],
-            "skipped": false,
-            "note": ""
+            ]
           }
         },
         {
@@ -243,7 +245,22 @@
           "deleted": true
         }
       ],
-      "haveGenerated": [],
+      "haveGenerated": [
+        {
+          "key": "tomato sauce (8 oz)|can",
+          "session": "smvhc0b6tdsramt",
+          "at": 1792539957413,
+          "qty": 1,
+          "unit": "can"
+        },
+        {
+          "key": "ground meat|lb",
+          "session": "smvhc0b6tdsramt",
+          "at": 1792539958042,
+          "qty": 1,
+          "unit": "lb"
+        }
+      ],
       "optionalPromoted": []
     }
   }
