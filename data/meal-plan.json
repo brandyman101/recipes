@@ -83,14 +83,7 @@
             "recipe": null,
             "custom": null,
             "skipped": false,
-            "note": "",
-            "dishes": [
-              {
-                "recipe": "avis-beef-borekas",
-                "leftovers": false,
-                "cookDate": null
-              }
-            ]
+            "note": ""
           }
         },
         {
