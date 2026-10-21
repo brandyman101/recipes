@@ -175,5 +175,27 @@
     "tags_need_review": false,
     "photo_generated": false,
     "search_text": "elza's mediterranean roasted bronzini pareve mains fish branzino mediterranean roasted easy"
+  },
+  {
+    "id": "french-onion-soup",
+    "title": "French Onion Soup",
+    "banner_image": "assets/images/french-onion-soup.jpg",
+    "kosher_status": "dairy",
+    "kosher_for_passover": false,
+    "categories": [
+      "soup"
+    ],
+    "tags": [
+      "french",
+      "comfort food",
+      "vegetarian-friendly"
+    ],
+    "prep_minutes": 15,
+    "cook_minutes": 65,
+    "servings": "6",
+    "leftover_friendly": true,
+    "tags_need_review": false,
+    "photo_generated": false,
+    "search_text": "french onion soup dairy soup french comfort food vegetarian-friendly"
   }
 ]
