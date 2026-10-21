@@ -279,9 +279,10 @@
         {
           "key": "oil|tbsp",
           "session": "smvhieomxis5ep6",
-          "at": 1792550740836,
+          "at": 1792550744397,
           "qty": 3,
-          "unit": "tbsp"
+          "unit": "tbsp",
+          "removed": true
         }
       ],
       "optionalPromoted": [],
