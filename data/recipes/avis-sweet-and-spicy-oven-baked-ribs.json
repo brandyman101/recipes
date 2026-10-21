@@ -1,0 +1,127 @@
+{
+  "banner_image": "assets/images/avis-sweet-and-spicy-oven-baked-ribs.jpg",
+  "categories": [
+    "Main Dishes",
+    "Meat & Poultry"
+  ],
+  "cook_minutes": 180,
+  "id": "avis-sweet-and-spicy-oven-baked-ribs",
+  "ingredients": [
+    {
+      "items": [
+        {
+          "item": "baby back pork ribs",
+          "prep": "",
+          "qty": "2 to 2 1/2",
+          "unit": "lb"
+        },
+        {
+          "item": "kosher salt and black pepper",
+          "optional": true,
+          "prep": "to taste",
+          "qty": "",
+          "unit": ""
+        }
+      ],
+      "section": "Ribs"
+    },
+    {
+      "items": [
+        {
+          "item": "olive oil",
+          "prep": "",
+          "qty": "1",
+          "unit": "tbsp"
+        },
+        {
+          "item": "onion",
+          "prep": "finely diced",
+          "qty": "1/4",
+          "unit": "cup"
+        },
+        {
+          "item": "ground cumin",
+          "prep": "",
+          "qty": "1/2",
+          "unit": "tsp"
+        },
+        {
+          "item": "ketchup",
+          "prep": "",
+          "qty": "1/2",
+          "unit": "cup"
+        },
+        {
+          "item": "hot chili sauce (such as Sriracha)",
+          "prep": "",
+          "qty": "1",
+          "unit": "tbsp"
+        },
+        {
+          "item": "light brown sugar",
+          "prep": "",
+          "qty": "2",
+          "unit": "tbsp"
+        },
+        {
+          "item": "apple cider vinegar",
+          "prep": "",
+          "qty": "1",
+          "unit": "tbsp"
+        }
+      ],
+      "section": "Sweet & Spicy BBQ Sauce"
+    }
+  ],
+  "instructions": [
+    "Preheat the oven to 275°F (135°C). Line a large roasting pan or rimmed baking sheet with aluminum foil.",
+    "If the ribs still have a thin membrane on the back, remove it. Season both sides generously with salt and pepper.",
+    "Place the ribs meaty-side down in the pan and cover tightly with foil — the ribs must be well sealed to keep from drying out.",
+    "Bake 2 1/2 to 3 1/2 hours, checking after 2 hours. The ribs are done when a sharp knife meets little resistance and the meat pulls easily from the bone; if still tough, keep baking (your oven may run cool, or raise it to 300°F).",
+    "Meanwhile, make the sauce: heat the olive oil in a saucepan over medium heat, add the onion, and cook 5–8 minutes until soft and translucent.",
+    "Stir in the cumin and cook 30 seconds, then add the ketchup, chili sauce, brown sugar, and vinegar. Stir, season with salt, and cook 2 minutes.",
+    "Remove the ribs from the oven and discard the foil. Brush both sides generously with the sauce.",
+    "Move an oven rack near the top and broil on high 3–4 minutes, until the sauce caramelizes — watch closely so it doesn't burn."
+  ],
+  "kosher_for_passover": false,
+  "kosher_review_notes": "Recipe calls for baby back pork ribs, which are not kosher.",
+  "kosher_status": "meat",
+  "leftover_friendly": true,
+  "needs_kosher_review": true,
+  "notes": "NOT KOSHER as written — this recipe uses baby back pork ribs and is kept exactly as written, with no substitutions. Flagged for kosher review.",
+  "pdf": "pdfs/avis-sweet-and-spicy-oven-baked-ribs.pdf",
+  "photo_generated": false,
+  "prep_minutes": 15,
+  "servings": "4",
+  "source": "https://www.inspiredtaste.net/7179/sweet-and-spicy-oven-baked-ribs/ (Inspired Taste)",
+  "tags": [
+    "ribs",
+    "bbq",
+    "sweet and spicy",
+    "oven-baked",
+    "low and slow"
+  ],
+  "tags_need_review": false,
+  "tips": [
+    {
+      "text": "Baking with the meatiest side facing down lets the rendered fat and juices drip down and baste the meat — the source's trick for extra-moist ribs.",
+      "title": "Meaty-side down"
+    },
+    {
+      "text": "Peeling the thin membrane off the back of the rack is the difference between fall-off-the-bone and chewy.",
+      "title": "Don't skip the membrane"
+    }
+  ],
+  "title": "Avi's Sweet and Spicy Oven-Baked Ribs",
+  "history": [
+    {
+      "ts": "2026-10-21T03:41:50.040Z",
+      "actor": "sous-chef",
+      "action": "intake",
+      "changes": [
+        "Created recipe"
+      ],
+      "reasoning": "Initial intake"
+    }
+  ]
+}
