@@ -74,8 +74,13 @@
         },
         {
           "lunch": {
-            "recipe": null,
-            "custom": null,
+            "dishes": [
+              {
+                "recipe": "best-fluffy-pancakes",
+                "leftovers": false,
+                "cookDate": null
+              }
+            ],
             "skipped": false,
             "note": ""
           },
