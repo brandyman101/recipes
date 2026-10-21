@@ -1,0 +1,137 @@
+{
+  "id": "classic-pepper-steak-with-green-peppers-and-tomatoes",
+  "title": "Classic Pepper Steak with Green Peppers and Tomatoes",
+  "kosher_status": "meat",
+  "kosher_for_passover": false,
+  "categories": [
+    "Main Dishes",
+    "Meat & Poultry"
+  ],
+  "prep_minutes": 25,
+  "cook_minutes": 35,
+  "servings": "4 servings",
+  "ingredients": [
+    {
+      "section": "Ingredients",
+      "items": [
+        {
+          "qty": "1/2",
+          "unit": "lb",
+          "item": "pepper steak",
+          "prep": ""
+        },
+        {
+          "qty": "3",
+          "unit": "tbsp",
+          "item": "oil",
+          "prep": ""
+        },
+        {
+          "qty": "1",
+          "unit": "cup",
+          "item": "water",
+          "prep": ""
+        },
+        {
+          "qty": "1",
+          "unit": "",
+          "item": "onion",
+          "prep": "sliced into rings"
+        },
+        {
+          "qty": "1",
+          "unit": "clove",
+          "item": "garlic",
+          "prep": "crushed"
+        },
+        {
+          "qty": "1/4",
+          "unit": "tsp",
+          "item": "ground ginger",
+          "prep": ""
+        },
+        {
+          "qty": "1",
+          "unit": "tsp",
+          "item": "salt",
+          "prep": ""
+        },
+        {
+          "qty": "2",
+          "unit": "",
+          "item": "green peppers",
+          "prep": "cut into 3/4-inch strips"
+        },
+        {
+          "qty": "1",
+          "unit": "tbsp",
+          "item": "cornstarch",
+          "prep": ""
+        },
+        {
+          "qty": "3",
+          "unit": "tbsp",
+          "item": "sugar",
+          "prep": ""
+        },
+        {
+          "qty": "2",
+          "unit": "tbsp",
+          "item": "soy sauce",
+          "prep": ""
+        },
+        {
+          "qty": "2",
+          "unit": "",
+          "item": "medium tomatoes",
+          "prep": "cut into wedges"
+        },
+        {
+          "qty": "4",
+          "unit": "cup",
+          "item": "rice",
+          "prep": "hot, cooked"
+        }
+      ]
+    }
+  ],
+  "instructions": [
+    "Cut beef into strips measuring 1/4-inch by 2 inches. (This will be easier to do if meat is partially frozen.) Heat oil in a saute pan over medium-high heat. Add meat and cook until meat is browned, about 5 minutes per side.",
+    "Add water, onion, garlic, ginger, and salt. Bring to a boil. Reduce heat, cover, and simmer until beef is tender, about 20 minutes. Add half of the peppers to the pan.",
+    "In a small bowl, combine cornstarch, sugar, and soy sauce. Stir into beef mixture. Raise heat and stir constantly as mixture thickens and comes to a boil. Lower heat and add tomatoes and remaining peppers. Cover and cook for an additional 3 minutes. Serve over hot rice."
+  ],
+  "tips": [
+    {
+      "title": "Health Note: green vs. colored peppers",
+      "text": "All peppers are green when they begin to grow. As they ripen, their sugar content increases and they turn colors - that's why brightly colored peppers are sweeter than green ones, which are picked earlier and have a sharp, bitter taste. It's also why green peppers are less expensive than red: they don't take as long to grow."
+    }
+  ],
+  "tags": [
+    "pepper steak",
+    "beef",
+    "stir-fry",
+    "weeknight",
+    "one-pan",
+    "rice"
+  ],
+  "notes": "Meat recipe, kosher as written. Source: photo of a cookbook page (p. 141, MEAT & POULTRY section).",
+  "source": "cookbook (page 141, MEAT & POULTRY)",
+  "banner_image": "assets/images/classic-pepper-steak-with-green-peppers-and-tomatoes.jpg",
+  "pdf": "pdfs/classic-pepper-steak-with-green-peppers-and-tomatoes.pdf",
+  "photo_generated": false,
+  "tags_need_review": false,
+  "leftover_friendly": true,
+  "pdf_stale": false,
+  "search_text": "classic pepper steak with green peppers and tomatoes beef stir-fry main meat pepper steak oil water onion garlic ground ginger salt green peppers cornstarch sugar soy sauce medium tomatoes rice",
+  "history": [
+    {
+      "ts": "2026-10-21T02:09:38.754Z",
+      "actor": "sous-chef",
+      "action": "intake",
+      "changes": [
+        "Created recipe"
+      ],
+      "reasoning": "Initial intake"
+    }
+  ]
+}
