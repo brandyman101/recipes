@@ -80,8 +80,13 @@
             "note": ""
           },
           "dinner": {
-            "recipe": null,
-            "custom": null,
+            "dishes": [
+              {
+                "recipe": "classic-pepper-steak-with-green-peppers-and-tomatoes",
+                "leftovers": false,
+                "cookDate": null
+              }
+            ],
             "skipped": false,
             "note": ""
           }
