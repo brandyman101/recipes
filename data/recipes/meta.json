@@ -73,5 +73,31 @@
     "tags_need_review": true,
     "photo_generated": true,
     "search_text": "macarone patlotski meat main dishes pasta ground beef tomato sauce onion garlic cumin coriander taco seasoning one-pot weeknight family recipe"
+  },
+  {
+    "id": "classic-pepper-steak-with-green-peppers-and-tomatoes",
+    "title": "Classic Pepper Steak with Green Peppers and Tomatoes",
+    "banner_image": "assets/images/classic-pepper-steak-with-green-peppers-and-tomatoes.jpg",
+    "kosher_status": "meat",
+    "kosher_for_passover": false,
+    "categories": [
+      "Main Dishes",
+      "Meat & Poultry"
+    ],
+    "tags": [
+      "pepper steak",
+      "beef",
+      "stir-fry",
+      "weeknight",
+      "one-pan",
+      "rice"
+    ],
+    "prep_minutes": 25,
+    "cook_minutes": 35,
+    "servings": "4 servings",
+    "leftover_friendly": true,
+    "tags_need_review": false,
+    "photo_generated": false,
+    "search_text": "classic pepper steak with green peppers and tomatoes beef stir-fry main meat pepper steak oil water onion garlic ground ginger salt green peppers cornstarch sugar soy sauce medium tomatoes rice"
   }
 ]
