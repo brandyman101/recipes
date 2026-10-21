@@ -91,9 +91,9 @@
     "file": null,
     "note": "Bronzini from Elza",
     "text": null,
-    "status": "pending",
+    "status": "done",
     "created_at": "2026-10-21T13:54:52.325Z",
-    "recipe_id": null,
+    "recipe_id": "elzas-mediterranean-roasted-bronzini",
     "fail_reason": null
   }
 ]
