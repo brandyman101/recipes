@@ -256,8 +256,9 @@
           "id": "mmvhifs5z",
           "text": "[ ] Bread  [ ] Cheese [ ] Milk",
           "have": false,
-          "updatedAt": 1792550756951,
-          "updatedBy": "smvhieomxis5ep6"
+          "updatedAt": 1792550758705,
+          "updatedBy": "smvhieomxis5ep6",
+          "deleted": true
         }
       ],
       "haveGenerated": [
