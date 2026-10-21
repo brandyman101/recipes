@@ -1,0 +1,97 @@
+{
+  "id": "elzas-mediterranean-roasted-bronzini",
+  "title": "Elza's Mediterranean Roasted Bronzini",
+  "kosher_status": "pareve",
+  "kosher_for_passover": false,
+  "categories": [
+    "Mains",
+    "Fish"
+  ],
+  "prep_minutes": 5,
+  "cook_minutes": 10,
+  "servings": "2",
+  "ingredients": [
+    {
+      "items": [
+        {
+          "qty": "1",
+          "unit": "",
+          "item": "whole branzino (or other mild white fish)",
+          "prep": "cleaned, deboned, and butterflied"
+        },
+        {
+          "qty": "2",
+          "unit": "tsp",
+          "item": "olive oil",
+          "prep": "divided"
+        },
+        {
+          "qty": "3",
+          "unit": "",
+          "item": "lemon",
+          "prep": "thinly sliced into rounds"
+        },
+        {
+          "qty": "4",
+          "unit": "",
+          "item": "fresh basil leaves",
+          "prep": ""
+        },
+        {
+          "qty": "1",
+          "unit": "tsp",
+          "item": "fresh garlic",
+          "prep": "crushed"
+        },
+        {
+          "qty": "1",
+          "unit": "pinch",
+          "item": "crushed red pepper",
+          "prep": ""
+        },
+        {
+          "qty": "",
+          "unit": "",
+          "item": "salt and pepper",
+          "prep": ""
+        }
+      ]
+    }
+  ],
+  "instructions": [
+    "Ask your fishmonger to clean, debone, and butterfly the fish for you!",
+    "Preheat the oven to 500°F.",
+    "Place the fish on a sheet pan and open it up. Coat the flesh with 1 teaspoon of the olive oil, and season with salt and pepper.",
+    "On the bottom half of the fish, spread the crushed garlic and crushed red pepper. Layer the basil on next, followed by the lemon slices.",
+    "Close the fish back up. With a sharp knife, score the skin on top 3 times — this keeps it from curling up.",
+    "Coat the outer skin with the remaining teaspoon of olive oil, and lightly season the skin with salt and pepper.",
+    "Roast for about 10 minutes, until the flesh flakes but is still moist and the skin is crisp.",
+    "If you like, drizzle a tiny bit more olive oil over the finished fish and serve."
+  ],
+  "tips": [],
+  "tags": [
+    "fish",
+    "branzino",
+    "mediterranean",
+    "roasted",
+    "easy"
+  ],
+  "notes": "Whole roasted fish with great flavor, made easy. The printed page's title was “Mediterranean Roasted Whole Fish”. Submitted as a photo of a printed recipe page.",
+  "source": "From Elza (printed recipe page)",
+  "banner_image": "assets/images/elzas-mediterranean-roasted-bronzini.jpg",
+  "pdf": "pdfs/elzas-mediterranean-roasted-bronzini.pdf",
+  "leftover_friendly": false,
+  "tags_need_review": false,
+  "photo_generated": false,
+  "history": [
+    {
+      "ts": "2026-10-21T14:14:13.583Z",
+      "actor": "sous-chef",
+      "action": "intake",
+      "changes": [
+        "Created recipe"
+      ],
+      "reasoning": "Initial intake"
+    }
+  ]
+}
