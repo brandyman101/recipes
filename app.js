@@ -467,6 +467,59 @@ function pluralizeUnit(unit, qty) {
   if (u === 'clove') return 'cloves';
   return unit;
 }
+/* Spice / dried-seasoning names recognized by the Shopping List's
+   "Skip spices" toggle. Matching is deliberately phrase-based: garlic is
+   not garlic powder, ginger is not ground ginger, and bell peppers are
+   vegetables, not spices. Fresh herbs are also left alone. */
+const SPICE_NAMES = new Set([
+  'allspice', 'anise', 'anise seed', 'annatto', 'asafoetida', 'basil',
+  'bay leaf', 'black pepper', 'caraway', 'caraway seed', 'cardamom',
+  'cayenne', 'cayenne pepper', 'celery salt', 'celery seed', 'chile powder',
+  'chili powder', 'cinnamon', 'clove', 'coriander', 'coriander seed',
+  'cumin', 'cumin seed', 'curry powder', 'dill weed', 'fennel seed',
+  'fenugreek', 'garam masala', 'garlic powder', 'garlic salt',
+  'ginger powder', 'herbes de provence', 'italian seasoning', 'kosher salt',
+  'mace', 'marjoram', 'mustard powder', 'mustard seed', 'nutmeg', 'old bay',
+  'onion powder', 'onion salt', 'oregano', 'paprika', 'pepper',
+  'peppercorn', 'poppy seed', 'poultry seasoning', 'red pepper flake',
+  'rosemary', 'saffron', 'sage', 'salt', 'sea salt', 'seasoned salt',
+  'sesame seed', 'star anise', 'sumac', 'table salt', 'taco seasoning',
+  'tarragon', 'thyme', 'turmeric', 'white pepper', "za'atar", 'zaatar'
+]);
+function isSpiceIngredient(item) {
+  let s = String(item || '').toLowerCase()
+    .replace(/\([^)]*\)/g, ' ')
+    .split(',')[0]
+    .replace(/&/g, ' and ')
+    .replace(/[^a-z0-9' -]/g, ' ')
+    .replace(/\bleaves\b/g, 'leaf')
+    .replace(/\bseeds\b/g, 'seed')
+    .replace(/\bflakes\b/g, 'flake')
+    .replace(/\bcloves\b/g, 'clove')
+    .replace(/\s+/g, ' ')
+    .trim();
+  if (!s) return false;
+  // Fresh peppers are produce, even though dried pepper seasonings are not.
+  if (/\b(bell|jalapeno|poblano|serrano|anaheim|habanero) pepper\b/.test(s)) return false;
+  if (s === 'salt and pepper' || s === 'pepper and salt') return true;
+  if (/\b(seasoning|spice blend|five spice|pumpkin pie spice|apple pie spice)\b/.test(s)) return true;
+
+  const had = word => new RegExp('\\b' + word + '\\b').test(s);
+  let core = s
+    .replace(/\b(freshly|finely|freeze-dried|powdered|ground|smoked|dried|dry|sweet|hot|whole|crushed)\b/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  core = core.replace(/ (stick|sticks)$/, '');
+  if (SPICE_NAMES.has(core)) return true;
+  if (core.endsWith(' chili powder') || core.endsWith(' chile powder')) return true;
+  if (core === 'ginger' && (had('ground') || had('dried') || had('powder') || had('powdered'))) return true;
+  if (core === 'mustard' && (had('ground') || had('dry') || had('powder') || had('powdered') || had('seed'))) return true;
+  if ((core === 'chili' || core === 'chile') && (had('dried') || had('flake'))) return true;
+  // Anything explicitly fresh and not already matched above is produce/herb,
+  // not a pantry spice (fresh basil, fresh thyme, fresh ginger, etc.).
+  if (had('fresh')) return false;
+  return false;
+}
 /* Normalize a meal slot to the dishes array format.
    Old: { recipe: 'id', custom: 'text', skipped: bool, note: '' }
    New: { dishes: [{ recipe, custom, leftovers, cookDate }], skipped, note } */
@@ -512,6 +565,7 @@ function buildShoppingList() {
       (sec.items || []).forEach(it => {
         const raw = (it.item || '').trim();
         if (!raw) return;
+        if (week.skipSpices && isSpiceIngredient(raw)) return;
         const gkey = groupKey(raw);
         if (!gkey) return;
         let unitRaw = (it.unit || '').trim();
@@ -731,9 +785,14 @@ function shoppingListHTML() {
       '<button class="shop-opt-btn" data-opt-have="' + esc(it.key) + '" type="button" aria-label="Already have" title="Already have">✓</button></div>'
   ).join('');
 
-  let html = '';
+  let html =
+    '<div class="no-print" style="margin:.35rem 0 .75rem">' +
+      '<label style="display:flex;align-items:center;gap:.5rem;font-weight:600;cursor:pointer">' +
+        '<input type="checkbox" id="shop-skip-spices"' + (week.skipSpices ? ' checked' : '') + '> Skip spices</label>' +
+      '<div class="muted" style="margin-top:.2rem;font-size:.9rem">When on, spice ingredients from planned recipes won’t be added. Items you add yourself stay.</div>' +
+    '</div>';
   if (!items.length && !week.manualItems.some(m => !m.deleted)) {
-    html = '<p class="muted">Nothing planned yet' + (from ? ' from the shopping day onward' : '') +
+    html += '<p class="muted">Nothing planned yet' + (from ? ' from the shopping day onward' : '') +
       ' — <a href="#/planner">plan your week</a> and your shopping list builds itself here.</p>';
   } else {
     if (genToBuyLis || manToBuyLis) {
@@ -1028,6 +1087,13 @@ async function renderShopping(app) {
       const ni = $('#shop-new');
       if (ni) ni.focus();
     }
+  });
+  shopWrap.addEventListener('change', e => {
+    if (e.target.id !== 'shop-skip-spices') return;
+    const week = getWeek(thisWeekKey());
+    week.skipSpices = !!e.target.checked;
+    week.skipSpicesAt = Date.now();
+    markShopDirty(); rerender();
   });
   const newInput = $('#shop-new');
   if (newInput) newInput.addEventListener('keydown', e => {
@@ -2704,6 +2770,18 @@ function mergePromoted(localArr, serverArr) {
   });
   return [...byKey.values()];
 }
+// The Skip spices setting is timestamped so the most recent toggle wins
+// when two devices sync; an older copy can never flip it back by accident.
+function mergeSkipSpices(target, source) {
+  if (!target || !source || source.skipSpices === undefined) return target;
+  const targetAt = target.skipSpicesAt || 0;
+  const sourceAt = source.skipSpicesAt || 0;
+  if (sourceAt >= targetAt) {
+    target.skipSpices = !!source.skipSpices;
+    target.skipSpicesAt = sourceAt;
+  }
+  return target;
+}
 // Merge shopping state from `source` week into `target` week (in place).
 // Used everywhere we combine local + server state. Merges are timestamp-
 // and tombstone-aware: concurrent "have" marks from two devices still
@@ -2717,6 +2795,7 @@ function mergeWeekState(target, source) {
   }
   // Merge optional promotions (union) so a promotion isn't lost in sync.
   target.optionalPromoted = mergePromoted(target.optionalPromoted, source.optionalPromoted);
+  mergeSkipSpices(target, source);
   return target;
 }
 // Fetch the meal plan from the live bridge API first (no Pages rebuild lag),
@@ -2810,6 +2889,7 @@ async function pollShopServer() {
     if (serverWeek.conflictAcked) {
       localWeek.conflictAcked = { ...(localWeek.conflictAcked || {}), ...serverWeek.conflictAcked };
     }
+    mergeSkipSpices(localWeek, serverWeek);
     saveShopLocal();
     // Re-render if we're on the shopping page
     if ((location.hash || '#/') === '#/shopping' && $('#shop-wrap')) {
