@@ -80,15 +80,17 @@
             "note": ""
           },
           "dinner": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": "",
             "dishes": [
               {
                 "recipe": "classic-pepper-steak-with-green-peppers-and-tomatoes",
                 "leftovers": false,
                 "cookDate": null
               }
-            ],
-            "skipped": false,
-            "note": ""
+            ]
           }
         },
         {
@@ -260,8 +262,8 @@
         }
       ],
       "optionalPromoted": [],
-      "skipSpices": false,
-      "skipSpicesAt": 1792549733212
+      "skipSpices": true,
+      "skipSpicesAt": 1792550684738
     }
   }
 }
