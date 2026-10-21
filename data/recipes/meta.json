@@ -99,5 +99,56 @@
     "tags_need_review": false,
     "photo_generated": false,
     "search_text": "classic pepper steak with green peppers and tomatoes beef stir-fry main meat pepper steak oil water onion garlic ground ginger salt green peppers cornstarch sugar soy sauce medium tomatoes rice"
+  },
+  {
+    "id": "honey-garlic-chicken-orzo",
+    "title": "Honey Garlic Chicken & Orzo",
+    "banner_image": "assets/images/honey-garlic-chicken-orzo.jpg",
+    "kosher_status": "meat",
+    "kosher_for_passover": false,
+    "categories": [
+      "Main Dishes",
+      "Chicken"
+    ],
+    "tags": [
+      "one-pan",
+      "weeknight",
+      "honey garlic",
+      "chicken",
+      "orzo",
+      "instagram"
+    ],
+    "prep_minutes": 15,
+    "cook_minutes": 60,
+    "servings": "4",
+    "leftover_friendly": true,
+    "tags_need_review": false,
+    "photo_generated": true,
+    "search_text": "honey garlic chicken and orzo meat main dishes chicken one-pan weeknight honey garlic chicken orzo instagram"
+  },
+  {
+    "id": "avis-sweet-and-spicy-oven-baked-ribs",
+    "title": "Avi's Sweet and Spicy Oven-Baked Ribs",
+    "banner_image": "assets/images/avis-sweet-and-spicy-oven-baked-ribs.jpg",
+    "kosher_status": "meat",
+    "kosher_for_passover": false,
+    "categories": [
+      "Main Dishes",
+      "Meat & Poultry"
+    ],
+    "tags": [
+      "ribs",
+      "bbq",
+      "sweet and spicy",
+      "oven-baked",
+      "low and slow"
+    ],
+    "prep_minutes": 15,
+    "cook_minutes": 180,
+    "servings": "4",
+    "leftover_friendly": true,
+    "tags_need_review": false,
+    "photo_generated": false,
+    "search_text": "avi's sweet and spicy oven-baked ribs meat main dishes meat & poultry ribs bbq sweet and spicy oven-baked low and slow"
   }
 ]
