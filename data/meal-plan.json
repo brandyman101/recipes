@@ -80,15 +80,17 @@
             "note": ""
           },
           "dinner": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": "",
             "dishes": [
               {
                 "recipe": "honey-garlic-chicken-orzo",
                 "leftovers": false,
                 "cookDate": null
               }
-            ],
-            "skipped": false,
-            "note": ""
+            ]
           }
         },
         {
@@ -292,8 +294,8 @@
         }
       ],
       "optionalPromoted": [],
-      "skipSpices": true,
-      "skipSpicesAt": 1792550776125
+      "skipSpices": false,
+      "skipSpicesAt": 1792582632467
     }
   }
 }
