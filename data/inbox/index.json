@@ -59,5 +59,17 @@
     "created_at": "2026-10-21T01:45:03.214Z",
     "recipe_id": "classic-pepper-steak-with-green-peppers-and-tomatoes",
     "fail_reason": null
+  },
+  {
+    "id": "inbox-mvhjqz3d-3nh",
+    "url": null,
+    "image": "data/inbox/inbox-mvhjqz3d-3nh.jpg",
+    "file": null,
+    "note": "Instagram",
+    "text": null,
+    "status": "pending",
+    "created_at": "2026-10-21T03:22:40.872Z",
+    "recipe_id": null,
+    "fail_reason": null
   }
 ]
