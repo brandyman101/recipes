@@ -1,0 +1,138 @@
+{
+  "banner_image": "assets/images/honey-garlic-chicken-orzo.jpg",
+  "categories": [
+    "Main Dishes",
+    "Chicken"
+  ],
+  "cook_minutes": 60,
+  "id": "honey-garlic-chicken-orzo",
+  "ingredients": [
+    {
+      "items": [
+        {
+          "item": "chicken thighs (dark meat)",
+          "prep": "",
+          "qty": "8-10",
+          "unit": ""
+        },
+        {
+          "item": "orzo",
+          "prep": "",
+          "qty": "1 1/2",
+          "unit": "cup"
+        },
+        {
+          "item": "small onion",
+          "prep": "diced",
+          "qty": "1",
+          "unit": ""
+        },
+        {
+          "item": "garlic",
+          "prep": "minced",
+          "qty": "5",
+          "unit": "cloves"
+        },
+        {
+          "item": "water",
+          "prep": "",
+          "qty": "3 1/2",
+          "unit": "cup"
+        },
+        {
+          "item": "chicken consommé",
+          "prep": "",
+          "qty": "2",
+          "unit": "tbsp"
+        },
+        {
+          "item": "honey",
+          "prep": "",
+          "qty": "1/4",
+          "unit": "cup"
+        },
+        {
+          "item": "soy sauce (or coconut aminos)",
+          "prep": "",
+          "qty": "3",
+          "unit": "tbsp"
+        },
+        {
+          "item": "olive oil",
+          "prep": "",
+          "qty": "3",
+          "unit": "tbsp"
+        },
+        {
+          "item": "paprika",
+          "prep": "",
+          "qty": "1",
+          "unit": "tsp"
+        },
+        {
+          "item": "garlic powder",
+          "prep": "",
+          "qty": "1",
+          "unit": "tsp"
+        },
+        {
+          "item": "black pepper",
+          "optional": true,
+          "prep": "to taste",
+          "qty": "",
+          "unit": ""
+        }
+      ],
+      "section": "Ingredients"
+    }
+  ],
+  "instructions": [
+    "Preheat the oven to 375°F (190°C).",
+    "In a large baking dish, whisk together the onion, garlic, olive oil, chicken consommé, honey, soy sauce, paprika, black pepper, garlic powder, and water.",
+    "Stir in the dry orzo, distributing it evenly.",
+    "Season the chicken thighs lightly with salt and pepper; nestle them skin-side up into the orzo.",
+    "Cover tightly with foil and bake for 40 minutes.",
+    "Uncover, spoon the sauce over the chicken, and bake 15–20 minutes more, until the chicken is glossy and tender.",
+    "Optional: broil 2–3 minutes for extra color. Rest 5 minutes before serving."
+  ],
+  "kosher_for_passover": false,
+  "kosher_status": "meat",
+  "leftover_friendly": true,
+  "notes": "Meat dish (chicken thighs, chicken consommé). One-pan dinner: the orzo cooks in the baking dish with the chicken — no draining, no stirring, no second pan. Submitted as an Instagram screenshot (2026-10-20). Black pepper appears in the directions (whisked into the sauce and used to season the chicken) but with no quantity, so it's listed as optional to taste.",
+  "pdf": "pdfs/honey-garlic-chicken-orzo.pdf",
+  "photo_generated": true,
+  "prep_minutes": 15,
+  "servings": "4",
+  "source": "Instagram (screenshot submitted 2026-10-20)",
+  "tags": [
+    "one-pan",
+    "weeknight",
+    "honey garlic",
+    "chicken",
+    "orzo",
+    "instagram"
+  ],
+  "tags_need_review": false,
+  "tips": [
+    {
+      "text": "After uncovering, spoon the pan sauce over the chicken before the final bake — that's what lacquers the skin, not the broiler.",
+      "title": "The gloss comes from basting"
+    },
+    {
+      "text": "The source promises the dish tastes better the next day. Store covered in the fridge and reheat gently.",
+      "title": "Even better tomorrow"
+    }
+  ],
+  "title": "Honey Garlic Chicken & Orzo",
+  "history": [
+    {
+      "ts": "2026-10-21T03:41:48.351Z",
+      "actor": "sous-chef",
+      "action": "intake",
+      "changes": [
+        "Created recipe"
+      ],
+      "reasoning": "Initial intake"
+    }
+  ]
+}
