@@ -263,9 +263,10 @@
         {
           "key": "cornstarch|tbsp",
           "session": "smvhieomxis5ep6",
-          "at": 1792550705721,
+          "at": 1792550710629,
           "qty": 1,
-          "unit": "tbsp"
+          "unit": "tbsp",
+          "removed": true
         }
       ],
       "optionalPromoted": [],
