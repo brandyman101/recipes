@@ -150,5 +150,30 @@
     "tags_need_review": false,
     "photo_generated": false,
     "search_text": "avi's sweet and spicy oven-baked ribs meat main dishes meat & poultry ribs bbq sweet and spicy oven-baked low and slow"
+  },
+  {
+    "id": "elzas-mediterranean-roasted-bronzini",
+    "title": "Elza's Mediterranean Roasted Bronzini",
+    "banner_image": "assets/images/elzas-mediterranean-roasted-bronzini.jpg",
+    "kosher_status": "pareve",
+    "kosher_for_passover": false,
+    "categories": [
+      "Mains",
+      "Fish"
+    ],
+    "tags": [
+      "fish",
+      "branzino",
+      "mediterranean",
+      "roasted",
+      "easy"
+    ],
+    "prep_minutes": 5,
+    "cook_minutes": 10,
+    "servings": "2",
+    "leftover_friendly": false,
+    "tags_need_review": false,
+    "photo_generated": false,
+    "search_text": "elza's mediterranean roasted bronzini pareve mains fish branzino mediterranean roasted easy"
   }
 ]
