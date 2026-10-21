@@ -468,9 +468,11 @@ function pluralizeUnit(unit, qty) {
   return unit;
 }
 /* Spice / dried-seasoning names recognized by the Shopping List's
-   "Skip spices" toggle. Matching is deliberately phrase-based: garlic is
-   not garlic powder, ginger is not ground ginger, and bell peppers are
-   vegetables, not spices. Fresh herbs are also left alone. */
+   "Skip spices" toggle. The same toggle also skips the basic staples
+   sugar, flour, oil, and plain water. Matching is deliberately
+   phrase-based: garlic is not garlic powder, ginger is not ground
+   ginger, and bell peppers are vegetables, not spices. Fresh herbs are
+   also left alone. */
 const SPICE_NAMES = new Set([
   'allspice', 'anise', 'anise seed', 'annatto', 'asafoetida', 'basil',
   'bay leaf', 'black pepper', 'caraway', 'caraway seed', 'cardamom',
@@ -486,6 +488,14 @@ const SPICE_NAMES = new Set([
   'sesame seed', 'star anise', 'sumac', 'table salt', 'taco seasoning',
   'tarragon', 'thyme', 'turmeric', 'white pepper', "za'atar", 'zaatar'
 ]);
+function isBasicPantryStaple(s) {
+  // Any "... sugar" or "... flour" or "... oil" ingredient is the staple
+  // itself (brown sugar, all-purpose flour, olive oil). Plain water only:
+  // coconut water, rose water, and sparkling water are bought ingredients.
+  if (/(^| )(sugar|flour|oil)$/.test(s)) return true;
+  if (/^(cold |warm |hot |ice |lukewarm |room temperature )?water$/.test(s)) return true;
+  return false;
+}
 function isSpiceIngredient(item) {
   let s = String(item || '').toLowerCase()
     .replace(/\([^)]*\)/g, ' ')
@@ -499,6 +509,7 @@ function isSpiceIngredient(item) {
     .replace(/\s+/g, ' ')
     .trim();
   if (!s) return false;
+  if (isBasicPantryStaple(s)) return true;
   // Fresh peppers are produce, even though dried pepper seasonings are not.
   if (/\b(bell|jalapeno|poblano|serrano|anaheim|habanero) pepper\b/.test(s)) return false;
   if (s === 'salt and pepper' || s === 'pepper and salt') return true;
@@ -789,7 +800,7 @@ function shoppingListHTML() {
     '<div class="no-print" style="margin:.35rem 0 .75rem">' +
       '<label style="display:flex;align-items:center;gap:.5rem;font-weight:600;cursor:pointer">' +
         '<input type="checkbox" id="shop-skip-spices"' + (week.skipSpices ? ' checked' : '') + '> Skip spices</label>' +
-      '<div class="muted" style="margin-top:.2rem;font-size:.9rem">When on, spice ingredients from planned recipes won’t be added. Items you add yourself stay.</div>' +
+      '<div class="muted" style="margin-top:.2rem;font-size:.9rem">When on, spices, sugar, flour, oil, and water from planned recipes won’t be added. Items you add yourself stay.</div>' +
     '</div>';
   if (!items.length && !week.manualItems.some(m => !m.deleted)) {
     html += '<p class="muted">Nothing planned yet' + (from ? ' from the shopping day onward' : '') +
