@@ -275,6 +275,13 @@
           "qty": 1,
           "unit": "tbsp",
           "removed": true
+        },
+        {
+          "key": "oil|tbsp",
+          "session": "smvhieomxis5ep6",
+          "at": 1792550740836,
+          "qty": 3,
+          "unit": "tbsp"
         }
       ],
       "optionalPromoted": [],
