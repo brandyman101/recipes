@@ -1,0 +1,116 @@
+{
+  "id": "french-onion-soup",
+  "title": "French Onion Soup",
+  "kosher_status": "dairy",
+  "kosher_for_passover": false,
+  "categories": [
+    "soup"
+  ],
+  "prep_minutes": 15,
+  "cook_minutes": 65,
+  "servings": "6",
+  "leftover_friendly": true,
+  "tags_need_review": false,
+  "photo_generated": false,
+  "ingredients": [
+    {
+      "section": "",
+      "items": [
+        {
+          "qty": "1",
+          "unit": "tbsp",
+          "item": "sugar",
+          "prep": ""
+        },
+        {
+          "qty": "1/4",
+          "unit": "cup",
+          "item": "all-purpose flour",
+          "prep": ""
+        },
+        {
+          "qty": "2",
+          "unit": "tbsp",
+          "item": "onion soup mix",
+          "prep": ""
+        },
+        {
+          "qty": "2",
+          "unit": "tsp",
+          "item": "salt",
+          "prep": ""
+        },
+        {
+          "qty": "1/4",
+          "unit": "tsp",
+          "item": "ground black pepper",
+          "prep": ""
+        },
+        {
+          "qty": "1/4",
+          "unit": "cup",
+          "item": "butter",
+          "prep": ""
+        },
+        {
+          "qty": "2",
+          "unit": "",
+          "item": "large onions",
+          "prep": "thinly sliced"
+        },
+        {
+          "qty": "6",
+          "unit": "cup",
+          "item": "water",
+          "prep": ""
+        },
+        {
+          "qty": "6",
+          "unit": "",
+          "item": "baguette slices",
+          "prep": ""
+        },
+        {
+          "qty": "1",
+          "unit": "cup",
+          "item": "Mozzarella cheese",
+          "prep": "shredded"
+        }
+      ]
+    }
+  ],
+  "instructions": [
+    "Mix sugar, all-purpose flour, onion soup mix, salt, and ground black pepper in a small bowl. Set aside.",
+    "In a large pot, melt butter. Add onions and caramelize about 25 minutes on low heat, mixing occasionally.",
+    "Add the flour mixture to onions and stir to create a roux. Slowly add water to roux, and continue mixing.",
+    "Bring to a boil. Reduce heat and simmer 30 to 40 minutes.",
+    "Preheat oven to broil. Ladle soup into 6 oven-safe bowls. Float a baguette slice on top of each soup. Sprinkle about 2 tablespoons of shredded mozzarella cheese onto the bread slices.",
+    "Place filled bowls onto a cookie sheet. Place cookie sheet in oven under broiler. Broil 4 minutes. Serve immediately."
+  ],
+  "tips": [
+    {
+      "title": "Garlic Baguette",
+      "text": "For a garlic bread topper instead of a plain baguette slice: slice 1 French-style baguette on a diagonal about 1-inch thick and place on a cookie sheet lined with baking paper. Brush each slice with 1/4 cup (1/2 stick) melted butter, sprinkle with 2 cloves garlic (minced), and bake at 400°F for 10 minutes."
+    }
+  ],
+  "tags": [
+    "french",
+    "comfort food",
+    "vegetarian-friendly"
+  ],
+  "notes": "This soup was served to my seminary students at the weekly class I hosted. It became an instant favorite and to my chagrin — a weekly request! No getting away with microwave popcorn and carrot sticks for me, like my fellow teachers.",
+  "source": "Submitted photo (cookbook page)",
+  "banner_image": "assets/images/french-onion-soup.jpg",
+  "pdf": "pdfs/french-onion-soup.pdf",
+  "history": [
+    {
+      "ts": "2026-10-21T15:11:08.588Z",
+      "actor": "sous-chef",
+      "action": "intake",
+      "changes": [
+        "Created recipe"
+      ],
+      "reasoning": "Initial intake"
+    }
+  ]
+}
