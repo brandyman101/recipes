@@ -74,15 +74,17 @@
         },
         {
           "lunch": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": "",
             "dishes": [
               {
                 "recipe": "best-fluffy-pancakes",
                 "leftovers": false,
                 "cookDate": null
               }
-            ],
-            "skipped": false,
-            "note": ""
+            ]
           },
           "dinner": {
             "recipe": null,
@@ -268,7 +270,7 @@
       ],
       "optionalPromoted": [],
       "skipSpices": true,
-      "skipSpicesAt": 1792549660001
+      "skipSpicesAt": 1792549690016
     }
   }
 }
