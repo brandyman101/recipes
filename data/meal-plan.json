@@ -77,14 +77,7 @@
             "recipe": null,
             "custom": null,
             "skipped": false,
-            "note": "",
-            "dishes": [
-              {
-                "recipe": "best-fluffy-pancakes",
-                "leftovers": false,
-                "cookDate": null
-              }
-            ]
+            "note": ""
           },
           "dinner": {
             "recipe": null,
