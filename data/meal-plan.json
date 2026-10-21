@@ -248,8 +248,9 @@
           "id": "mmvhiewtx",
           "text": "Bread",
           "have": false,
-          "updatedAt": 1792550716341,
-          "updatedBy": "smvhieomxis5ep6"
+          "updatedAt": 1792550722932,
+          "updatedBy": "smvhieomxis5ep6",
+          "deleted": true
         }
       ],
       "haveGenerated": [
@@ -277,8 +278,8 @@
         }
       ],
       "optionalPromoted": [],
-      "skipSpices": true,
-      "skipSpicesAt": 1792550701630
+      "skipSpices": false,
+      "skipSpicesAt": 1792550724475
     }
   }
 }
