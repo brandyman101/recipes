@@ -83,14 +83,7 @@
             "recipe": null,
             "custom": null,
             "skipped": false,
-            "note": "",
-            "dishes": [
-              {
-                "recipe": "honey-garlic-chicken-orzo",
-                "leftovers": false,
-                "cookDate": null
-              }
-            ]
+            "note": ""
           }
         },
         {
