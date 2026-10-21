@@ -67,9 +67,9 @@
     "file": null,
     "note": "Instagram",
     "text": null,
-    "status": "pending",
+    "status": "done",
     "created_at": "2026-10-21T03:22:40.872Z",
-    "recipe_id": null,
+    "recipe_id": "honey-garlic-chicken-orzo",
     "fail_reason": null
   },
   {
@@ -79,9 +79,9 @@
     "file": null,
     "note": "Avi's",
     "text": null,
-    "status": "pending",
+    "status": "done",
     "created_at": "2026-10-21T03:26:13.542Z",
-    "recipe_id": null,
+    "recipe_id": "avis-sweet-and-spicy-oven-baked-ribs",
     "fail_reason": null
   }
 ]
