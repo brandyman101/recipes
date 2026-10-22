@@ -197,5 +197,27 @@
     "tags_need_review": false,
     "photo_generated": false,
     "search_text": "french onion soup dairy soup french comfort food vegetarian-friendly"
+  },
+  {
+    "id": "chicken-soup",
+    "title": "Chicken Soup",
+    "banner_image": "assets/images/chicken-soup.jpg",
+    "kosher_status": "meat",
+    "kosher_for_passover": false,
+    "categories": [
+      "Soup"
+    ],
+    "tags": [
+      "chicken",
+      "soup",
+      "comfort food"
+    ],
+    "prep_minutes": 40,
+    "cook_minutes": 195,
+    "servings": "6",
+    "leftover_friendly": true,
+    "tags_need_review": false,
+    "photo_generated": false,
+    "search_text": "chicken soup chicken thighs chicken drumsticks onion garlic chicken broth carrots potatoes celery turnip parsnip water black pepper ground cumin ground coriander turmeric noodles comfort food"
   }
 ]
