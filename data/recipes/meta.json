@@ -219,5 +219,28 @@
     "tags_need_review": false,
     "photo_generated": false,
     "search_text": "chicken soup chicken thighs chicken drumsticks onion garlic chicken broth carrots potatoes celery turnip parsnip water black pepper ground cumin ground coriander turmeric noodles comfort food"
+  },
+  {
+    "id": "buffalo-chicken-wings",
+    "title": "Buffalo Chicken Wings",
+    "banner_image": "assets/images/buffalo-chicken-wings.jpg",
+    "kosher_status": "meat",
+    "kosher_for_passover": false,
+    "categories": [
+      "appetizer",
+      "chicken"
+    ],
+    "tags": [
+      "broiler",
+      "game day",
+      "buffalo"
+    ],
+    "prep_minutes": 10,
+    "cook_minutes": 25,
+    "servings": "Varies",
+    "leftover_friendly": true,
+    "tags_need_review": true,
+    "photo_generated": false,
+    "search_text": "buffalo chicken wings meat appetizer chicken frank's redhot buffalo wings sauce broiler game day buffalo"
   }
 ]
