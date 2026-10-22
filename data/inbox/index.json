@@ -167,5 +167,17 @@
     "created_at": "2026-10-22T15:10:31.283Z",
     "recipe_id": null,
     "fail_reason": null
+  },
+  {
+    "id": "inbox-mvjohfhk-71i",
+    "url": null,
+    "image": "data/inbox/inbox-mvjohfhk-71i.jpg",
+    "file": null,
+    "note": null,
+    "text": null,
+    "status": "pending",
+    "created_at": "2026-10-22T15:10:45.879Z",
+    "recipe_id": null,
+    "fail_reason": null
   }
 ]
