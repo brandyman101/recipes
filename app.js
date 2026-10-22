@@ -820,7 +820,9 @@ function shoppingListHTML() {
   }
   html += '<div class="shop-add no-print"><input type="text" id="shop-new" placeholder="Add an item — or paste a whole list…" aria-label="Add your own item">' +
     '<button class="btn secondary" id="shop-add" type="button">Add</button></div>';
-  html += '<div style="margin-top:.6rem"><button class="btn secondary" id="shop-copy" type="button">Copy list</button></div>';
+  html += '<div style="margin-top:.6rem"><button class="btn secondary" id="shop-copy" type="button">Copy list</button> ' +
+    '<button class="btn secondary" id="shop-photo-btn" type="button">📷 Add from photo</button></div>';
+  html += '<div class="form-hint no-print" id="shop-photo-hint" style="margin-top:.35rem">Photo of a typed or handwritten list — the items are read and added here within about 30 minutes.</div>';
   return html;
 }
 
@@ -1090,6 +1092,9 @@ async function renderShopping(app) {
       if (dm) { dm.deleted = true; dm.updatedAt = Date.now(); dm.updatedBy = getSessionId(); }
       saveShop(); rerender(); return;
     }
+    // Add from photo: pick a picture of a list; it goes to the inbox
+    // and the checker itemizes it into this week's manual items.
+    if (e.target.closest('#shop-photo-btn')) { pickShopListPhoto(); return; }
     // Add manual item(s) — the box accepts a whole pasted list, one
     // item per line (see addManualItems).
     if (e.target.closest('#shop-add')) {
@@ -3296,6 +3301,14 @@ async function loadInboxList(showAll = !!window._inboxShowAll) {
       const targetTitle = s.note ? s.note.replace(/^Deleted via site: /, '') : (s.edit_target || 'recipe');
       return '<li><strong>🗑️ Deleted: ' + esc(targetTitle) + '</strong> — ✓ removed' + ts(s) + '</li>';
     }
+    if (s.type === 'shopping-list') {
+      const slBadge = s.status === 'done' ? '✓ items added' : badge(s.status);
+      const added = Array.isArray(s.items_added) && s.items_added.length
+        ? '<br><span style="color:var(--muted)">' + esc(s.items_added.join(', ')) + '</span>' : '';
+      return '<li><strong>🛒 Shopping list photo</strong> — ' + slBadge + added +
+        (s.fail_reason ? ' <span style="color:var(--danger)">' + esc(s.fail_reason) + '</span>' : '') +
+        ts(s) + '</li>';
+    }
     // Show the recipe title once it's processed
     let titlePart = '';
     if (s.recipe_id && recipeMeta(s.recipe_id)) {
@@ -3341,6 +3354,72 @@ async function loadInboxList(showAll = !!window._inboxShowAll) {
   if (showAllBtn) showAllBtn.onclick = () => loadInboxList(true);
   const showLessBtn = $('#inbox-show-less');
   if (showLessBtn) showLessBtn.onclick = () => loadInboxList(false);
+}
+
+/* ---------------- Shopping list from a photo ----------------
+   The photo goes to the inbox as a "shopping-list" entry; the intake
+   checker reads it (typed or handwritten) and appends each line to the
+   current week's manual items on the shopping list. */
+function pickShopListPhoto() {
+  let inp = document.getElementById('shop-photo-input');
+  if (!inp) {
+    inp = document.createElement('input');
+    inp.type = 'file';
+    inp.accept = 'image/*';
+    inp.id = 'shop-photo-input';
+    inp.style.display = 'none';
+    document.body.appendChild(inp);
+    inp.addEventListener('change', async () => {
+      const file = (inp.files || [])[0];
+      inp.value = '';
+      if (file) await sendShopListPhoto(file);
+    });
+  }
+  inp.click();
+}
+
+async function resizeImageToB64(file) {
+  try {
+    const img = await loadImage(await readAsDataURL(file));
+    const MAX = 1600;
+    const scale = Math.min(1, MAX / Math.max(img.width, img.height));
+    const canvas = document.createElement('canvas');
+    canvas.width = Math.max(1, Math.round(img.width * scale));
+    canvas.height = Math.max(1, Math.round(img.height * scale));
+    canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+    const blob = await new Promise(r => canvas.toBlob(r, 'image/jpeg', 0.85));
+    if (!blob) throw new Error('decode failed');
+    return String(await readAsDataURL(blob)).split(',')[1];
+  } catch (e) {
+    const raw = String(await readAsDataURL(file)).split(',');
+    if (!raw[1]) throw new Error('Could not read that photo — try again.');
+    return raw[1];
+  }
+}
+
+async function sendShopListPhoto(file) {
+  const setHint = t => { const h = $('#shop-photo-hint'); if (h) h.textContent = t; };
+  setHint('Sending photo…');
+  try {
+    const b64 = await resizeImageToB64(file);
+    const id = 'inbox-' + Date.now().toString(36) + '-' + Math.floor(Math.random() * 1e4).toString(36);
+    const imagePath = 'data/inbox/' + id + '.jpg';
+    await ghPutB64(imagePath, b64, 'Inbox shopping-list photo ' + id);
+    const entry = {
+      id, type: 'shopping-list', url: null, image: imagePath, file: null, note: null, text: null,
+      status: 'pending', created_at: new Date().toISOString(),
+      recipe_id: null, fail_reason: null
+    };
+    await ghPut('data/inbox/' + id + '.json', JSON.stringify(entry, null, 2), 'Inbox shopping list ' + id);
+    let idx = [];
+    try { idx = JSON.parse((await ghGet('data/inbox/index.json')).text); } catch (e) { idx = []; }
+    idx.push(entry);
+    await ghPut('data/inbox/index.json', JSON.stringify(idx, null, 2), 'Inbox index ' + id);
+    setHint('Photo sent — the items will be added to this list within about 30 minutes.');
+    toast('List photo sent!');
+  } catch (e) {
+    setHint('Couldn’t send that photo: ' + (e.message || e) + ' — try again.');
+  }
 }
 
 async function sendSubmission() {
