@@ -6,9 +6,9 @@
     "url": null,
     "image": "data/inbox/inbox-testshop-6ada9338.jpg",
     "file": null,
-    "note": "end-to-end test",
+    "note": "test_mode completed",
     "text": null,
-    "status": "pending",
+    "status": "done",
     "created_at": "2026-10-22T18:52:00-04:00",
     "recipe_id": null,
     "fail_reason": null
