@@ -242,5 +242,31 @@
     "tags_need_review": true,
     "photo_generated": false,
     "search_text": "buffalo chicken wings meat appetizer chicken frank's redhot buffalo wings sauce broiler game day buffalo"
+  },
+  {
+    "id": "spinach-strawberry-salad",
+    "title": "Spinach Strawberry Salad",
+    "banner_image": "assets/images/spinach-strawberry-salad.jpg",
+    "kosher_status": "dairy",
+    "kosher_for_passover": false,
+    "categories": [
+      "Salads"
+    ],
+    "tags": [
+      "salad",
+      "spinach",
+      "strawberry",
+      "pecans",
+      "no-cook",
+      "quick",
+      "dairy"
+    ],
+    "prep_minutes": 15,
+    "cook_minutes": 0,
+    "servings": "4",
+    "leftover_friendly": false,
+    "tags_need_review": false,
+    "photo_generated": false,
+    "search_text": "spinach strawberry salad dairy salads spinach strawberry pecans no-cook quick"
   }
 ]
