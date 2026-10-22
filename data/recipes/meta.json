@@ -268,5 +268,55 @@
     "tags_need_review": false,
     "photo_generated": false,
     "search_text": "spinach strawberry salad dairy salads spinach strawberry pecans no-cook quick"
+  },
+  {
+    "id": "authentic-italian-bruschetta",
+    "title": "Authentic Italian Bruschetta",
+    "banner_image": "assets/images/authentic-italian-bruschetta.jpg",
+    "kosher_status": "pareve",
+    "kosher_for_passover": false,
+    "categories": [
+      "Appetizers"
+    ],
+    "tags": [
+      "bruschetta",
+      "appetizer",
+      "tomato",
+      "basil",
+      "pareve",
+      "quick"
+    ],
+    "prep_minutes": 25,
+    "cook_minutes": 5,
+    "servings": "8",
+    "leftover_friendly": false,
+    "tags_need_review": false,
+    "photo_generated": false,
+    "search_text": "authentic italian bruschetta pareve appetizers bruschetta appetizer tomato basil pareve quick"
+  },
+  {
+    "id": "roasted-salmon-with-green-herbs",
+    "title": "Roasted Salmon with Green Herbs",
+    "banner_image": "assets/images/roasted-salmon-with-green-herbs.jpg",
+    "kosher_status": "pareve",
+    "kosher_for_passover": false,
+    "categories": [
+      "Mains"
+    ],
+    "tags": [
+      "salmon",
+      "main",
+      "herbs",
+      "roasted",
+      "pareve",
+      "quick"
+    ],
+    "prep_minutes": 15,
+    "cook_minutes": 11,
+    "servings": "6",
+    "leftover_friendly": false,
+    "tags_need_review": false,
+    "photo_generated": false,
+    "search_text": "roasted salmon with green herbs pareve mains salmon main herbs roasted pareve quick"
   }
 ]
