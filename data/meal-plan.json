@@ -273,11 +273,12 @@
           "id": "mmvk4lpfd",
           "text": "Sweet potatoes Carrots and celery Potato Dill Bread Tomatoes Cucumbers Broccoli head sale Banana Avocado Tater tots Frozen broccoli sale Dr Praegar pizza stars Noah's yogurt One gallon of Noah's milk",
           "have": false,
-          "updatedAt": 1792708922410,
+          "updatedAt": 1792708951084,
           "updatedBy": "smvk4kfe0l9y8zv",
           "haveSession": null,
           "haveAt": 0,
-          "haveSessions": []
+          "haveSessions": [],
+          "deleted": true
         }
       ],
       "haveGenerated": [
