@@ -1,0 +1,107 @@
+{
+  "banner_image": "assets/images/roasted-salmon-with-green-herbs.jpg",
+  "categories": [
+    "Mains"
+  ],
+  "cook_minutes": 11,
+  "id": "roasted-salmon-with-green-herbs",
+  "ingredients": [
+    {
+      "items": [
+        {
+          "item": "skinless salmon filet",
+          "prep": "",
+          "qty": "2-2 1/2",
+          "unit": "lb"
+        },
+        {
+          "item": "kosher salt and freshly ground black pepper",
+          "prep": "",
+          "qty": "",
+          "unit": ""
+        },
+        {
+          "item": "olive oil",
+          "prep": "",
+          "qty": "1/4",
+          "unit": "cup"
+        },
+        {
+          "item": "lemon juice",
+          "prep": "freshly squeezed",
+          "qty": "2",
+          "unit": "tbsp"
+        },
+        {
+          "item": "scallions",
+          "prep": "minced, white and green parts (about 4 scallions)",
+          "qty": "1/2",
+          "unit": "cup"
+        },
+        {
+          "item": "dill",
+          "prep": "minced, fresh",
+          "qty": "1/2",
+          "unit": "cup"
+        },
+        {
+          "item": "parsley",
+          "prep": "minced, fresh",
+          "qty": "1/2",
+          "unit": "cup"
+        },
+        {
+          "item": "dry white wine",
+          "prep": "",
+          "qty": "1/4",
+          "unit": "cup"
+        },
+        {
+          "item": "lemon wedges",
+          "prep": "for serving",
+          "qty": "",
+          "unit": ""
+        }
+      ],
+      "section": ""
+    }
+  ],
+  "instructions": [
+    "Preheat the oven to 425°F.",
+    "Place the salmon filet in a glass, ceramic, or stainless-steel roasting dish and season it generously with salt and pepper. Whisk together the olive oil and lemon juice, drizzle the mixture evenly over the salmon, and let it stand at room temperature for 15 minutes.",
+    "In a small bowl, stir together the scallions, dill, and parsley. Scatter the herb mixture over the salmon filet, turning it so that both sides are generously coated with the green herbs. Pour the wine around the fish.",
+    "Roast the salmon for 10–12 minutes, until almost cooked in the center at the thickest part. The center will be firm with just a line of uncooked salmon in the very center (insert the tip of a small knife to check).",
+    "Cover the dish tightly with aluminum foil and allow the fish to rest for 10 minutes. Cut the salmon crosswise into serving pieces and serve hot with lemon wedges."
+  ],
+  "kosher_for_passover": false,
+  "kosher_status": "pareve",
+  "leftover_friendly": false,
+  "notes": "Adapted from a printout submitted as a screenshot (original source site unknown). Use a kosher-certified dry white wine. Banner photo is a stock-style photo of herb-topped roasted salmon from a web image search, not the source's photo.",
+  "pdf": "pdfs/roasted-salmon-with-green-herbs.pdf",
+  "photo_generated": false,
+  "prep_minutes": 15,
+  "servings": "6",
+  "source": "",
+  "tags": [
+    "salmon",
+    "main",
+    "herbs",
+    "roasted",
+    "pareve",
+    "quick"
+  ],
+  "tags_need_review": false,
+  "tips": [],
+  "title": "Roasted Salmon with Green Herbs",
+  "history": [
+    {
+      "ts": "2026-10-22T15:41:34.319Z",
+      "actor": "sous-chef",
+      "action": "intake",
+      "changes": [
+        "Created recipe"
+      ],
+      "reasoning": "Initial intake from inbox-mvjoh48x-p2 (screenshot of recipe printout)"
+    }
+  ]
+}
