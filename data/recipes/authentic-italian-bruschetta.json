@@ -1,0 +1,106 @@
+{
+  "banner_image": "assets/images/authentic-italian-bruschetta.jpg",
+  "categories": [
+    "Appetizers"
+  ],
+  "cook_minutes": 5,
+  "id": "authentic-italian-bruschetta",
+  "ingredients": [
+    {
+      "items": [
+        {
+          "item": "vine ripe tomatoes",
+          "prep": "diced",
+          "qty": "2",
+          "unit": ""
+        },
+        {
+          "item": "fresh basil leaves",
+          "prep": "chiffonade",
+          "qty": "5",
+          "unit": ""
+        },
+        {
+          "item": "extra virgin olive oil",
+          "prep": "divided",
+          "qty": "3",
+          "unit": "tbsp"
+        },
+        {
+          "item": "dried oregano",
+          "prep": "",
+          "qty": "1/2",
+          "unit": "tsp"
+        },
+        {
+          "item": "salt",
+          "prep": "",
+          "qty": "pinch",
+          "unit": ""
+        },
+        {
+          "item": "balsamic vinegar",
+          "prep": "",
+          "qty": "1",
+          "unit": "tsp"
+        },
+        {
+          "item": "Italian-style baguette",
+          "prep": "sliced",
+          "qty": "1",
+          "unit": ""
+        },
+        {
+          "item": "garlic clove",
+          "prep": "whole",
+          "qty": "1",
+          "unit": ""
+        },
+        {
+          "item": "purple onion",
+          "prep": "",
+          "qty": "",
+          "unit": ""
+        }
+      ],
+      "section": ""
+    }
+  ],
+  "instructions": [
+    "Combine the diced tomatoes with the fresh basil, dried oregano, a pinch of salt, 1 to 1½ tablespoons of the olive oil, and a splash (1 teaspoon) of balsamic vinegar. Chill.",
+    "Slice the baguette into ¼ to ½-inch slices. Cut off the end of the garlic clove and rub the garlic onto each side of each piece of bread. Drizzle both sides of the sliced bread with a little olive oil (or brush it on with a brush).",
+    "Toast on a grill or in a hot skillet until browned on both sides.",
+    "Top the hot bread with the cold tomato bruschetta and serve immediately."
+  ],
+  "kosher_for_passover": false,
+  "kosher_status": "pareve",
+  "leftover_friendly": false,
+  "notes": "Adapted from a printout submitted as a screenshot (original source site unknown). The printout lists purple onion as added without a specified amount — use to taste. Chill the tomato mixture while the bread toasts so the topping goes on cold. Banner photo is a stock-style photo of bruschetta from a web image search, not the source's photo.",
+  "pdf": "pdfs/authentic-italian-bruschetta.pdf",
+  "photo_generated": false,
+  "prep_minutes": 25,
+  "servings": "8",
+  "source": "",
+  "tags": [
+    "bruschetta",
+    "appetizer",
+    "tomato",
+    "basil",
+    "pareve",
+    "quick"
+  ],
+  "tags_need_review": false,
+  "tips": [],
+  "title": "Authentic Italian Bruschetta",
+  "history": [
+    {
+      "ts": "2026-10-22T15:41:27.835Z",
+      "actor": "sous-chef",
+      "action": "intake",
+      "changes": [
+        "Created recipe"
+      ],
+      "reasoning": "Initial intake from inbox-mvjogs1j-4hq (screenshot of recipe printout)"
+    }
+  ]
+}
