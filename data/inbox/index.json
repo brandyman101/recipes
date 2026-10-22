@@ -139,9 +139,9 @@
     "file": null,
     "note": null,
     "text": null,
-    "status": "pending",
+    "status": "done",
     "created_at": "2026-10-22T14:47:53.775Z",
-    "recipe_id": null,
+    "recipe_id": "spinach-strawberry-salad",
     "fail_reason": null
   }
 ]
