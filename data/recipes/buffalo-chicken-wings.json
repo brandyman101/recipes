@@ -1,0 +1,67 @@
+{
+  "id": "buffalo-chicken-wings",
+  "title": "Buffalo Chicken Wings",
+  "kosher_status": "meat",
+  "kosher_for_passover": false,
+  "categories": [
+    "Appetizer",
+    "Chicken"
+  ],
+  "prep_minutes": 10,
+  "cook_minutes": 25,
+  "servings": "Varies",
+  "ingredients": [
+    {
+      "section": "",
+      "items": [
+        {
+          "qty": "",
+          "unit": "",
+          "item": "chicken wings",
+          "prep": ""
+        },
+        {
+          "qty": "",
+          "unit": "",
+          "item": "Frank's RedHot Original Buffalo Wings Sauce",
+          "prep": ""
+        }
+      ]
+    }
+  ],
+  "instructions": [
+    "Lay the wings flat in a single layer in a pan. (If you'd like smaller pieces, cut each wing in half at the joint.)",
+    "Pour the Frank's RedHot Buffalo Wings Sauce over the wings and spread it around so they're coated.",
+    "Broil, keeping a close eye on them, until the tops look lightly charred with small brown bubbles forming — not burnt.",
+    "Take the pan out, flip the wings, add a little more sauce, and broil again until the tops are lightly browned.",
+    "Switch to bake at 350°F for 10 minutes so the wings finish cooking through."
+  ],
+  "tips": [
+    {
+      "title": "Watch the broiler",
+      "text": "Broilers vary a lot — stay by the oven. The wings go from brown bubbles to burnt fast."
+    }
+  ],
+  "tags": [
+    "broiler",
+    "game day",
+    "buffalo"
+  ],
+  "notes": "No quantities were specified in the original (it was spoken/transcribed) — use enough wings to fill a pan in a single layer and enough sauce to coat both sides. Prep time and cook time are estimates; broil time depends on your broiler.",
+  "source": "Text submission",
+  "banner_image": "assets/images/buffalo-chicken-wings.jpg",
+  "pdf": "pdfs/buffalo-chicken-wings.pdf",
+  "tags_need_review": true,
+  "photo_generated": false,
+  "history": [
+    {
+      "ts": "2026-10-22T12:39:37.786Z",
+      "actor": "sous-chef",
+      "action": "intake",
+      "changes": [
+        "Created recipe"
+      ],
+      "reasoning": "Initial intake"
+    }
+  ]
+}
