@@ -874,7 +874,7 @@ function renderRecipes(app) {
     '</div>' +
     '<p class="result-count" id="result-count"></p>' +
     '<div class="no-print" style="margin:0 0 1rem"><a class="btn" href="#/add">+ Add recipe</a> ' +
-    '<a class="btn secondary" href="#/submit">Submit a link or photo</a></div>' +
+    '<a class="btn secondary" href="#/submit">Submit Recipe</a></div>' +
     '<div class="card-grid" id="grid"></div></section>';
 
   $('#q').addEventListener('input', e => { filters.q = e.target.value; drawGrid(); });
