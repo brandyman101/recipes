@@ -279,6 +279,181 @@
           "haveAt": 0,
           "haveSessions": [],
           "deleted": true
+        },
+        {
+          "id": "m1a165d423dd0",
+          "text": "Berries",
+          "have": false,
+          "updatedAt": 1792709764061,
+          "updatedBy": "chat"
+        },
+        {
+          "id": "m1a165d423dd1",
+          "text": "Sweet potatoes",
+          "have": false,
+          "updatedAt": 1792709764061,
+          "updatedBy": "chat"
+        },
+        {
+          "id": "m1a165d423dd2",
+          "text": "Carrots and celery",
+          "have": false,
+          "updatedAt": 1792709764061,
+          "updatedBy": "chat"
+        },
+        {
+          "id": "m1a165d423dd3",
+          "text": "Potato",
+          "have": false,
+          "updatedAt": 1792709764061,
+          "updatedBy": "chat"
+        },
+        {
+          "id": "m1a165d423dd4",
+          "text": "Dill",
+          "have": false,
+          "updatedAt": 1792709764061,
+          "updatedBy": "chat"
+        },
+        {
+          "id": "m1a165d423dd5",
+          "text": "Bread",
+          "have": false,
+          "updatedAt": 1792709764061,
+          "updatedBy": "chat"
+        },
+        {
+          "id": "m1a165d423dd6",
+          "text": "Tomatoes",
+          "have": false,
+          "updatedAt": 1792709764061,
+          "updatedBy": "chat"
+        },
+        {
+          "id": "m1a165d423dd7",
+          "text": "Cucumbers",
+          "have": false,
+          "updatedAt": 1792709764061,
+          "updatedBy": "chat"
+        },
+        {
+          "id": "m1a165d423dd8",
+          "text": "Broccoli head sale",
+          "have": false,
+          "updatedAt": 1792709764061,
+          "updatedBy": "chat"
+        },
+        {
+          "id": "m1a165d423dd9",
+          "text": "Banana",
+          "have": false,
+          "updatedAt": 1792709764061,
+          "updatedBy": "chat"
+        },
+        {
+          "id": "m1a165d423dd10",
+          "text": "Avocado",
+          "have": false,
+          "updatedAt": 1792709764061,
+          "updatedBy": "chat"
+        },
+        {
+          "id": "m1a165d423dd11",
+          "text": "Tater tots",
+          "have": false,
+          "updatedAt": 1792709764061,
+          "updatedBy": "chat"
+        },
+        {
+          "id": "m1a165d423dd12",
+          "text": "Frozen broccoli sale",
+          "have": false,
+          "updatedAt": 1792709764061,
+          "updatedBy": "chat"
+        },
+        {
+          "id": "m1a165d423dd13",
+          "text": "Dr Praegar pizza stars",
+          "have": false,
+          "updatedAt": 1792709764061,
+          "updatedBy": "chat"
+        },
+        {
+          "id": "m1a165d423dd14",
+          "text": "Noah's yogurt",
+          "have": false,
+          "updatedAt": 1792709764061,
+          "updatedBy": "chat"
+        },
+        {
+          "id": "m1a165d423dd15",
+          "text": "One gallon of Noah's milk",
+          "have": false,
+          "updatedAt": 1792709764061,
+          "updatedBy": "chat"
+        },
+        {
+          "id": "m1a165d423dd16",
+          "text": "Chobani yogurt for mommy (get the kind of my diabetes- regular Chobani not the flip- I like the berry flavor VANILLA one)",
+          "have": false,
+          "updatedAt": 1792709764061,
+          "updatedBy": "chat"
+        },
+        {
+          "id": "m1a165d423dd17",
+          "text": "Cheddar cheese slices (not processed!! Don't get American cheese)",
+          "have": false,
+          "updatedAt": 1792709764061,
+          "updatedBy": "chat"
+        },
+        {
+          "id": "m1a165d423dd18",
+          "text": "Bronzini sale!! Buy 3",
+          "have": false,
+          "updatedAt": 1792709764061,
+          "updatedBy": "chat"
+        },
+        {
+          "id": "m1a165d423dd19",
+          "text": "Chicken sausage (no hotdog)",
+          "have": false,
+          "updatedAt": 1792709764061,
+          "updatedBy": "chat"
+        },
+        {
+          "id": "m1a165d423dd20",
+          "text": "Chicken drumsticks sale",
+          "have": false,
+          "updatedAt": 1792709764061,
+          "updatedBy": "chat"
+        },
+        {
+          "id": "m1a165d423dd21",
+          "text": "Challah",
+          "have": false,
+          "updatedAt": 1792709764061,
+          "updatedBy": "chat"
+        },
+        {
+          "id": "m1a165d423dd22",
+          "text": "Goodles",
+          "have": false,
+          "updatedAt": 1792709764061,
+          "updatedBy": "chat"
+        },
+        {
+          "id": "m1a165d423dd23",
+          "text": "Veggie straws",
+          "have": false,
+          "updatedAt": 1792709764061,
+          "updatedBy": "chat"
+        },
+        {
+          "id": "m1a165d423dd24",
+          "text": "Snacks for mommy",
+          "have": false,
+          "updatedAt": 1792709764061,
+          "updatedBy": "chat"
         }
       ],
       "haveGenerated": [
