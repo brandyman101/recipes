@@ -1,0 +1,14 @@
+{
+  "id": "inbox-testshop-6ada9338",
+  "type": "shopping-list",
+  "test_mode": true,
+  "url": null,
+  "image": "data/inbox/inbox-testshop-6ada9338.jpg",
+  "file": null,
+  "note": "end-to-end test",
+  "text": null,
+  "status": "pending",
+  "created_at": "2026-10-22T18:52:00-04:00",
+  "recipe_id": null,
+  "fail_reason": null
+}
