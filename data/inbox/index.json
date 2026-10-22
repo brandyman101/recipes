@@ -151,10 +151,11 @@
     "file": null,
     "note": null,
     "text": null,
-    "status": "pending",
+    "status": "done",
     "created_at": "2026-10-22T15:10:15.605Z",
-    "recipe_id": null,
-    "fail_reason": null
+    "recipe_id": "authentic-italian-bruschetta",
+    "fail_reason": null,
+    "duplicate_of": null
   },
   {
     "id": "inbox-mvjoh48x-p2",
@@ -163,10 +164,11 @@
     "file": null,
     "note": null,
     "text": null,
-    "status": "pending",
+    "status": "done",
     "created_at": "2026-10-22T15:10:31.283Z",
-    "recipe_id": null,
-    "fail_reason": null
+    "recipe_id": "roasted-salmon-with-green-herbs",
+    "fail_reason": null,
+    "duplicate_of": null
   },
   {
     "id": "inbox-mvjohfhk-71i",
@@ -175,9 +177,10 @@
     "file": null,
     "note": null,
     "text": null,
-    "status": "pending",
+    "status": "duplicate",
     "created_at": "2026-10-22T15:10:45.879Z",
     "recipe_id": null,
-    "fail_reason": null
+    "fail_reason": null,
+    "duplicate_of": "spinach-strawberry-salad"
   }
 ]
