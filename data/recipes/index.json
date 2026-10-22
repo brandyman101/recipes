@@ -8,5 +8,8 @@
   "elzas-mediterranean-roasted-bronzini",
   "french-onion-soup",
   "chicken-soup",
-  "buffalo-chicken-wings"
+  "buffalo-chicken-wings",
+  {
+    "id": "spinach-strawberry-salad"
+  }
 ]
