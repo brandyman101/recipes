@@ -1,0 +1,167 @@
+{
+  "banner_image": "assets/images/chicken-soup.jpg",
+  "categories": [
+    "Soup"
+  ],
+  "cook_minutes": 195,
+  "id": "chicken-soup",
+  "ingredients": [
+    {
+      "items": [
+        {
+          "item": "chicken thighs",
+          "prep": "",
+          "qty": "2",
+          "unit": ""
+        },
+        {
+          "item": "chicken drumsticks",
+          "prep": "",
+          "qty": "2",
+          "unit": ""
+        },
+        {
+          "item": "onion",
+          "prep": "whole",
+          "qty": "1",
+          "unit": ""
+        },
+        {
+          "item": "garlic",
+          "prep": "whole",
+          "qty": "2",
+          "unit": "cloves"
+        },
+        {
+          "item": "containers of chicken broth",
+          "prep": "",
+          "qty": "2",
+          "unit": ""
+        }
+      ],
+      "section": "For the broth"
+    },
+    {
+      "items": [
+        {
+          "item": "carrots",
+          "prep": "",
+          "qty": "3-4",
+          "unit": ""
+        },
+        {
+          "item": "potatoes",
+          "prep": "",
+          "qty": "1-2",
+          "unit": ""
+        },
+        {
+          "item": "celery",
+          "prep": "",
+          "qty": "",
+          "unit": ""
+        },
+        {
+          "item": "turnip",
+          "prep": "",
+          "qty": "",
+          "unit": ""
+        },
+        {
+          "item": "parsnip",
+          "prep": "",
+          "qty": "",
+          "unit": ""
+        },
+        {
+          "item": "water",
+          "prep": "plus more to taste",
+          "qty": "1",
+          "unit": "cup"
+        }
+      ],
+      "section": "Vegetables"
+    },
+    {
+      "items": [
+        {
+          "item": "black pepper",
+          "prep": "",
+          "qty": "",
+          "unit": ""
+        },
+        {
+          "item": "ground cumin",
+          "prep": "",
+          "qty": "",
+          "unit": ""
+        },
+        {
+          "item": "ground coriander",
+          "prep": "",
+          "qty": "",
+          "unit": ""
+        },
+        {
+          "item": "turmeric",
+          "prep": "very little",
+          "qty": "",
+          "unit": ""
+        }
+      ],
+      "section": "Spices"
+    },
+    {
+      "items": [
+        {
+          "item": "noodles",
+          "prep": "",
+          "qty": "",
+          "unit": ""
+        }
+      ],
+      "section": "To finish"
+    }
+  ],
+  "instructions": [
+    "Place the chicken (2 thighs and 2 legs), the whole onion, and the whole garlic cloves in a large pot with the 2 containers of chicken broth.",
+    "Bring to a boil.",
+    "Lower the flame, cover, and keep at a gentle bubble for 2 hours.",
+    "Take the chicken out of the pot and let it cool. Add the vegetables (carrots, potatoes, celery, turnip, parsnip) and 1 cup of water, adding more to taste. Sprinkle with pepper, cumin, coriander, and a very little turmeric. Take the chicken off the bone, chop it up, and put it back in the pot.",
+    "Bring back to a boil.",
+    "Lower the flame and cook for 1 hour, adding the noodles 10-15 minutes before the hour is up."
+  ],
+  "kosher_for_passover": false,
+  "kosher_status": "meat",
+  "leftover_friendly": true,
+  "notes": "Family recipe submitted as a phone screenshot of a personal note (the note is dated February 7, 2025). Transcribed as written, including the author's water note.",
+  "pdf": "pdfs/chicken-soup.pdf",
+  "photo_generated": false,
+  "prep_minutes": 40,
+  "servings": "6",
+  "source": "Submitted by Avi (photo of a personal note)",
+  "tags": [
+    "chicken",
+    "soup",
+    "comfort food"
+  ],
+  "tags_need_review": false,
+  "tips": [
+    {
+      "text": "The recipe calls for 1 cup of water, but the author usually adds a couple of cups — taste and adjust as you go.",
+      "title": "Water to taste"
+    }
+  ],
+  "title": "Chicken Soup",
+  "history": [
+    {
+      "ts": "2026-10-22T02:41:19.876Z",
+      "actor": "sous-chef",
+      "action": "intake",
+      "changes": [
+        "Created recipe"
+      ],
+      "reasoning": "Initial intake: transcribed from a phone screenshot of Avi's personal chicken soup note; web-sourced banner photo (finished dish, photo_generated=false)"
+    }
+  ]
+}
