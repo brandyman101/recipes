@@ -517,9 +517,14 @@
         {
           "id": "m1a165d423dd22",
           "text": "Goodles",
-          "have": false,
-          "updatedAt": 1792709764061,
-          "updatedBy": "chat"
+          "have": true,
+          "updatedAt": 1792714905750,
+          "updatedBy": "smvk7q2m9uhzh9f",
+          "haveSession": "smvk7q2m9uhzh9f",
+          "haveAt": 1792714905750,
+          "haveSessions": [
+            "smvk7q2m9uhzh9f"
+          ]
         },
         {
           "id": "m1a165d423dd23",
