@@ -333,9 +333,14 @@
         {
           "id": "m1a165d423dd5",
           "text": "Bread",
-          "have": false,
-          "updatedAt": 1792709764061,
-          "updatedBy": "chat"
+          "have": true,
+          "updatedAt": 1792715324051,
+          "updatedBy": "smvk7q2m9uhzh9f",
+          "haveSession": "smvk7q2m9uhzh9f",
+          "haveAt": 1792715324051,
+          "haveSessions": [
+            "smvk7q2m9uhzh9f"
+          ]
         },
         {
           "id": "m1a165d423dd6",
