@@ -479,9 +479,14 @@
         {
           "id": "m1a165d423dd18",
           "text": "Bronzini sale!! Buy 3",
-          "have": false,
-          "updatedAt": 1792709764061,
-          "updatedBy": "chat"
+          "have": true,
+          "updatedAt": 1792714789983,
+          "updatedBy": "smvk7q2m9uhzh9f",
+          "haveSession": "smvk7q2m9uhzh9f",
+          "haveAt": 1792714789983,
+          "haveSessions": [
+            "smvk7q2m9uhzh9f"
+          ]
         },
         {
           "id": "m1a165d423dd19",
