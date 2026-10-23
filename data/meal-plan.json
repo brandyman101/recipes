@@ -323,20 +323,18 @@
           "deleted": true
         },
         {
+          "id": "m1a165d423dd10",
+          "text": "Avocado",
+          "have": false,
+          "updatedAt": 1792720626858,
+          "updatedBy": "chat",
+          "deleted": true
+        },
+        {
           "id": "m1a165d423dd4",
           "text": "Dill",
           "have": false,
           "updatedAt": 1792721954099,
-          "updatedBy": "smvkcd4qb39mpsu",
-          "haveSession": null,
-          "haveAt": 0,
-          "haveSessions": []
-        },
-        {
-          "id": "m1a165d423dd5",
-          "text": "Bread",
-          "have": false,
-          "updatedAt": 1792721959367,
           "updatedBy": "smvkcd4qb39mpsu",
           "haveSession": null,
           "haveAt": 0,
@@ -383,38 +381,50 @@
           "haveSessions": []
         },
         {
-          "id": "m1a165d423dd10",
-          "text": "Avocado",
+          "id": "m1a165d423dd5",
+          "text": "Bread",
           "have": false,
-          "updatedAt": 1792720626858,
-          "updatedBy": "chat",
-          "deleted": true
-        },
-        {
-          "id": "m1a165d423dd11",
-          "text": "Tater tots",
-          "have": false,
-          "updatedAt": 1792721966208,
+          "updatedAt": 1792721959367,
           "updatedBy": "smvkcd4qb39mpsu",
           "haveSession": null,
           "haveAt": 0,
           "haveSessions": []
         },
         {
-          "id": "m1a165d423dd12",
-          "text": "Frozen broccoli sale",
+          "id": "m1a165d423dd21",
+          "text": "Challah",
           "have": false,
-          "updatedAt": 1792721967466,
+          "updatedAt": 1792721982984,
           "updatedBy": "smvkcd4qb39mpsu",
           "haveSession": null,
           "haveAt": 0,
           "haveSessions": []
         },
         {
-          "id": "m1a165d423dd13",
-          "text": "Dr Praegar pizza stars",
+          "id": "m1a165d423dd18",
+          "text": "Bronzini sale!! Buy 3",
           "have": false,
-          "updatedAt": 1792721968954,
+          "updatedAt": 1792721978420,
+          "updatedBy": "smvkcd4qb39mpsu",
+          "haveSession": null,
+          "haveAt": 0,
+          "haveSessions": []
+        },
+        {
+          "id": "m1a165d423dd19",
+          "text": "Chicken sausage (no hotdog)",
+          "have": false,
+          "updatedAt": 1792721980585,
+          "updatedBy": "smvkcd4qb39mpsu",
+          "haveSession": null,
+          "haveAt": 0,
+          "haveSessions": []
+        },
+        {
+          "id": "m1a165d423dd20",
+          "text": "Chicken drumsticks sale",
+          "have": false,
+          "updatedAt": 1792721981882,
           "updatedBy": "smvkcd4qb39mpsu",
           "haveSession": null,
           "haveAt": 0,
@@ -461,40 +471,30 @@
           "haveSessions": []
         },
         {
-          "id": "m1a165d423dd18",
-          "text": "Bronzini sale!! Buy 3",
+          "id": "m1a165d423dd11",
+          "text": "Tater tots",
           "have": false,
-          "updatedAt": 1792721978420,
+          "updatedAt": 1792721966208,
           "updatedBy": "smvkcd4qb39mpsu",
           "haveSession": null,
           "haveAt": 0,
           "haveSessions": []
         },
         {
-          "id": "m1a165d423dd19",
-          "text": "Chicken sausage (no hotdog)",
+          "id": "m1a165d423dd12",
+          "text": "Frozen broccoli sale",
           "have": false,
-          "updatedAt": 1792721980585,
+          "updatedAt": 1792721967466,
           "updatedBy": "smvkcd4qb39mpsu",
           "haveSession": null,
           "haveAt": 0,
           "haveSessions": []
         },
         {
-          "id": "m1a165d423dd20",
-          "text": "Chicken drumsticks sale",
+          "id": "m1a165d423dd13",
+          "text": "Dr Praegar pizza stars",
           "have": false,
-          "updatedAt": 1792721981882,
-          "updatedBy": "smvkcd4qb39mpsu",
-          "haveSession": null,
-          "haveAt": 0,
-          "haveSessions": []
-        },
-        {
-          "id": "m1a165d423dd21",
-          "text": "Challah",
-          "have": false,
-          "updatedAt": 1792721982984,
+          "updatedAt": 1792721968954,
           "updatedBy": "smvkcd4qb39mpsu",
           "haveSession": null,
           "haveAt": 0,
