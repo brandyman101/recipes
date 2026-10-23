@@ -463,26 +463,22 @@
         {
           "id": "m1a165d423dd18",
           "text": "Bronzini sale!! Buy 3",
-          "have": true,
-          "updatedAt": 1792714789983,
-          "updatedBy": "smvk7q2m9uhzh9f",
-          "haveSession": "smvk7q2m9uhzh9f",
-          "haveAt": 1792714789983,
-          "haveSessions": [
-            "smvk7q2m9uhzh9f"
-          ]
+          "have": false,
+          "updatedAt": 1792721978420,
+          "updatedBy": "smvkcd4qb39mpsu",
+          "haveSession": null,
+          "haveAt": 0,
+          "haveSessions": []
         },
         {
           "id": "m1a165d423dd19",
           "text": "Chicken sausage (no hotdog)",
-          "have": true,
-          "updatedAt": 1792715288726,
-          "updatedBy": "smvk7q2m9uhzh9f",
-          "haveSession": "smvk7q2m9uhzh9f",
-          "haveAt": 1792715288726,
-          "haveSessions": [
-            "smvk7q2m9uhzh9f"
-          ]
+          "have": false,
+          "updatedAt": 1792721980585,
+          "updatedBy": "smvkcd4qb39mpsu",
+          "haveSession": null,
+          "haveAt": 0,
+          "haveSessions": []
         },
         {
           "id": "m1a165d423dd20",
