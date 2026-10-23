@@ -1,12 +1,11 @@
 {
   "banner_image": "assets/images/chicken-soup.jpg",
-  "categories": [
-    "Soup"
-  ],
+  "categories": [],
   "cook_minutes": 195,
   "id": "chicken-soup",
   "ingredients": [
     {
+      "section": "For the broth",
       "items": [
         {
           "item": "chicken thighs",
@@ -37,11 +36,17 @@
           "prep": "",
           "qty": "2",
           "unit": ""
+        },
+        {
+          "qty": "",
+          "unit": "",
+          "item": "Round steak",
+          "prep": "Chopped into cubes"
         }
-      ],
-      "section": "For the broth"
+      ]
     },
     {
+      "section": "Vegetables",
       "items": [
         {
           "item": "carrots",
@@ -68,7 +73,7 @@
           "unit": ""
         },
         {
-          "item": "parsnip",
+          "item": "Sweet potato",
           "prep": "",
           "qty": "",
           "unit": ""
@@ -79,10 +84,10 @@
           "qty": "1",
           "unit": "cup"
         }
-      ],
-      "section": "Vegetables"
+      ]
     },
     {
+      "section": "Spices",
       "items": [
         {
           "item": "black pepper",
@@ -108,10 +113,10 @@
           "qty": "",
           "unit": ""
         }
-      ],
-      "section": "Spices"
+      ]
     },
     {
+      "section": "To finish",
       "items": [
         {
           "item": "noodles",
@@ -119,8 +124,7 @@
           "qty": "",
           "unit": ""
         }
-      ],
-      "section": "To finish"
+      ]
     }
   ],
   "instructions": [
@@ -162,6 +166,54 @@
         "Created recipe"
       ],
       "reasoning": "Initial intake: transcribed from a phone screenshot of Avi's personal chicken soup note; web-sourced banner photo (finished dish, photo_generated=false)"
+    },
+    {
+      "ts": "2026-10-23T14:43:20.199Z",
+      "actor": "site-editor (Meira)",
+      "action": "edit",
+      "changes": [
+        {
+          "field": "categories",
+          "from": "1 items (Soup)",
+          "to": "[]"
+        },
+        {
+          "field": "ingredients",
+          "from": "4 items ([section: 5 items]; [section: 6 items]; [section: 4 items]; …)",
+          "to": "4 items ([section: 6 items]; [section: 6 items]; [section: 4 items]; …)"
+        },
+        {
+          "field": "pairings",
+          "from": null,
+          "to": "[]"
+        },
+        {
+          "field": "needs_kosher_review",
+          "from": null,
+          "to": false
+        },
+        {
+          "field": "kosher_review_notes",
+          "from": null,
+          "to": ""
+        },
+        {
+          "field": "leftover_note",
+          "from": null,
+          "to": ""
+        },
+        {
+          "field": "pdf_stale",
+          "from": null,
+          "to": true
+        }
+      ],
+      "reasoning": null
     }
-  ]
+  ],
+  "pairings": [],
+  "needs_kosher_review": false,
+  "kosher_review_notes": "",
+  "leftover_note": "",
+  "pdf_stale": true
 }
