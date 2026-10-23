@@ -431,9 +431,14 @@
         {
           "id": "m1a165d423dd14",
           "text": "Noah's yogurt",
-          "have": false,
-          "updatedAt": 1792709764061,
-          "updatedBy": "chat"
+          "have": true,
+          "updatedAt": 1792714617329,
+          "updatedBy": "smvk7q2m9uhzh9f",
+          "haveSession": "smvk7q2m9uhzh9f",
+          "haveAt": 1792714617329,
+          "haveSessions": [
+            "smvk7q2m9uhzh9f"
+          ]
         },
         {
           "id": "m1a165d423dd15",
