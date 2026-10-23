@@ -335,62 +335,52 @@
         {
           "id": "m1a165d423dd5",
           "text": "Bread",
-          "have": true,
-          "updatedAt": 1792715324051,
-          "updatedBy": "smvk7q2m9uhzh9f",
-          "haveSession": "smvk7q2m9uhzh9f",
-          "haveAt": 1792715324051,
-          "haveSessions": [
-            "smvk7q2m9uhzh9f"
-          ]
+          "have": false,
+          "updatedAt": 1792721959367,
+          "updatedBy": "smvkcd4qb39mpsu",
+          "haveSession": null,
+          "haveAt": 0,
+          "haveSessions": []
         },
         {
           "id": "m1a165d423dd6",
           "text": "Tomatoes",
-          "have": true,
-          "updatedAt": 1792714469199,
-          "updatedBy": "smvk7q2m9uhzh9f",
-          "haveSession": "smvk7q2m9uhzh9f",
-          "haveAt": 1792714469199,
-          "haveSessions": [
-            "smvk7q2m9uhzh9f"
-          ]
+          "have": false,
+          "updatedAt": 1792721960686,
+          "updatedBy": "smvkcd4qb39mpsu",
+          "haveSession": null,
+          "haveAt": 0,
+          "haveSessions": []
         },
         {
           "id": "m1a165d423dd7",
           "text": "Cucumbers",
-          "have": true,
-          "updatedAt": 1792714468670,
-          "updatedBy": "smvk7q2m9uhzh9f",
-          "haveSession": "smvk7q2m9uhzh9f",
-          "haveAt": 1792714468670,
-          "haveSessions": [
-            "smvk7q2m9uhzh9f"
-          ]
+          "have": false,
+          "updatedAt": 1792721961861,
+          "updatedBy": "smvkcd4qb39mpsu",
+          "haveSession": null,
+          "haveAt": 0,
+          "haveSessions": []
         },
         {
           "id": "m1a165d423dd8",
           "text": "Broccoli head sale",
-          "have": true,
-          "updatedAt": 1792714159809,
-          "updatedBy": "smvk7q2m9uhzh9f",
-          "haveSession": "smvk7q2m9uhzh9f",
-          "haveAt": 1792714159809,
-          "haveSessions": [
-            "smvk7q2m9uhzh9f"
-          ]
+          "have": false,
+          "updatedAt": 1792721963465,
+          "updatedBy": "smvkcd4qb39mpsu",
+          "haveSession": null,
+          "haveAt": 0,
+          "haveSessions": []
         },
         {
           "id": "m1a165d423dd9",
           "text": "Banana",
-          "have": true,
-          "updatedAt": 1792714205669,
-          "updatedBy": "smvk7q2m9uhzh9f",
-          "haveSession": "smvk7q2m9uhzh9f",
-          "haveAt": 1792714205669,
-          "haveSessions": [
-            "smvk7q2m9uhzh9f"
-          ]
+          "have": false,
+          "updatedAt": 1792721964584,
+          "updatedBy": "smvkcd4qb39mpsu",
+          "haveSession": null,
+          "haveAt": 0,
+          "haveSessions": []
         },
         {
           "id": "m1a165d423dd10",
@@ -403,50 +393,42 @@
         {
           "id": "m1a165d423dd11",
           "text": "Tater tots",
-          "have": true,
-          "updatedAt": 1792714527669,
-          "updatedBy": "smvk7q2m9uhzh9f",
-          "haveSession": "smvk7q2m9uhzh9f",
-          "haveAt": 1792714527669,
-          "haveSessions": [
-            "smvk7q2m9uhzh9f"
-          ]
+          "have": false,
+          "updatedAt": 1792721966208,
+          "updatedBy": "smvkcd4qb39mpsu",
+          "haveSession": null,
+          "haveAt": 0,
+          "haveSessions": []
         },
         {
           "id": "m1a165d423dd12",
           "text": "Frozen broccoli sale",
-          "have": true,
-          "updatedAt": 1792714496415,
-          "updatedBy": "smvk7q2m9uhzh9f",
-          "haveSession": "smvk7q2m9uhzh9f",
-          "haveAt": 1792714496415,
-          "haveSessions": [
-            "smvk7q2m9uhzh9f"
-          ]
+          "have": false,
+          "updatedAt": 1792721967466,
+          "updatedBy": "smvkcd4qb39mpsu",
+          "haveSession": null,
+          "haveAt": 0,
+          "haveSessions": []
         },
         {
           "id": "m1a165d423dd13",
           "text": "Dr Praegar pizza stars",
-          "have": true,
-          "updatedAt": 1792714515120,
-          "updatedBy": "smvk7q2m9uhzh9f",
-          "haveSession": "smvk7q2m9uhzh9f",
-          "haveAt": 1792714515120,
-          "haveSessions": [
-            "smvk7q2m9uhzh9f"
-          ]
+          "have": false,
+          "updatedAt": 1792721968954,
+          "updatedBy": "smvkcd4qb39mpsu",
+          "haveSession": null,
+          "haveAt": 0,
+          "haveSessions": []
         },
         {
           "id": "m1a165d423dd14",
           "text": "Noah's yogurt",
-          "have": true,
-          "updatedAt": 1792714617329,
-          "updatedBy": "smvk7q2m9uhzh9f",
-          "haveSession": "smvk7q2m9uhzh9f",
-          "haveAt": 1792714617329,
-          "haveSessions": [
-            "smvk7q2m9uhzh9f"
-          ]
+          "have": false,
+          "updatedAt": 1792721969997,
+          "updatedBy": "smvkcd4qb39mpsu",
+          "haveSession": null,
+          "haveAt": 0,
+          "haveSessions": []
         },
         {
           "id": "m1a165d423dd15",
