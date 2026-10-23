@@ -284,20 +284,22 @@
           "id": "m1a165d423dd0",
           "text": "Berries",
           "have": true,
-          "updatedAt": 1792714475088,
+          "updatedAt": 1792720628878,
           "updatedBy": "smvk7q2m9uhzh9f",
           "haveSession": "smvk7q2m9uhzh9f",
           "haveAt": 1792714475088,
           "haveSessions": [
             "smvk7q2m9uhzh9f"
-          ]
+          ],
+          "deleted": true
         },
         {
           "id": "m1a165d423dd1",
           "text": "Sweet potatoes",
           "have": false,
-          "updatedAt": 1792709764061,
-          "updatedBy": "chat"
+          "updatedAt": 1792720624021,
+          "updatedBy": "chat",
+          "deleted": true
         },
         {
           "id": "m1a165d423dd2",
@@ -315,8 +317,9 @@
           "id": "m1a165d423dd3",
           "text": "Potato",
           "have": false,
-          "updatedAt": 1792709764061,
-          "updatedBy": "chat"
+          "updatedAt": 1792720625549,
+          "updatedBy": "chat",
+          "deleted": true
         },
         {
           "id": "m1a165d423dd4",
@@ -394,8 +397,9 @@
           "id": "m1a165d423dd10",
           "text": "Avocado",
           "have": false,
-          "updatedAt": 1792709764061,
-          "updatedBy": "chat"
+          "updatedAt": 1792720626858,
+          "updatedBy": "chat",
+          "deleted": true
         },
         {
           "id": "m1a165d423dd11",
