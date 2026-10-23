@@ -1,0 +1,115 @@
+{
+  "id": "dalia-s-salmon",
+  "title": "Dalia's Salmon",
+  "kosher_status": "dairy",
+  "kosher_for_passover": false,
+  "categories": [
+    "Mains"
+  ],
+  "prep_minutes": 15,
+  "cook_minutes": 27,
+  "servings": "8",
+  "ingredients": [
+    {
+      "section": "",
+      "items": [
+        {
+          "qty": "2",
+          "unit": "",
+          "item": "lemons",
+          "prep": "thinly sliced"
+        },
+        {
+          "qty": "1",
+          "unit": "",
+          "item": "large salmon fillet (about 3 lb.)",
+          "prep": ""
+        },
+        {
+          "qty": "",
+          "unit": "",
+          "item": "kosher salt",
+          "prep": ""
+        },
+        {
+          "qty": "",
+          "unit": "",
+          "item": "black pepper",
+          "prep": "freshly ground"
+        },
+        {
+          "qty": "6",
+          "unit": "tbsp",
+          "item": "butter",
+          "prep": "melted"
+        },
+        {
+          "qty": "2",
+          "unit": "tbsp",
+          "item": "honey",
+          "prep": ""
+        },
+        {
+          "qty": "3",
+          "unit": "cloves",
+          "item": "garlic",
+          "prep": "minced"
+        },
+        {
+          "qty": "1",
+          "unit": "tsp",
+          "item": "thyme leaves",
+          "prep": "chopped"
+        },
+        {
+          "qty": "1",
+          "unit": "tsp",
+          "item": "dried oregano",
+          "prep": ""
+        },
+        {
+          "qty": "",
+          "unit": "",
+          "item": "fresh parsley",
+          "prep": "chopped, for garnish"
+        }
+      ]
+    }
+  ],
+  "instructions": [
+    "Preheat the oven to 350°F. Line a large rimmed baking sheet with foil and grease with cooking spray.",
+    "Lay the lemon slices in an even layer in the center of the foil. Season both sides of the salmon with salt and pepper and place it on top of the lemon slices.",
+    "In a small bowl, whisk together the butter, honey, garlic, thyme, and oregano. Pour over the salmon, then fold the foil up around the salmon.",
+    "Bake until the salmon is cooked through, about 25 minutes.",
+    "Switch the oven to broil and broil for 2 minutes, or until the butter mixture has thickened. Sprinkle with the chopped fresh parsley before serving."
+  ],
+  "tips": [],
+  "tags": [
+    "salmon",
+    "main",
+    "baked",
+    "foil",
+    "honey",
+    "garlic",
+    "dairy"
+  ],
+  "notes": "Baked salmon fillet on lemon slices with a honey-garlic-butter sauce, folded in foil and finished under the broiler. Title from Avi's note (\"Dalia's salmon\"); adapted from a submitted screenshot of the recipe text (original source site unknown). Banner photo is a web photo of honey garlic butter salmon in foil, not the source's photo.",
+  "source": "",
+  "banner_image": "assets/images/dalia-s-salmon.jpg",
+  "pdf": "pdfs/dalia-s-salmon.pdf",
+  "leftover_friendly": true,
+  "tags_need_review": false,
+  "photo_generated": false,
+  "pdf_stale": false,
+  "history": [
+    {
+      "ts": "2026-10-23T04:09:53.593Z",
+      "actor": "sous-chef",
+      "action": "intake",
+      "changes": [
+        "Created recipe"
+      ],
+      "reasoning": "Initial intake"
+    }
+  ]
+}
