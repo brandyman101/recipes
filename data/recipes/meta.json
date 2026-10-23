@@ -318,5 +318,31 @@
     "tags_need_review": false,
     "photo_generated": false,
     "search_text": "roasted salmon with green herbs pareve mains salmon main herbs roasted pareve quick"
+  },
+  {
+    "id": "dalia-s-salmon",
+    "title": "Dalia's Salmon",
+    "banner_image": "assets/images/dalia-s-salmon.jpg",
+    "kosher_status": "dairy",
+    "kosher_for_passover": false,
+    "categories": [
+      "Mains"
+    ],
+    "tags": [
+      "salmon",
+      "main",
+      "baked",
+      "foil",
+      "honey",
+      "garlic",
+      "dairy"
+    ],
+    "prep_minutes": 15,
+    "cook_minutes": 27,
+    "servings": "8",
+    "leftover_friendly": true,
+    "tags_need_review": false,
+    "photo_generated": false,
+    "search_text": "dalia's salmon mains salmon main baked foil honey garlic dairy dairy lemons large salmon fillet (about 3 lb.) kosher salt black pepper butter honey garlic thyme leaves dried oregano fresh parsley"
   }
 ]
