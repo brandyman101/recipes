@@ -152,7 +152,7 @@
   "tags_need_review": false,
   "tips": [
     {
-      "text": "The recipe calls for 1 cup of water, but the author usually adds a couple of cups — taste and adjust as you go.",
+      "text": "The recipe calls for 1 cup of water, but the author usually adds a couple of cups \u2014 taste and adjust as you go.",
       "title": "Water to taste"
     }
   ],
@@ -179,8 +179,8 @@
         },
         {
           "field": "ingredients",
-          "from": "4 items ([section: 5 items]; [section: 6 items]; [section: 4 items]; …)",
-          "to": "4 items ([section: 6 items]; [section: 6 items]; [section: 4 items]; …)"
+          "from": "4 items ([section: 5 items]; [section: 6 items]; [section: 4 items]; \u2026)",
+          "to": "4 items ([section: 6 items]; [section: 6 items]; [section: 4 items]; \u2026)"
         },
         {
           "field": "pairings",
@@ -224,5 +224,5 @@
   "needs_kosher_review": false,
   "kosher_review_notes": "",
   "leftover_note": "",
-  "pdf_stale": true
+  "pdf_stale": false
 }
