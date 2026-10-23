@@ -433,38 +433,32 @@
         {
           "id": "m1a165d423dd15",
           "text": "One gallon of Noah's milk",
-          "have": true,
-          "updatedAt": 1792714675322,
-          "updatedBy": "smvk7q2m9uhzh9f",
-          "haveSession": "smvk7q2m9uhzh9f",
-          "haveAt": 1792714675322,
-          "haveSessions": [
-            "smvk7q2m9uhzh9f"
-          ]
+          "have": false,
+          "updatedAt": 1792721973071,
+          "updatedBy": "smvkcd4qb39mpsu",
+          "haveSession": null,
+          "haveAt": 0,
+          "haveSessions": []
         },
         {
           "id": "m1a165d423dd16",
           "text": "Chobani yogurt for mommy (get the kind of my diabetes- regular Chobani not the flip- I like the berry flavor VANILLA one)",
-          "have": true,
-          "updatedAt": 1792714623659,
-          "updatedBy": "smvk7q2m9uhzh9f",
-          "haveSession": "smvk7q2m9uhzh9f",
-          "haveAt": 1792714623659,
-          "haveSessions": [
-            "smvk7q2m9uhzh9f"
-          ]
+          "have": false,
+          "updatedAt": 1792721974869,
+          "updatedBy": "smvkcd4qb39mpsu",
+          "haveSession": null,
+          "haveAt": 0,
+          "haveSessions": []
         },
         {
           "id": "m1a165d423dd17",
           "text": "Cheddar cheese slices (not processed!! Don't get American cheese)",
-          "have": true,
-          "updatedAt": 1792714730369,
-          "updatedBy": "smvk7q2m9uhzh9f",
-          "haveSession": "smvk7q2m9uhzh9f",
-          "haveAt": 1792714730369,
-          "haveSessions": [
-            "smvk7q2m9uhzh9f"
-          ]
+          "have": false,
+          "updatedAt": 1792721976926,
+          "updatedBy": "smvkcd4qb39mpsu",
+          "haveSession": null,
+          "haveAt": 0,
+          "haveSessions": []
         },
         {
           "id": "m1a165d423dd18",
