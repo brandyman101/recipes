@@ -483,62 +483,52 @@
         {
           "id": "m1a165d423dd20",
           "text": "Chicken drumsticks sale",
-          "have": true,
-          "updatedAt": 1792715179945,
-          "updatedBy": "smvk7q2m9uhzh9f",
-          "haveSession": "smvk7q2m9uhzh9f",
-          "haveAt": 1792715179945,
-          "haveSessions": [
-            "smvk7q2m9uhzh9f"
-          ]
+          "have": false,
+          "updatedAt": 1792721981882,
+          "updatedBy": "smvkcd4qb39mpsu",
+          "haveSession": null,
+          "haveAt": 0,
+          "haveSessions": []
         },
         {
           "id": "m1a165d423dd21",
           "text": "Challah",
-          "have": true,
-          "updatedAt": 1792714478741,
-          "updatedBy": "smvk7q2m9uhzh9f",
-          "haveSession": "smvk7q2m9uhzh9f",
-          "haveAt": 1792714478741,
-          "haveSessions": [
-            "smvk7q2m9uhzh9f"
-          ]
+          "have": false,
+          "updatedAt": 1792721982984,
+          "updatedBy": "smvkcd4qb39mpsu",
+          "haveSession": null,
+          "haveAt": 0,
+          "haveSessions": []
         },
         {
           "id": "m1a165d423dd22",
           "text": "Goodles",
-          "have": true,
-          "updatedAt": 1792714905750,
-          "updatedBy": "smvk7q2m9uhzh9f",
-          "haveSession": "smvk7q2m9uhzh9f",
-          "haveAt": 1792714905750,
-          "haveSessions": [
-            "smvk7q2m9uhzh9f"
-          ]
+          "have": false,
+          "updatedAt": 1792721984085,
+          "updatedBy": "smvkcd4qb39mpsu",
+          "haveSession": null,
+          "haveAt": 0,
+          "haveSessions": []
         },
         {
           "id": "m1a165d423dd23",
           "text": "Veggie straws",
-          "have": true,
-          "updatedAt": 1792715109616,
-          "updatedBy": "smvk7q2m9uhzh9f",
-          "haveSession": "smvk7q2m9uhzh9f",
-          "haveAt": 1792715109616,
-          "haveSessions": [
-            "smvk7q2m9uhzh9f"
-          ]
+          "have": false,
+          "updatedAt": 1792721985194,
+          "updatedBy": "smvkcd4qb39mpsu",
+          "haveSession": null,
+          "haveAt": 0,
+          "haveSessions": []
         },
         {
           "id": "m1a165d423dd24",
           "text": "Snacks for mommy",
-          "have": true,
-          "updatedAt": 1792715110247,
-          "updatedBy": "smvk7q2m9uhzh9f",
-          "haveSession": "smvk7q2m9uhzh9f",
-          "haveAt": 1792715110247,
-          "haveSessions": [
-            "smvk7q2m9uhzh9f"
-          ]
+          "have": false,
+          "updatedAt": 1792721986645,
+          "updatedBy": "smvkcd4qb39mpsu",
+          "haveSession": null,
+          "haveAt": 0,
+          "haveSessions": []
         }
       ],
       "haveGenerated": [
