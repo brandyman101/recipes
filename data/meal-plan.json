@@ -325,14 +325,12 @@
         {
           "id": "m1a165d423dd4",
           "text": "Dill",
-          "have": true,
-          "updatedAt": 1792714470653,
-          "updatedBy": "smvk7q2m9uhzh9f",
-          "haveSession": "smvk7q2m9uhzh9f",
-          "haveAt": 1792714470653,
-          "haveSessions": [
-            "smvk7q2m9uhzh9f"
-          ]
+          "have": false,
+          "updatedAt": 1792721954099,
+          "updatedBy": "smvkcd4qb39mpsu",
+          "haveSession": null,
+          "haveAt": 0,
+          "haveSessions": []
         },
         {
           "id": "m1a165d423dd5",
