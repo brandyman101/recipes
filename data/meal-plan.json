@@ -339,9 +339,14 @@
         {
           "id": "m1a165d423dd8",
           "text": "Broccoli head sale",
-          "have": false,
-          "updatedAt": 1792709764061,
-          "updatedBy": "chat"
+          "have": true,
+          "updatedAt": 1792714159809,
+          "updatedBy": "smvk7q2m9uhzh9f",
+          "haveSession": "smvk7q2m9uhzh9f",
+          "haveAt": 1792714159809,
+          "haveSessions": [
+            "smvk7q2m9uhzh9f"
+          ]
         },
         {
           "id": "m1a165d423dd9",
