@@ -305,13 +305,14 @@
           "id": "m1a165d423dd2",
           "text": "Carrots and celery",
           "have": true,
-          "updatedAt": 1792714475984,
+          "updatedAt": 1792720632250,
           "updatedBy": "smvk7q2m9uhzh9f",
           "haveSession": "smvk7q2m9uhzh9f",
           "haveAt": 1792714475984,
           "haveSessions": [
             "smvk7q2m9uhzh9f"
-          ]
+          ],
+          "deleted": true
         },
         {
           "id": "m1a165d423dd3",
