@@ -1,0 +1,111 @@
+{
+  "id": "deli-roll",
+  "title": "Deli Roll",
+  "kosher_status": "meat",
+  "kosher_for_passover": false,
+  "categories": [
+    "Appetizer",
+    "Main"
+  ],
+  "prep_minutes": 20,
+  "cook_minutes": 40,
+  "servings": "1 roll",
+  "ingredients": [
+    {
+      "section": "",
+      "items": [
+        {
+          "qty": "1",
+          "unit": "sheet",
+          "item": "flaky dough",
+          "prep": ""
+        },
+        {
+          "qty": "1",
+          "unit": "cup",
+          "item": "mayo",
+          "prep": ""
+        },
+        {
+          "qty": "1/2",
+          "unit": "cup",
+          "item": "spicy mustard",
+          "prep": ""
+        },
+        {
+          "qty": "6-9",
+          "unit": "slices",
+          "item": "turkey roll",
+          "prep": ""
+        },
+        {
+          "qty": "1",
+          "unit": "",
+          "item": "large onion",
+          "prep": "sautéed"
+        },
+        {
+          "qty": "2",
+          "unit": "layers",
+          "item": "turkey pastrami",
+          "prep": ""
+        },
+        {
+          "qty": "1",
+          "unit": "",
+          "item": "egg",
+          "prep": "beaten, for egg wash"
+        },
+        {
+          "qty": "",
+          "unit": "",
+          "item": "sesame seeds",
+          "prep": "for topping"
+        }
+      ]
+    }
+  ],
+  "instructions": [
+    "Roll out a sheet of flaky dough.",
+    "Mix 1 cup mayo with 1/2 cup spicy mustard and shmear the mix over the dough.",
+    "Lay one layer of turkey roll (about 6-9 slices) over the dough and shmear with more mayo mix.",
+    "Sauté the onion and spread it over the turkey.",
+    "Layer turkey pastrami over the onion and shmear with more mayo mix, then repeat with a second layer of pastrami.",
+    "Roll up jelly-roll style and place on a cookie sheet.",
+    "Brush with beaten egg and sprinkle with sesame seeds.",
+    "Bake at 375°F until puffed and golden, about 40 minutes."
+  ],
+  "tips": [
+    {
+      "title": "Freeze ahead",
+      "text": "Freeze before the egg wash if making in advance."
+    }
+  ],
+  "tags": [
+    "deli roll",
+    "puff pastry",
+    "turkey",
+    "pastrami",
+    "make-ahead",
+    "freezer-friendly"
+  ],
+  "notes": "Yidi's version uses sautéed onions, turkey, and pastrami. The original 'for love of food' story also suggests sauerkraut or cabbage fillings: layer drained sauerkraut, or a bag of sautéed cabbage seasoned with salt and pepper, and use turkey pastrami or corned beef.",
+  "source": "for love of food (Instagram story), via Yidi",
+  "banner_image": "assets/images/deli-roll.jpg",
+  "pdf": "pdfs/deli-roll.pdf",
+  "leftover_friendly": true,
+  "tags_need_review": false,
+  "photo_generated": false,
+  "search_text": "deli roll meat appetizer main puff pastry turkey pastrami make-ahead freezer-friendly",
+  "history": [
+    {
+      "ts": "2026-10-26T23:40:54.132Z",
+      "actor": "sous-chef",
+      "action": "intake",
+      "changes": [
+        "Created recipe"
+      ],
+      "reasoning": "Initial intake"
+    }
+  ]
+}
