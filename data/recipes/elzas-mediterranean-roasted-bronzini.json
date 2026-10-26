@@ -28,8 +28,8 @@
         {
           "qty": "3",
           "unit": "",
-          "item": "lemon",
-          "prep": "thinly sliced into rounds"
+          "item": "lemon slices",
+          "prep": "thinly sliced, per fish"
         },
         {
           "qty": "4",
@@ -92,6 +92,25 @@
         "Created recipe"
       ],
       "reasoning": "Initial intake"
+    },
+    {
+      "ts": "2026-10-26T23:19:56.709Z",
+      "actor": "sous-chef",
+      "action": "edit",
+      "changes": [
+        {
+          "field": "ingredients",
+          "from": "1 items ([section: 7 items])",
+          "to": "1 items ([section: 7 items])"
+        },
+        {
+          "field": "pdf_stale",
+          "from": null,
+          "to": true
+        }
+      ],
+      "reasoning": "User request: change 3 lemons to three lemon slices per fish"
     }
-  ]
+  ],
+  "pdf_stale": true
 }
