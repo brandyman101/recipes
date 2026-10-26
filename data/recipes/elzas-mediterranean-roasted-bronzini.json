@@ -60,10 +60,10 @@
   ],
   "instructions": [
     "Ask your fishmonger to clean, debone, and butterfly the fish for you!",
-    "Preheat the oven to 500°F.",
+    "Preheat the oven to 500\u00b0F.",
     "Place the fish on a sheet pan and open it up. Coat the flesh with 1 teaspoon of the olive oil, and season with salt and pepper.",
     "On the bottom half of the fish, spread the crushed garlic and crushed red pepper. Layer the basil on next, followed by the lemon slices.",
-    "Close the fish back up. With a sharp knife, score the skin on top 3 times — this keeps it from curling up.",
+    "Close the fish back up. With a sharp knife, score the skin on top 3 times \u2014 this keeps it from curling up.",
     "Coat the outer skin with the remaining teaspoon of olive oil, and lightly season the skin with salt and pepper.",
     "Roast for about 10 minutes, until the flesh flakes but is still moist and the skin is crisp.",
     "If you like, drizzle a tiny bit more olive oil over the finished fish and serve."
@@ -76,7 +76,7 @@
     "roasted",
     "easy"
   ],
-  "notes": "Whole roasted fish with great flavor, made easy. The printed page's title was “Mediterranean Roasted Whole Fish”. Submitted as a photo of a printed recipe page.",
+  "notes": "Whole roasted fish with great flavor, made easy. The printed page's title was \u201cMediterranean Roasted Whole Fish\u201d. Submitted as a photo of a printed recipe page.",
   "source": "From Elza (printed recipe page)",
   "banner_image": "assets/images/elzas-mediterranean-roasted-bronzini.jpg",
   "pdf": "pdfs/elzas-mediterranean-roasted-bronzini.pdf",
@@ -112,5 +112,5 @@
       "reasoning": "User request: change 3 lemons to three lemon slices per fish"
     }
   ],
-  "pdf_stale": true
+  "pdf_stale": false
 }
