@@ -1,0 +1,54 @@
+{
+  "circular": "FINAL-2026AKF_Circular_10_25.pdf",
+  "effective": "October 25\u201330, 2026",
+  "updated": "2026-10-28",
+  "status": "current",
+  "from_recipes": [
+    {
+      "title": "Buffalo Chicken Wings",
+      "recipe_id": "buffalo-chicken-wings",
+      "sale": "Chicken wings $1.99/lb (super family pack)"
+    },
+    {
+      "title": "Chicken Soup",
+      "recipe_id": "chicken-soup",
+      "sale": "Chicken legs $2.79/lb, celery 2/$3, loose turnips $0.79/lb, Yukon potatoes $1.29/lb"
+    },
+    {
+      "title": "Honey Garlic Chicken & Orzo",
+      "recipe_id": "honey-garlic-chicken-orzo",
+      "sale": "Chicken legs $2.79/lb, Lieber's honey $5.99"
+    },
+    {
+      "title": "Elza's Mediterranean Roasted Bronzini",
+      "recipe_id": "elzas-mediterranean-roasted-bronzini",
+      "sale": "Ossie's bronzini fillet $19.99/lb"
+    },
+    {
+      "title": "The BEST Fluffy Pancakes",
+      "recipe_id": "best-fluffy-pancakes",
+      "sale": "Chasadim flour 2/$5, Domino sugar 2/$6, Jack's Farm eggs $0.99, Mill Road milk 2/$5"
+    },
+    {
+      "title": "Deli Roll",
+      "recipe_id": "deli-roll",
+      "sale": "Solomons sliced beef pastrami $6.99, Jack's Farm eggs $0.99"
+    }
+  ],
+  "new_ideas": [
+    {
+      "title": "Shabbat cholent",
+      "sale": "Grass-fed shin meat $6.99/lb, Yukon potatoes $1.29/lb, chickpeas 5/$4"
+    },
+    {
+      "title": "Roasted eggplant with tahini",
+      "sale": "Eggplants $1.29/lb, Achva sesame tahini $3.99"
+    },
+    {
+      "title": "Tilapia with broccoli and mushrooms",
+      "sale": "Freund's tilapia fillets $3.99, Pardes cauliflower/broccoli florets $3.99, white mushrooms 2/$5"
+    }
+  ],
+  "stock_up": "Jack's Farm extra-large eggs at $0.99 a dozen \u2014 unusually cheap.",
+  "deli_note": "Mechy's weekly specials (Mon\u2013Fri Oct 26\u201330) include half roasted chicken and chicken fajita at $8.99/lb."
+}
