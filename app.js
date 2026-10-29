@@ -285,6 +285,7 @@ function route() {
   $('#nav-recipes').classList.toggle('active', h.startsWith('#/recipes') || h.startsWith('#/recipe/'));
   $('#nav-planner').classList.toggle('active', h.startsWith('#/planner'));
   $('#nav-shopping').classList.toggle('active', h.startsWith('#/shopping'));
+  $('#nav-circular').classList.toggle('active', h.startsWith('#/circular'));
   window.scrollTo(0, 0);
   document.title = 'Brandel Family Recipes';
   if (h.startsWith('#/recipe/')) return renderRecipe(app, decodeURIComponent(h.slice(9)));
@@ -302,7 +303,63 @@ function route() {
     refreshMealPlan().then(() => { if ((location.hash || '#/') === '#/shopping') renderShopping(app); });
     return renderShopping(app);
   }
+  if (h === '#/circular') return renderCircular(app);
   return renderLanding(app);
+}
+
+/* ---------------- This Week at Aron's ---------------- */
+/* Weekly circular picks, written by the Wednesday Aron's circular job to
+   data/recipes/circular-picks.json (bridge-allowed under data/recipes/).
+   The tab reads that file fresh each visit; it never edits it. */
+async function renderCircular(app) {
+  document.title = "This Week at Aron's — Brandel Family Recipes";
+  app.innerHTML =
+    '<section class="page-head"><h1>This Week at Aron\'s</h1>' +
+    '<p class="muted">Loading this week\'s circular picks…</p></section>';
+  let picks = null;
+  try {
+    const res = await fetch('data/recipes/circular-picks.json?v=' + Date.now());
+    if (res.ok) picks = await res.json();
+  } catch (e) { picks = null; }
+  if (!picks || typeof picks !== 'object') {
+    app.innerHTML =
+      '<section class="page-head"><h1>This Week at Aron\'s</h1>' +
+      '<p class="muted">No circular picks yet.</p></section>' +
+      '<p class="empty-state">Picks appear here each Wednesday, once Aron\'s posts its new circular.</p>';
+    return;
+  }
+  const fromRecipes = Array.isArray(picks.from_recipes) ? picks.from_recipes : [];
+  const newIdeas = Array.isArray(picks.new_ideas) ? picks.new_ideas : [];
+  const fromHTML = fromRecipes.map(p => {
+    const title = esc(p.title || '');
+    const sale = esc(p.sale || '');
+    const link = p.recipe_id
+      ? '<a href="#/recipe/' + encodeURIComponent(p.recipe_id) + '">' + title + '</a>'
+      : title;
+    return '<li>' + link + (sale ? ' — ' + sale : '') + '</li>';
+  }).join('');
+  const ideasHTML = newIdeas.map(p =>
+    '<li><strong>' + esc(p.title || '') + '</strong>' + (p.sale ? ' — ' + esc(p.sale) : '') + '</li>'
+  ).join('');
+  app.innerHTML =
+    '<section class="page-head"><h1>This Week at Aron\'s</h1>' +
+    '<p class="muted">' + (picks.effective ? 'Aron\'s circular, effective ' + esc(picks.effective) : 'Aron\'s circular picks') + '</p></section>' +
+    (picks.status === 'not_posted'
+      ? '<p class="planner-locked">Aron\'s hasn\'t posted a new circular yet — these are last week\'s picks.</p>'
+      : '') +
+    (fromHTML
+      ? '<section class="recipe-section"><h2>From your recipes</h2><ul class="ing-list">' + fromHTML + '</ul></section>'
+      : '') +
+    (ideasHTML
+      ? '<section class="recipe-section"><h2>New ideas</h2><ul class="ing-list">' + ideasHTML + '</ul></section>'
+      : '') +
+    (picks.stock_up
+      ? '<section class="recipe-section"><h2>Worth stocking up</h2><p>' + esc(picks.stock_up) + '</p></section>'
+      : '') +
+    (picks.deli_note
+      ? '<section class="recipe-section"><h2>Easy night from the deli</h2><p>' + esc(picks.deli_note) + '</p></section>'
+      : '') +
+    '<p class="muted">Picks refresh each Wednesday from the newest Aron\'s circular. Tell Muse your picks and they\'ll be slotted into the meal plan.</p>';
 }
 
 /* ---------------- Home ---------------- */
