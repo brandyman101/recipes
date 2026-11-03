@@ -711,6 +711,35 @@ footer.site-footer {
   padding: 1.5rem 1rem 2rem;
 }
 
+/* ---------- Printable weekly menu ---------- */
+
+.menu-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  font-size: 0.95rem;
+}
+
+.menu-table th,
+.menu-table td {
+  border: 1px solid var(--line);
+  padding: 0.55rem 0.75rem;
+  vertical-align: top;
+  text-align: left;
+}
+
+.menu-table th {
+  background: var(--cream-dark);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.menu-table tr { break-inside: avoid; }
+
 /* ---------- Print: the standardized recipe sheet ----------
    The recipe page IS the printable PDF (Option A).
    Print button -> browser print dialog -> Save as PDF. */
