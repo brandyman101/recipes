@@ -304,6 +304,7 @@ function route() {
     return renderShopping(app);
   }
   if (h === '#/circular') return renderCircular(app);
+  if (h === '#/menu') return renderMenu(app);
   return renderLanding(app);
 }
 
@@ -336,10 +337,14 @@ async function renderCircular(app) {
     const link = p.recipe_id
       ? '<a href="#/recipe/' + encodeURIComponent(p.recipe_id) + '">' + title + '</a>'
       : title;
-    return '<li>' + link + (sale ? ' — ' + sale : '') + '</li>';
+    const addBtn = p.recipe_id
+      ? ' <button class="link-btn" data-planadd="' + esc(p.recipe_id) + '" type="button">+ Add to planner</button>'
+      : '';
+    return '<li>' + link + (sale ? ' — ' + sale : '') + addBtn + '</li>';
   }).join('');
   const ideasHTML = newIdeas.map(p =>
-    '<li><strong>' + esc(p.title || '') + '</strong>' + (p.sale ? ' — ' + esc(p.sale) : '') + '</li>'
+    '<li><strong>' + esc(p.title || '') + '</strong>' + (p.sale ? ' — ' + esc(p.sale) : '') +
+    ' <button class="link-btn" data-planadd-custom="' + esc(p.title || '') + '" type="button">+ Add to planner</button></li>'
   ).join('');
   app.innerHTML =
     '<section class="page-head"><h1>This Week at Aron\'s</h1>' +
@@ -359,7 +364,100 @@ async function renderCircular(app) {
     (picks.deli_note
       ? '<section class="recipe-section"><h2>Easy night from the deli</h2><p>' + esc(picks.deli_note) + '</p></section>'
       : '') +
-    '<p class="muted">Picks refresh each Wednesday from the newest Aron\'s circular. Tell Muse your picks and they\'ll be slotted into the meal plan.</p>';
+    '<p class="muted">Picks refresh each Wednesday from the newest Aron\'s circular.</p>';
+
+  // "Add to planner" buttons: pick a day + meal, save straight to this week's plan.
+  app.querySelectorAll('[data-planadd]').forEach(btn => {
+    btn.addEventListener('click', () => showPlanPicker(btn, btn.dataset.planadd, null));
+  });
+  app.querySelectorAll('[data-planadd-custom]').forEach(btn => {
+    btn.addEventListener('click', () => showPlanPicker(btn, null, btn.dataset.planaddCustom));
+  });
+}
+
+/* Inline day/meal picker used by "Add to planner" buttons on the circular tab.
+   rid = recipe id for collection dishes; title = dish name for custom (new-idea) dishes. */
+function showPlanPicker(anchor, rid, title) {
+  const old = document.getElementById('plan-picker');
+  if (old) old.remove();
+  const mon = sundayOf(0);
+  let days = '';
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(mon);
+    d.setDate(d.getDate() + i);
+    days += '<option value="' + i + '"' + (i === 5 ? ' selected' : '') + '>' +
+      esc(dayName(d) + ' ' + prettyDate(d)) + '</option>';
+  }
+  const box = document.createElement('div');
+  box.id = 'plan-picker';
+  box.className = 'slot-editor';
+  box.style.marginTop = '0.4rem';
+  box.innerHTML =
+    '<select id="pp-day" aria-label="Day">' + days + '</select> ' +
+    '<select id="pp-meal" aria-label="Meal"><option value="dinner" selected>Dinner</option>' +
+    '<option value="lunch">Lunch</option></select> ' +
+    '<button class="btn" id="pp-save" type="button">Save</button> ' +
+    '<button class="btn secondary" id="pp-cancel" type="button">Cancel</button>' +
+    '<div class="form-status" id="pp-status"></div>';
+  anchor.parentNode.insertBefore(box, anchor.nextSibling);
+  box.querySelector('#pp-cancel').onclick = () => box.remove();
+  box.querySelector('#pp-save').onclick = () => {
+    const di = +box.querySelector('#pp-day').value;
+    const meal = box.querySelector('#pp-meal').value;
+    const st = box.querySelector('#pp-status');
+    try {
+      const key = thisWeekKey();
+      const week = getWeek(key);
+      const slot = normalizeSlot(week.days[di][meal]);
+      if (rid && recipeMeta(rid)) slot.dishes.push({ recipe: rid });
+      else if (title) slot.dishes.push({ custom: title });
+      else { st.textContent = 'Nothing to add.'; return; }
+      week.days[di][meal] = slot;
+      persistWeek(key, st, () => {
+        toast('Added to the planner — the shopping list picks it up too.');
+        renderCircular(document.getElementById('app'));
+      });
+    } catch (e) {
+      st.className = 'form-status error';
+      st.textContent = 'Save failed: ' + e.message;
+    }
+  };
+}
+
+/* ---------------- Printable weekly menu ---------------- */
+function renderMenu(app) {
+  document.title = "This Week's Menu — Brandel Family Recipes";
+  const mon = sundayOf(0);
+  const key = thisWeekKey();
+  const week = getWeek(key);
+  let rows = '';
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(mon);
+    d.setDate(d.getDate() + i);
+    const cell = m => {
+      const s = normalizeSlot(week.days[i][m]);
+      if (s.skipped || !s.dishes.length) return '<span class="slot-skipped">—</span>';
+      return s.dishes.map(dish => {
+        let t = '—';
+        if (dish.recipe && recipeMeta(dish.recipe)) t = esc(recipeMeta(dish.recipe).title);
+        else if (dish.custom) t = esc(dish.custom);
+        if (dish.leftovers) t += ' <span class="badge leftovers">Leftovers</span>';
+        return '<div class="dish-row">' + t + '</div>';
+      }).join('') + (s.note ? '<div class="slot-note">' + esc(s.note) + '</div>' : '');
+    };
+    rows += '<tr><td><strong>' + esc(dayName(d)) + '</strong><br>' +
+      '<span class="muted">' + esc(prettyDate(d)) + '</span></td>' +
+      '<td>' + cell('lunch') + '</td><td>' + cell('dinner') + '</td></tr>';
+  }
+  app.innerHTML =
+    '<section class="page-head"><h1>This Week\'s Menu</h1>' +
+    '<p class="muted">Week of ' + esc(prettyDate(mon)) + '</p></section>' +
+    '<div class="no-print" style="margin-bottom:1rem"><button class="btn" id="menu-print" type="button">🖨 Print</button> ' +
+    '<a class="btn secondary" href="#/planner">Edit in planner</a></div>' +
+    '<table class="menu-table"><thead><tr><th>Day</th><th>Lunch</th><th>Dinner</th></tr></thead>' +
+    '<tbody>' + rows + '</tbody></table>';
+  const p = document.getElementById('menu-print');
+  if (p) p.onclick = () => window.print();
 }
 
 /* ---------------- Home ---------------- */
@@ -2626,6 +2724,7 @@ function renderPlanner(app) {
       '<button class="btn secondary" id="wk-prev" type="button">‹ Prev</button>' +
       '<h2>' + esc(label) + '</h2>' +
       '<button class="btn secondary" id="wk-next" type="button">Next ›</button>' +
+      '<a class="btn secondary" href="#/menu" style="text-decoration:none">🖨 Print menu</a>' +
     '</div>' +
     '<div class="shop-day-row no-print">' +
       '<label for="shop-day">🛒 Shopping day</label>' +
