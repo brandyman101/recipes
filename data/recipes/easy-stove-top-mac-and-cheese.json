@@ -1,0 +1,132 @@
+{
+  "banner_image": "assets/images/easy-stove-top-mac-and-cheese.jpg",
+  "categories": [
+    "Main Dishes"
+  ],
+  "cook_minutes": 20,
+  "id": "easy-stove-top-mac-and-cheese",
+  "ingredients": [
+    {
+      "items": [
+        {
+          "item": "cavatappi pasta",
+          "prep": "",
+          "qty": "12",
+          "unit": "oz"
+        },
+        {
+          "item": "butter",
+          "prep": "",
+          "qty": "2",
+          "unit": "tbsp"
+        },
+        {
+          "item": "flour",
+          "prep": "",
+          "qty": "1",
+          "unit": "tbsp"
+        },
+        {
+          "item": "paprika",
+          "prep": "",
+          "qty": "1",
+          "unit": "tsp"
+        },
+        {
+          "item": "garlic salt",
+          "prep": "",
+          "qty": "1/2",
+          "unit": "tsp"
+        },
+        {
+          "item": "salt",
+          "prep": "",
+          "qty": "1/2",
+          "unit": "tsp"
+        },
+        {
+          "item": "black pepper",
+          "prep": "",
+          "qty": "1/2",
+          "unit": "tsp"
+        },
+        {
+          "item": "Dijon mustard",
+          "prep": "",
+          "qty": "1",
+          "unit": "tsp"
+        },
+        {
+          "item": "whole milk",
+          "prep": "",
+          "qty": "1 1/2",
+          "unit": "cup"
+        },
+        {
+          "item": "heavy cream",
+          "prep": "",
+          "qty": "1/2",
+          "unit": "cup"
+        },
+        {
+          "item": "mild cheddar cheese",
+          "prep": "shredded",
+          "qty": "8",
+          "unit": "oz"
+        },
+        {
+          "item": "Colby Jack cheese",
+          "prep": "shredded",
+          "qty": "8",
+          "unit": "oz"
+        }
+      ],
+      "section": "Mac and Cheese"
+    }
+  ],
+  "instructions": [
+    "Cook the pasta according to the package directions; drain and set aside.",
+    "In a small bowl, combine all the seasonings (paprika, garlic salt, salt, and black pepper).",
+    "In a pan over medium-low heat, melt the butter and add half of the seasoning mixture. Stir for about 30 seconds to bloom the spices, then add the flour and whisk continuously for 1-2 minutes to cook off the raw flour taste.",
+    "Slowly pour in the milk and heavy cream, whisking continuously until smooth. Add the remaining seasonings and the Dijon mustard. Keep the heat on medium-low and stir until the sauce begins to thicken. Avoid boiling.",
+    "Reduce the heat to low, then turn off the heat before gradually adding the shredded cheeses. Stir until completely melted and creamy.",
+    "Add the cooked pasta and mix until evenly coated."
+  ],
+  "kosher_for_passover": false,
+  "kosher_status": "dairy",
+  "leftover_friendly": true,
+  "notes": "Dairy recipe (butter, milk, heavy cream, cheddar and Colby Jack). The source uses cavatappi pasta, cooked separately while the sauce comes together.",
+  "pdf": "pdfs/easy-stove-top-mac-and-cheese.pdf",
+  "photo_generated": false,
+  "prep_minutes": 10,
+  "search_text": "easy stove top mac and cheese dairy main dishes mac and cheese pasta stovetop weeknight kid-friendly comfort food cavatappi butter flour paprika garlic salt salt black pepper dijon mustard whole milk heavy cream mild cheddar cheese colby jack cheese",
+  "servings": "4",
+  "source": "Pasted text submission",
+  "tags": [
+    "mac and cheese",
+    "pasta",
+    "stovetop",
+    "weeknight",
+    "kid-friendly",
+    "comfort food"
+  ],
+  "tags_need_review": false,
+  "tips": [
+    {
+      "text": "Make sure to cook the flour for at least 1 minute to avoid a raw flour taste. Keep the heat gentle throughout the process, especially when adding the dairy. High heat can cause the cheese sauce to separate or become grainy. Always turn off the heat before adding your cheese, and use freshly shredded cheese for the smoothest, creamiest results!",
+      "title": "Keep the heat gentle"
+    }
+  ],
+  "title": "Easy Stove Top Mac and Cheese",
+  "history": [
+    {
+      "ts": "2026-11-06T03:43:50.756Z",
+      "actor": "sous-chef",
+      "action": "intake",
+      "changes": [
+        "Created recipe"
+      ],
+      "reasoning": "Initial intake"
+    }
+  ]
+}
