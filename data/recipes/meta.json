@@ -393,5 +393,29 @@
     "tags_need_review": false,
     "photo_generated": false,
     "search_text": "easy stove top mac and cheese dairy main dishes mac and cheese pasta stovetop weeknight kid-friendly comfort food cavatappi butter flour paprika garlic salt salt black pepper dijon mustard whole milk heavy cream mild cheddar cheese colby jack cheese"
+  },
+  {
+    "id": "honey-garlic-chicken",
+    "title": "Honey Garlic Chicken",
+    "banner_image": "assets/images/honey-garlic-chicken.jpg",
+    "kosher_status": "meat",
+    "kosher_for_passover": false,
+    "categories": [
+      "Main Dishes",
+      "Chicken"
+    ],
+    "tags": [
+      "chicken",
+      "honey garlic",
+      "weeknight",
+      "oven-baked"
+    ],
+    "prep_minutes": 10,
+    "cook_minutes": 60,
+    "servings": "8",
+    "leftover_friendly": true,
+    "tags_need_review": false,
+    "photo_generated": false,
+    "search_text": "honey garlic chicken meat main dishes chicken chicken honey garlic weeknight oven-baked bone-in chicken (thighs, drumsticks, or a combination) honey soy sauce olive oil garlic ketchup paprika black pepper"
   }
 ]
