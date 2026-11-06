@@ -368,5 +368,30 @@
     "tags_need_review": false,
     "photo_generated": false,
     "search_text": "deli roll meat appetizer main puff pastry turkey pastrami make-ahead freezer-friendly"
+  },
+  {
+    "id": "easy-stove-top-mac-and-cheese",
+    "title": "Easy Stove Top Mac and Cheese",
+    "banner_image": "assets/images/easy-stove-top-mac-and-cheese.jpg",
+    "kosher_status": "dairy",
+    "kosher_for_passover": false,
+    "categories": [
+      "Main Dishes"
+    ],
+    "tags": [
+      "mac and cheese",
+      "pasta",
+      "stovetop",
+      "weeknight",
+      "kid-friendly",
+      "comfort food"
+    ],
+    "prep_minutes": 10,
+    "cook_minutes": 20,
+    "servings": "4",
+    "leftover_friendly": true,
+    "tags_need_review": false,
+    "photo_generated": false,
+    "search_text": "easy stove top mac and cheese dairy main dishes mac and cheese pasta stovetop weeknight kid-friendly comfort food cavatappi butter flour paprika garlic salt salt black pepper dijon mustard whole milk heavy cream mild cheddar cheese colby jack cheese"
   }
 ]
