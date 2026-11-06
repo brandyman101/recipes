@@ -1,0 +1,107 @@
+{
+  "banner_image": "assets/images/honey-garlic-chicken.jpg",
+  "categories": [
+    "Main Dishes",
+    "Chicken"
+  ],
+  "cook_minutes": 60,
+  "id": "honey-garlic-chicken",
+  "ingredients": [
+    {
+      "items": [
+        {
+          "item": "bone-in chicken (thighs, drumsticks, or a combination)",
+          "prep": "",
+          "qty": "8",
+          "unit": ""
+        },
+        {
+          "item": "honey",
+          "prep": "",
+          "qty": "3",
+          "unit": "tbsp"
+        },
+        {
+          "item": "soy sauce",
+          "prep": "",
+          "qty": "3",
+          "unit": "tbsp"
+        },
+        {
+          "item": "olive oil",
+          "prep": "",
+          "qty": "2",
+          "unit": "tbsp"
+        },
+        {
+          "item": "garlic",
+          "prep": "minced",
+          "qty": "4",
+          "unit": "cloves"
+        },
+        {
+          "item": "ketchup",
+          "prep": "",
+          "qty": "1",
+          "unit": "tbsp"
+        },
+        {
+          "item": "paprika",
+          "prep": "",
+          "qty": "1",
+          "unit": "tsp"
+        },
+        {
+          "item": "black pepper",
+          "prep": "",
+          "qty": "1/2",
+          "unit": "tsp"
+        }
+      ],
+      "section": "Ingredients"
+    }
+  ],
+  "instructions": [
+    "Preheat the oven to 400°F.",
+    "In a small bowl, whisk together the honey, soy sauce, olive oil, minced garlic, ketchup, paprika, and black pepper.",
+    "Arrange the chicken in a baking dish. Pour the sauce over the chicken and turn the pieces to coat well.",
+    "Bake uncovered for 45–60 minutes, depending on the size of the pieces, basting once or twice with the pan sauce if desired.",
+    "Check the thickest part of each piece with a food thermometer, avoiding the bone. Chicken must reach at least 165°F; thighs and drumsticks are often more tender around 175–185°F.",
+    "If you'd like a stickier, more caramelized finish, broil for 1–3 minutes at the end, watching closely so the honey doesn't burn.",
+    "Let rest for 5 minutes, then spoon some of the pan sauce over the chicken before serving."
+  ],
+  "kosher_for_passover": false,
+  "kosher_status": "meat",
+  "leftover_friendly": true,
+  "notes": "Easy oven-baked chicken thighs and drumsticks in a honey garlic sauce. Serve with roasted potatoes, rice, or steamed vegetables. For a toddler, shred the cooked chicken and carefully remove all bones and cartilage before serving.",
+  "pdf": "pdfs/honey-garlic-chicken.pdf",
+  "photo_generated": false,
+  "prep_minutes": 10,
+  "servings": "8",
+  "source": "PDF submitted 2026-11-06",
+  "tags": [
+    "chicken",
+    "honey garlic",
+    "weeknight",
+    "oven-baked"
+  ],
+  "tags_need_review": false,
+  "tips": [
+    {
+      "text": "Check that your soy sauce, ketchup, and other packaged ingredients are certified kosher.",
+      "title": "Keep it kosher"
+    }
+  ],
+  "title": "Honey Garlic Chicken",
+  "history": [
+    {
+      "ts": "2026-11-06T16:41:36.821Z",
+      "actor": "sous-chef",
+      "action": "intake",
+      "changes": [
+        "Created recipe"
+      ],
+      "reasoning": "Initial intake"
+    }
+  ]
+}
