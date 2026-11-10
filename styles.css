@@ -82,6 +82,14 @@ body {
   line-height: 1.55;
 }
 
+/* Notebook look (2026-11-10): ruled paper in light mode only;
+   dark mode keeps its solid background. */
+:root:not([data-theme="dark"]) body {
+  background-color: var(--cream);
+  background-image: repeating-linear-gradient(transparent 0, transparent 31px,
+    rgba(96, 139, 196, 0.20) 31px, rgba(96, 139, 196, 0.20) 32px);
+}
+
 /* ---------- Header / nav ---------- */
 
 .site-header {
@@ -1503,5 +1511,16 @@ input[type="range"].mood-range::-moz-range-thumb {
 
 .form-error {
   color: var(--meat);
+  font-weight: 700;
+}
+
+/* ---------- Handwritten notebook headings (2026-11-10) ----------
+   All headings in Caveat; body copy stays in the system sans so recipes
+   stay easy to read. Placed last so it wins over the earlier serif rules. */
+.card-body h2, .recipe-title, .recipe-section h2, .recipe-section h3,
+.planner-nav h2, .day-card h3, .acc-title, .sheet h3,
+.hero h1, .section-head h2, .landing-card h2, .modal h2, .page-head h1,
+.banner-fallback {
+  font-family: "Caveat", "Segoe Script", cursive;
   font-weight: 700;
 }
