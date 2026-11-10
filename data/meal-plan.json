@@ -675,8 +675,8 @@
       ],
       "manualItems": [],
       "haveGenerated": [],
-      "skipSpices": true,
-      "skipSpicesAt": 1794320217420,
+      "skipSpices": false,
+      "skipSpicesAt": 1794320221409,
       "optionalPromoted": []
     },
     "2026-11-01": {
