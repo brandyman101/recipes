@@ -42,10 +42,150 @@ function recipeMeta(id) {
 let mealPlan = { weeks: {} };
 let plannerOffset = 0;     // weeks away from the current week
 let filters = { q: '', kosher: 'all', kfp: false, category: 'all',
-                maxTime: 0, tag: 'all', leftovers: false, sort: 'asc' };
+                maxTime: 0, tag: 'all', leftovers: false, sort: 'asc', favorites: false };
 let editDraft = null;      // working copy while the edit form is open
 let currentEditSha = null;  // GitHub blob SHA when the edit page loaded (for 409 conflict detection)
 let editingSlot = null;    // {key, di, meal} while a planner slot is being edited
+
+/* ---------------- Fun UI: local-only state (2026-11-10) ----------------
+   Favorites, ratings, theme, and dark mode live in localStorage only —
+   no new bridge writes or data files. */
+const LS = {
+  get(key, fallback) {
+    try { const v = localStorage.getItem(key); return v == null ? fallback : JSON.parse(v); }
+    catch (e) { return fallback; }
+  },
+  set(key, value) { try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) {} }
+};
+const FAVORITES_KEY = 'brandel-favorites'; // array of recipe ids
+const RATINGS_KEY = 'brandel-ratings';     // {recipeId: stars}
+function getFavorites() { const f = LS.get(FAVORITES_KEY, []); return Array.isArray(f) ? f : []; }
+function isFavorite(id) { return getFavorites().includes(id); }
+function setFavorite(id, on) {
+  let f = getFavorites();
+  f = on ? [...new Set([...f, id])] : f.filter(x => x !== id);
+  LS.set(FAVORITES_KEY, f);
+  return on;
+}
+function getRatings() { const r = LS.get(RATINGS_KEY, {}); return (r && typeof r === 'object') ? r : {}; }
+function getRating(id) { return getRatings()[id] || 0; }
+function setRating(id, stars) { const r = getRatings(); r[id] = stars; LS.set(RATINGS_KEY, r); }
+
+/* ---------- #1 Confetti cannon (playground) ---------- */
+let confettiCanvas = null, confettiCtx = null, confettiParts = [], confettiRaf = null;
+const CONFETTI_COLORS = ['#ff5d3a', '#0e9b8a', '#f5a800', '#e85d8a', '#2f6fed', '#2fa84f'];
+function sizeConfettiCanvas() {
+  if (!confettiCanvas) return;
+  confettiCanvas.width = window.innerWidth;
+  confettiCanvas.height = window.innerHeight;
+}
+function burstConfetti(x, y, count) {
+  if (!confettiCanvas) {
+    confettiCanvas = document.getElementById('confetti');
+    if (!confettiCanvas) return;
+    confettiCtx = confettiCanvas.getContext('2d');
+    sizeConfettiCanvas();
+  }
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const n = reduced ? Math.min(count || 40, 20) : (count || 60);
+  for (let i = 0; i < n; i++) {
+    const a = Math.random() * Math.PI * 2, sp = 4 + Math.random() * 9;
+    confettiParts.push({
+      x, y,
+      vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - 5,
+      w: 5 + Math.random() * 6, h: 8 + Math.random() * 7,
+      rot: Math.random() * Math.PI, vr: (Math.random() - 0.5) * 0.3,
+      color: CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)],
+      life: 1, decay: 0.008 + Math.random() * 0.008,
+      circle: Math.random() < 0.3
+    });
+  }
+  if (!confettiRaf) confettiTick();
+}
+function confettiTick() {
+  confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+  confettiParts = confettiParts.filter(p => p.life > 0);
+  confettiParts.forEach(p => {
+    p.x += p.vx; p.y += p.vy; p.vy += 0.28; p.vx *= 0.99; p.rot += p.vr; p.life -= p.decay;
+    confettiCtx.save();
+    confettiCtx.translate(p.x, p.y);
+    confettiCtx.rotate(p.rot);
+    confettiCtx.globalAlpha = Math.max(p.life, 0);
+    confettiCtx.fillStyle = p.color;
+    if (p.circle) { confettiCtx.beginPath(); confettiCtx.arc(0, 0, p.w / 2, 0, Math.PI * 2); confettiCtx.fill(); }
+    else confettiCtx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h * Math.abs(Math.sin(p.rot * 2)) + 1.5);
+    confettiCtx.restore();
+  });
+  if (confettiParts.length) { confettiRaf = requestAnimationFrame(confettiTick); }
+  else { confettiRaf = null; confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height); }
+}
+
+/* ---------- #3 Ripple for primary buttons (playground) ---------- */
+function addRipple(btn, e) {
+  const rect = btn.getBoundingClientRect();
+  const d = Math.max(rect.width, rect.height);
+  const span = document.createElement('span');
+  span.className = 'ripple-ink';
+  span.style.width = span.style.height = d + 'px';
+  const x = (e && e.clientX) ? e.clientX - rect.left - d / 2 : rect.width / 2 - d / 2;
+  const y = (e && e.clientY) ? e.clientY - rect.top - d / 2 : rect.height / 2 - d / 2;
+  span.style.left = x + 'px';
+  span.style.top = y + 'px';
+  btn.appendChild(span);
+  setTimeout(() => span.remove(), 600);
+}
+
+/* ---------- #2 Favorite toggle with particle burst (playground) ---------- */
+function toggleFavorite(id, btnEl) {
+  const on = setFavorite(id, !isFavorite(id));
+  if (btnEl) {
+    btnEl.classList.toggle('liked', on);
+    if (on && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      for (let i = 0; i < 10; i++) {
+        const s = document.createElement('span');
+        s.className = 'particle';
+        s.style.background = CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)];
+        btnEl.appendChild(s);
+        const ang = (i / 10) * Math.PI * 2 + Math.random() * 0.5;
+        const dist = 44 + Math.random() * 30;
+        s.animate([
+          { transform: 'translate(-50%,-50%) scale(1)', opacity: 1 },
+          { transform: 'translate(' + (Math.cos(ang) * dist - 4) + 'px,' + (Math.sin(ang) * dist - 4) + 'px) scale(0)', opacity: 0 }
+        ], { duration: 550 + Math.random() * 250, easing: 'cubic-bezier(.2,.8,.3,1)' });
+        setTimeout(((el) => () => el.remove())(s), 850);
+      }
+    }
+  }
+  toast(on ? 'Saved to favorites ♥' : 'Removed from favorites');
+  return on;
+}
+
+/* ---------- #8 / #10 Theme + dark mode (playground) ---------- */
+const ACCENT_PALETTES = [
+  { name: 'terracotta', label: 'Terracotta', accent: '#b4552d' },
+  { name: 'teal', label: 'Teal', accent: '#0e7d6e' },
+  { name: 'forest', label: 'Forest', accent: '#2e7d4f' },
+  { name: 'plum', label: 'Plum', accent: '#7d4a8a' },
+  { name: 'ocean', label: 'Ocean', accent: '#2f5f8f' }
+];
+function applyTheme(name) {
+  if (!name || name === 'terracotta') document.documentElement.removeAttribute('data-accent');
+  else document.documentElement.setAttribute('data-accent', name);
+  try { localStorage.setItem('brandel-theme', name || 'terracotta'); } catch (e) {}
+}
+function isDarkMode() { return document.documentElement.getAttribute('data-theme') === 'dark'; }
+function setDarkMode(on) {
+  if (on) document.documentElement.setAttribute('data-theme', 'dark');
+  else document.documentElement.removeAttribute('data-theme');
+  try { localStorage.setItem('brandel-dark', on ? '1' : '0'); } catch (e) {}
+  const sw = document.getElementById('theme-switch');
+  if (sw) {
+    sw.setAttribute('aria-checked', on ? 'true' : 'false');
+    sw.setAttribute('aria-label', on ? 'Light mode' : 'Dark mode');
+    const knob = sw.querySelector('.theme-knob');
+    if (knob) knob.textContent = on ? '🌙' : '☀';
+  }
+}
 
 /* ---------------- Small helpers ---------------- */
 const $ = (sel, el) => (el || document).querySelector(sel);
@@ -248,6 +388,48 @@ async function boot() {
     });
   }
 
+  // Fun UI #10: dark-mode switch in the header (state applied pre-paint
+  // by the inline script in index.html; here we just sync the switch).
+  setDarkMode(isDarkMode());
+  const themeSwitch = document.getElementById('theme-switch');
+  if (themeSwitch) {
+    themeSwitch.addEventListener('click', () => {
+      const on = !isDarkMode();
+      setDarkMode(on);
+      toast(on ? 'Dark mode on 🌙' : 'Light mode on ☀');
+    });
+  }
+
+  // Fun UI #14: build the slide-up planner sheet once (used by recipe pages).
+  ensurePlanSheet();
+  window.addEventListener('resize', sizeConfettiCanvas);
+
+  // Fun UI #3: ripple on every primary button + magnetic pull on desktop.
+  document.addEventListener('click', e => {
+    const btn = e.target && e.target.closest ? e.target.closest('.btn') : null;
+    if (btn) addRipple(btn, e);
+  });
+  const finePointer = window.matchMedia('(pointer: fine)').matches;
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (finePointer && !prefersReduced) {
+    let magBtn = null;
+    document.addEventListener('mousemove', e => {
+      const btn = e.target && e.target.closest ? e.target.closest('.btn') : null;
+      if (btn !== magBtn) {
+        if (magBtn) magBtn.style.transform = '';
+        magBtn = btn;
+      }
+      if (!magBtn) return;
+      const r = magBtn.getBoundingClientRect();
+      const x = e.clientX - r.left - r.width / 2;
+      const y = e.clientY - r.top - r.height / 2;
+      magBtn.style.transform = 'translate(' + (x * 0.18) + 'px,' + (y * 0.28) + 'px)';
+    });
+    document.addEventListener('mouseleave', () => {
+      if (magBtn) { magBtn.style.transform = ''; magBtn = null; }
+    });
+  }
+
   // Keep the meal plan fresh when someone else (e.g. the other cook) saves:
   // re-fetch when the tab regains focus, unless mid-edit.
   const maybeRefreshPlan = async () => {
@@ -418,27 +600,114 @@ function showPlanPicker(anchor, rid, title) {
     '<div class="form-status" id="pp-status"></div>';
   anchor.parentNode.insertBefore(box, anchor.nextSibling);
   box.querySelector('#pp-cancel').onclick = () => box.remove();
-  box.querySelector('#pp-save').onclick = () => {
+  box.querySelector('#pp-save').onclick = e => {
     const di = +box.querySelector('#pp-day').value;
     const meal = box.querySelector('#pp-meal').value;
     const st = box.querySelector('#pp-status');
-    try {
-      const key = thisWeekKey();
-      const week = getWeek(key);
-      const slot = normalizeSlot(week.days[di][meal]);
-      if (rid && recipeMeta(rid)) slot.dishes.push({ recipe: rid });
-      else if (title) slot.dishes.push({ custom: title });
-      else { st.textContent = 'Nothing to add.'; return; }
-      week.days[di][meal] = slot;
-      persistWeek(key, st, () => {
-        toast('Added to the planner — the shopping list picks it up too.');
-        renderCircular(document.getElementById('app'));
-      });
-    } catch (e) {
-      st.className = 'form-status error';
-      st.textContent = 'Save failed: ' + e.message;
-    }
+    saveDishToPlanner(rid, title, di, meal, st, () => {
+      toast('Added to the planner — the shopping list picks it up too.');
+      if (e && e.target) {
+        const r = e.target.getBoundingClientRect();
+        burstConfetti(r.left + r.width / 2, r.top, 45); // fun UI #1
+      }
+      renderCircular(document.getElementById('app'));
+    });
   };
+}
+
+/* Shared planner save used by the inline picker and the bottom sheet.
+   Adds one dish (recipe id, or a custom title) to this week's plan. */
+function saveDishToPlanner(rid, title, di, meal, statusEl, done) {
+  try {
+    const key = thisWeekKey();
+    const week = getWeek(key);
+    const slot = normalizeSlot(week.days[di][meal]);
+    if (rid && recipeMeta(rid)) slot.dishes.push({ recipe: rid });
+    else if (title) slot.dishes.push({ custom: title });
+    else { if (statusEl) statusEl.textContent = 'Nothing to add.'; return; }
+    week.days[di][meal] = slot;
+    persistWeek(key, statusEl, done);
+  } catch (e) {
+    if (statusEl) {
+      statusEl.className = 'form-status error';
+      statusEl.textContent = 'Save failed: ' + e.message;
+    }
+  }
+}
+
+/* ---------------- Fun UI #14: slide-up "Add to planner" sheet ----------------
+   Same day/meal picker as showPlanPicker, presented as a bottom sheet
+   (thumb-friendly on mobile). Built once in boot(); opened from recipe pages. */
+let planSheetCtx = null; // {rid, title} while the sheet is open
+function ensurePlanSheet() {
+  if (document.getElementById('plan-sheet')) return;
+  const veil = document.createElement('div');
+  veil.className = 'sheet-veil';
+  veil.id = 'plan-sheet-veil';
+  const sheet = document.createElement('div');
+  sheet.className = 'sheet';
+  sheet.id = 'plan-sheet';
+  sheet.setAttribute('role', 'dialog');
+  sheet.setAttribute('aria-modal', 'true');
+  sheet.innerHTML =
+    '<div class="grab"></div>' +
+    '<h3>Add to planner</h3>' +
+    '<p class="muted" id="plan-sheet-dish"></p>' +
+    '<label class="sheet-label">Day<select id="ps-day" aria-label="Day"></select></label>' +
+    '<label class="sheet-label">Meal<select id="ps-meal" aria-label="Meal">' +
+      '<option value="dinner" selected>Dinner</option>' +
+      '<option value="lunch">Lunch</option></select></label>' +
+    '<div class="sheet-row">' +
+      '<button class="btn secondary" id="ps-cancel" type="button">Cancel</button>' +
+      '<button class="btn" id="ps-save" type="button">Add it</button>' +
+    '</div>' +
+    '<div class="form-status" id="ps-status"></div>';
+  document.body.appendChild(veil);
+  document.body.appendChild(sheet);
+  veil.addEventListener('click', closePlanSheet);
+  sheet.querySelector('#ps-cancel').addEventListener('click', closePlanSheet);
+  sheet.querySelector('#ps-save').addEventListener('click', e => {
+    if (!planSheetCtx) return;
+    const di = +sheet.querySelector('#ps-day').value;
+    const meal = sheet.querySelector('#ps-meal').value;
+    const st = sheet.querySelector('#ps-status');
+    saveDishToPlanner(planSheetCtx.rid, planSheetCtx.title, di, meal, st, () => {
+      closePlanSheet();
+      toast('Added to the planner — the shopping list picks it up too.');
+      const r = e.target.getBoundingClientRect();
+      burstConfetti(r.left + r.width / 2, r.top, 45);
+    });
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && planSheetCtx) closePlanSheet();
+  });
+}
+function openPlanSheet(rid, title) {
+  ensurePlanSheet();
+  planSheetCtx = { rid, title };
+  const mon = sundayOf(0);
+  const daySel = document.getElementById('ps-day');
+  daySel.innerHTML = '';
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(mon);
+    d.setDate(d.getDate() + i);
+    const o = document.createElement('option');
+    o.value = i;
+    o.textContent = dayName(d) + ' ' + prettyDate(d);
+    if (i === 5) o.selected = true; // Friday dinner (Shabbat) by default
+    daySel.appendChild(o);
+  }
+  document.getElementById('plan-sheet-dish').textContent = title || '';
+  document.getElementById('ps-status').textContent = '';
+  document.getElementById('plan-sheet').classList.add('open');
+  document.getElementById('plan-sheet-veil').classList.add('open');
+}
+function closePlanSheet() {
+  planSheetCtx = null;
+  const s = document.getElementById('plan-sheet');
+  const v = document.getElementById('plan-sheet-veil');
+  if (s) s.classList.remove('open');
+  if (v) v.classList.remove('open');
 }
 
 /* ---------------- Printable weekly menu ---------------- */
@@ -1010,6 +1279,15 @@ function renderRecipes(app) {
       '<div class="search-row hero-search no-print">' +
         '<input type="search" id="q" placeholder="Search recipes, ingredients, tags…" ' +
         'value="' + esc(filters.q) + '" aria-label="Search recipes"></div>' +
+      // Fun UI #7: "Tonight's mood" slider — the face reacts, and the slider
+      // sets the max-time filter (quick 🥱 → fancy 🤩, no limit).
+      '<div class="mood-row no-print">' +
+        '<span class="mood-face" id="mood-face" aria-hidden="true">🙂</span>' +
+        '<div class="mood-body">' +
+          '<div class="mood-word" id="mood-word">Something easy</div>' +
+          '<input type="range" class="mood-range" id="mood-range" min="0" max="100" value="35" aria-label="Tonight\'s mood">' +
+        '</div>' +
+      '</div>' +
     '</section>' +
 
     '<section class="home-section">' +
@@ -1048,16 +1326,63 @@ function renderRecipes(app) {
     '</div>' +
     '<p class="result-count" id="result-count"></p>' +
     '<div class="no-print" style="margin:0 0 1rem"><a class="btn" href="#/add">+ Add recipe</a> ' +
-    '<a class="btn secondary" href="#/submit">Submit Recipe</a></div>' +
+    '<a class="btn secondary" href="#/submit">Submit Recipe</a> ' +
+    '<button class="chip-btn' + (filters.favorites ? ' active' : '') + '" id="f-fav" type="button" aria-pressed="' + (filters.favorites ? 'true' : 'false') + '">♥ Favorites</button></div>' +
     '<div class="card-grid" id="grid"></div></section>';
 
   $('#q').addEventListener('input', e => { filters.q = e.target.value; drawGrid(); });
+
+  // Fun UI #2: "♥ Favorites" chip shows only favorited recipes.
+  const favChip = $('#f-fav');
+  if (favChip) favChip.addEventListener('click', () => {
+    filters.favorites = !filters.favorites;
+    favChip.classList.toggle('active', filters.favorites);
+    favChip.setAttribute('aria-pressed', filters.favorites ? 'true' : 'false');
+    drawGrid();
+  });
+
+  // Fun UI #7: mood slider wiring (see MOOD_BANDS below).
+  wireMoodSlider();
+  syncMoodSlider();
+
+  // Fun UI #2: favorite buttons on cards (delegated; cards re-render).
+  const gridEl = $('#grid');
+  gridEl.addEventListener('click', e => {
+    const fb = e.target.closest ? e.target.closest('[data-fav]') : null;
+    if (!fb) return;
+    e.preventDefault();
+    const on = toggleFavorite(fb.dataset.fav, fb);
+    if (filters.favorites && !on) drawGrid(); // un-favorited while filtered
+  });
+
+  // Fun UI #4 + #12: 3D tilt + cursor spotlight on recipe cards
+  // (desktop pointer only; tilt skipped for reduced motion).
+  const finePointer = window.matchMedia('(pointer: fine)').matches;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (finePointer) {
+    gridEl.addEventListener('mousemove', e => {
+      const card = e.target.closest ? e.target.closest('.card') : null;
+      if (!card) return;
+      const r = card.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width - 0.5;
+      const py = (e.clientY - r.top) / r.height - 0.5;
+      card.style.setProperty('--mx', ((px + 0.5) * 100) + '%');
+      card.style.setProperty('--my', ((py + 0.5) * 100) + '%');
+      if (!reducedMotion) {
+        card.style.transform = 'translateY(-2px) rotateY(' + (px * 6) + 'deg) rotateX(' + (-py * 5) + 'deg)';
+      }
+    });
+    gridEl.addEventListener('mouseout', e => {
+      const card = e.target.closest ? e.target.closest('.card') : null;
+      if (card && !card.contains(e.relatedTarget)) card.style.transform = '';
+    });
+  }
 
   $('#q').addEventListener('input', e => { filters.q = e.target.value; drawGrid(); });
   $('#f-kosher').addEventListener('change', e => { filters.kosher = e.target.value; drawGrid(); });
   $('#f-cat').addEventListener('change', e => { filters.category = e.target.value; drawGrid(); });
   $('#f-tag').addEventListener('change', e => { filters.tag = e.target.value; drawGrid(); });
-  $('#f-time').addEventListener('change', e => { filters.maxTime = Number(e.target.value); drawGrid(); });
+  $('#f-time').addEventListener('change', e => { filters.maxTime = Number(e.target.value); syncMoodSlider(); drawGrid(); });
   $('#f-sort').addEventListener('change', e => { filters.sort = e.target.value; drawGrid(); });
   $('#f-kfp').addEventListener('change', e => { filters.kfp = e.target.checked; drawGrid(); });
   $('#f-left').addEventListener('change', e => { filters.leftovers = e.target.checked; drawGrid(); });
@@ -1323,6 +1648,7 @@ function renderLanding(app) {
   const plannedCount = week.days.reduce((n, d) =>
     n + normalizeSlot(d.lunch).dishes.length + normalizeSlot(d.dinner).dishes.length, 0);
 
+  const savedTheme = (() => { try { return localStorage.getItem('brandel-theme') || 'terracotta'; } catch (e) { return 'terracotta'; } })();
   app.innerHTML =
     '<section class="hero landing-hero">' +
       '<h1>Brandel Family Recipes</h1>' +
@@ -1339,11 +1665,37 @@ function renderLanding(app) {
         '<div class="landing-card-icon">🛒</div>' +
         '<h2>Shopping List</h2><p>' + toBuyCount + ' items to buy</p></a>' +
     '</section>' +
+    '<section class="home-section theme-picker no-print">' +
+      '<div class="section-head"><h2>Pick a theme</h2></div>' +
+      '<div class="theme-swatches" id="theme-swatches">' +
+        ACCENT_PALETTES.map(p =>
+          '<button class="theme-swatch' + (savedTheme === p.name ? ' active' : '') + '" data-accent-name="' + p.name +
+          '" type="button" style="--sw:' + p.accent + '" aria-label="' + esc(p.label) + ' theme" title="' + esc(p.label) + '">' +
+          (savedTheme === p.name ? '✓' : '') + '</button>'
+        ).join('') +
+      '</div>' +
+    '</section>' +
     '<section class="home-section">' +
       '<div class="section-head"><h2>This week</h2>' +
       '<a class="link-btn" href="#/planner">Open planner →</a></div>' +
       '<div class="plan-carousel">' + planCarouselHTML() + '</div>' +
     '</section>';
+
+  // Fun UI #8: theme swatches apply the accent palette immediately.
+  const swatches = $('#theme-swatches');
+  if (swatches) swatches.addEventListener('click', e => {
+    const b = e.target.closest('[data-accent-name]');
+    if (!b) return;
+    const name = b.dataset.accentName;
+    applyTheme(name);
+    swatches.querySelectorAll('.theme-swatch').forEach(s => {
+      const on = s.dataset.accentName === name;
+      s.classList.toggle('active', on);
+      s.textContent = on ? '✓' : '';
+    });
+    const p = ACCENT_PALETTES.find(x => x.name === name);
+    toast('Theme: ' + (p ? p.label : name));
+  });
 }
 
 function planCarouselHTML() {
@@ -1376,9 +1728,57 @@ function planCarouselHTML() {
   }).join('');
 }
 
+/* ---------------- Fun UI #7: Tonight's mood slider ----------------
+   The face reacts as you drag; the slider sets the max-time filter.
+   Bands: 🥱 quick (30 min) → 🙂 easy (60) → 😊 worth it (120) → 🤩 no limit. */
+const MOOD_BANDS = [
+  { max: 20,  face: '🥱', word: 'Quick — 30 min max',     time: 30 },
+  { max: 50,  face: '🙂', word: 'Something easy',         time: 60 },
+  { max: 80,  face: '😊', word: 'Worth the effort',       time: 120 },
+  { max: 100, face: '🤩', word: 'Go fancy — no limit',    time: 0 }
+];
+function moodBandForValue(v) {
+  return MOOD_BANDS.find(b => v <= b.max) || MOOD_BANDS[MOOD_BANDS.length - 1];
+}
+function sliderValueForMaxTime(t) {
+  if (!t) return 95;
+  if (t <= 30) return 10;
+  if (t <= 60) return 35;
+  if (t <= 90) return 65;
+  return 75;
+}
+function wireMoodSlider() {
+  const range = $('#mood-range');
+  if (!range) return;
+  range.addEventListener('input', () => {
+    const v = parseInt(range.value, 10);
+    const band = moodBandForValue(v);
+    const face = $('#mood-face'), word = $('#mood-word');
+    if (face) { face.textContent = band.face; face.style.transform = 'scale(' + (1 + Math.abs(v - 50) / 160) + ')'; }
+    if (word) word.textContent = band.word;
+    range.style.background = 'linear-gradient(90deg,#e85d8a,#f5a800 ' + v + '%, var(--line) ' + v + '%)';
+    filters.maxTime = band.time;
+    const sel = $('#f-time');
+    if (sel) sel.value = String(band.time);
+    drawGrid();
+  });
+}
+function syncMoodSlider() {
+  const range = $('#mood-range');
+  if (!range) return;
+  range.value = sliderValueForMaxTime(filters.maxTime);
+  const v = parseInt(range.value, 10);
+  const band = moodBandForValue(v);
+  const face = $('#mood-face'), word = $('#mood-word');
+  if (face) face.textContent = band.face;
+  if (word) word.textContent = band.word;
+  range.style.background = 'linear-gradient(90deg,#e85d8a,#f5a800 ' + v + '%, var(--line) ' + v + '%)';
+}
+
 function filteredRecipes() {
   const q = filters.q.trim().toLowerCase();
   const list = recipes.filter(r => {
+    if (filters.favorites && !isFavorite(r.id)) return false;
     if (filters.kosher !== 'all' && String(r.kosher_status || '') !== filters.kosher) return false;
     if (filters.kfp && !r.kosher_for_passover) return false;
     if (filters.category !== 'all' && !(r.categories || []).includes(filters.category)) return false;
@@ -1430,13 +1830,22 @@ function drawGrid() {
       '</div>';
     return;
   }
-  grid.innerHTML = list.map(r =>
-    '<a class="card" href="#/recipe/' + encodeURIComponent(r.id) + '">' +
+  grid.innerHTML = list.map(r => {
+    const myRating = getRating(r.id);
+    const ratingHTML = myRating
+      ? '<div class="card-rating" aria-label="Your rating: ' + myRating + ' of 5 stars">' +
+        '★'.repeat(myRating) + '☆'.repeat(5 - myRating) + ' <span>Your rating</span></div>'
+      : '';
+    return '<a class="card" href="#/recipe/' + encodeURIComponent(r.id) + '">' +
+      // Fun UI #2: favorite heart (click handled by the grid delegation).
+      '<button class="fav-btn' + (isFavorite(r.id) ? ' liked' : '') + '" data-fav="' + esc(r.id) +
+        '" type="button" aria-label="Favorite ' + esc(r.title) + '">♥</button>' +
       bannerHTML(r) +
       '<div class="card-body"><h2>' + esc(r.title) + '</h2>' +
       '<div class="card-meta">' + esc(fmtTime(totalTime(r))) + ' total · Serves ' + esc(r.servings || '—') + '</div>' +
-      badgesHTML(r) + '</div></a>'
-  ).join('');
+      ratingHTML +
+      badgesHTML(r) + '</div></a>';
+  }).join('');
 }
 
 /* ---------------- Recipe page ---------------- */
@@ -1656,8 +2065,15 @@ async function renderRecipe(app, id) {
       const curServings = formatScaledServings(scaleState.parsedServings, scaleState.factor);
       servesHTML = '<span class="scale-serves">Serves <button class="scale-step" data-step="-1" type="button" aria-label="Fewer servings">−</button> <span id="scale-servings-val">' + curServings + '</span> <button class="scale-step" data-step="1" type="button" aria-label="More servings">+</button></span>';
     }
+    // Fun UI #11: progress ring showing the scaled-vs-original ratio
+    // (0.5x empty → 3x full).
+    const ringHTML = '<span class="scale-ring" title="Scaled vs original">' +
+      '<svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true">' +
+      '<circle class="ring-bg" cx="22" cy="22" r="18"></circle>' +
+      '<circle class="ring-fg" id="scale-ring-fg" cx="22" cy="22" r="18"></circle></svg>' +
+      '<span class="scale-ring-label" id="scale-ring-label">1x</span></span>';
     return '<div class="scale-bar no-print">' +
-      '<span class="scale-label">Scale:</span> ' + presetBtns + servesHTML +
+      '<span class="scale-label">Scale:</span> ' + presetBtns + servesHTML + ringHTML +
       '<span class="scale-current" id="scale-current">' +
         (scaleState.factor === 1 ? 'Original recipe' : 'Showing ' + scaleState.factor + 'x' + (scaleState.parsedServings ? ' · ' + formatScaledServings(scaleState.parsedServings, scaleState.factor) + ' servings' : '')) +
       '</span></div>';
@@ -1686,6 +2102,27 @@ async function renderRecipe(app, id) {
   const leftoverNote = r.leftover_note ||
     (r.leftover_friendly ? 'Good for leftovers.' : 'Best eaten fresh.');
 
+  // Fun UI #6: star rating (local only).
+  const myRating = getRating(id);
+  const RATING_MSGS = ['Tap a star', 'Rough night. It happens.', 'Edible, not memorable.',
+    'Solid weeknight dinner.', 'Really good — make it again!', 'Hall of fame. Frame this recipe.'];
+  const starsHTML = [1, 2, 3, 4, 5].map(v =>
+    '<button class="star' + (myRating >= v ? ' on' : '') + '" data-v="' + v + '" type="button" aria-label="' + v + ' star' + (v > 1 ? 's' : '') + '">' +
+    '<svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg></button>'
+  ).join('');
+
+  // Fun UI #13: Ingredients / Instructions / Tips as smooth accordions,
+  // open by default. The accordion button carries the section title.
+  const accOpen = (title, inner) =>
+    '<section class="recipe-section acc-item open">' +
+      '<button class="acc-q" type="button" aria-expanded="true"><span class="acc-title">' + title + '</span><span class="chev">⌄</span></button>' +
+      '<div class="acc-a">' + inner + '</div></section>';
+  const tipsHTML = (r.tips && r.tips.length)
+    ? accOpen('Tips', '<ul class="tips-list">' + r.tips.map(t =>
+        '<li>' + (t.title ? '<strong>' + esc(t.title) + ':</strong> ' : '') + esc(t.text || '') + '</li>'
+      ).join('') + '</ul>')
+    : '';
+
   app.innerHTML =
     '<a class="back-link no-print" href="#/recipes">← All recipes</a>' +
     '<article class="recipe-print">' +
@@ -1702,10 +2139,14 @@ async function renderRecipe(app, id) {
         '<span>Total <strong>' + esc(fmtTime(totalTime(r))) + '</strong></span>' +
         '<span>Serves <strong id="header-servings-val">' + esc(r.servings || '—') + '</strong></span>' +
       '</div>' +
-      '<section class="recipe-section"><h2>Ingredients</h2>' + scaleBarHTML() + ingHTML + '</section>' +
-      '<section class="recipe-section"><h2>Instructions</h2><ol class="steps">' +
+      '<section class="recipe-section rating-section no-print"><h2>Your rating</h2>' +
+        '<div class="stars" id="stars" role="radiogroup" aria-label="Rate this recipe">' + starsHTML + '</div>' +
+        '<div class="rating-msg" id="rating-msg">' + esc(RATING_MSGS[myRating] || RATING_MSGS[0]) + '</div></section>' +
+      accOpen('Ingredients', scaleBarHTML() + ingHTML) +
+      accOpen('Instructions', '<ol class="steps">' +
         (r.instructions || []).map(s => '<li>' + esc(s) + '</li>').join('') +
-      '</ol></section>' +
+      '</ol>') +
+      tipsHTML +
       pairHTML +
       '<section class="recipe-section"><h2>Leftovers</h2>' +
         '<div class="leftover-box ' + (r.leftover_friendly ? 'yes' : 'no') + '">' +
@@ -1715,6 +2156,8 @@ async function renderRecipe(app, id) {
         ? '<p class="source-line">' + esc([r.notes, r.source].filter(Boolean).join(' — ')) + '</p>'
         : '') +
       '<div class="actions no-print">' +
+        '<button class="btn" id="plan-btn" type="button">+ Add to planner</button>' +
+        '<button class="btn secondary" id="fav-page-btn" type="button">' + (isFavorite(id) ? '♥ Favorited' : '♡ Favorite') + '</button>' +
         '<a class="btn secondary" href="#/edit/' + encodeURIComponent(r.id) + '">Edit</a>' +
         (pdfUrl(r) ? '<a class="btn" href="' + esc(pdfUrl(r)) + '" target="_blank" rel="noopener">View PDF</a>' : '') +
         '<button class="btn secondary" id="share-btn" type="button">Share</button>' +
@@ -1727,6 +2170,52 @@ async function renderRecipe(app, id) {
 
   $('#share-btn').onclick = () => shareRecipe(r);
   $('#print-btn').onclick = () => window.print();
+
+  // Fun UI #14: "Add to planner" opens the slide-up bottom sheet.
+  const planBtn = $('#plan-btn');
+  if (planBtn) planBtn.addEventListener('click', () => openPlanSheet(r.id, r.title));
+
+  // Fun UI #2: favorite button on the recipe page.
+  const favPageBtn = $('#fav-page-btn');
+  if (favPageBtn) favPageBtn.addEventListener('click', () => {
+    const on = toggleFavorite(r.id, null);
+    favPageBtn.textContent = on ? '♥ Favorited' : '♡ Favorite';
+  });
+
+  // Fun UI #6: star rating wiring (hover preview, click to save, 5★ = confetti).
+  const starBtns = [...app.querySelectorAll('.star')];
+  const ratingMsgEl = $('#rating-msg');
+  let liveRating = myRating;
+  const paintStars = n => starBtns.forEach((s, i) => s.classList.toggle('on', i < n));
+  starBtns.forEach(s => {
+    const v = parseInt(s.dataset.v, 10);
+    s.addEventListener('mouseenter', () => paintStars(v));
+    s.addEventListener('click', () => {
+      setRating(id, v);
+      liveRating = v;
+      paintStars(v);
+      if (ratingMsgEl) ratingMsgEl.textContent = RATING_MSGS[v];
+      toast(RATING_MSGS[v]);
+      if (v === 5) {
+        const rect = s.getBoundingClientRect();
+        burstConfetti(rect.left + rect.width / 2, rect.top, 50);
+      }
+    });
+  });
+  const starsWrap = $('#stars');
+  if (starsWrap) starsWrap.addEventListener('mouseleave', () => paintStars(liveRating));
+
+  // Fun UI #13: accordion wiring (open by default; heights measured live).
+  app.querySelectorAll('.acc-item').forEach(item => {
+    const q = item.querySelector('.acc-q'), a = item.querySelector('.acc-a');
+    if (!q || !a) return;
+    if (item.classList.contains('open')) a.style.maxHeight = a.scrollHeight + 'px';
+    q.addEventListener('click', () => {
+      const open = item.classList.toggle('open');
+      q.setAttribute('aria-expanded', open ? 'true' : 'false');
+      a.style.maxHeight = open ? a.scrollHeight + 'px' : '0px';
+    });
+  });
 
   // Scale controls: recompute all quantities from data-base-qty on every change.
   // Store targetServings (not rounded factor) to avoid precision loss.
@@ -1777,9 +2266,32 @@ async function renderRecipe(app, id) {
     const headerServVal = app.querySelector('#header-servings-val');
     if (scaleState.parsedServings) {
       const scaledServings = formatScaledServings(scaleState.parsedServings, f);
-      if (servVal) servVal.textContent = scaledServings;
+      if (servVal) {
+        if (servVal.textContent !== scaledServings) {
+          servVal.textContent = scaledServings;
+          // Fun UI #11: the servings number springs when it changes.
+          if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && servVal.animate) {
+            servVal.animate([{ transform: 'scale(1.25)' }, { transform: 'scale(1)' }], { duration: 220, easing: 'ease-out' });
+          }
+        }
+      }
       if (headerServVal) headerServVal.textContent = scaledServings;
     }
+    // Fun UI #11: progress ring — scaled-vs-original ratio (0.5x → 3x).
+    const ringFg = app.querySelector('#scale-ring-fg');
+    const ringLabel = app.querySelector('#scale-ring-label');
+    if (ringFg && ringLabel) {
+      const CIRC = 2 * Math.PI * 18;
+      const frac = Math.min(1, Math.max(0, (f - 0.5) / 2.5));
+      ringFg.style.strokeDasharray = CIRC;
+      ringFg.style.strokeDashoffset = CIRC * (1 - frac);
+      ringLabel.textContent = (Math.round(f * 100) / 100) + 'x';
+    }
+    // Fun UI #13: re-measure open accordions — scaled quantities can
+    // reflow the ingredient list, and the accordion height is explicit.
+    app.querySelectorAll('.acc-item.open .acc-a').forEach(a => {
+      a.style.maxHeight = a.scrollHeight + 'px';
+    });
   };
   app.querySelectorAll('[data-scale]').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -2645,7 +3157,16 @@ function slotHTML(key, di, meal, slot, canEdit, shabbat) {
       const editBtn = canEdit
         ? ' <button class="link-btn" data-dishedit="' + key + '|' + di + '|' + meal + '|' + idx + '" type="button">Edit</button>'
         : '';
-      return '<div class="dish-row">' + dishBody + editBtn + '</div>';
+      // Fun UI #9: drag handle + up/down arrows (touch fallback) to reorder
+      // dishes within this slot. data-dish identifies the row for dragging.
+      const moveBtns = canEdit && s.dishes.length > 1
+        ? ' <button class="dish-move" data-moveup="' + key + '|' + di + '|' + meal + '|' + idx + '" type="button" aria-label="Move up">↑</button>' +
+          '<button class="dish-move" data-movedown="' + key + '|' + di + '|' + meal + '|' + idx + '" type="button" aria-label="Move down">↓</button>'
+        : '';
+      const grip = canEdit && s.dishes.length > 1 ? '<span class="drag-grip" title="Drag to reorder">⠿</span>' : '';
+      return '<div class="dish-row" draggable="' + (canEdit && s.dishes.length > 1 ? 'true' : 'false') +
+        '" data-dish="' + key + '|' + di + '|' + meal + '|' + idx + '">' +
+        grip + dishBody + moveBtns + editBtn + '</div>';
     }).join('');
     if (s.note) body += ' <span class="slot-note">— ' + esc(s.note) + '</span>';
   } else {
@@ -2772,10 +3293,66 @@ function renderPlanner(app) {
     persistWeek(key, null, () => renderPlanner(app));
   });
 
+  // Fun UI #9: drag-to-reorder dishes within a slot (HTML5 drag), with
+  // up/down arrow buttons as the touch fallback.
+  const daysEl = $('#days');
+  let dragSrc = null; // {key, di, meal, idx}
+  daysEl.addEventListener('dragstart', e => {
+    const row = e.target.closest ? e.target.closest('[data-dish]') : null;
+    if (!row || row.getAttribute('draggable') !== 'true') { e.preventDefault(); return; }
+    const [k, di, meal, idx] = row.dataset.dish.split('|');
+    dragSrc = { key: k, di: +di, meal, idx: +idx };
+    e.dataTransfer.effectAllowed = 'move';
+    try { e.dataTransfer.setData('text/plain', row.dataset.dish); } catch (err) {}
+    row.classList.add('dragging');
+  });
+  daysEl.addEventListener('dragover', e => {
+    const row = e.target.closest ? e.target.closest('[data-dish]') : null;
+    if (!row || !dragSrc) return;
+    const [k, di, meal] = row.dataset.dish.split('|');
+    if (k !== dragSrc.key || +di !== dragSrc.di || meal !== dragSrc.meal) return; // same slot only
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    const r = row.getBoundingClientRect();
+    const after = (e.clientY - r.top) > r.height / 2;
+    row.classList.toggle('drop-after', after);
+    row.classList.toggle('drop-before', !after);
+  });
+  daysEl.addEventListener('dragleave', e => {
+    const row = e.target.closest ? e.target.closest('[data-dish]') : null;
+    if (row) row.classList.remove('drop-before', 'drop-after');
+  });
+  daysEl.addEventListener('drop', e => {
+    const row = e.target.closest ? e.target.closest('[data-dish]') : null;
+    if (!row || !dragSrc) return;
+    e.preventDefault();
+    const [k, di, meal, idx] = row.dataset.dish.split('|');
+    if (k !== dragSrc.key || +di !== dragSrc.di || meal !== dragSrc.meal) { dragSrc = null; return; }
+    const r = row.getBoundingClientRect();
+    let to = (e.clientY - r.top) > r.height / 2 ? +idx + 1 : +idx;
+    if (dragSrc.idx < to) to -= 1;
+    if (to !== dragSrc.idx) moveDishInSlot(k, +di, meal, dragSrc.idx, to);
+    dragSrc = null;
+  });
+  daysEl.addEventListener('dragend', () => {
+    dragSrc = null;
+    daysEl.querySelectorAll('.dragging, .drop-before, .drop-after')
+      .forEach(el => el.classList.remove('dragging', 'drop-before', 'drop-after'));
+  });
+
   $('#days').addEventListener('click', e => {
     const t = e.target;
     if (t.id === 'se-save') return saveSlot(key);
     if (t.id === 'se-cancel') { editingSlot = null; return renderPlanner(app); }
+    // Fun UI #9: up/down arrow buttons move a dish within its slot.
+    if (t.dataset.moveup || t.dataset.movedown) {
+      const [k, di, meal, idx] = (t.dataset.moveup || t.dataset.movedown).split('|');
+      const to = +idx + (t.dataset.moveup ? -1 : 1);
+      const slot = normalizeSlot(getWeek(k).days[+di][meal]);
+      if (to < 0 || to >= slot.dishes.length) return;
+      moveDishInSlot(k, +di, meal, +idx, to);
+      return;
+    }
     if (t.dataset.slotadd) {
       const [k, di, meal] = t.dataset.slotadd.split('|');
       editingSlot = { key: k, di: +di, meal, dishIdx: -1 }; // -1 = new dish
@@ -2839,6 +3416,19 @@ function saveSlot(key) {
   slot.note = $('#se-note').value.trim();
   getWeek(key).days[editingSlot.di][editingSlot.meal] = slot;
   persistWeek(key, st, () => { editingSlot = null; renderPlanner($('#app')); });
+}
+
+/* Fun UI #9: move a dish within its slot, then save (same bridge path). */
+function moveDishInSlot(key, di, meal, fromIdx, toIdx) {
+  const week = getWeek(key);
+  const slot = normalizeSlot(week.days[di][meal]);
+  if (fromIdx < 0 || fromIdx >= slot.dishes.length) return;
+  if (toIdx < 0 || toIdx >= slot.dishes.length) return;
+  if (fromIdx === toIdx) return;
+  const [dish] = slot.dishes.splice(fromIdx, 1);
+  slot.dishes.splice(toIdx, 0, dish);
+  week.days[di][meal] = slot;
+  persistWeek(key, null, () => renderPlanner($('#app')));
 }
 
 async function persistWeek(key, statusEl, done) {
