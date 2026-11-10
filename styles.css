@@ -1383,8 +1383,9 @@ input[type="range"].mood-range::-moz-range-thumb {
 
 /* Landing page */
 .landing-hero { text-align: center; padding: 2.5rem 1rem 1.5rem; }
-/* Bubbe's Script home heading (2026-11-10, restored): matches the header title. */
-.landing-hero h1 {
+/* Bubbe's Script home heading (2026-11-10, restored): matches the header title.
+   Specificity .hero.landing-hero beats the later Fraunces .hero h1 rule. */
+.hero.landing-hero h1 {
   font-family: "Dancing Script", "Segoe Script", cursive;
   font-size: 2.9rem;
   font-weight: 700;
