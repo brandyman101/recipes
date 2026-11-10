@@ -456,9 +456,11 @@ async function boot() {
   window.addEventListener('focus', maybeRefreshPlan);
 }
 
-/* Re-fetch the meal plan (e.g. after someone else saves). Skips while editing. */
+/* Re-fetch the meal plan (e.g. after someone else saves). Skips while editing,
+   and while a save is in flight / just finished — see the race guard above. */
 async function refreshMealPlan() {
   if (editingSlot) return;
+  if (mealPlanSaving || Date.now() - mealPlanSavedAt < 15000) return;
   const mp = await fetchLiveMealPlan();
   if (!mp) return;
   // Merge, don't overwrite: server wins for days (planner), union for shopping state.
@@ -601,22 +603,25 @@ function showPlanPicker(anchor, rid, title) {
   anchor.parentNode.insertBefore(box, anchor.nextSibling);
   box.querySelector('#pp-cancel').onclick = () => box.remove();
   box.querySelector('#pp-save').onclick = e => {
+    const saveBtn = box.querySelector('#pp-save');
+    const r = saveBtn.getBoundingClientRect(); // capture before anything moves
     const di = +box.querySelector('#pp-day').value;
     const meal = box.querySelector('#pp-meal').value;
     const st = box.querySelector('#pp-status');
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Saving…';
     saveDishToPlanner(rid, title, di, meal, st, () => {
       toast('Added to the planner — the shopping list picks it up too.');
-      if (e && e.target) {
-        const r = e.target.getBoundingClientRect();
-        burstConfetti(r.left + r.width / 2, r.top, 45); // fun UI #1
-      }
+      burstConfetti(r.left + r.width / 2, r.top, 45); // fun UI #1
       renderCircular(document.getElementById('app'));
-    });
+    }).then(() => { saveBtn.disabled = false; saveBtn.textContent = 'Save'; });
   };
 }
 
 /* Shared planner save used by the inline picker and the bottom sheet.
-   Adds one dish (recipe id, or a custom title) to this week's plan. */
+   Adds one dish (recipe id, or a custom title) to this week's plan.
+   Returns a promise that settles when the save finishes (success or fail),
+   so callers can restore their buttons. */
 function saveDishToPlanner(rid, title, di, meal, statusEl, done) {
   try {
     const key = thisWeekKey();
@@ -624,14 +629,15 @@ function saveDishToPlanner(rid, title, di, meal, statusEl, done) {
     const slot = normalizeSlot(week.days[di][meal]);
     if (rid && recipeMeta(rid)) slot.dishes.push({ recipe: rid });
     else if (title) slot.dishes.push({ custom: title });
-    else { if (statusEl) statusEl.textContent = 'Nothing to add.'; return; }
+    else { if (statusEl) statusEl.textContent = 'Nothing to add.'; return Promise.resolve(false); }
     week.days[di][meal] = slot;
-    persistWeek(key, statusEl, done);
+    return persistWeek(key, statusEl, done);
   } catch (e) {
     if (statusEl) {
       statusEl.className = 'form-status error';
       statusEl.textContent = 'Save failed: ' + e.message;
     }
+    return Promise.resolve(false);
   }
 }
 
@@ -666,17 +672,22 @@ function ensurePlanSheet() {
   document.body.appendChild(sheet);
   veil.addEventListener('click', closePlanSheet);
   sheet.querySelector('#ps-cancel').addEventListener('click', closePlanSheet);
-  sheet.querySelector('#ps-save').addEventListener('click', e => {
+  sheet.querySelector('#ps-save').addEventListener('click', () => {
     if (!planSheetCtx) return;
+    const saveBtn = sheet.querySelector('#ps-save');
+    // Capture the button's position BEFORE the sheet starts closing —
+    // reading it after closePlanSheet() puts the confetti off-screen.
+    const r = saveBtn.getBoundingClientRect();
     const di = +sheet.querySelector('#ps-day').value;
     const meal = sheet.querySelector('#ps-meal').value;
     const st = sheet.querySelector('#ps-status');
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Saving…';
     saveDishToPlanner(planSheetCtx.rid, planSheetCtx.title, di, meal, st, () => {
       closePlanSheet();
       toast('Added to the planner — the shopping list picks it up too.');
-      const r = e.target.getBoundingClientRect();
       burstConfetti(r.left + r.width / 2, r.top, 45);
-    });
+    }).then(() => { saveBtn.disabled = false; saveBtn.textContent = 'Add it'; });
   });
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && planSheetCtx) closePlanSheet();
@@ -3431,7 +3442,18 @@ function moveDishInSlot(key, di, meal, fromIdx, toIdx) {
   persistWeek(key, null, () => renderPlanner($('#app')));
 }
 
+/* Guard against the stale-refresh race (2026-11-10): a planner save updates
+   the in-memory plan first, then the server. If the user opens the planner
+   while the save is still in flight (or just after), refreshMealPlan can
+   fetch the pre-save server copy and "server wins" wipes the just-added dish
+   from view — even though the save lands a moment later. While a save is
+   running, or for 15s after one finishes, the in-memory copy is
+   authoritative and the refresh merge is skipped. */
+let mealPlanSaving = false;
+let mealPlanSavedAt = 0;
+
 async function persistWeek(key, statusEl, done) {
+  mealPlanSaving = true;
   try {
     await ghPut('data/meal-plan.json', JSON.stringify(mealPlan, null, 2), 'Update meal plan: ' + key);
     toast('Saved — the site rebuilds in about a minute.');
@@ -3442,6 +3464,9 @@ async function persistWeek(key, statusEl, done) {
       : 'Save failed: ' + e.message;
     if (statusEl) { statusEl.className = 'form-status error'; statusEl.textContent = msg; }
     else toast(msg);
+  } finally {
+    mealPlanSaving = false;
+    mealPlanSavedAt = Date.now();
   }
 }
 
