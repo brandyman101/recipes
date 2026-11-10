@@ -63,6 +63,19 @@ body {
 
 .main-nav { display: flex; gap: 0.25rem; }
 
+/* Hamburger toggle — hidden on desktop, shown on small screens. */
+.nav-toggle {
+  display: none;
+  border: 1px solid var(--line);
+  background: var(--cream);
+  color: var(--ink);
+  border-radius: 8px;
+  padding: 0.35rem 0.6rem;
+  font-size: 1.05rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
 .main-nav a {
   color: var(--ink-soft);
   text-decoration: none;
@@ -790,10 +803,15 @@ footer.site-footer {
     padding: 0.35rem 0.6rem;
     font-size: 0.78rem;
   }
+  /* Hamburger: nav hidden until the ☰ button is tapped. */
+  .nav-toggle { display: block; margin-left: auto; }
   .main-nav {
+    display: none;
     order: 3;
     flex: 1 1 100%;
+    flex-direction: column;
   }
+  .main-nav.open { display: flex; }
   .main-nav a {
     padding: 0.4rem 0.7rem;
     font-size: 0.88rem;
