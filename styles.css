@@ -291,6 +291,7 @@ body {
 .badge.meat   { background: var(--meat); }
 .badge.dairy  { background: var(--dairy); }
 .badge.pareve { background: var(--pareve); }
+.badge.noah   { background: #fdf3d7; color: #8a6d00; }
 
 .kosher-alert {
   margin: 0.75rem 0;
