@@ -619,13 +619,18 @@
             "note": ""
           },
           "dinner": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": "",
             "dishes": [
               {
                 "recipe": "chicken-soup"
+              },
+              {
+                "recipe": "chicken-soup"
               }
-            ],
-            "skipped": false,
-            "note": ""
+            ]
           }
         },
         {
