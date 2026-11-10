@@ -647,8 +647,11 @@
             "note": ""
           },
           "dinner": {
-            "recipe": null,
-            "custom": null,
+            "dishes": [
+              {
+                "recipe": "elzas-mediterranean-roasted-bronzini"
+              }
+            ],
             "skipped": false,
             "note": ""
           }
