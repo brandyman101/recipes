@@ -231,6 +231,23 @@ async function boot() {
   window.addEventListener('hashchange', route);
   route();
 
+  // Hamburger menu (mobile): show/hide the navigation.
+  const navToggle = document.getElementById('nav-toggle');
+  const mainNav = document.getElementById('main-nav');
+  if (navToggle && mainNav) {
+    navToggle.addEventListener('click', () => {
+      const open = mainNav.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    // Tapping a nav link closes the menu.
+    mainNav.addEventListener('click', e => {
+      if (e.target.closest('a')) {
+        mainNav.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
   // Keep the meal plan fresh when someone else (e.g. the other cook) saves:
   // re-fetch when the tab regains focus, unless mid-edit.
   const maybeRefreshPlan = async () => {
