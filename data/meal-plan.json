@@ -647,13 +647,15 @@
             "note": ""
           },
           "dinner": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": "",
             "dishes": [
               {
                 "recipe": "elzas-mediterranean-roasted-bronzini"
               }
-            ],
-            "skipped": false,
-            "note": ""
+            ]
           }
         },
         {
@@ -673,8 +675,8 @@
       ],
       "manualItems": [],
       "haveGenerated": [],
-      "skipSpices": false,
-      "skipSpicesAt": 1794319725154,
+      "skipSpices": true,
+      "skipSpicesAt": 1794320208185,
       "optionalPromoted": []
     },
     "2026-11-01": {
@@ -777,7 +779,10 @@
             "note": ""
           }
         }
-      ]
+      ],
+      "haveGenerated": [],
+      "manualItems": [],
+      "optionalPromoted": []
     },
     "2026-10-25": {
       "days": [
@@ -879,7 +884,10 @@
             "note": ""
           }
         }
-      ]
+      ],
+      "haveGenerated": [],
+      "manualItems": [],
+      "optionalPromoted": []
     },
     "2026-10-11": {
       "days": [
@@ -981,7 +989,10 @@
             "note": ""
           }
         }
-      ]
+      ],
+      "haveGenerated": [],
+      "manualItems": [],
+      "optionalPromoted": []
     }
   }
 }
