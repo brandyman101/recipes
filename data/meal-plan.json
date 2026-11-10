@@ -647,8 +647,11 @@
             "note": ""
           },
           "dinner": {
-            "recipe": null,
-            "custom": null,
+            "dishes": [
+              {
+                "recipe": "elzas-mediterranean-roasted-bronzini"
+              }
+            ],
             "skipped": false,
             "note": ""
           }
@@ -671,7 +674,314 @@
       "manualItems": [],
       "haveGenerated": [],
       "skipSpices": false,
-      "skipSpicesAt": 1794319725154
+      "skipSpicesAt": 1794319725154,
+      "optionalPromoted": []
+    },
+    "2026-11-01": {
+      "days": [
+        {
+          "lunch": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          },
+          "dinner": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          }
+        },
+        {
+          "lunch": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          },
+          "dinner": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          }
+        },
+        {
+          "lunch": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          },
+          "dinner": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          }
+        },
+        {
+          "lunch": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          },
+          "dinner": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          }
+        },
+        {
+          "lunch": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          },
+          "dinner": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          }
+        },
+        {
+          "lunch": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          },
+          "dinner": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          }
+        },
+        {
+          "lunch": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          },
+          "dinner": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          }
+        }
+      ]
+    },
+    "2026-10-25": {
+      "days": [
+        {
+          "lunch": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          },
+          "dinner": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          }
+        },
+        {
+          "lunch": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          },
+          "dinner": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          }
+        },
+        {
+          "lunch": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          },
+          "dinner": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          }
+        },
+        {
+          "lunch": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          },
+          "dinner": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          }
+        },
+        {
+          "lunch": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          },
+          "dinner": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          }
+        },
+        {
+          "lunch": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          },
+          "dinner": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          }
+        },
+        {
+          "lunch": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          },
+          "dinner": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          }
+        }
+      ]
+    },
+    "2026-10-11": {
+      "days": [
+        {
+          "lunch": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          },
+          "dinner": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          }
+        },
+        {
+          "lunch": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          },
+          "dinner": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          }
+        },
+        {
+          "lunch": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          },
+          "dinner": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          }
+        },
+        {
+          "lunch": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          },
+          "dinner": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          }
+        },
+        {
+          "lunch": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          },
+          "dinner": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          }
+        },
+        {
+          "lunch": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          },
+          "dinner": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          }
+        },
+        {
+          "lunch": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          },
+          "dinner": {
+            "recipe": null,
+            "custom": null,
+            "skipped": false,
+            "note": ""
+          }
+        }
+      ]
     }
   }
 }
