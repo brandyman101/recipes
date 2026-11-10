@@ -82,13 +82,7 @@ body {
   line-height: 1.55;
 }
 
-/* Notebook look (2026-11-10): ruled paper in light mode only;
-   dark mode keeps its solid background. */
-:root:not([data-theme="dark"]) body {
-  background-color: var(--cream);
-  background-image: repeating-linear-gradient(transparent 0, transparent 31px,
-    rgba(96, 139, 196, 0.20) 31px, rgba(96, 139, 196, 0.20) 32px);
-}
+/* (Notebook ruled-paper background removed 2026-11-10 — modern editorial.) */
 
 /* ---------- Header / nav ---------- */
 
@@ -109,13 +103,14 @@ body {
   gap: 1rem;
 }
 
-/* Bubbe's Script title (2026-11-10): handwritten script for the site name. */
+/* Modern editorial masthead (2026-11-10): refined serif, ink color. */
 .site-title {
-  font-family: "Dancing Script", "Segoe Script", cursive;
-  font-size: 1.8rem;
-  font-weight: 700;
+  font-family: "Fraunces", Georgia, "Times New Roman", serif;
+  font-size: 1.5rem;
+  font-weight: 600;
   line-height: 1.1;
-  color: var(--accent-dark);
+  letter-spacing: 0.01em;
+  color: var(--ink);
   text-decoration: none;
   margin-right: auto;
   white-space: nowrap;
@@ -1200,7 +1195,7 @@ input[type="range"].mood-range::-moz-range-thumb {
     gap: 0.4rem 0.75rem;
     padding: 0.55rem 0.75rem;
   }
-  .site-title { font-size: 1.45rem; }
+  .site-title { font-size: 1.25rem; }
   .edit-toggle {
     padding: 0.35rem 0.6rem;
     font-size: 0.78rem;
@@ -1388,14 +1383,19 @@ input[type="range"].mood-range::-moz-range-thumb {
 
 /* Landing page */
 .landing-hero { text-align: center; padding: 2.5rem 1rem 1.5rem; }
-/* Bubbe's Script home heading (2026-11-10): matches the header title. */
+/* Modern editorial home heading (2026-11-10): serif masthead + standfirst. */
 .landing-hero h1 {
-  font-family: "Dancing Script", "Segoe Script", cursive;
-  font-size: 2.9rem;
-  font-weight: 700;
+  font-family: "Fraunces", Georgia, "Times New Roman", serif;
+  font-size: 2.6rem;
+  font-weight: 600;
   line-height: 1.1;
-  color: var(--accent-dark);
-  margin-bottom: 0.25rem;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+.landing-hero .muted {
+  font-size: 1.1rem;
+  color: var(--ink-soft);
 }
 .landing-cards {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
@@ -1514,13 +1514,13 @@ input[type="range"].mood-range::-moz-range-thumb {
   font-weight: 700;
 }
 
-/* ---------- Handwritten notebook headings (2026-11-10) ----------
-   All headings in Caveat; body copy stays in the system sans so recipes
-   stay easy to read. Placed last so it wins over the earlier serif rules. */
+/* ---------- Modern editorial headings (2026-11-10) ----------
+   All headings in Fraunces; body copy stays in the system sans.
+   Placed last so it wins over the earlier serif rules. */
 .card-body h2, .recipe-title, .recipe-section h2, .recipe-section h3,
 .planner-nav h2, .day-card h3, .acc-title, .sheet h3,
 .hero h1, .section-head h2, .landing-card h2, .modal h2, .page-head h1,
 .banner-fallback {
-  font-family: "Caveat", "Segoe Script", cursive;
-  font-weight: 700;
+  font-family: "Fraunces", Georgia, "Times New Roman", serif;
+  font-weight: 600;
 }
