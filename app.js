@@ -1132,6 +1132,9 @@ function tilesHTML() {
       (img ? '<img src="' + esc(img) + '" alt="" loading="lazy">' : '<span class="tile-ph"></span>') +
       '<span class="tile-label">' + esc(label) + ' <em>' + count + '</em></span></button>';
   const out = [];
+  // "All" tile first — clears the kosher/category filters.
+  const allImg = (recipes.find(r => r.banner_image) || {}).banner_image || '';
+  out.push(tile('All', recipes.length, allImg, 'all'));
   ['meat', 'dairy', 'pareve'].forEach(k => {
     const rs = recipes.filter(r => r.kosher_status === k);
     if (!rs.length) return;
@@ -1139,7 +1142,7 @@ function tilesHTML() {
     out.push(tile(k[0].toUpperCase() + k.slice(1), rs.length, img, 'kosher:' + k));
   });
   allCats().slice(0, 6).forEach(c => {
-    const rs = recipes.filter(r => (r.categories || []).includes(c));
+    const rs = recipes.filter(r => (r.categories || []).map(canonCat).includes(c));
     if (!rs.length) return;
     const img = (rs.find(r => r.banner_image) || {}).banner_image || '';
     out.push(tile(c, rs.length, img, 'cat:' + c));
@@ -1279,8 +1282,15 @@ function shoppingListHTML() {
 }
 
 /* ---------------- Home: search / filter / grid ---------------- */
+// Category display names: merge near-duplicates so "Appetizer", "appetizer"
+// and "Appetizers" show as a single tile ("Appetizers").
+const canonCat = c => {
+  const t = String(c || '').trim();
+  if (/^appetizers?$/i.test(t)) return 'Appetizers';
+  return t;
+};
 const allTags = () => [...new Set(recipes.flatMap(r => r.tags || []))].sort();
-const allCats = () => [...new Set(recipes.flatMap(r => r.categories || []))].sort();
+const allCats = () => [...new Set(recipes.flatMap(r => (r.categories || []).map(canonCat)))].sort();
 
 function renderRecipes(app) {
   const tags = allTags(), cats = allCats();
@@ -1412,7 +1422,14 @@ function renderRecipes(app) {
     const btn = e.target.closest('[data-tile]');
     if (!btn) return;
     const [kind, val] = btn.dataset.tile.split(/:(.+)/);
-    if (kind === 'kosher') {
+    if (kind === 'all') {
+      filters.kosher = 'all';
+      filters.category = 'all';
+      const ks = $('#f-kosher');
+      if (ks) ks.value = 'all';
+      const cs = $('#f-cat');
+      if (cs) cs.value = 'all';
+    } else if (kind === 'kosher') {
       filters.kosher = val;
       const sel = $('#f-kosher');
       if (sel) sel.value = val;
@@ -1792,7 +1809,7 @@ function filteredRecipes() {
     if (filters.favorites && !isFavorite(r.id)) return false;
     if (filters.kosher !== 'all' && String(r.kosher_status || '') !== filters.kosher) return false;
     if (filters.kfp && !r.kosher_for_passover) return false;
-    if (filters.category !== 'all' && !(r.categories || []).includes(filters.category)) return false;
+    if (filters.category !== 'all' && !(r.categories || []).map(canonCat).includes(filters.category)) return false;
     if (filters.maxTime && totalTime(r) > filters.maxTime) return false;
     if (filters.tag !== 'all' && !(r.tags || []).includes(filters.tag)) return false;
     if (filters.leftovers && !r.leftover_friendly) return false;
