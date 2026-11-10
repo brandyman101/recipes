@@ -103,14 +103,14 @@ body {
   gap: 1rem;
 }
 
-/* Modern editorial masthead (2026-11-10): refined serif, ink color. */
+/* Bubbe's Script title (2026-11-10, restored): handwritten script for the
+   site name; the rest of the site stays modern editorial. */
 .site-title {
-  font-family: "Fraunces", Georgia, "Times New Roman", serif;
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-family: "Dancing Script", "Segoe Script", cursive;
+  font-size: 1.8rem;
+  font-weight: 700;
   line-height: 1.1;
-  letter-spacing: 0.01em;
-  color: var(--ink);
+  color: var(--accent-dark);
   text-decoration: none;
   margin-right: auto;
   white-space: nowrap;
@@ -1195,7 +1195,7 @@ input[type="range"].mood-range::-moz-range-thumb {
     gap: 0.4rem 0.75rem;
     padding: 0.55rem 0.75rem;
   }
-  .site-title { font-size: 1.25rem; }
+  .site-title { font-size: 1.45rem; }
   .edit-toggle {
     padding: 0.35rem 0.6rem;
     font-size: 0.78rem;
@@ -1383,15 +1383,14 @@ input[type="range"].mood-range::-moz-range-thumb {
 
 /* Landing page */
 .landing-hero { text-align: center; padding: 2.5rem 1rem 1.5rem; }
-/* Modern editorial home heading (2026-11-10): serif masthead + standfirst. */
+/* Bubbe's Script home heading (2026-11-10, restored): matches the header title. */
 .landing-hero h1 {
-  font-family: "Fraunces", Georgia, "Times New Roman", serif;
-  font-size: 2.6rem;
-  font-weight: 600;
+  font-family: "Dancing Script", "Segoe Script", cursive;
+  font-size: 2.9rem;
+  font-weight: 700;
   line-height: 1.1;
-  letter-spacing: 0.01em;
-  color: var(--ink);
-  margin-bottom: 0.5rem;
+  color: var(--accent-dark);
+  margin-bottom: 0.25rem;
 }
 .landing-hero .muted {
   font-size: 1.1rem;
