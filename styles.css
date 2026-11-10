@@ -101,9 +101,12 @@ body {
   gap: 1rem;
 }
 
+/* Bubbe's Script title (2026-11-10): handwritten script for the site name. */
 .site-title {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.25rem;
+  font-family: "Dancing Script", "Segoe Script", cursive;
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1.1;
   color: var(--accent-dark);
   text-decoration: none;
   margin-right: auto;
@@ -1189,7 +1192,7 @@ input[type="range"].mood-range::-moz-range-thumb {
     gap: 0.4rem 0.75rem;
     padding: 0.55rem 0.75rem;
   }
-  .site-title { font-size: 1.02rem; }
+  .site-title { font-size: 1.45rem; }
   .edit-toggle {
     padding: 0.35rem 0.6rem;
     font-size: 0.78rem;
