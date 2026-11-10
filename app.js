@@ -42,7 +42,7 @@ function recipeMeta(id) {
 let mealPlan = { weeks: {} };
 let plannerOffset = 0;     // weeks away from the current week
 let filters = { q: '', kosher: 'all', kfp: false, category: 'all',
-                maxTime: 0, tag: 'all', leftovers: false, sort: 'asc', favorites: false };
+                maxTime: 0, tag: 'all', leftovers: false, sort: 'asc', favorites: false, noah: false };
 let editDraft = null;      // working copy while the edit form is open
 let currentEditSha = null;  // GitHub blob SHA when the edit page loaded (for 409 conflict detection)
 let editingSlot = null;    // {key, di, meal} while a planner slot is being edited
@@ -136,6 +136,44 @@ function addRipple(btn, e) {
 }
 
 /* ---------- #2 Favorite toggle with particle burst (playground) ---------- */
+/* ---------- Noah's favorites (shared, stored in the recipe data) ----------
+   Unlike ♥ Favorites (per-device localStorage), Noah's favorites are saved
+   on the recipe itself + meta.json via the bridge, so the whole family sees
+   them. */
+async function toggleNoahsFavorite(id) {
+  const meta = recipeMeta(id);
+  const on = !(meta && meta.noahs_favorite);
+  // Full recipe JSON (recipe pages load it into byId; fetch if not cached).
+  let d = byId[id];
+  if (!d || typeof d !== 'object') {
+    d = JSON.parse((await ghGet('data/recipes/' + id + '.json')).text);
+  }
+  d = { ...d, noahs_favorite: on };
+  await ghPut('data/recipes/' + id + '.json', JSON.stringify(d, null, 2),
+    (on ? "Mark Noah's favorite: " : "Unmark Noah's favorite: ") + (d.title || id));
+  // Update meta.json so the list/filter sees the flag.
+  const updateMeta = async () => {
+    const m = JSON.parse((await ghGet('data/recipes/meta.json')).text);
+    const mi = m.findIndex(x => x.id === id);
+    if (mi >= 0) m[mi] = { ...m[mi], noahs_favorite: on };
+    else m.push({ ...(meta || {}), noahs_favorite: on });
+    await ghPut('data/recipes/meta.json', JSON.stringify(m),
+      "Update meta: Noah's favorite " + (d.title || id));
+  };
+  try { await updateMeta(); }
+  catch (e) {
+    console.warn('meta.json update failed, retrying once...', e);
+    await new Promise(r => setTimeout(r, 800));
+    await updateMeta();
+  }
+  // Update in-memory copies.
+  byId[id] = d;
+  const i = recipes.findIndex(x => x.id === id);
+  if (i >= 0) recipes[i] = { ...recipes[i], noahs_favorite: on };
+  if (metaById[id]) metaById[id] = { ...metaById[id], noahs_favorite: on };
+  return on;
+}
+
 function toggleFavorite(id, btnEl) {
   const on = setFavorite(id, !isFavorite(id));
   if (btnEl) {
@@ -1135,6 +1173,10 @@ function tilesHTML() {
   // "All" tile first — clears the kosher/category filters.
   const allImg = (recipes.find(r => r.banner_image) || {}).banner_image || '';
   out.push(tile('All', recipes.length, allImg, 'all'));
+  // "Noah's Favorites" tab — recipes flagged as Noah's favorite (shared, saved on the recipe).
+  const noahRs = recipes.filter(r => r.noahs_favorite);
+  const noahImg = (noahRs.find(r => r.banner_image) || {}).banner_image || '';
+  out.push(tile("Noah's Favorites", noahRs.length, noahImg, 'noah'));
   ['meat', 'dairy', 'pareve'].forEach(k => {
     const rs = recipes.filter(r => r.kosher_status === k);
     if (!rs.length) return;
@@ -1425,10 +1467,13 @@ function renderRecipes(app) {
     if (kind === 'all') {
       filters.kosher = 'all';
       filters.category = 'all';
+      filters.noah = false;
       const ks = $('#f-kosher');
       if (ks) ks.value = 'all';
       const cs = $('#f-cat');
       if (cs) cs.value = 'all';
+    } else if (kind === 'noah') {
+      filters.noah = true;
     } else if (kind === 'kosher') {
       filters.kosher = val;
       const sel = $('#f-kosher');
@@ -1807,6 +1852,7 @@ function filteredRecipes() {
   const q = filters.q.trim().toLowerCase();
   const list = recipes.filter(r => {
     if (filters.favorites && !isFavorite(r.id)) return false;
+    if (filters.noah && !r.noahs_favorite) return false;
     if (filters.kosher !== 'all' && String(r.kosher_status || '') !== filters.kosher) return false;
     if (filters.kfp && !r.kosher_for_passover) return false;
     if (filters.category !== 'all' && !(r.categories || []).map(canonCat).includes(filters.category)) return false;
@@ -1872,7 +1918,7 @@ function drawGrid() {
       '<div class="card-body"><h2>' + esc(r.title) + '</h2>' +
       '<div class="card-meta">' + esc(fmtTime(totalTime(r))) + ' total · Serves ' + esc(r.servings || '—') + '</div>' +
       ratingHTML +
-      badgesHTML(r) + '</div></a>';
+      badgesHTML(r) + (r.noahs_favorite ? ' <span class="badge noah">⭐ Noah\'s favorite</span>' : '') + '</div></a>';
   }).join('');
 }
 
@@ -2186,6 +2232,7 @@ async function renderRecipe(app, id) {
       '<div class="actions no-print">' +
         '<button class="btn" id="plan-btn" type="button">+ Add to planner</button>' +
         '<button class="btn secondary" id="fav-page-btn" type="button">' + (isFavorite(id) ? '♥ Favorited' : '♡ Favorite') + '</button>' +
+        '<button class="btn secondary" id="noah-btn" type="button">' + (r.noahs_favorite ? '★ Noah\'s favorite' : '☆ Noah\'s favorite') + '</button>' +
         '<a class="btn secondary" href="#/edit/' + encodeURIComponent(r.id) + '">Edit</a>' +
         (pdfUrl(r) ? '<a class="btn" href="' + esc(pdfUrl(r)) + '" target="_blank" rel="noopener">View PDF</a>' : '') +
         '<button class="btn secondary" id="share-btn" type="button">Share</button>' +
@@ -2208,6 +2255,27 @@ async function renderRecipe(app, id) {
   if (favPageBtn) favPageBtn.addEventListener('click', () => {
     const on = toggleFavorite(r.id, null);
     favPageBtn.textContent = on ? '♥ Favorited' : '♡ Favorite';
+  });
+
+  // Noah's favorite button — shared flag saved on the recipe via the bridge.
+  const noahBtn = $('#noah-btn');
+  if (noahBtn) noahBtn.addEventListener('click', async () => {
+    noahBtn.disabled = true;
+    noahBtn.textContent = 'Saving…';
+    try {
+      const on = await toggleNoahsFavorite(r.id);
+      noahBtn.textContent = on ? '★ Noah\'s favorite' : '☆ Noah\'s favorite';
+      toast(on ? 'Added to Noah\'s favorites ⭐' : 'Removed from Noah\'s favorites');
+      if (on) {
+        const rect = noahBtn.getBoundingClientRect();
+        burstConfetti(rect.left + rect.width / 2, rect.top, 40);
+      }
+    } catch (e) {
+      noahBtn.textContent = r.noahs_favorite ? '★ Noah\'s favorite' : '☆ Noah\'s favorite';
+      toast('Save failed: ' + e.message);
+    } finally {
+      noahBtn.disabled = false;
+    }
   });
 
   // Fun UI #6: star rating wiring (hover preview, click to save, 5★ = confetti).
@@ -3019,6 +3087,7 @@ async function saveRecipe(id) {
       categories: d.categories || [], tags: d.tags || [],
       prep_minutes: d.prep_minutes, cook_minutes: d.cook_minutes, servings: d.servings,
       leftover_friendly: !!d.leftover_friendly, tags_need_review: !!d.tags_need_review,
+      noahs_favorite: !!d.noahs_favorite,
       photo_generated: !!d.photo_generated,
       search_text: ((d.ingredients || []).flatMap(s => (s.items || []).map(i => i.item || '')).join(' ') + ' ' + (d.notes || '')).trim(),
     };
@@ -3096,6 +3165,7 @@ async function saveNewRecipe() {
       categories: d.categories || [], tags: d.tags || [],
       prep_minutes: d.prep_minutes, cook_minutes: d.cook_minutes, servings: d.servings,
       leftover_friendly: !!d.leftover_friendly, tags_need_review: !!d.tags_need_review,
+      noahs_favorite: !!d.noahs_favorite,
       photo_generated: !!d.photo_generated,
       search_text: ((d.ingredients || []).flatMap(s => (s.items || []).map(i => i.item || '')).join(' ') + ' ' + (d.notes || '')).trim(),
     };
