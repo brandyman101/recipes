@@ -1725,7 +1725,7 @@ function renderLanding(app) {
   app.innerHTML =
     '<section class="hero landing-hero">' +
       '<h1>Brandel Family Recipes</h1>' +
-      '<p class="muted">What are we cooking this week?</p>' +
+      '<p class="muted">Life\'s short, eat the good stuff.</p>' +
     '</section>' +
     '<section class="landing-cards">' +
       '<a class="landing-card" href="#/recipes">' +
