@@ -1,0 +1,171 @@
+{
+  "banner_image": "assets/images/lagman.jpg",
+  "categories": [
+    "Main Dishes"
+  ],
+  "cook_minutes": 85,
+  "id": "lagman",
+  "ingredients": [
+    {
+      "items": [
+        {
+          "item": "onions",
+          "prep": "sliced",
+          "qty": "2 1/2",
+          "unit": ""
+        },
+        {
+          "item": "meat",
+          "prep": "cut up in pieces",
+          "qty": "",
+          "unit": ""
+        },
+        {
+          "item": "celery",
+          "prep": "cut up",
+          "qty": "1",
+          "unit": ""
+        },
+        {
+          "item": "red pepper",
+          "prep": "cut up",
+          "qty": "1",
+          "unit": ""
+        },
+        {
+          "item": "yellow pepper",
+          "prep": "",
+          "qty": "1/2",
+          "unit": ""
+        },
+        {
+          "item": "zera (cumin seeds)",
+          "prep": "",
+          "qty": "2",
+          "unit": "tsp"
+        },
+        {
+          "item": "salt",
+          "prep": "",
+          "qty": "1",
+          "unit": "tsp"
+        },
+        {
+          "item": "black pepper",
+          "prep": "",
+          "qty": "",
+          "unit": ""
+        },
+        {
+          "item": "V8 Hot & Spicy vegetable juice",
+          "prep": "",
+          "qty": "1",
+          "unit": "cup"
+        },
+        {
+          "item": "V8 vegetable juice (large can)",
+          "prep": "",
+          "qty": "1",
+          "unit": "can"
+        },
+        {
+          "item": "tomato sauce",
+          "prep": "",
+          "qty": "1",
+          "unit": "can"
+        },
+        {
+          "item": "potato",
+          "prep": "cut up",
+          "qty": "1",
+          "unit": ""
+        },
+        {
+          "item": "garlic",
+          "prep": "cut up",
+          "qty": "5-6",
+          "unit": "cloves"
+        },
+        {
+          "item": "oil",
+          "prep": "",
+          "qty": "1/2 + 1/3",
+          "unit": "cup"
+        },
+        {
+          "item": "hot paprika",
+          "prep": "",
+          "qty": "1 1/2",
+          "unit": "tsp"
+        },
+        {
+          "item": "cayenne pepper",
+          "prep": "",
+          "qty": "1 1/4",
+          "unit": "tsp"
+        },
+        {
+          "item": "water",
+          "prep": "",
+          "qty": "4",
+          "unit": "cup"
+        },
+        {
+          "item": "noodles",
+          "prep": "for serving",
+          "qty": "",
+          "unit": ""
+        }
+      ],
+      "section": "Ingredients"
+    }
+  ],
+  "instructions": [
+    "Heat the oil (about 1/2 cup + 1/3 cup) in a large pot.",
+    "Fry the onion until brown, about 10 minutes. Add the garlic, mix, then add the meat and fry for 10-15 minutes.",
+    "Add the zera and the salt. Add all the vegetables and fry for about 7 minutes, mixing.",
+    "Add the V8, hot paprika, and cayenne pepper. Bring to a boil and cook for 7 minutes.",
+    "Add 4 cups of water. Once it comes up to a boil, skim off any scum that rises from the oil, then lower the heat and simmer for 30-45 minutes.",
+    "Cook the noodles separately according to the package directions. Serve the lagman over the noodles."
+  ],
+  "kosher_for_passover": false,
+  "kosher_status": "meat",
+  "leftover_friendly": true,
+  "notes": "Transcribed from a handwritten recipe photo. A few readings are best-effort and worth checking against the original: the meat has no quantity written; the celery is written as a circled 1 (read as 1 stalk); the potato line reads '2 circled, 1 potato' (read as 1 potato); the V8 and tomato sauce quantities were squeezed into the right margin (1 large can V8, 1 cup V8 Hot & Spicy, 1 can tomato sauce); the salt in the instructions was corrected from tbsp to tsp in the handwriting; the oil is written as 'about 1/2 cup + 1/3 cup'. 'Zera' is cumin seeds. Servings and times are estimates - the original gives no servings or meat quantity.",
+  "pdf": "pdfs/lagman.pdf",
+  "photo_generated": false,
+  "prep_minutes": 35,
+  "servings": "6",
+  "source": "Handwritten recipe photo submitted 2026-11-10",
+  "tags": [
+    "lagman",
+    "noodles",
+    "central-asian",
+    "soup",
+    "spicy",
+    "beef"
+  ],
+  "tags_need_review": true,
+  "tips": [
+    {
+      "text": "Cook the noodles separately and ladle the lagman over them - the noodles are not cooked in the sauce.",
+      "title": "Noodles"
+    },
+    {
+      "text": "Check that the V8 and tomato sauce are certified kosher.",
+      "title": "Keep it kosher"
+    }
+  ],
+  "title": "Lagman",
+  "history": [
+    {
+      "ts": "2026-11-11T00:46:51.480Z",
+      "actor": "sous-chef",
+      "action": "intake",
+      "changes": [
+        "Created recipe"
+      ],
+      "reasoning": "Initial intake"
+    }
+  ]
+}
