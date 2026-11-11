@@ -1,1 +1,78 @@
-{"circular": "2025AKF_Circular_11_1-1.pdf", "effective": "November 1–6, 2026", "updated": "2026-11-04", "status": "current", "from_recipes": [{"title": "Buffalo Chicken Wings", "recipe_id": "buffalo-chicken-wings", "sale": "marinated chicken wings $2.79/lb"}, {"title": "Chicken Soup", "recipe_id": "chicken-soup", "sale": "chicken drumsticks $2.69/lb, cello carrots 4/$3, yellow onions 2/$3, frozen whole green beans 2/$5"}, {"title": "Honey Garlic Chicken & Orzo", "recipe_id": "honey-garlic-chicken-orzo", "sale": "boneless skinless dark-meat chicken thighs $7.49/lb (or drumsticks $2.69/lb), yellow onions 2/$3"}, {"title": "Avi's Beef Borekas", "recipe_id": "avis-beef-borekas", "sale": "ground chuck (super family pack) $5.99/lb, Pepperidge Farm puff pastry sheets $4.99, yellow onions 2/$3"}, {"title": "Macarone Patlotski", "recipe_id": "macarone-patlotski", "sale": "ground chuck $5.99/lb, Tuscanini crushed tomatoes $2.29, yellow onions 2/$3"}, {"title": "Classic Pepper Steak with Green Peppers and Tomatoes", "recipe_id": "classic-pepper-steak-with-green-peppers-and-tomatoes", "sale": "yellow/orange peppers $1.89/lb, tomatoes on the vine $1.99/lb, onions 2/$3; grass-fed round steak $9.49/lb as the cut"}, {"title": "Authentic Italian Bruschetta", "recipe_id": "authentic-italian-bruschetta", "sale": "tomatoes on the vine $1.99/lb"}, {"title": "French Onion Soup", "recipe_id": "french-onion-soup", "sale": "yellow onions 2/$3, shredded pizza & mozzarella (2 lb) $7.99"}, {"title": "Elza's Mediterranean Roasted Bronzini", "recipe_id": "elzas-mediterranean-roasted-bronzini", "sale": "tilapia fillet family pack $5.99/lb as a budget swap for bronzini ($19.99/lb), lemons 10/$3"}], "new_ideas": [{"title": "Roasted butternut squash soup", "sale": "butternut squash $0.89/lb, yellow onions 2/$3, cello carrots 4/$3"}, {"title": "Pesto tilapia", "sale": "tilapia fillet family pack $5.99/lb, Tuscanini pesto basil $3.99"}, {"title": "Sesame-teriyaki chicken drumsticks", "sale": "chicken drumsticks $2.69/lb, Mikee sesame teriyaki sauce $5.99"}, {"title": "Apple crumble", "sale": "Honey Crisp apples $0.99/lb"}], "stock_up": "Nassau canola oil 96 oz at $8.99 is a solid staple stock-up price.", "deli_note": "Mechy's weekly specials (Mon 11/2–Fri 11/6): sesame chicken, chicken broccoli, chicken lo mein, chicken fried rice $10.99/lb; sesame noodles, fried rice, teriyaki potatoes, Asian vegetables $7.99/lb (1 lb minimum)."}
+{
+  "circular": "2026AKF_Circular_11_8-1.pdf",
+  "effective": "November 8\u201313, 2026",
+  "updated": "2026-11-11",
+  "status": "current",
+  "from_recipes": [
+    {
+      "title": "Buffalo Chicken Wings",
+      "recipe_id": "buffalo-chicken-wings",
+      "sale": "chicken wings $1.99/lb (super family pack)"
+    },
+    {
+      "title": "Chicken Soup",
+      "recipe_id": "chicken-soup",
+      "sale": "chicken legs $1.99/lb, carrots $0.69/lb, sweet potato yams $0.99/lb"
+    },
+    {
+      "title": "Honey Garlic Chicken",
+      "recipe_id": "honey-garlic-chicken",
+      "sale": "chicken legs $1.99/lb (super family pack)"
+    },
+    {
+      "title": "Honey Garlic Chicken & Orzo",
+      "recipe_id": "honey-garlic-chicken-orzo",
+      "sale": "chicken legs $1.99/lb (dark meat)"
+    },
+    {
+      "title": "Avi's Beef Borekas",
+      "recipe_id": "avis-beef-borekas",
+      "sale": "extra lean ground shoulder $7.99/lb + Bowl & Basket puff pastry $3.99"
+    },
+    {
+      "title": "Classic Pepper Steak with Green Peppers and Tomatoes",
+      "recipe_id": "classic-pepper-steak-with-green-peppers-and-tomatoes",
+      "sale": "round steak $9.49/lb + Lundberg basmati rice $5.99"
+    },
+    {
+      "title": "Macarone Patlotski",
+      "recipe_id": "macarone-patlotski",
+      "sale": "extra lean ground shoulder $7.99/lb + Tuscanini tomato sauce 4/$5"
+    },
+    {
+      "title": "Deli Roll",
+      "recipe_id": "deli-roll",
+      "sale": "Tirat Zvi turkey breast $7.99 + Bowl & Basket puff pastry $3.99"
+    },
+    {
+      "title": "French Onion Soup",
+      "recipe_id": "french-onion-soup",
+      "sale": "Goodman's onion soup mix 2/$3 + Haolam shredded pizza cheese 2/$6"
+    },
+    {
+      "title": "The BEST Fluffy Pancakes",
+      "recipe_id": "best-fluffy-pancakes",
+      "sale": "Jacks Farm eggs $0.99/12-pack + Fairlife milk $4.99"
+    }
+  ],
+  "new_ideas": [
+    {
+      "title": "Shabbat cholent",
+      "sale": "boneless cholent meat $11.99/lb + Nassau Foods cholent mix 4/$5 + sweet potato yams $0.99/lb and carrots $0.69/lb"
+    },
+    {
+      "title": "Chicken shawarma wraps",
+      "sale": "ready-to-cook chicken shwarma (dark meat) $9.49/lb + cucumbers 2/$4 + leeks $1.99/lb"
+    },
+    {
+      "title": "Israeli couscous with roasted vegetables",
+      "sale": "Gefen Israeli-style couscous 5/$5 + sweet potato yams $0.99/lb, jumbo green squash $0.99/lb, carrots $0.69/lb"
+    },
+    {
+      "title": "Sweet-and-sour chicken with rice pilaf",
+      "sale": "chicken cutlets $6.99/lb + Gold's sweet & sour duck sauce $3.99 + Near East rice pilaf 3/$5"
+    }
+  ],
+  "stock_up": "Eggs are 99\u00a2 a dozen (Jacks Farm, 12-pack) \u2014 grab a few cartons while they're that cheap.",
+  "deli_note": "Mechy's Deli weekly specials (Mon Nov 9\u2013Fri Nov 13): mains $9.99/lb \u2014 roasted chicken bottoms, southern fried chicken, pasta bolognese, chicken fried rice; sides $7.99/lb \u2014 mushroom orzo, ratatouille, pasta pesto, roasted sweet potatoes."
+}
