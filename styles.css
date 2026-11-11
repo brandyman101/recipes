@@ -837,7 +837,7 @@ canvas#confetti {
 /* ---------- #2 Favorites (bursting like button) ---------- */
 .fav-btn {
   position: absolute;
-  top: 0.6rem;
+  bottom: 0.6rem;
   right: 0.6rem;
   z-index: 2;
   width: 2.25rem;
@@ -855,6 +855,8 @@ canvas#confetti {
 }
 :root[data-theme="dark"] .fav-btn { background: rgba(38, 32, 25, 0.94); }
 .fav-btn.liked { border-color: #e85d8a; color: #e85d8a; animation: favPop 0.35s cubic-bezier(.2,2.2,.4,1); }
+/* Heart sits bottom-right of the card — keep badges clear of it. */
+.card-body .badges { padding-right: 2.75rem; }
 @keyframes favPop { 0% { transform: scale(0.6); } 100% { transform: scale(1); } }
 .fav-btn .particle {
   position: absolute;
