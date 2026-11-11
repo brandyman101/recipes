@@ -1338,6 +1338,7 @@ function renderRecipes(app) {
   const tags = allTags(), cats = allCats();
   app.innerHTML =
     '<section class="hero">' +
+      '<p class="hero-slogan">Life\'s short, eat the good stuff.</p>' +
       '<h1>What are we cooking?</h1>' +
       '<div class="search-row hero-search no-print">' +
         '<input type="search" id="q" placeholder="Search recipes, ingredients, tags…" ' +
@@ -3818,8 +3819,10 @@ function saveSubmitDraft() {
       url: ($('#s-url') || {}).value || '',
       note: ($('#s-note') || {}).value || '',
       text: ($('#s-text') || {}).value || '',
-      photoB64: window._submitPhotoB64 || null,
-      photoName: window._submitPhotoName || null
+      photos: (window._submitPhotos || []).map(p => ({ b64: p.b64, name: p.name })),
+      // Legacy single-photo fields, kept so older drafts still restore.
+      photoB64: (window._submitPhotos || [])[0] ? window._submitPhotos[0].b64 : null,
+      photoName: (window._submitPhotos || [])[0] ? window._submitPhotos[0].name : null
     };
     localStorage.setItem(SUBMIT_DRAFT_KEY, JSON.stringify(draft));
   } catch (e) { /* storage full or unavailable — non-fatal */ }
@@ -3833,6 +3836,7 @@ function loadSubmitDraft() {
 }
 function clearSubmitDraft() {
   try { localStorage.removeItem(SUBMIT_DRAFT_KEY); } catch (e) {}
+  window._submitPhotos = [];
   window._submitPhotoB64 = null;
   window._submitPhotoName = null;
 }
@@ -3847,12 +3851,12 @@ function renderSubmit(app) {
     '<form class="edit-form no-print" id="submit-form" onsubmit="return false">' +
       '<div class="field"><label for="s-url">Link (optional)</label>' +
         '<input type="url" id="s-url" placeholder="https://… recipe page, video, post"></div>' +
-      '<div class="field"><label>Photo (optional)</label>' +
-        '<input type="file" id="s-photo" accept="image/*" style="display:none">' +
+      '<div class="field"><label>Photos (optional)</label>' +
+        '<input type="file" id="s-photo" accept="image/*" multiple style="display:none">' +
         '<div style="display:flex;gap:.5rem;flex-wrap:wrap">' +
-          '<button class="btn secondary" id="s-choose-btn" type="button">🖼️ Choose photo</button>' +
+          '<button class="btn secondary" id="s-choose-btn" type="button">🖼️ Choose photos</button>' +
           '<button class="btn secondary" id="s-camera-btn" type="button">📷 Take photo</button></div>' +
-        '<div class="form-hint" id="s-photo-hint">A photo of a written recipe, a dish, a cookbook page…</div></div>' +
+        '<div class="form-hint" id="s-photo-hint">Photos of a written recipe, a dish, cookbook pages… — pick as many as you like (up to 6).</div></div>' +
       '<div class="field"><label>PDF recipe (optional)</label>' +
         '<input type="file" id="s-pdf" accept=".pdf,application/pdf" style="display:none">' +
         '<div style="display:flex;gap:.5rem;flex-wrap:wrap">' +
@@ -3890,10 +3894,11 @@ function renderSubmit(app) {
     // The old file-input+camouflage approach let Android kill the tab.
     if (camBtn) camBtn.onclick = () => { openInPageCamera(); };
     photoInput.addEventListener('change', async () => {
-      const file = (photoInput.files || [])[0];
-      if (!file) return;
-      if (photoHint) photoHint.textContent = 'Processing photo…';
-      await processPhotoFile(file);
+      const files = [...(photoInput.files || [])];
+      if (!files.length) return;
+      if (photoHint) photoHint.textContent = 'Processing photo' + (files.length > 1 ? 's' : '') + '…';
+      for (const file of files) await processPhotoFile(file);
+      photoInput.value = ''; // allow picking the same files again later
     });
   }
   // PDF upload: simple file picker, no processing needed client-side.
@@ -3925,8 +3930,20 @@ function renderSubmit(app) {
 
 /* Shared photo processing: resize to 1600px JPEG, stash base64 in memory
    + localStorage draft, update the hint and preview. */
+/* Multiple photos: each picked/taken photo is resized and appended to
+   window._submitPhotos (cap 6 — the draft lives in localStorage). The
+   legacy _submitPhotoB64/_submitPhotoName fields always mirror the first
+   photo, so older code paths keep working. */
+const SUBMIT_PHOTO_MAX = 6;
 async function processPhotoFile(file, nameOverride) {
   const photoHint = $('#s-photo-hint');
+  if (!Array.isArray(window._submitPhotos)) window._submitPhotos = [];
+  if (window._submitPhotos.length >= SUBMIT_PHOTO_MAX) {
+    if (photoHint) photoHint.textContent = 'That\'s the limit — ' + SUBMIT_PHOTO_MAX + ' photos per submission. Remove one to add another.';
+    return;
+  }
+  let b64 = null;
+  const name = nameOverride || file.name || 'photo.jpg';
   try {
     const dataUrl = await readAsDataURL(file);
     const img = await loadImage(dataUrl);
@@ -3939,24 +3956,29 @@ async function processPhotoFile(file, nameOverride) {
     const blob = await new Promise(r => canvas.toBlob(r, 'image/jpeg', 0.85));
     if (!blob) throw new Error('decode failed');
     const resizedDataUrl = await readAsDataURL(blob);
-    window._submitPhotoB64 = resizedDataUrl.split(',')[1];
-    window._submitPhotoName = nameOverride || file.name || 'photo.jpg';
+    b64 = resizedDataUrl.split(',')[1];
   } catch (e) {
     try {
       const raw = String(await readAsDataURL(file)).split(',');
-      window._submitPhotoB64 = raw[1] || null;
-      window._submitPhotoName = nameOverride || file.name || 'photo.jpg';
-    } catch (e2) {
-      window._submitPhotoB64 = null;
-    }
+      b64 = raw[1] || null;
+    } catch (e2) { b64 = null; }
+  }
+  if (b64) {
+    window._submitPhotos.push({ b64, name });
+    window._submitPhotoB64 = window._submitPhotos[0].b64;
+    window._submitPhotoName = window._submitPhotos[0].name;
   }
   saveSubmitDraft();
-  if (photoHint) {
-    photoHint.textContent = window._submitPhotoB64
-      ? 'Photo ready: ' + (window._submitPhotoName || 'photo')
-      : 'Could not read that photo — try again.';
-  }
+  updatePhotoHint();
   updatePhotoPreview();
+}
+function updatePhotoHint() {
+  const photoHint = $('#s-photo-hint');
+  if (!photoHint) return;
+  const n = (window._submitPhotos || []).length;
+  photoHint.textContent = n
+    ? n + ' photo' + (n > 1 ? 's' : '') + ' ready: ' + window._submitPhotos.map(p => p.name).join(', ')
+    : 'Photos of a written recipe, a dish, cookbook pages… — pick as many as you like (up to 6).';
 }
 
 /* In-page camera: uses getUserMedia so the tab never leaves the page.
@@ -4033,53 +4055,66 @@ function restoreSubmitDraft() {
   if (draft.url && urlInput) urlInput.value = draft.url;
   if (draft.note && noteInput) noteInput.value = draft.note;
   if (draft.text && textInput) textInput.value = draft.text;
-  if (draft.photoB64) {
-    window._submitPhotoB64 = draft.photoB64;
-    window._submitPhotoName = draft.photoName || 'photo.jpg';
-    if (photoHint) photoHint.textContent = 'Photo ready: ' + window._submitPhotoName + ' (restored)';
+  if (Array.isArray(draft.photos) && draft.photos.length) {
+    window._submitPhotos = draft.photos.filter(p => p && p.b64).slice(0, SUBMIT_PHOTO_MAX);
+  } else if (draft.photoB64) {
+    // Legacy single-photo draft.
+    window._submitPhotos = [{ b64: draft.photoB64, name: draft.photoName || 'photo.jpg' }];
+  } else {
+    window._submitPhotos = [];
+  }
+  if (window._submitPhotos.length) {
+    window._submitPhotoB64 = window._submitPhotos[0].b64;
+    window._submitPhotoName = window._submitPhotos[0].name;
+    if (photoHint) photoHint.textContent = window._submitPhotos.length + ' photo' + (window._submitPhotos.length > 1 ? 's' : '') + ' ready (restored)';
   }
   updatePhotoPreview();
 }
 function updatePhotoPreview() {
-  let prev = $('#s-photo-preview');
-  let rmBtn = $('#s-photo-remove');
   const hint = $('#s-photo-hint');
-  if (window._submitPhotoB64) {
-    const src = 'data:image/jpeg;base64,' + window._submitPhotoB64;
-    if (!prev && hint) {
-      const wrap = document.createElement('div');
-      wrap.id = 's-photo-preview-wrap';
-      wrap.style.cssText = 'position:relative;display:inline-block;margin-top:.5rem';
-      prev = document.createElement('img');
-      prev.id = 's-photo-preview';
-      prev.style.cssText = 'max-width:120px;border-radius:8px;display:block';
-      rmBtn = document.createElement('button');
-      rmBtn.id = 's-photo-remove';
-      rmBtn.type = 'button';
-      rmBtn.textContent = '×';
-      rmBtn.setAttribute('aria-label', 'Remove photo');
-      rmBtn.style.cssText = 'position:absolute;top:-8px;right:-8px;width:24px;height:24px;border-radius:50%;' +
-        'background:#a03d1a;color:#fff;border:none;font-size:16px;line-height:1;cursor:pointer';
-      rmBtn.onclick = removeSubmitPhoto;
-      wrap.appendChild(prev);
-      wrap.appendChild(rmBtn);
-      hint.parentElement.appendChild(wrap);
-    }
-    if (prev) { prev.src = src; prev.style.display = 'block'; }
-    const wrap = $('#s-photo-preview-wrap');
-    if (wrap) wrap.style.display = 'inline-block';
-  } else {
-    const wrap = $('#s-photo-preview-wrap');
+  const photos = window._submitPhotos || [];
+  let wrap = $('#s-photo-preview-wrap');
+  if (!photos.length) {
     if (wrap) wrap.style.display = 'none';
+    return;
   }
+  if (!wrap && hint) {
+    wrap = document.createElement('div');
+    wrap.id = 's-photo-preview-wrap';
+    wrap.style.cssText = 'display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem';
+    hint.parentElement.appendChild(wrap);
+  }
+  if (!wrap) return;
+  wrap.style.display = 'flex';
+  wrap.innerHTML = '';
+  photos.forEach((p, i) => {
+    const cell = document.createElement('div');
+    cell.style.cssText = 'position:relative;display:inline-block';
+    const img = document.createElement('img');
+    img.src = 'data:image/jpeg;base64,' + p.b64;
+    img.alt = p.name || ('Photo ' + (i + 1));
+    img.style.cssText = 'max-width:120px;border-radius:8px;display:block';
+    const rm = document.createElement('button');
+    rm.type = 'button';
+    rm.textContent = '×';
+    rm.setAttribute('aria-label', 'Remove ' + (p.name || ('photo ' + (i + 1))));
+    rm.style.cssText = 'position:absolute;top:-8px;right:-8px;width:24px;height:24px;border-radius:50%;' +
+      'background:#a03d1a;color:#fff;border:none;font-size:16px;line-height:1;cursor:pointer';
+    rm.onclick = () => removeSubmitPhoto(i);
+    cell.appendChild(img);
+    cell.appendChild(rm);
+    wrap.appendChild(cell);
+  });
 }
-function removeSubmitPhoto() {
-  window._submitPhotoB64 = null;
-  window._submitPhotoName = null;
+function removeSubmitPhoto(i) {
+  if (!Array.isArray(window._submitPhotos)) window._submitPhotos = [];
+  if (typeof i === 'number') window._submitPhotos.splice(i, 1);
+  else window._submitPhotos = [];
+  window._submitPhotoB64 = window._submitPhotos[0] ? window._submitPhotos[0].b64 : null;
+  window._submitPhotoName = window._submitPhotos[0] ? window._submitPhotos[0].name : null;
   saveSubmitDraft();
+  updatePhotoHint();
   updatePhotoPreview();
-  const hint = $('#s-photo-hint');
-  if (hint) hint.textContent = 'A photo of a written recipe, a dish, a cookbook page…';
   const photoInput = $('#s-photo');
   if (photoInput) photoInput.value = '';
 }
@@ -4297,18 +4332,38 @@ async function sendShopListPhoto(file) {
   }
 }
 
+/* Resize an image file to max 1600px JPEG and return its base64 (no prefix).
+   Falls back to the raw bytes if the image can't be decoded. */
+async function resizeFileToB64(file) {
+  try {
+    const img = await loadImage(await readAsDataURL(file));
+    const MAX = 1600;
+    const scale = Math.min(1, MAX / Math.max(img.width, img.height));
+    const canvas = document.createElement('canvas');
+    canvas.width = Math.max(1, Math.round(img.width * scale));
+    canvas.height = Math.max(1, Math.round(img.height * scale));
+    canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+    const blob = await new Promise(r => canvas.toBlob(r, 'image/jpeg', 0.85));
+    if (!blob) throw new Error('decode failed');
+    return String(await readAsDataURL(blob)).split(',')[1];
+  } catch (e) {
+    const raw = String(await readAsDataURL(file)).split(',');
+    if (!raw[1]) throw new Error('Could not read that photo — try downloading it as a JPG first.');
+    return raw[1];
+  }
+}
+
 async function sendSubmission() {
   const st = $('#submit-status');
   const url = $('#s-url').value.trim();
   const note = $('#s-note').value.trim();
   const text = ($('#s-text') || {}).value.trim();
-  // Photo comes from the draft (saved when selected, survives tab death).
+  // Photos come from the draft (saved when selected, survives tab death).
   // Falls back to the file input if the draft is empty (e.g. very old flow).
-  let b64 = window._submitPhotoB64 || null;
-  let photoName = window._submitPhotoName || 'photo.jpg';
-  const file = (($('#s-photo').files || [])[0] || null);
+  const draftPhotos = (window._submitPhotos || []).filter(p => p && p.b64);
+  const inputFiles = [...(($('#s-photo').files) || [])];
   const pdfFile = (($('#s-pdf').files || [])[0] || null);
-  if (!url && !b64 && !file && !text && !pdfFile) {
+  if (!url && !draftPhotos.length && !inputFiles.length && !text && !pdfFile) {
     st.className = 'form-status error';
     st.textContent = 'Add a link, a photo, a PDF, recipe text, or a combination.';
     return;
@@ -4317,36 +4372,25 @@ async function sendSubmission() {
   st.textContent = 'Submitting…';
   const id = 'inbox-' + Date.now().toString(36) + '-' + Math.floor(Math.random() * 1e4).toString(36);
   try {
-    let imagePath = null;
-    if (b64) {
-      // Already resized when the photo was selected.
-      imagePath = 'data/inbox/' + id + '.jpg';
-      await ghPutB64(imagePath, b64, 'Inbox photo ' + id);
-    } else if (file) {
-      // Fallback: read from the file input directly.
-      if (!file.size) throw new Error('That photo didn\u2019t come through — try selecting it again.');
-      let fb64 = null, ext = 'jpg';
-      try {
-        const img = await loadImage(await readAsDataURL(file));
-        const MAX = 1600;
-        const scale = Math.min(1, MAX / Math.max(img.width, img.height));
-        const canvas = document.createElement('canvas');
-        canvas.width = Math.max(1, Math.round(img.width * scale));
-        canvas.height = Math.max(1, Math.round(img.height * scale));
-        canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
-        const blob = await new Promise(r => canvas.toBlob(r, 'image/jpeg', 0.85));
-        if (!blob) throw new Error('decode failed');
-        fb64 = String(await readAsDataURL(blob)).split(',')[1];
-      } catch (e) {
-        const raw = String(await readAsDataURL(file)).split(',');
-        if (!raw[1]) throw new Error('Could not read that photo — try downloading it as a JPG first.');
-        fb64 = raw[1];
-        const mt = (file.type || '').toLowerCase();
-        ext = mt.includes('png') ? 'png' : mt.includes('heic') ? 'heic' : mt.includes('webp') ? 'webp' : 'jpg';
+    // Photos: one inbox file per photo (draft photos are already resized;
+    // files straight from the input are resized here as a fallback).
+    const imagePaths = [];
+    const uploadPhoto = async (b64, n) => {
+      const path = 'data/inbox/' + id + '-' + n + '.jpg';
+      await ghPutB64(path, b64, 'Inbox photo ' + id + ' #' + n);
+      imagePaths.push(path);
+    };
+    if (draftPhotos.length) {
+      for (let n = 0; n < draftPhotos.length; n++) {
+        await uploadPhoto(draftPhotos[n].b64, n + 1);
       }
-      imagePath = 'data/inbox/' + id + '.' + ext;
-      await ghPutB64(imagePath, fb64, 'Inbox photo ' + id);
+    } else if (inputFiles.length) {
+      for (let n = 0; n < inputFiles.length; n++) {
+        if (!inputFiles[n].size) throw new Error('That photo didn\u2019t come through — try selecting it again.');
+        await uploadPhoto(await resizeFileToB64(inputFiles[n]), n + 1);
+      }
     }
+    const imagePath = imagePaths[0] || null;
     // PDF upload: store as-is (no resizing), checker extracts text + renders pages.
     let pdfPath = null;
     if (pdfFile) {
@@ -4357,7 +4401,7 @@ async function sendSubmission() {
       await ghPutB64(pdfPath, pdfB64, 'Inbox PDF ' + id);
     }
     const entry = {
-      id, url: url || null, image: imagePath, file: pdfPath, note: note || null, text: text || null,
+      id, url: url || null, image: imagePath, images: imagePaths, file: pdfPath, note: note || null, text: text || null,
       status: 'pending', created_at: new Date().toISOString(),
       recipe_id: null, fail_reason: null
     };
@@ -4374,7 +4418,7 @@ async function sendSubmission() {
     const pdfIn = $('#s-pdf'); if (pdfIn) pdfIn.value = '';
     const pdfH = $('#s-pdf-hint'); if (pdfH) pdfH.textContent = 'A PDF of a recipe — text and layout are both used.';
     const st2 = $('#s-text'); if (st2) st2.value = '';
-    const ph = $('#s-photo-hint'); if (ph) ph.textContent = 'A photo of a written recipe, a dish, a cookbook page…';
+    const ph = $('#s-photo-hint'); if (ph) ph.textContent = 'Photos of a written recipe, a dish, cookbook pages… — pick as many as you like (up to 6).';
     clearSubmitDraft();
     updatePhotoPreview();
     toast('Submitted!');
