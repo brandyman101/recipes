@@ -1183,7 +1183,7 @@ function tilesHTML() {
     const img = (rs.find(r => r.banner_image) || {}).banner_image || '';
     out.push(tile(k[0].toUpperCase() + k.slice(1), rs.length, img, 'kosher:' + k));
   });
-  allCats().slice(0, 6).forEach(c => {
+  allCats().forEach(c => {
     const rs = recipes.filter(r => (r.categories || []).map(canonCat).includes(c));
     if (!rs.length) return;
     const img = (rs.find(r => r.banner_image) || {}).banner_image || '';
@@ -1325,11 +1325,16 @@ function shoppingListHTML() {
 
 /* ---------------- Home: search / filter / grid ---------------- */
 // Category display names: merge near-duplicates so "Appetizer", "appetizer"
-// and "Appetizers" show as a single tile ("Appetizers").
+// and "Appetizers" show as a single tile ("Appetizers"), "Main", "Mains"
+// and "Main Dishes" show as one tile ("Main Dishes"), and "Salad"/"Salads"
+// as one tile ("Salads"). Anything else is title-cased, so a lowercase
+// "chicken" or "soup" from an old submission merges with "Chicken"/"Soup".
 const canonCat = c => {
   const t = String(c || '').trim();
   if (/^appetizers?$/i.test(t)) return 'Appetizers';
-  return t;
+  if (/^mains?$|^main dish(es)?$/i.test(t)) return 'Main Dishes';
+  if (/^salads?$/i.test(t)) return 'Salads';
+  return t.toLowerCase().split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 };
 const allTags = () => [...new Set(recipes.flatMap(r => r.tags || []))].sort();
 const allCats = () => [...new Set(recipes.flatMap(r => (r.categories || []).map(canonCat)))].sort();
