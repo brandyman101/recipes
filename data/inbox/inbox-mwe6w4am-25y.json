@@ -10,8 +10,31 @@
   "file": null,
   "note": null,
   "text": null,
-  "status": "working",
+  "status": "done",
   "created_at": "2026-11-12T23:39:11.299Z",
   "recipe_id": null,
-  "fail_reason": null
+  "fail_reason": null,
+  "items_added": [
+    "Tomatoes",
+    "Red grapes sale",
+    "Berries (maybe raspberries are cheaper)",
+    "Broccoli for shabbos- get 2 or more if small",
+    "Bananas",
+    "One gallon of Noah's milk",
+    "Noah's yogurt",
+    "Mommy's yogurt",
+    "Shredded cheese",
+    "Eggs sale",
+    "Mini frozen pancakes for Noah",
+    "Frozen pizza dough sale",
+    "Pizza stars",
+    "V8",
+    "Honey",
+    "Pasta (shells and penne for Avi)",
+    "Bowl and basket crackers sale",
+    "Veggie straws (get the regular)",
+    "Small popcorn bags (NOT BIG) and potato chips (regular flavor)",
+    "T biscuits"
+  ],
+  "duplicates_skipped": 13
 }
