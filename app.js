@@ -2112,6 +2112,389 @@ function pluralizeScaledUnit(unit, formattedQty) {
   return unit; // tbsp, tsp, g, ml, oz, lb are invariant
 }
 
+/* ---------------- Cooking mode ---------------- */
+// Big-touch cooking view for the kitchen: tap ingredients to check them
+// off as they're used, tap a step to mark it done, and run a countdown
+// timer on any step (steps that mention a time, e.g. "bake 25 minutes",
+// get that time as a suggested preset). Checks, done steps, and timers
+// live in sessionStorage, so a refresh mid-cook doesn't lose them, but
+// they don't linger into the next cook. Timers keep running if you leave
+// the view — they beep, vibrate, and flash the tab title when they finish.
+// The screen is kept awake while cooking mode is open (wake lock, best effort).
+const COOK_TIMER_KEY = 'brandel-cook-timers';
+let cookTimers = null;       // { "<recipeId>:<stepIdx>": { endAt, label, done } }
+let cookTickId = null;
+let cookAlerted = new Set(); // timer keys already beeped for
+let cookAudioCtx = null;
+let cookWakeLock = null;
+let cookPickerStep = null;   // step index whose timer picker is open
+let cookCurrentId = null;
+let cookCurrentTitle = '';
+let cookWired = false;
+
+function cookStoreGet(key, fallback) {
+  try {
+    const v = sessionStorage.getItem(key);
+    return v === null ? fallback : JSON.parse(v);
+  } catch (e) { return fallback; }
+}
+function cookStoreSet(key, val) {
+  try { sessionStorage.setItem(key, JSON.stringify(val)); } catch (e) {}
+}
+function loadCookTimers() {
+  if (!cookTimers) cookTimers = cookStoreGet(COOK_TIMER_KEY, {}) || {};
+  return cookTimers;
+}
+function saveCookTimers() { cookStoreSet(COOK_TIMER_KEY, loadCookTimers()); }
+function cookTimerKey(id, step) { return id + ':' + step; }
+function loadCookSet(key) {
+  const v = cookStoreGet(key, []);
+  return new Set(Array.isArray(v) ? v : []);
+}
+function saveCookSet(key, set) { cookStoreSet(key, [...set]); }
+
+// First time mentioned in a step ("bake 25-30 minutes", "rest 1 hour",
+// "sizzle 30 seconds") → seconds. Ranges use the long end.
+function parseStepTime(text) {
+  const s = String(text || '');
+  const toSecs = (n, unit) => {
+    unit = (unit || '').toLowerCase();
+    if (unit.startsWith('h')) return n * 3600;
+    if (unit.startsWith('s')) return Math.max(1, n);
+    return n * 60;
+  };
+  let m = s.match(/(\d+)\s*(?:to|–|-|or)\s*(\d+)\s*(hours?|hrs?|minutes?|mins?|seconds?|secs?)/i);
+  if (m) return toSecs(parseInt(m[2], 10), m[3]);
+  m = s.match(/(\d+)\s*(hours?|hrs?|minutes?|mins?|seconds?|secs?)/i);
+  if (!m) return null;
+  return toSecs(parseInt(m[1], 10), m[2]);
+}
+function fmtCookDur(secs) {
+  if (secs < 60) return secs + ' sec';
+  const m = Math.round(secs / 60);
+  if (m < 60) return m + ' min';
+  const h = Math.floor(m / 60), rm = m % 60;
+  return rm ? h + ' hr ' + rm + ' min' : h + ' hr';
+}
+function fmtCountdown(ms) {
+  const total = Math.max(0, Math.ceil(ms / 1000));
+  const h = Math.floor(total / 3600), m = Math.floor((total % 3600) / 60), s = total % 60;
+  const mm = String(m).padStart(2, '0'), ss = String(s).padStart(2, '0');
+  return h > 0 ? h + ':' + mm + ':' + ss : mm + ':' + ss;
+}
+function cookBeep() {
+  try {
+    const Ctx = window.AudioContext || window.webkitAudioContext;
+    if (!Ctx) return;
+    cookAudioCtx = cookAudioCtx || new Ctx();
+    if (cookAudioCtx.state === 'suspended') cookAudioCtx.resume();
+    const t0 = cookAudioCtx.currentTime;
+    [0, 0.3, 0.6].forEach(t => {
+      const o = cookAudioCtx.createOscillator(), g = cookAudioCtx.createGain();
+      o.type = 'sine'; o.frequency.value = 880;
+      g.gain.setValueAtTime(0.0001, t0 + t);
+      g.gain.exponentialRampToValueAtTime(0.25, t0 + t + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, t0 + t + 0.25);
+      o.connect(g); g.connect(cookAudioCtx.destination);
+      o.start(t0 + t); o.stop(t0 + t + 0.28);
+    });
+  } catch (e) {}
+  try { if (navigator.vibrate) navigator.vibrate([200, 100, 200, 100, 200]); } catch (e) {}
+}
+
+// Render one step's timer zone from current state.
+function paintCookTimerZone(zone) {
+  if (!zone || !cookCurrentId) return;
+  const step = parseInt(zone.dataset.step, 10);
+  const key = cookTimerKey(cookCurrentId, step);
+  const t = loadCookTimers()[key];
+  const suggest = parseInt(zone.dataset.suggest || '0', 10) || null;
+  if (t && t.done) {
+    zone.innerHTML = '<div class="cook-done">⏰ Time\'s up!</div>' +
+      '<button class="btn secondary" type="button" data-cook-act="timer-dismiss" data-key="' + esc(key) + '">Dismiss</button>';
+    return;
+  }
+  if (t) {
+    zone.innerHTML = '<div class="cook-count"><span data-countdown="' + esc(key) + '">' +
+      fmtCountdown(t.endAt - Date.now()) + '</span> left</div>' +
+      '<button class="btn secondary" type="button" data-cook-act="timer-cancel" data-key="' + esc(key) + '">Cancel timer</button>';
+    return;
+  }
+  if (cookPickerStep === step) {
+    const presets = [60, 300, 600, 900, 1200, 1800, 2700, 3600];
+    let chips = '';
+    if (suggest && !presets.includes(suggest)) {
+      chips += '<button class="timer-chip suggested" type="button" data-cook-act="timer-start" data-step="' + step + '" data-secs="' + suggest + '">★ ' + esc(fmtCookDur(suggest)) + '</button>';
+    }
+    chips += presets.map(s =>
+      '<button class="timer-chip' + (s === suggest ? ' suggested' : '') + '" type="button" data-cook-act="timer-start" data-step="' + step + '" data-secs="' + s + '">' + esc(fmtCookDur(s)) + '</button>'
+    ).join('');
+    zone.innerHTML = '<div class="cook-picker">' + chips +
+      '<span class="cook-custom"><input class="cook-custom-min" type="number" min="1" max="720" inputmode="numeric" placeholder="Min" aria-label="Custom minutes">' +
+      '<button class="btn secondary" type="button" data-cook-act="timer-custom" data-step="' + step + '">Start</button></span>' +
+      '<button class="btn secondary" type="button" data-cook-act="timer-close" data-step="' + step + '">Close</button></div>';
+    return;
+  }
+  zone.innerHTML = '<button class="btn secondary cook-timer-btn" type="button" data-cook-act="timer-open" data-step="' + step + '">⏱ Set timer' +
+    (suggest ? ' <span class="cook-suggest">· step says ' + esc(fmtCookDur(suggest)) + '</span>' : '') + '</button>';
+}
+
+// Sticky bar of running timers for the current recipe; tap one to jump to its step.
+function paintCookSummary() {
+  const bar = document.getElementById('cook-summary');
+  if (!bar || !cookCurrentId) return;
+  const timers = loadCookTimers();
+  const running = Object.keys(timers).filter(k => k.startsWith(cookCurrentId + ':') && !timers[k].done);
+  if (!running.length) { bar.innerHTML = ''; bar.classList.add('empty'); return; }
+  bar.classList.remove('empty');
+  bar.innerHTML = running.map(k => {
+    const step = parseInt(k.slice(cookCurrentId.length + 1), 10);
+    return '<button class="cook-sum-chip" type="button" data-cook-act="timer-jump" data-step="' + step + '">' +
+      '⏱ Step ' + (step + 1) + ' · <span data-countdown="' + esc(k) + '">' + fmtCountdown(timers[k].endAt - Date.now()) + '</span></button>';
+  }).join('');
+}
+
+// Single 1-second tick for all timers (started on first cooking-mode entry,
+// keeps running after leaving the view so timers still fire).
+function startCookTick() {
+  if (cookTickId) return;
+  loadCookTimers();
+  cookTickId = setInterval(() => {
+    const now = Date.now();
+    const timers = loadCookTimers();
+    let changed = false;
+    Object.keys(timers).forEach(key => {
+      const t = timers[key];
+      if (t.done) return;
+      if (t.endAt - now <= 0) {
+        t.done = true; changed = true;
+        if (!cookAlerted.has(key)) {
+          cookAlerted.add(key);
+          cookBeep();
+          document.title = '⏰ Time\'s up! — Brandel Family Recipes';
+        }
+        if (cookCurrentId) {
+          document.querySelectorAll('[data-timer-zone]').forEach(zone => {
+            if (cookTimerKey(cookCurrentId, parseInt(zone.dataset.step, 10)) === key) paintCookTimerZone(zone);
+          });
+        }
+        paintCookSummary();
+      } else {
+        document.querySelectorAll('[data-countdown="' + key + '"]').forEach(el => {
+          el.textContent = fmtCountdown(t.endAt - now);
+        });
+      }
+    });
+    if (changed) saveCookTimers();
+  }, 1000);
+}
+
+function repaintCookZone(step) {
+  const zone = document.querySelector('[data-timer-zone][data-step="' + step + '"]');
+  paintCookTimerZone(zone);
+}
+function startCookTimer(step, secs) {
+  const key = cookTimerKey(cookCurrentId, step);
+  const timers = loadCookTimers();
+  timers[key] = { endAt: Date.now() + secs * 1000, label: 'Step ' + (step + 1), done: false };
+  cookAlerted.delete(key);
+  saveCookTimers();
+  cookPickerStep = null;
+  repaintCookZone(step);
+  paintCookSummary();
+  toast('Timer set for ' + fmtCookDur(secs));
+}
+function updateCookIngCount() {
+  const el = document.getElementById('cook-ing-count');
+  if (!el || !cookCurrentId) return;
+  const set = loadCookSet('brandel-cook-checked:' + cookCurrentId);
+  const total = parseInt(el.dataset.total || '0', 10);
+  el.textContent = set.size + ' of ' + total + ' used';
+}
+
+// One delegated handler for every cooking-mode tap (zones re-render, so no
+// per-element listeners). Wired once; ignores taps outside cooking mode.
+function onCookAction(e) {
+  const el = e.target.closest('[data-cook-act]');
+  if (!el || !cookCurrentId) return;
+  const id = cookCurrentId;
+  const act = el.dataset.cookAct;
+  if (act === 'ing') {
+    const set = loadCookSet('brandel-cook-checked:' + id);
+    const k = el.dataset.ing;
+    if (set.has(k)) set.delete(k); else set.add(k);
+    saveCookSet('brandel-cook-checked:' + id, set);
+    el.classList.toggle('done', set.has(k));
+    el.setAttribute('aria-checked', set.has(k) ? 'true' : 'false');
+    updateCookIngCount();
+    return;
+  }
+  if (act === 'step') {
+    const set = loadCookSet('brandel-cook-steps:' + id);
+    const k = String(el.dataset.step);
+    if (set.has(k)) set.delete(k); else set.add(k);
+    saveCookSet('brandel-cook-steps:' + id, set);
+    const card = el.closest('.cook-step');
+    if (card) card.classList.toggle('done', set.has(k));
+    return;
+  }
+  if (act === 'timer-open') {
+    cookPickerStep = parseInt(el.dataset.step, 10);
+    repaintCookZone(el.dataset.step);
+    return;
+  }
+  if (act === 'timer-close') {
+    cookPickerStep = null;
+    repaintCookZone(el.dataset.step);
+    return;
+  }
+  if (act === 'timer-start') {
+    startCookTimer(parseInt(el.dataset.step, 10), parseInt(el.dataset.secs, 10));
+    return;
+  }
+  if (act === 'timer-custom') {
+    const step = parseInt(el.dataset.step, 10);
+    const zone = el.closest('[data-timer-zone]');
+    const inp = zone ? zone.querySelector('.cook-custom-min') : null;
+    const mins = inp ? parseInt(inp.value, 10) : NaN;
+    if (!mins || mins < 1) { toast('Enter minutes first'); return; }
+    startCookTimer(step, Math.min(mins, 720) * 60);
+    return;
+  }
+  if (act === 'timer-cancel' || act === 'timer-dismiss') {
+    const key = el.dataset.key;
+    const timers = loadCookTimers();
+    delete timers[key];
+    cookAlerted.delete(key);
+    saveCookTimers();
+    if (act === 'timer-dismiss') document.title = '🍳 ' + cookCurrentTitle + ' — Brandel Family Recipes';
+    repaintCookZone(key.slice(id.length + 1));
+    paintCookSummary();
+    return;
+  }
+  if (act === 'timer-jump') {
+    const card = document.querySelector('[data-step-idx="' + el.dataset.step + '"]');
+    if (card && card.scrollIntoView) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+}
+function onCookKey(e) {
+  if (e.key !== 'Enter' && e.key !== ' ') return;
+  const el = e.target.closest('[data-cook-act="ing"], [data-cook-act="step"]');
+  if (!el || !cookCurrentId) return;
+  e.preventDefault();
+  onCookAction({ target: el });
+}
+function wireCookMode() {
+  if (cookWired) return;
+  cookWired = true;
+  document.addEventListener('click', onCookAction);
+  document.addEventListener('keydown', onCookKey);
+}
+
+// Scaled quantity/item text for cooking mode (same rules as the recipe
+// page's applyScale: fractions for US units, pluralized units/nouns).
+function cookQtyText(item, f) {
+  const baseQty = item.qty || '', unit = item.unit || '';
+  if (!baseQty) return unit;
+  const scaled = scaleQty(baseQty, unit, f);
+  if (!scaled) return [baseQty, unit].filter(Boolean).join(' ');
+  if (!/\d/.test(scaled)) return scaled;
+  const dispUnit = pluralizeScaledUnit(unit, scaled);
+  return dispUnit ? scaled + ' ' + dispUnit : scaled;
+}
+function cookItemText(item, f) {
+  const baseItem = item.item || '';
+  if (!baseItem || item.unit) return baseItem;
+  const parsed = parseQty(item.qty || '');
+  let n = null;
+  if (typeof parsed === 'number') n = parsed * f;
+  else if (Array.isArray(parsed)) n = parsed[1] * f;
+  if (n === null) return baseItem;
+  return pluralize(baseItem, n);
+}
+
+function renderCookMode(app, r, factor) {
+  wireCookMode();
+  startCookTick();
+  cookCurrentId = r.id;
+  cookCurrentTitle = r.title;
+  cookPickerStep = null;
+  document.title = '🍳 ' + r.title + ' — Brandel Family Recipes';
+  // Keep the screen awake while cooking (best effort; not all browsers allow it).
+  try {
+    if (navigator.wakeLock && navigator.wakeLock.request) {
+      navigator.wakeLock.request('screen').then(l => { cookWakeLock = l; }).catch(() => {});
+    }
+  } catch (e) {}
+  const f = factor || 1;
+  const checkedIng = loadCookSet('brandel-cook-checked:' + r.id);
+  const checkedSteps = loadCookSet('brandel-cook-steps:' + r.id);
+  let ingTotal = 0;
+  const ingHTML = (r.ingredients || []).map((s, si) =>
+    (s.section ? '<h3 class="cook-ing-sec">' + esc(s.section) + '</h3>' : '') +
+    '<ul class="cook-ing-list">' + (s.items || []).map((i, ii) => {
+      ingTotal++;
+      const k = si + ':' + ii;
+      const done = checkedIng.has(k);
+      return '<li class="cook-ing-row' + (done ? ' done' : '') + '" data-cook-act="ing" data-ing="' + k + '" role="checkbox" aria-checked="' + (done ? 'true' : 'false') + '" tabindex="0">' +
+        '<span class="cook-box">✓</span>' +
+        '<span class="cook-ing-qty">' + esc(cookQtyText(i, f)) + '</span>' +
+        '<span class="cook-ing-item">' + esc(cookItemText(i, f)) + (i.prep ? ' <em class="cook-prep">' + esc(i.prep) + '</em>' : '') + '</span>' +
+        (i.optional ? ' <em class="opt-tag">optional</em>' : '') + '</li>';
+    }).join('') + '</ul>'
+  ).join('');
+  const stepsHTML = (r.instructions || []).map((s, i) => {
+    const suggest = parseStepTime(s);
+    return '<li class="cook-step' + (checkedSteps.has(String(i)) ? ' done' : '') + '" data-step-idx="' + i + '">' +
+      '<div class="cook-step-top"><span class="cook-step-num">' + (i + 1) + '</span>' +
+      '<p class="cook-step-text" data-cook-act="step" data-step="' + i + '" tabindex="0">' + esc(s) + '</p></div>' +
+      '<div class="cook-timer-zone" data-timer-zone="' + esc(r.id) + '" data-step="' + i + '"' +
+        (suggest ? ' data-suggest="' + suggest + '"' : '') + '></div></li>';
+  }).join('');
+
+  app.innerHTML =
+    '<div class="cook-mode">' +
+      '<div class="cook-head no-print">' +
+        '<button class="btn secondary" id="cook-back" type="button">← Back to recipe</button>' +
+        '<button class="btn secondary" id="cook-reset" type="button">Reset</button>' +
+      '</div>' +
+      '<h1 class="cook-title">' + esc(r.title) + '</h1>' +
+      '<p class="cook-hint muted">Tap an ingredient when you\'ve used it. Tap a step to mark it done. Set a timer on any step — it keeps running even if you leave this view.</p>' +
+      '<div class="cook-summary empty" id="cook-summary"></div>' +
+      '<h2 class="cook-sec-title">Ingredients <span class="cook-count-label" id="cook-ing-count" data-total="' + ingTotal + '"></span></h2>' +
+      ingHTML +
+      '<h2 class="cook-sec-title">Instructions</h2>' +
+      '<ol class="cook-steps">' + stepsHTML + '</ol>' +
+    '</div>';
+  updateCookIngCount();
+  document.querySelectorAll('[data-timer-zone]').forEach(zone => paintCookTimerZone(zone));
+  paintCookSummary();
+  $('#cook-back').onclick = () => exitCookMode(app, r.id);
+  $('#cook-reset').onclick = () => {
+    if (!confirm('Clear all checks, done steps, and timers for this recipe?')) return;
+    try {
+      sessionStorage.removeItem('brandel-cook-checked:' + r.id);
+      sessionStorage.removeItem('brandel-cook-steps:' + r.id);
+    } catch (e) {}
+    const timers = loadCookTimers();
+    Object.keys(timers).forEach(k => {
+      if (k.startsWith(r.id + ':')) { delete timers[k]; cookAlerted.delete(k); }
+    });
+    saveCookTimers();
+    document.title = '🍳 ' + r.title + ' — Brandel Family Recipes';
+    renderCookMode(app, r, f);
+  };
+  window.scrollTo(0, 0);
+}
+
+function exitCookMode(app, id) {
+  try { if (cookWakeLock) { cookWakeLock.release(); cookWakeLock = null; } } catch (e) {}
+  cookCurrentId = null;
+  cookPickerStep = null;
+  renderRecipe(app, id);
+}
+
 async function renderRecipe(app, id) {
   const r = await ensureRecipe(id);
   if (!r) {
@@ -2244,6 +2627,7 @@ async function renderRecipe(app, id) {
         ? '<p class="source-line">' + esc([r.notes, r.source].filter(Boolean).join(' — ')) + '</p>'
         : '') +
       '<div class="actions no-print">' +
+        '<button class="btn" id="cook-btn" type="button">🍳 Start cooking</button>' +
         '<button class="btn" id="plan-btn" type="button">+ Add to planner</button>' +
         '<button class="btn secondary" id="fav-page-btn" type="button">' + (isFavorite(id) ? '♥ Favorited' : '♡ Favorite') + '</button>' +
         '<button class="btn secondary" id="noah-btn" type="button">' + (r.noahs_favorite ? '★ Noah\'s favorite' : '☆ Noah\'s favorite') + '</button>' +
@@ -2259,6 +2643,11 @@ async function renderRecipe(app, id) {
 
   $('#share-btn').onclick = () => shareRecipe(r);
   $('#print-btn').onclick = () => window.print();
+
+  // Cooking mode: big-touch view with checkable ingredients, done steps,
+  // and per-step timers. Carries the current scale factor along.
+  const cookBtn = $('#cook-btn');
+  if (cookBtn) cookBtn.addEventListener('click', () => renderCookMode(app, r, scaleState.factor));
 
   // Fun UI #14: "Add to planner" opens the slide-up bottom sheet.
   const planBtn = $('#plan-btn');
