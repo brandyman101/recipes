@@ -1338,10 +1338,11 @@ const canonCat = c => {
   return t.toLowerCase().split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 };
 // The only category tiles shown under "Browse recipes" (Avi's list,
-// 2026-11-12, in his order). Recipes in other categories (Breakfast,
-// Brunch, Chicken, Fish, Meat & Poultry, …) still show under All and
-// under the Meat/Dairy/Pareve tiles — they just get no tile of their own.
-const TILE_CATS = ['Main Dishes', 'Soups', 'Salads', 'Side Dishes', 'Appetizers', 'Baked Goods'];
+// 2026-11-12, in his order; Chicken added same day at his request).
+// Recipes in other categories (Breakfast, Brunch, Fish, Meat & Poultry, …)
+// still show under All and under the Meat/Dairy/Pareve tiles — they just
+// get no tile of their own.
+const TILE_CATS = ['Main Dishes', 'Soups', 'Salads', 'Side Dishes', 'Appetizers', 'Baked Goods', 'Chicken'];
 const allTags = () => [...new Set(recipes.flatMap(r => r.tags || []))].sort();
 const allCats = () => [...new Set(recipes.flatMap(r => (r.categories || []).map(canonCat)))].sort();
 
