@@ -668,7 +668,148 @@
           }
         }
       ],
-      "manualItems": [],
+      "manualItems": [
+        {
+          "id": "mmwe7mocc0",
+          "text": "Tomatoes",
+          "have": false,
+          "updatedAt": 1794527986620,
+          "updatedBy": "photo-list"
+        },
+        {
+          "id": "mmwe7mocc1",
+          "text": "Red grapes sale",
+          "have": false,
+          "updatedAt": 1794527986620,
+          "updatedBy": "photo-list"
+        },
+        {
+          "id": "mmwe7mocc2",
+          "text": "Berries (maybe raspberries are cheaper)",
+          "have": false,
+          "updatedAt": 1794527986620,
+          "updatedBy": "photo-list"
+        },
+        {
+          "id": "mmwe7mocc3",
+          "text": "Broccoli for shabbos- get 2 or more if small",
+          "have": false,
+          "updatedAt": 1794527986620,
+          "updatedBy": "photo-list"
+        },
+        {
+          "id": "mmwe7mocc4",
+          "text": "Bananas",
+          "have": false,
+          "updatedAt": 1794527986620,
+          "updatedBy": "photo-list"
+        },
+        {
+          "id": "mmwe7mocc5",
+          "text": "One gallon of Noah's milk",
+          "have": false,
+          "updatedAt": 1794527986620,
+          "updatedBy": "photo-list"
+        },
+        {
+          "id": "mmwe7mocc6",
+          "text": "Noah's yogurt",
+          "have": false,
+          "updatedAt": 1794527986620,
+          "updatedBy": "photo-list"
+        },
+        {
+          "id": "mmwe7mocc7",
+          "text": "Mommy's yogurt",
+          "have": false,
+          "updatedAt": 1794527986620,
+          "updatedBy": "photo-list"
+        },
+        {
+          "id": "mmwe7mocc8",
+          "text": "Shredded cheese",
+          "have": false,
+          "updatedAt": 1794527986620,
+          "updatedBy": "photo-list"
+        },
+        {
+          "id": "mmwe7mocc9",
+          "text": "Eggs sale",
+          "have": false,
+          "updatedAt": 1794527986620,
+          "updatedBy": "photo-list"
+        },
+        {
+          "id": "mmwe7mocc10",
+          "text": "Mini frozen pancakes for Noah",
+          "have": false,
+          "updatedAt": 1794527986620,
+          "updatedBy": "photo-list"
+        },
+        {
+          "id": "mmwe7mocc11",
+          "text": "Frozen pizza dough sale",
+          "have": false,
+          "updatedAt": 1794527986620,
+          "updatedBy": "photo-list"
+        },
+        {
+          "id": "mmwe7mocc12",
+          "text": "Pizza stars",
+          "have": false,
+          "updatedAt": 1794527986620,
+          "updatedBy": "photo-list"
+        },
+        {
+          "id": "mmwe7mocc13",
+          "text": "V8",
+          "have": false,
+          "updatedAt": 1794527986620,
+          "updatedBy": "photo-list"
+        },
+        {
+          "id": "mmwe7mocc14",
+          "text": "Honey",
+          "have": false,
+          "updatedAt": 1794527986620,
+          "updatedBy": "photo-list"
+        },
+        {
+          "id": "mmwe7mocc15",
+          "text": "Pasta (shells and penne for Avi)",
+          "have": false,
+          "updatedAt": 1794527986620,
+          "updatedBy": "photo-list"
+        },
+        {
+          "id": "mmwe7mocc16",
+          "text": "Bowl and basket crackers sale",
+          "have": false,
+          "updatedAt": 1794527986620,
+          "updatedBy": "photo-list"
+        },
+        {
+          "id": "mmwe7mocc17",
+          "text": "Veggie straws (get the regular)",
+          "have": false,
+          "updatedAt": 1794527986620,
+          "updatedBy": "photo-list"
+        },
+        {
+          "id": "mmwe7mocc18",
+          "text": "Small popcorn bags (NOT BIG) and potato chips (regular flavor)",
+          "have": false,
+          "updatedAt": 1794527986620,
+          "updatedBy": "photo-list"
+        },
+        {
+          "id": "mmwe7mocc19",
+          "text": "T biscuits",
+          "have": false,
+          "updatedAt": 1794527986620,
+          "updatedBy": "photo-list"
+        }
+      ],
       "haveGenerated": [],
       "skipSpices": false,
       "skipSpicesAt": 1794464601656,
