@@ -1580,3 +1580,6 @@ input[type="range"].mood-range::-moz-range-thumb {
 .cook-done { font-size: 1.3rem; font-weight: 700; color: var(--meat); margin-bottom: 0.5rem;
   animation: cook-pulse 1s ease-in-out infinite; }
 @keyframes cook-pulse { 50% { opacity: 0.5; } }
+
+/* "Start cooking" sits at the end of the Instructions section. */
+.cook-start-wrap { margin-top: 1rem; }
