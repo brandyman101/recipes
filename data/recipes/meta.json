@@ -444,5 +444,29 @@
     "tags_need_review": true,
     "photo_generated": false,
     "search_text": "lagman meat main dishes lagman noodles central-asian soup spicy beef"
+  },
+  {
+    "id": "feta-pasta",
+    "title": "Feta Pasta",
+    "banner_image": "assets/images/feta-pasta.jpg",
+    "kosher_status": "dairy",
+    "kosher_for_passover": false,
+    "categories": [
+      "Main Dishes"
+    ],
+    "tags": [
+      "pasta",
+      "feta",
+      "baked",
+      "weeknight",
+      "vegetarian"
+    ],
+    "prep_minutes": 10,
+    "cook_minutes": 30,
+    "servings": "4",
+    "leftover_friendly": true,
+    "tags_need_review": true,
+    "photo_generated": false,
+    "search_text": "feta pasta dairy main dishes feta pasta baked cherry tomatoes garlic olive oil red pepper flakes basil black pepper garlic powder pasta"
   }
 ]
