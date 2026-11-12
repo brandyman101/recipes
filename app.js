@@ -958,7 +958,7 @@ function pluralizeUnit(unit, qty) {
   return unit;
 }
 /* Spice / dried-seasoning names recognized by the Shopping List's
-   "Skip spices" toggle. The same toggle also skips the basic staples
+   "Skip pantry essentials" toggle. The same toggle also skips the basic staples
    sugar, flour, oil, and plain water. Matching is deliberately
    phrase-based: garlic is not garlic powder, ginger is not ground
    ginger, and bell peppers are vegetables, not spices. Fresh herbs are
@@ -1296,8 +1296,7 @@ function shoppingListHTML() {
   let html =
     '<div class="no-print" style="margin:.35rem 0 .75rem">' +
       '<label style="display:flex;align-items:center;gap:.5rem;font-weight:600;cursor:pointer">' +
-        '<input type="checkbox" id="shop-skip-spices"' + (week.skipSpices ? ' checked' : '') + '> Skip spices</label>' +
-      '<div class="muted" style="margin-top:.2rem;font-size:.9rem">When on, spices, sugar, flour, oil, and water from planned recipes won’t be added. Items you add yourself stay.</div>' +
+        '<input type="checkbox" id="shop-skip-spices"' + (week.skipSpices ? ' checked' : '') + '> Skip pantry essentials</label>' +
     '</div>';
   if (!items.length && !week.manualItems.some(m => !m.deleted)) {
     html += '<p class="muted">Nothing planned yet' + (from ? ' from the shopping day onward' : '') +
