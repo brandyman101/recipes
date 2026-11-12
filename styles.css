@@ -1527,3 +1527,56 @@ input[type="range"].mood-range::-moz-range-thumb {
   font-family: "Fraunces", Georgia, "Times New Roman", serif;
   font-weight: 600;
 }
+
+/* ---------- Cooking mode (2026-11-12) ----------
+   Big-touch kitchen view: checkable ingredients, done steps, per-step
+   timers. Uses the theme variables so dark mode just works. */
+.cook-mode { max-width: 760px; margin: 0 auto; }
+.cook-head { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 0.75rem; }
+.cook-title { font-size: 1.7rem; margin: 0 0 0.35rem; }
+.cook-hint { margin: 0 0 1rem; font-size: 0.95rem; }
+.cook-summary { position: sticky; top: 0; z-index: 5; display: flex; gap: 0.5rem; flex-wrap: wrap;
+  padding: 0.5rem 0.6rem; margin-bottom: 0.75rem; background: var(--card);
+  border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+.cook-summary.empty { display: none; }
+.cook-sum-chip { border: 1px solid var(--accent); background: var(--cream); color: var(--ink);
+  border-radius: 999px; padding: 0.45rem 0.85rem; font-size: 1rem; font-weight: 700; cursor: pointer; }
+.cook-sec-title { font-size: 1.3rem; margin: 1.25rem 0 0.5rem; }
+.cook-count-label { font-family: inherit; font-size: 1rem; font-weight: 400; color: var(--muted); }
+.cook-ing-sec { font-size: 1.05rem; margin: 1rem 0 0.25rem; color: var(--accent-dark); }
+.cook-ing-list { list-style: none; margin: 0; padding: 0; }
+.cook-ing-row { display: flex; align-items: center; gap: 0.75rem; padding: 0.8rem 0.5rem;
+  border-bottom: 1px solid var(--line); cursor: pointer; font-size: 1.12rem; min-height: 52px;
+  -webkit-tap-highlight-color: transparent; }
+.cook-ing-row:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: 6px; }
+.cook-box { width: 30px; height: 30px; flex: none; display: inline-flex; align-items: center; justify-content: center;
+  border: 2px solid var(--accent); border-radius: 7px; color: transparent; font-weight: 700; font-size: 1.1rem; }
+.cook-ing-row.done .cook-box { background: var(--pareve); border-color: var(--pareve); color: #fff; }
+.cook-ing-row.done .cook-ing-item, .cook-ing-row.done .cook-ing-qty { text-decoration: line-through; opacity: 0.55; }
+.cook-ing-qty { font-weight: 700; white-space: nowrap; }
+.cook-ing-item { line-height: 1.35; }
+.cook-prep { color: var(--muted); font-size: 0.95em; }
+.cook-steps { list-style: none; margin: 0; padding: 0; }
+.cook-step { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 1rem; margin: 0 0 0.8rem; box-shadow: var(--shadow); }
+.cook-step-top { display: flex; gap: 0.75rem; align-items: flex-start; }
+.cook-step-num { flex: none; width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; font-size: 1.05rem; }
+.cook-step-text { font-size: 1.18rem; line-height: 1.5; margin: 0; cursor: pointer; flex: 1;
+  -webkit-tap-highlight-color: transparent; }
+.cook-step-text:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+.cook-step.done .cook-step-text { text-decoration: line-through; opacity: 0.55; }
+.cook-step.done .cook-step-num { background: var(--pareve); }
+.cook-timer-zone { margin-top: 0.85rem; padding-top: 0.85rem; border-top: 1px dashed var(--line); }
+.cook-suggest { font-weight: 400; font-size: 0.9em; color: var(--muted); }
+.cook-picker { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
+.timer-chip { border: 1px solid var(--line); background: var(--cream); color: var(--ink);
+  border-radius: 999px; padding: 0.6rem 0.95rem; font-size: 1.05rem; cursor: pointer; min-height: 46px; }
+.timer-chip.suggested { border-color: var(--accent); color: var(--accent-dark); font-weight: 700; }
+.cook-custom { display: inline-flex; gap: 0.4rem; align-items: center; }
+.cook-custom-min { width: 76px; padding: 0.55rem 0.5rem; font-size: 1.05rem; border: 1px solid var(--line);
+  border-radius: 8px; background: var(--card); color: var(--ink); }
+.cook-count { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem; }
+.cook-done { font-size: 1.3rem; font-weight: 700; color: var(--meat); margin-bottom: 0.5rem;
+  animation: cook-pulse 1s ease-in-out infinite; }
+@keyframes cook-pulse { 50% { opacity: 0.5; } }
