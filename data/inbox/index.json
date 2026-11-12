@@ -270,5 +270,22 @@
     "created_at": "2026-11-12T05:37:50.005Z",
     "recipe_id": "squash-kugel",
     "fail_reason": null
+  },
+  {
+    "id": "inbox-mwe6w4am-25y",
+    "type": "shopping-list",
+    "url": null,
+    "image": "data/inbox/inbox-mwe6w4am-25y-1.jpg",
+    "images": [
+      "data/inbox/inbox-mwe6w4am-25y-1.jpg",
+      "data/inbox/inbox-mwe6w4am-25y-2.jpg"
+    ],
+    "file": null,
+    "note": null,
+    "text": null,
+    "status": "pending",
+    "created_at": "2026-11-12T23:39:11.299Z",
+    "recipe_id": null,
+    "fail_reason": null
   }
 ]
