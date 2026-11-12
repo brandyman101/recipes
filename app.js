@@ -1318,8 +1318,8 @@ function shoppingListHTML() {
   html += '<div class="shop-add no-print"><input type="text" id="shop-new" placeholder="Add an item — or paste a whole list…" aria-label="Add your own item">' +
     '<button class="btn secondary" id="shop-add" type="button">Add</button></div>';
   html += '<div style="margin-top:.6rem"><button class="btn secondary" id="shop-copy" type="button">Copy list</button> ' +
-    '<button class="btn secondary" id="shop-photo-btn" type="button">📷 Add from photo</button></div>';
-  html += '<div class="form-hint no-print" id="shop-photo-hint" style="margin-top:.35rem">Photo of a typed or handwritten list — the items are read and added here within about 30 minutes.</div>';
+    '<button class="btn secondary" id="shop-photo-btn" type="button">📷 Add from photos</button></div>';
+  html += '<div class="form-hint no-print" id="shop-photo-hint" style="margin-top:.35rem">Photos of a typed or handwritten list — pick as many as you like (up to 6). The items are read and added here within about 30 minutes.</div>';
   return html;
 }
 
@@ -4218,9 +4218,10 @@ async function loadInboxList(showAll = !!window._inboxShowAll) {
     }
     if (s.type === 'shopping-list') {
       const slBadge = s.status === 'done' ? '✓ items added' : badge(s.status);
+      const nPhotos = Array.isArray(s.images) ? s.images.length : 1;
       const added = Array.isArray(s.items_added) && s.items_added.length
         ? '<br><span style="color:var(--muted)">' + esc(s.items_added.join(', ')) + '</span>' : '';
-      return '<li><strong>🛒 Shopping list photo</strong> — ' + slBadge + added +
+      return '<li><strong>🛒 Shopping list photo' + (nPhotos > 1 ? 's (' + nPhotos + ')' : '') + '</strong> — ' + slBadge + added +
         (s.fail_reason ? ' <span style="color:var(--danger)">' + esc(s.fail_reason) + '</span>' : '') +
         ts(s) + '</li>';
     }
@@ -4271,23 +4272,25 @@ async function loadInboxList(showAll = !!window._inboxShowAll) {
   if (showLessBtn) showLessBtn.onclick = () => loadInboxList(false);
 }
 
-/* ---------------- Shopping list from a photo ----------------
-   The photo goes to the inbox as a "shopping-list" entry; the intake
-   checker reads it (typed or handwritten) and appends each line to the
-   current week's manual items on the shopping list. */
+/* ---------------- Shopping list from photos ----------------
+   The photos go to the inbox as one "shopping-list" entry; the intake
+   checker reads them all (typed or handwritten) and appends each line to
+   the current week's manual items on the shopping list, duplicates removed. */
+const SHOP_PHOTO_MAX = 6;
 function pickShopListPhoto() {
   let inp = document.getElementById('shop-photo-input');
   if (!inp) {
     inp = document.createElement('input');
     inp.type = 'file';
     inp.accept = 'image/*';
+    inp.multiple = true;
     inp.id = 'shop-photo-input';
     inp.style.display = 'none';
     document.body.appendChild(inp);
     inp.addEventListener('change', async () => {
-      const file = (inp.files || [])[0];
+      const files = Array.from(inp.files || []);
       inp.value = '';
-      if (file) await sendShopListPhoto(file);
+      if (files.length) await sendShopListPhotos(files);
     });
   }
   inp.click();
@@ -4312,16 +4315,24 @@ async function resizeImageToB64(file) {
   }
 }
 
-async function sendShopListPhoto(file) {
+async function sendShopListPhotos(files) {
   const setHint = t => { const h = $('#shop-photo-hint'); if (h) h.textContent = t; };
-  setHint('Sending photo…');
+  const list = Array.from(files || []).slice(0, SHOP_PHOTO_MAX);
+  if (!list.length) return;
+  if ((files || []).length > SHOP_PHOTO_MAX) toast('Only the first ' + SHOP_PHOTO_MAX + ' photos were sent.');
+  const plural = list.length > 1;
+  setHint('Sending ' + list.length + (plural ? ' photos…' : ' photo…'));
   try {
-    const b64 = await resizeImageToB64(file);
     const id = 'inbox-' + Date.now().toString(36) + '-' + Math.floor(Math.random() * 1e4).toString(36);
-    const imagePath = 'data/inbox/' + id + '.jpg';
-    await ghPutB64(imagePath, b64, 'Inbox shopping-list photo ' + id);
+    const paths = [];
+    for (let i = 0; i < list.length; i++) {
+      const b64 = await resizeImageToB64(list[i]);
+      const p = 'data/inbox/' + id + '-' + (i + 1) + '.jpg';
+      await ghPutB64(p, b64, 'Inbox shopping-list photo ' + id + ' (' + (i + 1) + '/' + list.length + ')');
+      paths.push(p);
+    }
     const entry = {
-      id, type: 'shopping-list', url: null, image: imagePath, file: null, note: null, text: null,
+      id, type: 'shopping-list', url: null, image: paths[0], images: paths, file: null, note: null, text: null,
       status: 'pending', created_at: new Date().toISOString(),
       recipe_id: null, fail_reason: null
     };
@@ -4330,10 +4341,10 @@ async function sendShopListPhoto(file) {
     try { idx = JSON.parse((await ghGet('data/inbox/index.json')).text); } catch (e) { idx = []; }
     idx.push(entry);
     await ghPut('data/inbox/index.json', JSON.stringify(idx, null, 2), 'Inbox index ' + id);
-    setHint('Photo sent — the items will be added to this list within about 30 minutes.');
-    toast('List photo sent!');
+    setHint((plural ? 'Photos' : 'Photo') + ' sent — the items will be added to this list within about 30 minutes.');
+    toast('List photo' + (plural ? 's' : '') + ' sent!');
   } catch (e) {
-    setHint('Couldn’t send that photo: ' + (e.message || e) + ' — try again.');
+    setHint('Couldn’t send ' + (plural ? 'those photos' : 'that photo') + ': ' + (e.message || e) + ' — try again.');
   }
 }
 
