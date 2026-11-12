@@ -1,0 +1,115 @@
+{
+  "id": "feta-pasta",
+  "title": "Feta Pasta",
+  "kosher_status": "dairy",
+  "kosher_for_passover": false,
+  "categories": [
+    "Main Dishes"
+  ],
+  "prep_minutes": 10,
+  "cook_minutes": 30,
+  "servings": "4",
+  "ingredients": [
+    {
+      "section": "Feta Pasta",
+      "items": [
+        {
+          "qty": "2",
+          "unit": "pint",
+          "item": "cherry tomatoes",
+          "prep": "halved"
+        },
+        {
+          "qty": "2-3",
+          "unit": "cloves",
+          "item": "garlic",
+          "prep": "crushed"
+        },
+        {
+          "qty": "1/3",
+          "unit": "cup",
+          "item": "olive oil",
+          "prep": "divided"
+        },
+        {
+          "qty": "1",
+          "unit": "tsp",
+          "item": "red pepper flakes",
+          "prep": "divided"
+        },
+        {
+          "qty": "1/4",
+          "unit": "cup",
+          "item": "fresh basil",
+          "prep": "torn"
+        },
+        {
+          "qty": "1/2",
+          "unit": "tsp",
+          "item": "black pepper",
+          "prep": ""
+        },
+        {
+          "qty": "1/2",
+          "unit": "tsp",
+          "item": "garlic powder",
+          "prep": "",
+          "optional": true
+        },
+        {
+          "qty": "8",
+          "unit": "oz",
+          "item": "feta cheese",
+          "prep": "1 block"
+        },
+        {
+          "qty": "12",
+          "unit": "oz",
+          "item": "pasta",
+          "prep": ""
+        }
+      ]
+    }
+  ],
+  "instructions": [
+    "Preheat the oven to 425°F.",
+    "Cut the tomatoes in half and place them in a glass baking dish.",
+    "Crush the garlic over the tomatoes. Drizzle with enough olive oil to coat, then add the red pepper flakes, basil, and black pepper (plus the garlic powder, if using). Toss to mix.",
+    "Place the feta block in the middle of the dish. Drizzle a little more olive oil and red pepper flakes over the top.",
+    "Bake for 30 minutes, until the tomatoes have burst and the feta is soft and lightly golden at the edges. About halfway through, gently smash the tomatoes a bit with a spoon.",
+    "Meanwhile, cook the pasta according to the package directions; drain.",
+    "When the feta and tomatoes come out of the oven, stir them together into a creamy sauce, then add the drained pasta and toss to coat. Serve immediately."
+  ],
+  "tips": [
+    {
+      "title": "Loosen the sauce if needed",
+      "text": "Save a splash of the pasta cooking water before draining — stir a little in if the sauce is thicker than you'd like."
+    }
+  ],
+  "tags": [
+    "pasta",
+    "feta",
+    "baked",
+    "weeknight",
+    "vegetarian"
+  ],
+  "notes": "Dairy recipe (feta). The submission gave no quantities except the garlic (2-3 cloves), so the amounts follow the standard version of this dish — adjust to taste. The basil amount is also estimated.",
+  "source": "Pasted text submission",
+  "banner_image": "assets/images/feta-pasta.jpg",
+  "pdf": "pdfs/feta-pasta.pdf",
+  "photo_generated": false,
+  "leftover_friendly": true,
+  "tags_need_review": true,
+  "search_text": "feta pasta dairy main dishes feta pasta baked cherry tomatoes garlic olive oil red pepper flakes basil black pepper garlic powder pasta",
+  "history": [
+    {
+      "ts": "2026-11-12T05:41:20.996Z",
+      "actor": "sous-chef",
+      "action": "intake",
+      "changes": [
+        "Created recipe"
+      ],
+      "reasoning": "Initial intake"
+    }
+  ]
+}
