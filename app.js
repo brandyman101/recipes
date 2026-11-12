@@ -2115,8 +2115,9 @@ function pluralizeScaledUnit(unit, formattedQty) {
 /* ---------------- Cooking mode ---------------- */
 // Big-touch cooking view for the kitchen: tap ingredients to check them
 // off as they're used, tap a step to mark it done, and run a countdown
-// timer on any step (steps that mention a time, e.g. "bake 25 minutes",
-// get that time as a suggested preset). Checks, done steps, and timers
+// timer on steps that mention a time (e.g. "bake 25 minutes" gets that
+// time as a suggested preset; steps without a time get no timer).
+// Checks, done steps, and timers
 // live in sessionStorage, so a refresh mid-cook doesn't lose them, but
 // they don't linger into the next cook. Timers keep running if you leave
 // the view — they beep, vibrate, and flash the tab title when they finish.
@@ -2444,13 +2445,15 @@ function renderCookMode(app, r, factor) {
         (i.optional ? ' <em class="opt-tag">optional</em>' : '') + '</li>';
     }).join('') + '</ul>'
   ).join('');
+  // Only steps that mention a time get a timer (Avi's request, 2026-11-12).
   const stepsHTML = (r.instructions || []).map((s, i) => {
     const suggest = parseStepTime(s);
     return '<li class="cook-step' + (checkedSteps.has(String(i)) ? ' done' : '') + '" data-step-idx="' + i + '">' +
       '<div class="cook-step-top"><span class="cook-step-num">' + (i + 1) + '</span>' +
       '<p class="cook-step-text" data-cook-act="step" data-step="' + i + '" tabindex="0">' + esc(s) + '</p></div>' +
-      '<div class="cook-timer-zone" data-timer-zone="' + esc(r.id) + '" data-step="' + i + '"' +
-        (suggest ? ' data-suggest="' + suggest + '"' : '') + '></div></li>';
+      (suggest
+        ? '<div class="cook-timer-zone" data-timer-zone="' + esc(r.id) + '" data-step="' + i + '" data-suggest="' + suggest + '"></div>'
+        : '') + '</li>';
   }).join('');
 
   app.innerHTML =
@@ -2460,7 +2463,7 @@ function renderCookMode(app, r, factor) {
         '<button class="btn secondary" id="cook-reset" type="button">Reset</button>' +
       '</div>' +
       '<h1 class="cook-title">' + esc(r.title) + '</h1>' +
-      '<p class="cook-hint muted">Tap an ingredient when you\'ve used it. Tap a step to mark it done. Set a timer on any step — it keeps running even if you leave this view.</p>' +
+      '<p class="cook-hint muted">Tap an ingredient when you\'ve used it. Tap a step to mark it done. Steps that mention a time have a timer — it keeps running even if you leave this view.</p>' +
       '<div class="cook-summary empty" id="cook-summary"></div>' +
       '<h2 class="cook-sec-title">Ingredients <span class="cook-count-label" id="cook-ing-count" data-total="' + ingTotal + '"></span></h2>' +
       ingHTML +
@@ -2616,7 +2619,8 @@ async function renderRecipe(app, id) {
       accOpen('Ingredients', scaleBarHTML() + ingHTML) +
       accOpen('Instructions', '<ol class="steps">' +
         (r.instructions || []).map(s => '<li>' + esc(s) + '</li>').join('') +
-      '</ol>') +
+      '</ol>' +
+      '<div class="cook-start-wrap"><button class="btn" id="cook-btn" type="button">🍳 Start cooking</button></div>') +
       tipsHTML +
       pairHTML +
       '<section class="recipe-section"><h2>Leftovers</h2>' +
@@ -2627,7 +2631,6 @@ async function renderRecipe(app, id) {
         ? '<p class="source-line">' + esc([r.notes, r.source].filter(Boolean).join(' — ')) + '</p>'
         : '') +
       '<div class="actions no-print">' +
-        '<button class="btn" id="cook-btn" type="button">🍳 Start cooking</button>' +
         '<button class="btn" id="plan-btn" type="button">+ Add to planner</button>' +
         '<button class="btn secondary" id="fav-page-btn" type="button">' + (isFavorite(id) ? '♥ Favorited' : '♡ Favorite') + '</button>' +
         '<button class="btn secondary" id="noah-btn" type="button">' + (r.noahs_favorite ? '★ Noah\'s favorite' : '☆ Noah\'s favorite') + '</button>' +
