@@ -1183,7 +1183,7 @@ function tilesHTML() {
     const img = (rs.find(r => r.banner_image) || {}).banner_image || '';
     out.push(tile(k[0].toUpperCase() + k.slice(1), rs.length, img, 'kosher:' + k));
   });
-  allCats().forEach(c => {
+  TILE_CATS.forEach(c => {
     const rs = recipes.filter(r => (r.categories || []).map(canonCat).includes(c));
     if (!rs.length) return;
     const img = (rs.find(r => r.banner_image) || {}).banner_image || '';
@@ -1325,21 +1325,29 @@ function shoppingListHTML() {
 /* ---------------- Home: search / filter / grid ---------------- */
 // Category display names: merge near-duplicates so "Appetizer", "appetizer"
 // and "Appetizers" show as a single tile ("Appetizers"), "Main", "Mains"
-// and "Main Dishes" show as one tile ("Main Dishes"), and "Salad"/"Salads"
-// as one tile ("Salads"). Anything else is title-cased, so a lowercase
-// "chicken" or "soup" from an old submission merges with "Chicken"/"Soup".
+// and "Main Dishes" show as one tile ("Main Dishes"), "Salad"/"Salads"
+// as one tile ("Salads"), and "Soup"/"Soups" as one tile ("Soups").
+// Anything else is title-cased, so a lowercase "chicken" from an old
+// submission merges with "Chicken".
 const canonCat = c => {
   const t = String(c || '').trim();
   if (/^appetizers?$/i.test(t)) return 'Appetizers';
   if (/^mains?$|^main dish(es)?$/i.test(t)) return 'Main Dishes';
   if (/^salads?$/i.test(t)) return 'Salads';
+  if (/^soups?$/i.test(t)) return 'Soups';
   return t.toLowerCase().split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 };
+// The only category tiles shown under "Browse recipes" (Avi's list,
+// 2026-11-12, in his order). Recipes in other categories (Breakfast,
+// Brunch, Chicken, Fish, Meat & Poultry, …) still show under All and
+// under the Meat/Dairy/Pareve tiles — they just get no tile of their own.
+const TILE_CATS = ['Main Dishes', 'Soups', 'Salads', 'Side Dishes', 'Appetizers', 'Baked Goods'];
 const allTags = () => [...new Set(recipes.flatMap(r => r.tags || []))].sort();
 const allCats = () => [...new Set(recipes.flatMap(r => (r.categories || []).map(canonCat)))].sort();
 
 function renderRecipes(app) {
-  const tags = allTags(), cats = allCats();
+  const tags = allTags(), cats = TILE_CATS.filter(c =>
+    recipes.some(r => (r.categories || []).map(canonCat).includes(c)));
   app.innerHTML =
     '<section class="hero">' +
       '<p class="hero-slogan">Life\'s short, eat the good stuff.</p>' +
