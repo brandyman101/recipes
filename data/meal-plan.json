@@ -822,8 +822,9 @@
           "id": "mmwe7mocc19",
           "text": "T biscuits",
           "have": false,
-          "updatedAt": 1794527986620,
-          "updatedBy": "photo-list"
+          "updatedAt": 1794530802563,
+          "updatedBy": "photo-list",
+          "deleted": true
         }
       ],
       "haveGenerated": [],
