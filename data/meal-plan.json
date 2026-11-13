@@ -742,8 +742,9 @@
           "id": "mmwe7mocc9",
           "text": "Eggs sale",
           "have": false,
-          "updatedAt": 1794527986620,
-          "updatedBy": "photo-list"
+          "updatedAt": 1794530131163,
+          "updatedBy": "photo-list",
+          "deleted": true
         },
         {
           "id": "mmwe7mocc10",
