@@ -791,8 +791,9 @@
           "id": "mmwe7mocc15",
           "text": "Pasta (shells and penne for Avi)",
           "have": false,
-          "updatedAt": 1794527986620,
-          "updatedBy": "photo-list"
+          "updatedAt": 1794530450610,
+          "updatedBy": "photo-list",
+          "deleted": true
         },
         {
           "id": "mmwe7mocc16",
