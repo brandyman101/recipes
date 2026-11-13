@@ -721,15 +721,17 @@
           "id": "mmwe7mocc6",
           "text": "Noah's yogurt",
           "have": false,
-          "updatedAt": 1794527986620,
-          "updatedBy": "photo-list"
+          "updatedAt": 1794530307733,
+          "updatedBy": "photo-list",
+          "deleted": true
         },
         {
           "id": "mmwe7mocc7",
           "text": "Mommy's yogurt",
           "have": false,
-          "updatedAt": 1794527986620,
-          "updatedBy": "photo-list"
+          "updatedAt": 1794530308508,
+          "updatedBy": "photo-list",
+          "deleted": true
         },
         {
           "id": "mmwe7mocc8",
@@ -751,8 +753,9 @@
           "id": "mmwe7mocc10",
           "text": "Mini frozen pancakes for Noah",
           "have": false,
-          "updatedAt": 1794527986620,
-          "updatedBy": "photo-list"
+          "updatedAt": 1794530309358,
+          "updatedBy": "photo-list",
+          "deleted": true
         },
         {
           "id": "mmwe7mocc11",
