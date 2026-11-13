@@ -761,8 +761,9 @@
           "id": "mmwe7mocc11",
           "text": "Frozen pizza dough sale",
           "have": false,
-          "updatedAt": 1794527986620,
-          "updatedBy": "photo-list"
+          "updatedAt": 1794530340798,
+          "updatedBy": "photo-list",
+          "deleted": true
         },
         {
           "id": "mmwe7mocc12",
