@@ -769,8 +769,9 @@
           "id": "mmwe7mocc12",
           "text": "Pizza stars",
           "have": false,
-          "updatedAt": 1794527986620,
-          "updatedBy": "photo-list"
+          "updatedAt": 1794530353734,
+          "updatedBy": "photo-list",
+          "deleted": true
         },
         {
           "id": "mmwe7mocc13",
