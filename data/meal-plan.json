@@ -708,8 +708,9 @@
           "id": "mmwe7mocc5",
           "text": "One gallon of Noah's milk",
           "have": false,
-          "updatedAt": 1794527986620,
-          "updatedBy": "photo-list"
+          "updatedAt": 1794529292354,
+          "updatedBy": "photo-list",
+          "deleted": true
         },
         {
           "id": "mmwe7mocc6",
