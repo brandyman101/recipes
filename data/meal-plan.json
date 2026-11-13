@@ -673,15 +673,17 @@
           "id": "mmwe7mocc0",
           "text": "Tomatoes",
           "have": false,
-          "updatedAt": 1794527986620,
-          "updatedBy": "photo-list"
+          "updatedAt": 1794529819353,
+          "updatedBy": "photo-list",
+          "deleted": true
         },
         {
           "id": "mmwe7mocc1",
           "text": "Red grapes sale",
           "have": false,
-          "updatedAt": 1794527986620,
-          "updatedBy": "photo-list"
+          "updatedAt": 1794529820130,
+          "updatedBy": "photo-list",
+          "deleted": true
         },
         {
           "id": "mmwe7mocc2",
