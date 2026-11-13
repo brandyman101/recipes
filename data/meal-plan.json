@@ -687,8 +687,9 @@
           "id": "mmwe7mocc2",
           "text": "Berries (maybe raspberries are cheaper)",
           "have": false,
-          "updatedAt": 1794527986620,
-          "updatedBy": "photo-list"
+          "updatedAt": 1794529715276,
+          "updatedBy": "photo-list",
+          "deleted": true
         },
         {
           "id": "mmwe7mocc3",
