@@ -801,8 +801,9 @@
           "id": "mmwe7mocc16",
           "text": "Bowl and basket crackers sale",
           "have": false,
-          "updatedAt": 1794527986620,
-          "updatedBy": "photo-list"
+          "updatedAt": 1794536326425,
+          "updatedBy": "photo-list",
+          "deleted": true
         },
         {
           "id": "mmwe7mocc17",
@@ -829,7 +830,7 @@
       ],
       "haveGenerated": [],
       "skipSpices": false,
-      "skipSpicesAt": 1794464601656,
+      "skipSpicesAt": 1794536328922,
       "optionalPromoted": []
     },
     "2026-11-01": {
