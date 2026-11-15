@@ -1,0 +1,95 @@
+{
+  "banner_image": "assets/images/mante.jpg",
+  "categories": [
+    "Main Dishes"
+  ],
+  "cook_minutes": 60,
+  "id": "mante",
+  "ingredients": [
+    {
+      "items": [
+        {
+          "item": "meat (round steak or side steak)",
+          "prep": "chopped",
+          "qty": "2",
+          "unit": "lb"
+        },
+        {
+          "item": "medium onions",
+          "prep": "chopped",
+          "qty": "2",
+          "unit": ""
+        },
+        {
+          "item": "dumpling wrappers",
+          "prep": "",
+          "qty": "2",
+          "unit": "package"
+        },
+        {
+          "item": "salt",
+          "prep": "",
+          "qty": "1/2",
+          "unit": "tsp"
+        },
+        {
+          "item": "pepper",
+          "prep": "",
+          "qty": "",
+          "unit": ""
+        }
+      ],
+      "section": "Mante"
+    }
+  ],
+  "instructions": [
+    "Combine the chopped meat, onions, salt, and pepper.",
+    "Use a wet paper towel to dampen the dumpling wrappers.",
+    "Fill each dumpling wrapper with about 1 tablespoon of the meat mixture and seal the dumpling.",
+    "Place the filled dumplings on a tray lined with nonstick aluminum foil and freeze.",
+    "When ready to cook, bring water to a boil in the steamer and add about 1 tablespoon of salt to the boiling water.",
+    "Place the frozen dumplings in the steamer trays and steam for about 45 minutes to 1 hour.",
+    "Transfer to a plate and spray a little oil on each mante. Serve and enjoy!"
+  ],
+  "kosher_for_passover": false,
+  "kosher_status": "meat",
+  "leftover_friendly": true,
+  "notes": "Family recipe from a photo of a handwritten page (signed \"Babanina\"). The dumplings are filled, frozen, then steamed straight from frozen. Prep time, cook time, and servings are estimated: the source gives no servings, and the 45–60 minute steam is the cook time. The photo on the submitted page is a family snapshot, not the dish, so the banner photo is a web photo of steamed manti with yogurt.",
+  "pdf": "pdfs/mante.pdf",
+  "photo_generated": false,
+  "prep_minutes": 35,
+  "search_text": "mante meat armenian manti dumplings steamed main dishes freezer-friendly make-ahead",
+  "servings": "8",
+  "source": "Photo of handwritten recipe page",
+  "tags": [
+    "armenian",
+    "dumplings",
+    "manti",
+    "steamed",
+    "freezer-friendly",
+    "make-ahead"
+  ],
+  "tags_need_review": false,
+  "tips": [
+    {
+      "text": "The filled dumplings go straight from the freezer into the steamer, so make a big batch and freeze what you don't cook right away.",
+      "title": "Freeze first, steam later"
+    },
+    {
+      "text": "The recipe calls for a steamer with trays — the dumplings steam from frozen for 45 minutes to 1 hour.",
+      "title": "You'll need a steamer"
+    }
+  ],
+  "title": "Mante",
+  "history": [
+    {
+      "ts": "2026-11-15T22:43:16.561Z",
+      "actor": "sous-chef",
+      "action": "intake",
+      "changes": [
+        "Created recipe"
+      ],
+      "reasoning": "Initial intake"
+    }
+  ]
+}
