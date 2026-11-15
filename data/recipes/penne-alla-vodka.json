@@ -1,0 +1,144 @@
+{
+  "id": "penne-alla-vodka",
+  "title": "Penne Alla Vodka",
+  "kosher_status": "dairy",
+  "kosher_for_passover": false,
+  "categories": [
+    "Main Dishes"
+  ],
+  "prep_minutes": 10,
+  "cook_minutes": 40,
+  "servings": "4",
+  "ingredients": [
+    {
+      "section": "Penne Alla Vodka",
+      "items": [
+        {
+          "qty": "12-16",
+          "unit": "oz",
+          "item": "penne noodles",
+          "prep": "cooked"
+        },
+        {
+          "qty": "3",
+          "unit": "tbsp",
+          "item": "butter",
+          "prep": ""
+        },
+        {
+          "qty": "1",
+          "unit": "tbsp",
+          "item": "olive oil",
+          "prep": ""
+        },
+        {
+          "qty": "4",
+          "unit": "cloves",
+          "item": "garlic",
+          "prep": "chopped"
+        },
+        {
+          "qty": "1",
+          "unit": "",
+          "item": "medium onion",
+          "prep": "chopped"
+        },
+        {
+          "qty": "1/4",
+          "unit": "tsp",
+          "item": "red pepper flakes",
+          "prep": "crushed"
+        },
+        {
+          "qty": "3/4",
+          "unit": "cup",
+          "item": "vodka",
+          "prep": ""
+        },
+        {
+          "qty": "1",
+          "unit": "can",
+          "item": "tomato sauce (15 oz)",
+          "prep": ""
+        },
+        {
+          "qty": "",
+          "unit": "",
+          "item": "salt",
+          "prep": "",
+          "optional": true
+        },
+        {
+          "qty": "",
+          "unit": "",
+          "item": "black pepper",
+          "prep": "",
+          "optional": true
+        },
+        {
+          "qty": "1",
+          "unit": "cup",
+          "item": "heavy cream",
+          "prep": ""
+        },
+        {
+          "qty": "",
+          "unit": "",
+          "item": "parmesan cheese",
+          "prep": "grated, for serving",
+          "optional": true
+        },
+        {
+          "qty": "",
+          "unit": "",
+          "item": "basil",
+          "prep": "",
+          "optional": true
+        }
+      ]
+    }
+  ],
+  "instructions": [
+    "Cook the noodles according to the package directions.",
+    "Melt the butter and olive oil together in a saucepan over medium heat.",
+    "Add the onions, garlic, and red pepper flakes. Cook until the onion is translucent, about 7 to 10 minutes.",
+    "Add the vodka and allow the alcohol to cook out, about 15 minutes.",
+    "Add the tomato sauce, salt, and pepper. Bring to a simmer for an additional 5 minutes.",
+    "Add the heavy cream and stir to combine. Don't allow the sauce to become too hot or the cream could break or curdle.",
+    "Bring the sauce to a simmer again and remove from heat.",
+    "Combine the sauce with the noodles and toss to coat.",
+    "Top with grated parmesan and serve immediately. Enjoy!"
+  ],
+  "tips": [
+    {
+      "title": "Keep the heat gentle after the cream goes in",
+      "text": "If the sauce gets too hot once the cream is added, it can break or curdle — simmer briefly, then take it off the heat."
+    }
+  ],
+  "tags": [
+    "pasta",
+    "penne",
+    "vodka sauce",
+    "tomato",
+    "cream"
+  ],
+  "notes": "From the wedding cookbook. The basil is optional in the source ('Can add basil also — ask mommy how much'). The photo on the submitted page is a family snapshot, not the dish, so the banner photo is a web photo of penne alla vodka.",
+  "source": "Photo of recipe page (wedding cookbook)",
+  "banner_image": "assets/images/penne-alla-vodka.jpg",
+  "pdf": "pdfs/penne-alla-vodka.pdf",
+  "leftover_friendly": true,
+  "photo_generated": false,
+  "tags_need_review": false,
+  "search_text": "penne alla vodka dairy pasta tomato cream main dishes",
+  "history": [
+    {
+      "ts": "2026-11-15T23:27:20.188Z",
+      "actor": "sous-chef",
+      "action": "intake",
+      "changes": [
+        "Created recipe"
+      ],
+      "reasoning": "Initial intake"
+    }
+  ]
+}
