@@ -343,9 +343,9 @@
     "file": null,
     "note": "Savti\u2019s Green Rice",
     "text": null,
-    "status": "pending",
+    "status": "done",
     "created_at": "2026-11-15T23:02:26.466Z",
-    "recipe_id": null,
+    "recipe_id": "savtis-green-rice",
     "fail_reason": null
   },
   {
