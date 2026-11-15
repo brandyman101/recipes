@@ -706,5 +706,28 @@
     "tags_need_review": false,
     "photo_generated": false,
     "search_text": "penne alla vodka dairy pasta tomato cream main dishes"
+  },
+  {
+    "id": "cucumber-salad",
+    "title": "Cucumber Salad",
+    "banner_image": "assets/images/cucumber-salad.jpg",
+    "kosher_status": "pareve",
+    "kosher_for_passover": false,
+    "categories": [
+      "Salads"
+    ],
+    "tags": [
+      "cucumber",
+      "salad",
+      "dill",
+      "lemon"
+    ],
+    "prep_minutes": 10,
+    "cook_minutes": 0,
+    "servings": "6",
+    "leftover_friendly": false,
+    "tags_need_review": false,
+    "photo_generated": false,
+    "search_text": "cucumber salad pareve salads dill lemon red onion"
   }
 ]
