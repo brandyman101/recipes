@@ -658,5 +658,29 @@
     "tags_need_review": false,
     "photo_generated": false,
     "search_text": "dill potatoes pareve side dishes roasted"
+  },
+  {
+    "id": "vegetable-manicotti",
+    "title": "Vegetable Manicotti",
+    "banner_image": "assets/images/vegetable-manicotti.jpg",
+    "kosher_status": "dairy",
+    "kosher_for_passover": false,
+    "categories": [
+      "Main Dishes"
+    ],
+    "tags": [
+      "vegetarian",
+      "pasta",
+      "baked",
+      "zucchini",
+      "ricotta"
+    ],
+    "prep_minutes": 20,
+    "cook_minutes": 55,
+    "servings": "14",
+    "leftover_friendly": true,
+    "tags_need_review": false,
+    "photo_generated": false,
+    "search_text": "vegetable manicotti dairy vegetarian pasta baked zucchini ricotta marinara main dishes"
   }
 ]
