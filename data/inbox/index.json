@@ -328,9 +328,9 @@
     "file": null,
     "note": null,
     "text": null,
-    "status": "pending",
+    "status": "done",
     "created_at": "2026-11-15T23:01:27.165Z",
-    "recipe_id": null,
+    "recipe_id": "coca-cola-meatballs",
     "fail_reason": null
   },
   {
@@ -341,7 +341,7 @@
       "data/inbox/inbox-mwifwghb-7kp-1.jpg"
     ],
     "file": null,
-    "note": "Savti’s Green Rice",
+    "note": "Savti\u2019s Green Rice",
     "text": null,
     "status": "pending",
     "created_at": "2026-11-15T23:02:26.466Z",
@@ -371,7 +371,7 @@
       "data/inbox/inbox-mwify9d6-7mr-1.jpg"
     ],
     "file": null,
-    "note": "Arielle’s Sprinkle Cookies",
+    "note": "Arielle\u2019s Sprinkle Cookies",
     "text": null,
     "status": "pending",
     "created_at": "2026-11-15T23:03:50.634Z",
@@ -386,7 +386,7 @@
       "data/inbox/inbox-mwig04ky-4h3-1.jpg"
     ],
     "file": null,
-    "note": "Nava’s Asian Garlic Green Beans",
+    "note": "Nava\u2019s Asian Garlic Green Beans",
     "text": null,
     "status": "pending",
     "created_at": "2026-11-15T23:05:17.568Z",
