@@ -6,10 +6,10 @@
     "data/inbox/inbox-mwig04ky-4h3-1.jpg"
   ],
   "file": null,
-  "note": "Nava’s Asian Garlic Green Beans",
+  "note": "Nava\u2019s Asian Garlic Green Beans",
   "text": null,
-  "status": "pending",
+  "status": "failed",
   "created_at": "2026-11-15T23:05:17.568Z",
   "recipe_id": null,
-  "fail_reason": null
+  "fail_reason": "Remote end closed connection without response"
 }
