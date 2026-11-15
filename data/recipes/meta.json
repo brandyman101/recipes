@@ -682,5 +682,29 @@
     "tags_need_review": false,
     "photo_generated": false,
     "search_text": "vegetable manicotti dairy vegetarian pasta baked zucchini ricotta marinara main dishes"
+  },
+  {
+    "id": "penne-alla-vodka",
+    "title": "Penne Alla Vodka",
+    "banner_image": "assets/images/penne-alla-vodka.jpg",
+    "kosher_status": "dairy",
+    "kosher_for_passover": false,
+    "categories": [
+      "Main Dishes"
+    ],
+    "tags": [
+      "pasta",
+      "penne",
+      "vodka sauce",
+      "tomato",
+      "cream"
+    ],
+    "prep_minutes": 10,
+    "cook_minutes": 40,
+    "servings": "4",
+    "leftover_friendly": true,
+    "tags_need_review": false,
+    "photo_generated": false,
+    "search_text": "penne alla vodka dairy pasta tomato cream main dishes"
   }
 ]
