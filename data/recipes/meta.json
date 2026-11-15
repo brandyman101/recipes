@@ -612,5 +612,29 @@
     "tags_need_review": false,
     "photo_generated": false,
     "search_text": "arielle's sprinkle cookies pareve baked goods dessert cookies"
+  },
+  {
+    "id": "navas-asian-garlic-green-beans",
+    "title": "Nava's Asian Garlic Green Beans",
+    "banner_image": "assets/images/navas-asian-garlic-green-beans.jpg",
+    "kosher_status": "pareve",
+    "kosher_for_passover": false,
+    "categories": [
+      "Side Dishes"
+    ],
+    "tags": [
+      "asian",
+      "garlic",
+      "green beans",
+      "sesame",
+      "teriyaki"
+    ],
+    "prep_minutes": 10,
+    "cook_minutes": 10,
+    "servings": "4",
+    "leftover_friendly": false,
+    "tags_need_review": false,
+    "photo_generated": false,
+    "search_text": "nava's asian garlic green beans pareve side dishes sesame teriyaki"
   }
 ]
