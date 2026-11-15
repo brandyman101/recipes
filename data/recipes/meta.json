@@ -636,5 +636,27 @@
     "tags_need_review": false,
     "photo_generated": false,
     "search_text": "nava's asian garlic green beans pareve side dishes sesame teriyaki"
+  },
+  {
+    "id": "dill-potatoes",
+    "title": "Dill Potatoes",
+    "banner_image": "assets/images/dill-potatoes.jpg",
+    "kosher_status": "pareve",
+    "kosher_for_passover": false,
+    "categories": [
+      "Side Dishes"
+    ],
+    "tags": [
+      "potatoes",
+      "dill",
+      "side dish"
+    ],
+    "prep_minutes": 10,
+    "cook_minutes": 35,
+    "servings": "4",
+    "leftover_friendly": false,
+    "tags_need_review": false,
+    "photo_generated": false,
+    "search_text": "dill potatoes pareve side dishes roasted"
   }
 ]
