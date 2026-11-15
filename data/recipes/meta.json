@@ -589,5 +589,28 @@
     "tags_need_review": false,
     "photo_generated": false,
     "search_text": "zucchini stuffed chicken meat honey baked main dishes"
+  },
+  {
+    "id": "arielles-sprinkle-cookies",
+    "title": "Arielle's Sprinkle Cookies",
+    "banner_image": "assets/images/arielle-sprinkle-cookies.jpg",
+    "kosher_status": "pareve",
+    "kosher_for_passover": false,
+    "categories": [
+      "Baked Goods"
+    ],
+    "tags": [
+      "cookies",
+      "sprinkles",
+      "dessert",
+      "kids"
+    ],
+    "prep_minutes": 15,
+    "cook_minutes": 30,
+    "servings": "24",
+    "leftover_friendly": false,
+    "tags_need_review": false,
+    "photo_generated": false,
+    "search_text": "arielle's sprinkle cookies pareve baked goods dessert cookies"
   }
 ]
