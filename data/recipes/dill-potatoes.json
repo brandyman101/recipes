@@ -1,0 +1,88 @@
+{
+  "kosher_for_passover": false,
+  "leftover_friendly": false,
+  "photo_generated": false,
+  "tags_need_review": false,
+  "tips": [],
+  "id": "dill-potatoes",
+  "title": "Dill Potatoes",
+  "kosher_status": "pareve",
+  "categories": [
+    "Side Dishes"
+  ],
+  "prep_minutes": 10,
+  "cook_minutes": 35,
+  "servings": "4",
+  "ingredients": [
+    {
+      "section": "Dill Potatoes",
+      "items": [
+        {
+          "qty": "",
+          "unit": "",
+          "item": "red or gold potatoes (not russet)",
+          "prep": ""
+        },
+        {
+          "qty": "",
+          "unit": "",
+          "item": "fresh dill",
+          "prep": ""
+        },
+        {
+          "qty": "",
+          "unit": "",
+          "item": "olive oil",
+          "prep": ""
+        },
+        {
+          "qty": "",
+          "unit": "",
+          "item": "salt",
+          "prep": ""
+        },
+        {
+          "qty": "",
+          "unit": "",
+          "item": "pepper",
+          "prep": ""
+        },
+        {
+          "qty": "",
+          "unit": "",
+          "item": "margarine",
+          "prep": "",
+          "optional": true
+        }
+      ]
+    }
+  ],
+  "instructions": [
+    "Cut the potatoes into halves or equal sizes. Place in cold water and set to boil.",
+    "Boil until fork tender.",
+    "Remove from the water and cut into quarters or bite sized pieces. Chop the fresh dill.",
+    "Mix the potatoes with enough fresh dill to coat, sprinkle more salt than you think you need, pepper, and olive oil, and a few pats of margarine if using. Mix.",
+    "Place in a pan and bake at 350 for 10-15 minutes to wilt the dill. Or return to the pot at low heat and mix occasionally until the dill is wilted."
+  ],
+  "tags": [
+    "potatoes",
+    "dill",
+    "side dish"
+  ],
+  "notes": "From the family cookbook. The source gives no quantities — season and scale to taste. Margarine is optional (the author likes Earth Balance). The photo on the submitted page is a family snapshot, not the dish, so the banner photo is a web photo of dill potatoes.",
+  "source": "Photo of recipe page (family cookbook)",
+  "banner_image": "assets/images/dill-potatoes.jpg",
+  "pdf": "pdfs/dill-potatoes.pdf",
+  "search_text": "dill potatoes pareve side dishes roasted",
+  "history": [
+    {
+      "ts": "2026-11-15T23:18:43.192Z",
+      "actor": "sous-chef",
+      "action": "intake",
+      "changes": [
+        "Created recipe"
+      ],
+      "reasoning": "Initial intake"
+    }
+  ]
+}
