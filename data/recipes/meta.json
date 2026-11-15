@@ -565,5 +565,29 @@
     "tags_need_review": false,
     "photo_generated": false,
     "search_text": "savti's green rice persian green rice sabzi polo chicken dill cilantro basmati meat main dishes"
+  },
+  {
+    "id": "zucchini-stuffed-chicken",
+    "title": "Zucchini Stuffed Chicken",
+    "banner_image": "assets/images/zucchini-stuffed-chicken.jpg",
+    "kosher_status": "meat",
+    "kosher_for_passover": false,
+    "categories": [
+      "Main Dishes"
+    ],
+    "tags": [
+      "chicken",
+      "zucchini",
+      "stuffed",
+      "honey",
+      "baked"
+    ],
+    "prep_minutes": 25,
+    "cook_minutes": 60,
+    "servings": "4",
+    "leftover_friendly": false,
+    "tags_need_review": false,
+    "photo_generated": false,
+    "search_text": "zucchini stuffed chicken meat honey baked main dishes"
   }
 ]
