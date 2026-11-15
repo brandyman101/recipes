@@ -1,0 +1,115 @@
+{
+  "kosher_for_passover": false,
+  "leftover_friendly": true,
+  "photo_generated": false,
+  "tags_need_review": false,
+  "tips": [],
+  "id": "savtis-green-rice",
+  "title": "Savti's Green Rice",
+  "kosher_status": "meat",
+  "categories": [
+    "Main Dishes"
+  ],
+  "prep_minutes": 25,
+  "cook_minutes": 140,
+  "servings": "6",
+  "ingredients": [
+    {
+      "section": "Savti's Green Rice",
+      "items": [
+        {
+          "qty": "1",
+          "unit": "bunch",
+          "item": "fresh dill",
+          "prep": "chopped into small pieces"
+        },
+        {
+          "qty": "1",
+          "unit": "bunch",
+          "item": "fresh cilantro",
+          "prep": "chopped into small pieces",
+          "optional": true
+        },
+        {
+          "qty": "1",
+          "unit": "",
+          "item": "large Spanish onion",
+          "prep": ""
+        },
+        {
+          "qty": "1",
+          "unit": "package",
+          "item": "boneless baby chicken thighs",
+          "prep": ""
+        },
+        {
+          "qty": "2",
+          "unit": "tbsp",
+          "item": "oil",
+          "prep": ""
+        },
+        {
+          "qty": "1",
+          "unit": "tsp",
+          "item": "turmeric",
+          "prep": ""
+        },
+        {
+          "qty": "1",
+          "unit": "tsp",
+          "item": "salt",
+          "prep": ""
+        },
+        {
+          "qty": "1",
+          "unit": "tsp",
+          "item": "pepper",
+          "prep": ""
+        },
+        {
+          "qty": "3",
+          "unit": "cup",
+          "item": "basmati Persian rice",
+          "prep": ""
+        },
+        {
+          "qty": "1",
+          "unit": "tbsp",
+          "item": "lemon juice",
+          "prep": ""
+        }
+      ]
+    }
+  ],
+  "instructions": [
+    "Cut the onion into small pieces and sauté in a pot with 2 tablespoons of oil.",
+    "Cut the chicken into cubes and add to the onion and sauté.",
+    "Add 1 cup of water and the spices to the chicken and onions. Let cook for two hours.",
+    "In a separate pot, boil 6 cups of water and add the rice to the boiling water. Add lemon juice to the boiling water with the rice. Let the rice boil for 11 minutes until al dente.",
+    "Strain the rice. Add the dill and cilantro to the rice and mix thoroughly.",
+    "Pour the cooked chicken into the rice and let cook on low for 10 minutes."
+  ],
+  "tags": [
+    "persian",
+    "rice",
+    "chicken",
+    "herbs",
+    "sabzi-polo"
+  ],
+  "notes": "From the family cookbook (p. 21), signed 'Dalia Brandel'. The page is titled 'Persian Green Rice'; submitted as 'Savti's Green Rice'. The cilantro is optional in the source ('if you don't like cilantro you can omit'). The steps call for 2 tablespoons of oil for sautéing, which is listed above. The photo on the submitted page is a family snapshot, not the dish, so the banner photo is a web photo of sabzi polo.",
+  "source": "Photo of recipe page (family cookbook, p. 21)",
+  "banner_image": "assets/images/savtis-green-rice.jpg",
+  "pdf": "pdfs/savtis-green-rice.pdf",
+  "search_text": "savti's green rice persian green rice sabzi polo chicken dill cilantro basmati meat main dishes",
+  "history": [
+    {
+      "ts": "2026-11-15T23:22:37.032Z",
+      "actor": "sous-chef",
+      "action": "intake",
+      "changes": [
+        "Created recipe"
+      ],
+      "reasoning": "Initial intake"
+    }
+  ]
+}
