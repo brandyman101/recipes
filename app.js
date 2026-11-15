@@ -260,15 +260,75 @@ function closeModal() {
 /* ---------------- Write bridge ----------------
    Reads go straight to the public repo (no auth needed).
    Every write POSTs to the private bridge, which holds the GitHub
-   token securely and commits on the site's behalf. */
+   token securely and commits on the site's behalf. Writes also need
+   the shared secret code (see below), sent as a Bearer token. */
 const GH = 'https://api.github.com';
 
-async function bridgeSave(path, content, message, encoding) {
-  const res = await fetch(BRIDGE + '/save', {
+/* ---------------- Site secret code ----------------
+   Same idea as the budget app: a shared code is required to save
+   anything (submit, edit, meal plan, Noah's favorites). Entered once
+   per device, kept in localStorage, sent on every bridge POST. Reads
+   stay public. If a save gets a 401, ask for the code once and retry. */
+const SITE_CODE_KEY = 'brandel-code';
+function getSiteCode() {
+  try { return localStorage.getItem(SITE_CODE_KEY) || ''; } catch (e) { return ''; }
+}
+function setSiteCode(code) {
+  try {
+    if (code) localStorage.setItem(SITE_CODE_KEY, code);
+    else localStorage.removeItem(SITE_CODE_KEY);
+  } catch (e) {}
+  paintCodeBtn();
+}
+function paintCodeBtn() {
+  const b = document.getElementById('code-btn');
+  if (!b) return;
+  const has = !!getSiteCode();
+  b.classList.toggle('has-code', has);
+  b.setAttribute('aria-label', has ? 'Secret code saved — tap to change' : 'Enter secret code');
+  b.setAttribute('title', has ? 'Secret code saved — tap to change' : 'Enter secret code');
+}
+// Ask for the code. Cancel keeps the current one; OK with blank clears it.
+function promptSiteCode() {
+  const cur = getSiteCode();
+  const res = window.prompt('Secret code (needed to save anything on this site):', cur);
+  if (res === null) return cur;
+  const code = res.trim();
+  setSiteCode(code);
+  return code;
+}
+
+// POST to the bridge with the saved code; on 401, ask for the code once
+// and retry. Returns the fetch Response (callers check status).
+async function bridgePost(endpoint, bodyObj) {
+  const attempt = (code) => fetch(BRIDGE + endpoint, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ path, content, message, encoding: encoding || 'utf8' })
+    headers: {
+      'Content-Type': 'application/json',
+      ...(code ? { Authorization: 'Bearer ' + code } : {}),
+    },
+    body: JSON.stringify(bodyObj),
   });
+  let res = await attempt(getSiteCode());
+  if (res.status === 401) {
+    const code = promptSiteCode();
+    if (!code) {
+      const err = new Error('A secret code is needed to save. Tap 🔑 in the header to enter it.');
+      err.code = 401;
+      throw err;
+    }
+    res = await attempt(code);
+    if (res.status === 401) {
+      const err = new Error('That code didn\'t work. Tap 🔑 in the header to try again.');
+      err.code = 401;
+      throw err;
+    }
+  }
+  return res;
+}
+
+async function bridgeSave(path, content, message, encoding) {
+  const res = await bridgePost('/save', { path, content, message, encoding: encoding || 'utf8' });
   if (!res.ok) {
     let detail = '';
     try { detail = (await res.text()).slice(0, 160); } catch (e) {}
@@ -281,11 +341,7 @@ async function bridgeSave(path, content, message, encoding) {
    The worker fetches the live file, diffs, appends history, and commits.
    Throws with code 409 if base_sha doesn't match (someone else saved first). */
 async function bridgeSaveRecipe(path, recipe, actor, reasoning, baseSha, action) {
-  const res = await fetch(BRIDGE + '/save-recipe', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ path, recipe, actor, reasoning, base_sha: baseSha, action })
-  });
+  const res = await bridgePost('/save-recipe', { path, recipe, actor, reasoning, base_sha: baseSha, action });
   const data = await res.json().catch(() => ({}));
   if (res.status === 409) {
     const err = new Error(data.detail || 'Conflict');
@@ -317,11 +373,7 @@ function getEditorName() {
 }
 
 async function bridgeDelete(path, message) {
-  const res = await fetch(BRIDGE + '/delete', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ path, message })
-  });
+  const res = await bridgePost('/delete', { path, message });
   if (!res.ok) {
     let detail = '';
     try { detail = (await res.text()).slice(0, 160); } catch (e) {}
@@ -435,6 +487,19 @@ async function boot() {
       const on = !isDarkMode();
       setDarkMode(on);
       toast(on ? 'Dark mode on 🌙' : 'Light mode on ☀');
+    });
+  }
+
+  // Secret code button in the header (tap to enter or change the code).
+  paintCodeBtn();
+  const codeBtn = document.getElementById('code-btn');
+  if (codeBtn) {
+    codeBtn.addEventListener('click', () => {
+      const before = getSiteCode();
+      promptSiteCode();
+      const after = getSiteCode();
+      if (after && after !== before) toast('Secret code saved 🔑');
+      else if (!after && before) toast('Secret code cleared');
     });
   }
 
