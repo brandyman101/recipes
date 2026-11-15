@@ -1,0 +1,100 @@
+{
+  "kosher_for_passover": false,
+  "leftover_friendly": false,
+  "photo_generated": false,
+  "tags_need_review": false,
+  "tips": [],
+  "id": "arielles-sprinkle-cookies",
+  "title": "Arielle's Sprinkle Cookies",
+  "kosher_status": "pareve",
+  "categories": [
+    "Baked Goods"
+  ],
+  "prep_minutes": 15,
+  "cook_minutes": 30,
+  "servings": "24",
+  "ingredients": [
+    {
+      "section": "Arielle's Sprinkle Cookies",
+      "items": [
+        {
+          "qty": "1",
+          "unit": "cup",
+          "item": "sugar",
+          "prep": ""
+        },
+        {
+          "qty": "1",
+          "unit": "cup",
+          "item": "oil",
+          "prep": ""
+        },
+        {
+          "qty": "2",
+          "unit": "",
+          "item": "eggs",
+          "prep": ""
+        },
+        {
+          "qty": "2",
+          "unit": "tsp",
+          "item": "water",
+          "prep": ""
+        },
+        {
+          "qty": "2",
+          "unit": "tsp",
+          "item": "vanilla",
+          "prep": ""
+        },
+        {
+          "qty": "1",
+          "unit": "tsp",
+          "item": "baking powder",
+          "prep": ""
+        },
+        {
+          "qty": "3",
+          "unit": "cup",
+          "item": "flour",
+          "prep": ""
+        },
+        {
+          "qty": "",
+          "unit": "",
+          "item": "sprinkles",
+          "prep": ""
+        }
+      ]
+    }
+  ],
+  "instructions": [
+    "Preheat the oven to 350.",
+    "Pour the sugar and oil into a large bowl, mix. Add the eggs, water and vanilla and then mix.",
+    "Add the baking powder and flour and mix until there are no lumps.",
+    "Roll them into balls and then roll into sprinkles.",
+    "Put in the oven for 20-30 minutes. Enjoy!!"
+  ],
+  "tags": [
+    "cookies",
+    "sprinkles",
+    "dessert",
+    "kids"
+  ],
+  "notes": "From the family cookbook (p. 16), signed '- Arielle'. No yield is given; servings are estimated at about 24 cookies. The photo on the submitted page is a family snapshot, not the dish, so the banner photo is a web photo of sprinkle cookies.",
+  "source": "Photo of recipe page (family cookbook, p. 16)",
+  "banner_image": "assets/images/arielle-sprinkle-cookies.jpg",
+  "pdf": "pdfs/arielle-sprinkle-cookies.pdf",
+  "search_text": "arielle's sprinkle cookies pareve baked goods dessert cookies",
+  "history": [
+    {
+      "ts": "2026-11-15T23:23:19.538Z",
+      "actor": "sous-chef",
+      "action": "intake",
+      "changes": [
+        "Created recipe"
+      ],
+      "reasoning": "Initial intake"
+    }
+  ]
+}
