@@ -1,0 +1,101 @@
+{
+  "kosher_for_passover": false,
+  "leftover_friendly": false,
+  "photo_generated": false,
+  "tags_need_review": false,
+  "tips": [],
+  "id": "zucchini-stuffed-chicken",
+  "title": "Zucchini Stuffed Chicken",
+  "kosher_status": "meat",
+  "categories": [
+    "Main Dishes"
+  ],
+  "prep_minutes": 25,
+  "cook_minutes": 60,
+  "servings": "4",
+  "ingredients": [
+    {
+      "section": "Zucchini Stuffed Chicken",
+      "items": [
+        {
+          "qty": "3 1/2",
+          "unit": "lb",
+          "item": "chicken",
+          "prep": "quartered"
+        },
+        {
+          "qty": "3",
+          "unit": "",
+          "item": "medium zucchinis",
+          "prep": ""
+        },
+        {
+          "qty": "3",
+          "unit": "tbsp",
+          "item": "margarine",
+          "prep": ""
+        },
+        {
+          "qty": "3",
+          "unit": "",
+          "item": "day-old bread slices",
+          "prep": ""
+        },
+        {
+          "qty": "1",
+          "unit": "",
+          "item": "egg",
+          "prep": "slightly beaten"
+        },
+        {
+          "qty": "1/8",
+          "unit": "tsp",
+          "item": "pepper",
+          "prep": ""
+        },
+        {
+          "qty": "1/2",
+          "unit": "tsp",
+          "item": "salt",
+          "prep": ""
+        },
+        {
+          "qty": "1/2",
+          "unit": "cup",
+          "item": "honey",
+          "prep": ""
+        }
+      ]
+    }
+  ],
+  "instructions": [
+    "Rinse the chicken, remove excess fat, and pat dry.",
+    "Shred the unpeeled zucchini in a food processor or grate on the large holes of a hand grater.",
+    "In a 1 1/2-quart saucepan, melt the margarine and add the zucchini. Cook, stirring, about 3 minutes. Remove from heat. Grate or shred the bread into crumbs and add to the zucchini. Stir in the egg and seasonings, mixing well.",
+    "Preheat the oven to 400 degrees. Carefully loosen the skin on each chicken quarter to form a pocket and spoon 1/4 of the stuffing into each.",
+    "Brush each quarter with honey and bake for 60 minutes until tender."
+  ],
+  "tags": [
+    "chicken",
+    "zucchini",
+    "stuffed",
+    "honey",
+    "baked"
+  ],
+  "notes": "From the family cookbook (p. 13). Uses a 10-inch skillet, a 1 1/2-quart saucepan, and a roasting pan. The photo on the submitted page is a family snapshot, not the dish, so the banner photo is a web photo of zucchini-stuffed chicken.",
+  "source": "Photo of recipe page (family cookbook, p. 13)",
+  "banner_image": "assets/images/zucchini-stuffed-chicken.jpg",
+  "pdf": "pdfs/zucchini-stuffed-chicken.pdf",
+  "search_text": "zucchini stuffed chicken meat honey baked main dishes",
+  "history": [
+    {
+      "ts": "2026-11-15T23:18:25.368Z",
+      "actor": "sous-chef",
+      "action": "intake",
+      "changes": [
+        "Created recipe"
+      ],
+      "reasoning": "Initial intake"
+    }
+  ]
+}
