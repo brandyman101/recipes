@@ -302,5 +302,20 @@
     "created_at": "2026-11-15T22:36:21.892Z",
     "recipe_id": "mante",
     "fail_reason": null
+  },
+  {
+    "id": "inbox-mwifuag0-5vd",
+    "url": null,
+    "image": "data/inbox/inbox-mwifuag0-5vd-1.jpg",
+    "images": [
+      "data/inbox/inbox-mwifuag0-5vd-1.jpg"
+    ],
+    "file": null,
+    "note": null,
+    "text": null,
+    "status": "pending",
+    "created_at": "2026-11-15T23:00:45.183Z",
+    "recipe_id": null,
+    "fail_reason": null
   }
 ]
