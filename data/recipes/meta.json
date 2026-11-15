@@ -541,5 +541,29 @@
     "tags_need_review": false,
     "photo_generated": false,
     "search_text": "coca cola meatballs meat beef baked coca-cola main dishes"
+  },
+  {
+    "id": "savtis-green-rice",
+    "title": "Savti's Green Rice",
+    "banner_image": "assets/images/savtis-green-rice.jpg",
+    "kosher_status": "meat",
+    "kosher_for_passover": false,
+    "categories": [
+      "Main Dishes"
+    ],
+    "tags": [
+      "persian",
+      "rice",
+      "chicken",
+      "herbs",
+      "sabzi-polo"
+    ],
+    "prep_minutes": 25,
+    "cook_minutes": 140,
+    "servings": "6",
+    "leftover_friendly": true,
+    "tags_need_review": false,
+    "photo_generated": false,
+    "search_text": "savti's green rice persian green rice sabzi polo chicken dill cilantro basmati meat main dishes"
   }
 ]
