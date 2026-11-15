@@ -517,5 +517,29 @@
     "tags_need_review": false,
     "photo_generated": false,
     "search_text": "mante meat armenian manti dumplings steamed main dishes freezer-friendly make-ahead"
+  },
+  {
+    "id": "coca-cola-meatballs",
+    "title": "Coca Cola Meatballs",
+    "banner_image": "assets/images/coca-cola-meatballs.jpg",
+    "kosher_status": "meat",
+    "kosher_for_passover": false,
+    "categories": [
+      "Main Dishes"
+    ],
+    "tags": [
+      "meatballs",
+      "coca-cola",
+      "beef",
+      "baked",
+      "family"
+    ],
+    "prep_minutes": 20,
+    "cook_minutes": 60,
+    "servings": "15",
+    "leftover_friendly": true,
+    "tags_need_review": false,
+    "photo_generated": false,
+    "search_text": "coca cola meatballs meat beef baked coca-cola main dishes"
   }
 ]
