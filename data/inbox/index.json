@@ -377,5 +377,20 @@
     "created_at": "2026-11-15T23:03:50.634Z",
     "recipe_id": null,
     "fail_reason": null
+  },
+  {
+    "id": "inbox-mwig04ky-4h3",
+    "url": null,
+    "image": "data/inbox/inbox-mwig04ky-4h3-1.jpg",
+    "images": [
+      "data/inbox/inbox-mwig04ky-4h3-1.jpg"
+    ],
+    "file": null,
+    "note": "Nava’s Asian Garlic Green Beans",
+    "text": null,
+    "status": "pending",
+    "created_at": "2026-11-15T23:05:17.568Z",
+    "recipe_id": null,
+    "fail_reason": null
   }
 ]
