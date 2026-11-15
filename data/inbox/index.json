@@ -433,9 +433,9 @@
     "file": null,
     "note": "From wedding cookbook",
     "text": null,
-    "status": "pending",
+    "status": "done",
     "created_at": "2026-11-15T23:14:53.280Z",
-    "recipe_id": null,
+    "recipe_id": "penne-alla-vodka",
     "fail_reason": null
   }
 ]
