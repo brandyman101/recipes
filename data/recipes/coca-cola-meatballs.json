@@ -1,0 +1,124 @@
+{
+  "kosher_for_passover": false,
+  "leftover_friendly": true,
+  "photo_generated": false,
+  "tags_need_review": false,
+  "tips": [],
+  "id": "coca-cola-meatballs",
+  "title": "Coca Cola Meatballs",
+  "kosher_status": "meat",
+  "categories": [
+    "Main Dishes"
+  ],
+  "prep_minutes": 20,
+  "cook_minutes": 60,
+  "servings": "15",
+  "ingredients": [
+    {
+      "section": "Coca Cola Meatballs",
+      "items": [
+        {
+          "qty": "500",
+          "unit": "g",
+          "item": "lean ground beef",
+          "prep": ""
+        },
+        {
+          "qty": "1/2",
+          "unit": "cup",
+          "item": "seasoned breadcrumbs",
+          "prep": ""
+        },
+        {
+          "qty": "1",
+          "unit": "",
+          "item": "egg",
+          "prep": ""
+        },
+        {
+          "qty": "1",
+          "unit": "tbsp",
+          "item": "water",
+          "prep": ""
+        },
+        {
+          "qty": "1",
+          "unit": "",
+          "item": "onion",
+          "prep": "minced, divided"
+        },
+        {
+          "qty": "2",
+          "unit": "tsp",
+          "item": "fresh garlic",
+          "prep": "crushed"
+        },
+        {
+          "qty": "1",
+          "unit": "cup",
+          "item": "tomato sauce (thick ketchup)",
+          "prep": ""
+        },
+        {
+          "qty": "1",
+          "unit": "cup",
+          "item": "Coca-Cola",
+          "prep": ""
+        },
+        {
+          "qty": "2",
+          "unit": "tbsp",
+          "item": "Worcestershire sauce",
+          "prep": ""
+        },
+        {
+          "qty": "1/2",
+          "unit": "",
+          "item": "green bell pepper",
+          "prep": ""
+        },
+        {
+          "qty": "",
+          "unit": "",
+          "item": "salt",
+          "prep": ""
+        },
+        {
+          "qty": "",
+          "unit": "",
+          "item": "black pepper",
+          "prep": ""
+        }
+      ]
+    }
+  ],
+  "instructions": [
+    "Pre-heat the oven to 180 deg C (350 deg F). Spray a 20 x 30cm (8 x 12 inch) oven dish with cooking spray.",
+    "In a large mixing bowl, combine the beef, breadcrumbs, egg, water, half of the chopped onion, half of the green bell pepper (if using), half the salt and half the black pepper. Mix well and form into balls. Place in a single layer on the prepared oven dish.",
+    "In a small bowl, mix together the remaining onion, salt, and pepper. Add the garlic, tomato sauce, Coca-Cola, Worcestershire sauce, and the green bell pepper. Pour over the meatballs.",
+    "Bake 50-60 minutes (turning twice) until the sauce is bubbly and the meatballs are fully cooked."
+  ],
+  "tags": [
+    "meatballs",
+    "coca-cola",
+    "beef",
+    "baked",
+    "family"
+  ],
+  "notes": "Signed '- Mom' in the family cookbook (p. 15). The steps call for salt and black pepper, but the ingredient list gives no amounts — season to taste. The photo on the submitted page is a family snapshot, not the dish, so the banner photo is a web photo of Coca-Cola meatballs.",
+  "source": "Photo of recipe page (family cookbook, p. 15)",
+  "banner_image": "assets/images/coca-cola-meatballs.jpg",
+  "pdf": "pdfs/coca-cola-meatballs.pdf",
+  "search_text": "coca cola meatballs meat beef baked coca-cola main dishes",
+  "history": [
+    {
+      "ts": "2026-11-15T23:18:15.629Z",
+      "actor": "sous-chef",
+      "action": "intake",
+      "changes": [
+        "Created recipe"
+      ],
+      "reasoning": "Initial intake"
+    }
+  ]
+}
