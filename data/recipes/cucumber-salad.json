@@ -1,0 +1,96 @@
+{
+  "id": "cucumber-salad",
+  "title": "Cucumber Salad",
+  "kosher_status": "pareve",
+  "kosher_for_passover": false,
+  "categories": [
+    "Salads"
+  ],
+  "prep_minutes": 10,
+  "cook_minutes": 0,
+  "servings": "6",
+  "ingredients": [
+    {
+      "section": "Cucumber Salad",
+      "items": [
+        {
+          "qty": "3",
+          "unit": "",
+          "item": "cucumbers",
+          "prep": "thinly sliced"
+        },
+        {
+          "qty": "2",
+          "unit": "tsp",
+          "item": "salt",
+          "prep": ""
+        },
+        {
+          "qty": "3",
+          "unit": "tbsp",
+          "item": "lemon juice",
+          "prep": "fresh"
+        },
+        {
+          "qty": "1",
+          "unit": "tbsp",
+          "item": "vegetable or avocado oil",
+          "prep": ""
+        },
+        {
+          "qty": "1",
+          "unit": "tbsp",
+          "item": "sugar",
+          "prep": ""
+        },
+        {
+          "qty": "2",
+          "unit": "tbsp",
+          "item": "dill",
+          "prep": ""
+        },
+        {
+          "qty": "1/2",
+          "unit": "cup",
+          "item": "red onion",
+          "prep": "sliced"
+        }
+      ]
+    }
+  ],
+  "instructions": [
+    "Mix the cucumbers and salt. Cover with a plate that rests on the cucumbers and weigh it down with a 1lb can. Let it stand for 1-2 hours. Drain.",
+    "Mix the lemon juice, oil, and sugar. Add to the cucumbers with the dill and onion. Mix and refrigerate."
+  ],
+  "tips": [
+    {
+      "title": "Weigh them down",
+      "text": "The plate and 1lb can press the water out of the salted cucumbers, so the salad stays crisp instead of watery."
+    }
+  ],
+  "tags": [
+    "cucumber",
+    "salad",
+    "dill",
+    "lemon"
+  ],
+  "notes": "From the wedding cookbook, signed '- Kayla'. The salted cucumbers stand for 1-2 hours before the dressing goes on — that resting time is passive, not counted in the prep time. The photo on the submitted page is a family snapshot, not the dish, so the banner photo is a web photo of cucumber dill salad.",
+  "source": "Photo of recipe page (wedding cookbook)",
+  "banner_image": "assets/images/cucumber-salad.jpg",
+  "pdf": "pdfs/cucumber-salad.pdf",
+  "leftover_friendly": false,
+  "photo_generated": false,
+  "tags_need_review": false,
+  "search_text": "cucumber salad pareve salads dill lemon red onion",
+  "history": [
+    {
+      "ts": "2026-11-15T23:27:04.762Z",
+      "actor": "sous-chef",
+      "action": "intake",
+      "changes": [
+        "Created recipe"
+      ],
+      "reasoning": "Initial intake"
+    }
+  ]
+}
