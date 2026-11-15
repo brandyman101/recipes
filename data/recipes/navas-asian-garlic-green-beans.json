@@ -1,0 +1,96 @@
+{
+  "kosher_for_passover": false,
+  "leftover_friendly": false,
+  "photo_generated": false,
+  "tags_need_review": false,
+  "tips": [
+    {
+      "title": "Scrape the pan",
+      "text": "When serving, scoop up the garlic and shallot pieces from the bottom of the pan — that's where the flavor is."
+    }
+  ],
+  "id": "navas-asian-garlic-green-beans",
+  "title": "Nava's Asian Garlic Green Beans",
+  "kosher_status": "pareve",
+  "categories": [
+    "Side Dishes"
+  ],
+  "prep_minutes": 10,
+  "cook_minutes": 10,
+  "servings": "4",
+  "ingredients": [
+    {
+      "section": "Nava's Asian Garlic Green Beans",
+      "items": [
+        {
+          "qty": "1",
+          "unit": "lb",
+          "item": "fresh green beans",
+          "prep": ""
+        },
+        {
+          "qty": "2",
+          "unit": "tbsp",
+          "item": "toasted sesame oil",
+          "prep": ""
+        },
+        {
+          "qty": "3",
+          "unit": "cloves",
+          "item": "garlic",
+          "prep": ""
+        },
+        {
+          "qty": "1",
+          "unit": "",
+          "item": "shallot",
+          "prep": ""
+        },
+        {
+          "qty": "2",
+          "unit": "tbsp",
+          "item": "teriyaki sauce",
+          "prep": ""
+        },
+        {
+          "qty": "",
+          "unit": "",
+          "item": "sesame seeds, chopped peanuts, or slivered almonds",
+          "prep": "for topping",
+          "optional": true
+        }
+      ]
+    }
+  ],
+  "instructions": [
+    "Trim the ends off the green beans. Mince the garlic, and chop the shallot.",
+    "Add the sesame oil to a large skillet over medium to medium-high heat. Let heat for a couple minutes until hot.",
+    "Carefully add the shallot and garlic. Heat for 20-30 seconds.",
+    "Add the green beans and stir well to coat. Sauté until just tender, about 5-6 minutes, stirring often so the garlic doesn't burn.",
+    "Add the teriyaki sauce. Toss to combine and cook 1-2 minutes.",
+    "When serving, don't forget the garlic/shallot pieces on the bottom of the pan — huge flavor!"
+  ],
+  "tags": [
+    "asian",
+    "garlic",
+    "green beans",
+    "sesame",
+    "teriyaki"
+  ],
+  "notes": "From the family cookbook, signed '- Nava'. The topping (sesame seeds, chopped peanuts, or slivered almonds) is optional in the source. The photo on the submitted page is a family snapshot, not the dish, so the banner photo is a web photo of Asian garlic green beans.",
+  "source": "Photo of recipe page (family cookbook)",
+  "banner_image": "assets/images/navas-asian-garlic-green-beans.jpg",
+  "pdf": "pdfs/navas-asian-garlic-green-beans.pdf",
+  "search_text": "nava's asian garlic green beans pareve side dishes sesame teriyaki",
+  "history": [
+    {
+      "ts": "2026-11-15T23:23:47.945Z",
+      "actor": "sous-chef",
+      "action": "intake",
+      "changes": [
+        "Created recipe"
+      ],
+      "reasoning": "Initial intake"
+    }
+  ]
+}
