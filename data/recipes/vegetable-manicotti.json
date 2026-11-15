@@ -1,0 +1,129 @@
+{
+  "kosher_for_passover": false,
+  "leftover_friendly": true,
+  "photo_generated": false,
+  "tags_need_review": false,
+  "tips": [
+    {
+      "title": "No pre-cooking the shells",
+      "text": "The extra liquid in the sauce cooks the uncooked manicotti right in the oven — that's the whole trick of this version."
+    }
+  ],
+  "id": "vegetable-manicotti",
+  "title": "Vegetable Manicotti",
+  "kosher_status": "dairy",
+  "categories": [
+    "Main Dishes"
+  ],
+  "prep_minutes": 20,
+  "cook_minutes": 55,
+  "servings": "14",
+  "ingredients": [
+    {
+      "section": "Vegetable Manicotti",
+      "items": [
+        {
+          "qty": "2",
+          "unit": "tsp",
+          "item": "olive oil",
+          "prep": ""
+        },
+        {
+          "qty": "1",
+          "unit": "",
+          "item": "medium zucchini",
+          "prep": "chopped"
+        },
+        {
+          "qty": "15",
+          "unit": "oz",
+          "item": "part-skim ricotta cheese",
+          "prep": ""
+        },
+        {
+          "qty": "1 1/2",
+          "unit": "cup",
+          "item": "shredded provolone or mozzarella cheese",
+          "prep": "divided"
+        },
+        {
+          "qty": "1/4",
+          "unit": "cup",
+          "item": "parmesan cheese",
+          "prep": "grated"
+        },
+        {
+          "qty": "2",
+          "unit": "",
+          "item": "large eggs",
+          "prep": ""
+        },
+        {
+          "qty": "1",
+          "unit": "tbsp",
+          "item": "fresh parsley",
+          "prep": "chopped"
+        },
+        {
+          "qty": "1/2",
+          "unit": "tsp",
+          "item": "salt",
+          "prep": ""
+        },
+        {
+          "qty": "1/4",
+          "unit": "tsp",
+          "item": "black pepper",
+          "prep": ""
+        },
+        {
+          "qty": "14",
+          "unit": "",
+          "item": "manicotti (8 oz box)",
+          "prep": "uncooked"
+        },
+        {
+          "qty": "1",
+          "unit": "jar",
+          "item": "marinara sauce (28 oz)",
+          "prep": ""
+        },
+        {
+          "qty": "1",
+          "unit": "cup",
+          "item": "water",
+          "prep": ""
+        }
+      ]
+    }
+  ],
+  "instructions": [
+    "In a large skillet, heat the oil over medium heat. Add the zucchini. Cook, stirring, for about 5 minutes. Cool for 5 minutes.",
+    "In a large bowl, combine the ricotta, 1 cup provolone, parmesan, eggs, parsley, salt, and pepper. Transfer the cheese mixture to a large resealable storage bag. Push the mixture toward one corner and twist the bag closed. Make a three-quarter-inch cut in a corner of the bag and squeeze the filling into each pasta tube.",
+    "In a bowl, combine the marinara sauce and water. Spread 2/3 cup into each of two 2-quart baking dishes. Divide the manicotti between the baking dishes, arranging them in a single layer. Top with the remaining marinara sauce.",
+    "Cover one pan with foil and bake 45 minutes. Remove the foil and sprinkle with the remaining 1/4 cup provolone cheese. Bake 10 minutes, or until the cheese melts."
+  ],
+  "tags": [
+    "vegetarian",
+    "pasta",
+    "baked",
+    "zucchini",
+    "ricotta"
+  ],
+  "notes": "Our speedy, healthy version for a classic. By adding extra liquid to the dish, we've eliminated the need to cook the shells before stuffing them. From the family cookbook (p. 14). The photo on the submitted page is a family snapshot, not the dish, so the banner photo is a web photo of baked manicotti.",
+  "source": "Photo of recipe page (family cookbook, p. 14)",
+  "banner_image": "assets/images/vegetable-manicotti.jpg",
+  "pdf": "pdfs/vegetable-manicotti.pdf",
+  "search_text": "vegetable manicotti dairy vegetarian pasta baked zucchini ricotta marinara main dishes",
+  "history": [
+    {
+      "ts": "2026-11-15T23:21:58.888Z",
+      "actor": "sous-chef",
+      "action": "intake",
+      "changes": [
+        "Created recipe"
+      ],
+      "reasoning": "Initial intake"
+    }
+  ]
+}
