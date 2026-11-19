@@ -1,0 +1,17 @@
+{
+  "id": "inbox-mwo6bpu0-72",
+  "type": "shopping-list",
+  "url": null,
+  "image": "data/inbox/inbox-mwo6bpu0-72-1.jpg",
+  "images": [
+    "data/inbox/inbox-mwo6bpu0-72-1.jpg",
+    "data/inbox/inbox-mwo6bpu0-72-2.jpg"
+  ],
+  "file": null,
+  "note": null,
+  "text": null,
+  "status": "pending",
+  "created_at": "2026-11-19T23:21:01.658Z",
+  "recipe_id": null,
+  "fail_reason": null
+}
