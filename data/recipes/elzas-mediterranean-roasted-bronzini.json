@@ -1,17 +1,15 @@
 {
   "id": "elzas-mediterranean-roasted-bronzini",
-  "title": "Elza's Mediterranean Roasted Bronzini",
+  "title": "Mediterranean Roasted Bronzini",
   "kosher_status": "pareve",
   "kosher_for_passover": false,
-  "categories": [
-    "Mains",
-    "Fish"
-  ],
+  "categories": [],
   "prep_minutes": 5,
   "cook_minutes": 10,
   "servings": "2",
   "ingredients": [
     {
+      "section": "",
       "items": [
         {
           "qty": "1",
@@ -60,10 +58,10 @@
   ],
   "instructions": [
     "Ask your fishmonger to clean, debone, and butterfly the fish for you!",
-    "Preheat the oven to 500\u00b0F.",
+    "Preheat the oven to 500°F.",
     "Place the fish on a sheet pan and open it up. Coat the flesh with 1 teaspoon of the olive oil, and season with salt and pepper.",
     "On the bottom half of the fish, spread the crushed garlic and crushed red pepper. Layer the basil on next, followed by the lemon slices.",
-    "Close the fish back up. With a sharp knife, score the skin on top 3 times \u2014 this keeps it from curling up.",
+    "Close the fish back up. With a sharp knife, score the skin on top 3 times — this keeps it from curling up.",
     "Coat the outer skin with the remaining teaspoon of olive oil, and lightly season the skin with salt and pepper.",
     "Roast for about 10 minutes, until the flesh flakes but is still moist and the skin is crisp.",
     "If you like, drizzle a tiny bit more olive oil over the finished fish and serve."
@@ -76,7 +74,7 @@
     "roasted",
     "easy"
   ],
-  "notes": "Whole roasted fish with great flavor, made easy. The printed page's title was \u201cMediterranean Roasted Whole Fish\u201d. Submitted as a photo of a printed recipe page.",
+  "notes": "Whole roasted fish with great flavor, made easy. The printed page's title was “Mediterranean Roasted Whole Fish”. Submitted as a photo of a printed recipe page.",
   "source": "From Elza (printed recipe page)",
   "banner_image": "assets/images/elzas-mediterranean-roasted-bronzini.jpg",
   "pdf": "pdfs/elzas-mediterranean-roasted-bronzini.pdf",
@@ -110,7 +108,59 @@
         }
       ],
       "reasoning": "User request: change 3 lemons to three lemon slices per fish"
+    },
+    {
+      "ts": "2026-11-19T12:37:28.562Z",
+      "actor": "site-editor (Avi)",
+      "action": "edit",
+      "changes": [
+        {
+          "field": "title",
+          "from": "Elza's Mediterranean Roasted Bronzini",
+          "to": "Mediterranean Roasted Bronzini"
+        },
+        {
+          "field": "categories",
+          "from": "2 items (Mains; Fish)",
+          "to": "[]"
+        },
+        {
+          "field": "ingredients",
+          "from": "1 items ([section: 7 items])",
+          "to": "1 items ([section: 7 items])"
+        },
+        {
+          "field": "pdf_stale",
+          "from": false,
+          "to": true
+        },
+        {
+          "field": "pairings",
+          "from": null,
+          "to": "[]"
+        },
+        {
+          "field": "needs_kosher_review",
+          "from": null,
+          "to": false
+        },
+        {
+          "field": "kosher_review_notes",
+          "from": null,
+          "to": ""
+        },
+        {
+          "field": "leftover_note",
+          "from": null,
+          "to": ""
+        }
+      ],
+      "reasoning": null
     }
   ],
-  "pdf_stale": false
+  "pdf_stale": true,
+  "pairings": [],
+  "needs_kosher_review": false,
+  "kosher_review_notes": "",
+  "leftover_note": ""
 }
