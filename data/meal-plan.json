@@ -1453,8 +1453,9 @@
           "id": "mmwo87twx1",
           "text": "Tomatoes like 2 (we have)",
           "have": false,
-          "updatedAt": 1795133635377,
-          "updatedBy": "photo-list"
+          "updatedAt": 1795135724058,
+          "updatedBy": "photo-list",
+          "deleted": true
         },
         {
           "id": "mmwo87twx2",
