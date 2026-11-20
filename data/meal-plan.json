@@ -1590,19 +1590,26 @@
         {
           "id": "mmwo87twx20",
           "text": "Frozen butternut squash SALE",
-          "have": false,
-          "updatedAt": 1795133635377,
-          "updatedBy": "photo-list"
+          "have": true,
+          "updatedAt": 1795134789752,
+          "updatedBy": "smwo8itlo3j2h5x",
+          "haveSession": "smwo8itlo3j2h5x",
+          "haveAt": 1795134789752,
+          "haveSessions": [
+            "smwo8itlo3j2h5x"
+          ]
         },
         {
           "id": "mmwo87twx21",
           "text": "2 frozen pie crusts- deep",
-          "have": false,
-          "updatedAt": 1795134399165,
+          "have": true,
+          "updatedAt": 1795134791788,
           "updatedBy": "smwo8itlo3j2h5x",
-          "haveSession": null,
-          "haveAt": 0,
-          "haveSessions": []
+          "haveSession": "smwo8itlo3j2h5x",
+          "haveAt": 1795134791788,
+          "haveSessions": [
+            "smwo8itlo3j2h5x"
+          ]
         },
         {
           "id": "mmwo87twx22",
