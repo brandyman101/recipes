@@ -1513,9 +1513,14 @@
         {
           "id": "mmwo87twx9",
           "text": "Aron's cut up sweet potatoes cubes — SALE",
-          "have": false,
-          "updatedAt": 1795133635377,
-          "updatedBy": "photo-list"
+          "have": true,
+          "updatedAt": 1795135666008,
+          "updatedBy": "smwo8itlo3j2h5x",
+          "haveSession": "smwo8itlo3j2h5x",
+          "haveAt": 1795135666008,
+          "haveSessions": [
+            "smwo8itlo3j2h5x"
+          ]
         },
         {
           "id": "mmwo87twx10",
