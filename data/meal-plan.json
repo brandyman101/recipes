@@ -1573,8 +1573,9 @@
           "id": "mmwo87twx18",
           "text": "Mozzerella cheese ball sliced",
           "have": false,
-          "updatedAt": 1795133635377,
-          "updatedBy": "photo-list"
+          "updatedAt": 1795134239339,
+          "updatedBy": "photo-list",
+          "deleted": true
         },
         {
           "id": "mmwo87twx19",
