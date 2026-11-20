@@ -1465,9 +1465,14 @@
         {
           "id": "mmwo87twx2",
           "text": "Avocado 2",
-          "have": false,
-          "updatedAt": 1795133635377,
-          "updatedBy": "photo-list"
+          "have": true,
+          "updatedAt": 1795136071620,
+          "updatedBy": "smwo8itlo3j2h5x",
+          "haveSession": "smwo8itlo3j2h5x",
+          "haveAt": 1795136071620,
+          "haveSessions": [
+            "smwo8itlo3j2h5x"
+          ]
         },
         {
           "id": "mmwo87twx3",
