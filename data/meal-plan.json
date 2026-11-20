@@ -1614,9 +1614,14 @@
         {
           "id": "mmwo87twx22",
           "text": "Can of red beans",
-          "have": false,
-          "updatedAt": 1795133635377,
-          "updatedBy": "photo-list"
+          "have": true,
+          "updatedAt": 1795135406126,
+          "updatedBy": "smwo8itlo3j2h5x",
+          "haveSession": "smwo8itlo3j2h5x",
+          "haveAt": 1795135406126,
+          "haveSessions": [
+            "smwo8itlo3j2h5x"
+          ]
         },
         {
           "id": "mmwo87twx23",
@@ -1657,9 +1662,14 @@
         {
           "id": "mmwo87twx26",
           "text": "can corn",
-          "have": false,
-          "updatedAt": 1795133635377,
-          "updatedBy": "photo-list"
+          "have": true,
+          "updatedAt": 1795135408127,
+          "updatedBy": "smwo8itlo3j2h5x",
+          "haveSession": "smwo8itlo3j2h5x",
+          "haveAt": 1795135408127,
+          "haveSessions": [
+            "smwo8itlo3j2h5x"
+          ]
         },
         {
           "id": "mmwo87twx27",
