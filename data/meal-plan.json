@@ -1628,9 +1628,14 @@
         {
           "id": "mmwo87twx24",
           "text": "1 28 ounce can of crushed tomatoes",
-          "have": false,
-          "updatedAt": 1795133635377,
-          "updatedBy": "photo-list"
+          "have": true,
+          "updatedAt": 1795134862561,
+          "updatedBy": "smwo8itlo3j2h5x",
+          "haveSession": "smwo8itlo3j2h5x",
+          "haveAt": 1795134862561,
+          "haveSessions": [
+            "smwo8itlo3j2h5x"
+          ]
         },
         {
           "id": "mmwo87twx25",
