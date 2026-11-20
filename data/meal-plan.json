@@ -1674,9 +1674,14 @@
         {
           "id": "mmwo87twx27",
           "text": "Chumus get spicy for mama",
-          "have": false,
-          "updatedAt": 1795133635377,
-          "updatedBy": "photo-list"
+          "have": true,
+          "updatedAt": 1795135455707,
+          "updatedBy": "smwo8itlo3j2h5x",
+          "haveSession": "smwo8itlo3j2h5x",
+          "haveAt": 1795135455707,
+          "haveSessions": [
+            "smwo8itlo3j2h5x"
+          ]
         }
       ],
       "haveGenerated": [],
