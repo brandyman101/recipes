@@ -1559,8 +1559,9 @@
           "id": "mmwo87twx16",
           "text": "Noah's yogurt",
           "have": false,
-          "updatedAt": 1795133635377,
-          "updatedBy": "photo-list"
+          "updatedAt": 1795134259532,
+          "updatedBy": "photo-list",
+          "deleted": true
         },
         {
           "id": "mmwo87twx17",
