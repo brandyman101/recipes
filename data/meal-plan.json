@@ -1252,7 +1252,7 @@
       "manualItems": [
         {
           "id": "mmwo70w0q0",
-          "text": "Aron's cut up sweet potatoes cubes \u2014 SALE",
+          "text": "Aron's cut up sweet potatoes cubes — SALE",
           "have": false,
           "updatedAt": 1795133635377,
           "updatedBy": "chat-replace",
@@ -1300,7 +1300,7 @@
         },
         {
           "id": "mmwo70w0q6",
-          "text": "Apples \u2014 HONEYCRISP ONLY ( this is different than what I normally ask for which is Macintosh) buy 5",
+          "text": "Apples — HONEYCRISP ONLY ( this is different than what I normally ask for which is Macintosh) buy 5",
           "have": false,
           "updatedAt": 1795133635377,
           "updatedBy": "chat-replace",
@@ -1332,7 +1332,7 @@
         },
         {
           "id": "mmwo70w0q10",
-          "text": "Pepper\u2014 Aron's diced mixed peppers -SALE",
+          "text": "Pepper— Aron's diced mixed peppers -SALE",
           "have": false,
           "updatedAt": 1795133635377,
           "updatedBy": "chat-replace",
@@ -1340,7 +1340,7 @@
         },
         {
           "id": "mmwo70w0q11",
-          "text": "Chicken combo drums and THIGHS\u2014 REGULAR CHICKEN PLEASE SALE",
+          "text": "Chicken combo drums and THIGHS— REGULAR CHICKEN PLEASE SALE",
           "have": false,
           "updatedAt": 1795133635377,
           "updatedBy": "chat-replace",
@@ -1472,7 +1472,7 @@
         },
         {
           "id": "mmwo87twx4",
-          "text": "Apples \u2014 HONEYCRISP ONLY ( this is different than what I normally ask for which is Macintosh) buy 5",
+          "text": "Apples — HONEYCRISP ONLY ( this is different than what I normally ask for which is Macintosh) buy 5",
           "have": false,
           "updatedAt": 1795133635377,
           "updatedBy": "photo-list"
@@ -1500,14 +1500,14 @@
         },
         {
           "id": "mmwo87twx8",
-          "text": "Pepper\u2014 Aron's diced mixed peppers -SALE",
+          "text": "Pepper— Aron's diced mixed peppers -SALE",
           "have": false,
           "updatedAt": 1795133635377,
           "updatedBy": "photo-list"
         },
         {
           "id": "mmwo87twx9",
-          "text": "Aron's cut up sweet potatoes cubes \u2014 SALE",
+          "text": "Aron's cut up sweet potatoes cubes — SALE",
           "have": false,
           "updatedAt": 1795133635377,
           "updatedBy": "photo-list"
@@ -1535,7 +1535,7 @@
         },
         {
           "id": "mmwo87twx13",
-          "text": "Chicken combo drums and THIGHS\u2014 REGULAR CHICKEN PLEASE SALE",
+          "text": "Chicken combo drums and THIGHS— REGULAR CHICKEN PLEASE SALE",
           "have": false,
           "updatedAt": 1795133635377,
           "updatedBy": "photo-list"
@@ -1551,8 +1551,9 @@
           "id": "mmwo87twx15",
           "text": "One gallon of Noah's milk",
           "have": false,
-          "updatedAt": 1795133635377,
-          "updatedBy": "photo-list"
+          "updatedAt": 1795134148187,
+          "updatedBy": "photo-list",
+          "deleted": true
         },
         {
           "id": "mmwo87twx16",
@@ -1638,7 +1639,9 @@
           "updatedAt": 1795133635377,
           "updatedBy": "photo-list"
         }
-      ]
+      ],
+      "haveGenerated": [],
+      "optionalPromoted": []
     }
   }
 }
