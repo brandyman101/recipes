@@ -1477,9 +1477,14 @@
         {
           "id": "mmwo87twx3",
           "text": "clementines",
-          "have": false,
-          "updatedAt": 1795133635377,
-          "updatedBy": "photo-list"
+          "have": true,
+          "updatedAt": 1795136097122,
+          "updatedBy": "smwo8itlo3j2h5x",
+          "haveSession": "smwo8itlo3j2h5x",
+          "haveAt": 1795136097122,
+          "haveSessions": [
+            "smwo8itlo3j2h5x"
+          ]
         },
         {
           "id": "mmwo87twx4",
