@@ -116,6 +116,15 @@ body {
   white-space: nowrap;
 }
 
+/* Brand badge (Avi's logo, words removed) left of the title — 2026-11-25. */
+.site-logo {
+  height: 2.1rem;
+  width: 2.1rem;
+  border-radius: 7px;
+  vertical-align: -0.55rem;
+  margin-right: 0.5rem;
+}
+
 .main-nav { display: flex; gap: 0.25rem; }
 
 /* Hamburger toggle — hidden on desktop, shown on small screens. */
