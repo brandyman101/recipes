@@ -1,1 +1,98 @@
-{"circular": "1-Arons-circular-11.15.26-Nuts-Factory-updated-15272587.pdf", "effective": "November 15\u201320, 2026", "updated": "2026-11-18", "status": "current", "from_recipes": [{"title": "Classic Pepper Steak with Green Peppers and Tomatoes", "recipe_id": "classic-pepper-steak-with-green-peppers-and-tomatoes", "sale": "Grass-fed beef strips $8.99/lb, diced mixed peppers $3.99/lb, onions $0.89/lb"}, {"title": "Honey Garlic Chicken & Orzo", "recipe_id": "honey-garlic-chicken-orzo", "sale": "Chicken combo drums & thighs $2.89/lb, onions $0.89/lb"}, {"title": "Honey Garlic Chicken", "recipe_id": "honey-garlic-chicken", "sale": "Chicken combo drums & thighs $2.89/lb"}, {"title": "Chicken Soup", "recipe_id": "chicken-soup", "sale": "Chicken combo drums & thighs $2.89/lb, cello carrots 4/$3, onions $0.89/lb, Tabatchnick broth 2/$5"}, {"title": "Squash Kugel", "recipe_id": "squash-kugel", "sale": "Acorn, spaghetti or kabocha squash $0.79/lb, Birds Eye butternut squash 2/$5, Unger\u2019s deep dish pie crusts $5.99"}, {"title": "Feta Pasta", "recipe_id": "feta-pasta", "sale": "Tnuva feta cheese in brine $6.99"}, {"title": "Buffalo Chicken Wings", "recipe_id": "buffalo-chicken-wings", "sale": "Ready-to-cook shwarma-style chicken wings $2.99/lb"}, {"title": "Cucumber Salad", "recipe_id": "cucumber-salad", "sale": "Hot house cucumbers 2/$3, red onions $0.89/lb"}, {"title": "Nava\u2019s Asian Garlic Green Beans", "recipe_id": "navas-asian-garlic-green-beans", "sale": "Gefen whole green beans 2/$5, fresh scallions $0.99"}, {"title": "Lagman", "recipe_id": "lagman", "sale": "Grass-fed beef strips $8.99/lb, carrots 4/$3, onions $0.89/lb, diced mixed peppers $3.99/lb"}], "new_ideas": [{"title": "Roast turkey with stuffing & cranberry sauce (Thanksgiving prep)", "sale": "Empire whole turkey $3.99/lb, Oroweat stuffing $3.99, cranberry sauce 2/$3, Streit\u2019s turkey gravy mix 2/$4"}, {"title": "Spatchcock roast chicken with squash & carrots (Shabbat)", "sale": "Spatchcock whole chicken $3.49/lb, squash $0.79/lb, cello carrots 4/$3"}, {"title": "Eggplant Parmesan", "sale": "Black beauty eggplants $1.29/lb, Miller\u2019s shredded mozzarella 2/$4"}, {"title": "Cheese tortellini with pesto", "sale": "Yonis cheese tortellini $7.99, Tuscanini pesto basil $3.99"}], "stock_up": "Worth stocking up: Tuscanini extra light olive oil 1L at $8.99, and Domino granulated sugar 3/$10 (4 lb bags) for holiday baking.", "deli_note": "Mechy\u2019s Deli (Mon\u2013Fri): pastrami orzo $9.99/lb and hot honey southern fried chicken $9.99/lb make easy nights; sushi vegetable roll $7.45."}
+{
+  "circular": "2-AKF-Weekly-Circular-11-22-2026.pdf",
+  "effective": "November 22\u201327, 2026",
+  "updated": "2026-11-25",
+  "status": "current",
+  "from_recipes": [
+    {
+      "title": "Avi's Beef Borekas",
+      "recipe_id": "avis-beef-borekas",
+      "sale": "Pepperidge Farm puff pastry $4.99 + ground chuck $5.99/lb"
+    },
+    {
+      "title": "Deli Roll",
+      "recipe_id": "deli-roll",
+      "sale": "Pepperidge Farm puff pastry $4.99 + Tirat Zvi turkey breast 2 for $5"
+    },
+    {
+      "title": "Buffalo Chicken Wings",
+      "recipe_id": "buffalo-chicken-wings",
+      "sale": "Chicken wings $1.99/lb"
+    },
+    {
+      "title": "Honey Garlic Chicken",
+      "recipe_id": "honey-garlic-chicken",
+      "sale": "Chicken legs $2.29/lb"
+    },
+    {
+      "title": "Chicken Soup",
+      "recipe_id": "chicken-soup",
+      "sale": "Chicken legs $2.29/lb, cello carrots 2 for $6, yellow onions 2 for $3"
+    },
+    {
+      "title": "Squash Kugel",
+      "recipe_id": "squash-kugel",
+      "sale": "Whole butternut squash 89\u00a2/lb"
+    },
+    {
+      "title": "Dill Potatoes",
+      "recipe_id": "dill-potatoes",
+      "sale": "Red C baby potatoes 89\u00a2/lb (Idaho potatoes 2 for $5)"
+    },
+    {
+      "title": "Cucumber Salad",
+      "recipe_id": "cucumber-salad",
+      "sale": "Persian cucumbers 2 for $5"
+    },
+    {
+      "title": "French Onion Soup",
+      "recipe_id": "french-onion-soup",
+      "sale": "Yellow onions 2 for $3 + Les Petites shredded cheese 2 for $6"
+    },
+    {
+      "title": "Easy Stove Top Mac and Cheese",
+      "recipe_id": "easy-stove-top-mac-and-cheese",
+      "sale": "Les Petites shredded cheese 2 for $6 + Ronzoni pasta 5 for $5"
+    },
+    {
+      "title": "Penne Alla Vodka",
+      "recipe_id": "penne-alla-vodka",
+      "sale": "Ronzoni pasta 5 for $5 + Farmland heavy cream $5.99"
+    },
+    {
+      "title": "Coca Cola Meatballs",
+      "recipe_id": "coca-cola-meatballs",
+      "sale": "Ground chuck $5.99/lb"
+    },
+    {
+      "title": "Macarone Patlotski",
+      "recipe_id": "macarone-patlotski",
+      "sale": "Ground chuck $5.99/lb + Ronzoni pasta 5 for $5"
+    },
+    {
+      "title": "Vegetable Manicotti",
+      "recipe_id": "vegetable-manicotti",
+      "sale": "Polly-O ricotta $4.99 + Les Petites shredded cheese 2 for $6"
+    }
+  ],
+  "new_ideas": [
+    {
+      "title": "Thanksgiving roast turkey with butternut squash & sweet potatoes",
+      "sale": "Empire whole turkey $3.99/lb, butternut squash 89\u00a2/lb, sweet potato yams 89\u00a2/lb, Bowl & Basket cranberry 2 for $3"
+    },
+    {
+      "title": "Sheet-pan chicken legs with sweet potatoes & broccoli",
+      "sale": "Chicken legs $2.29/lb, sweet potato yams 89\u00a2/lb, broccoli crowns $1.49/lb"
+    },
+    {
+      "title": "Pan-seared tilapia with garlic broccoli",
+      "sale": "Tilapia fillet $7.99/lb, broccoli crowns $1.49/lb, Gefen crushed garlic cubes $2.79"
+    },
+    {
+      "title": "Turkey shawarma wraps",
+      "sale": "Ready-to-cook dark meat turkey shawarma $7.99/lb, romaine hearts 2 for $6, Sonny & Joes classic hummus $2.99"
+    }
+  ],
+  "stock_up": "Ronzoni pasta is 5 for $5 and Domino granulated sugar is 3 for $10 \u2014 good week to stock the pantry.",
+  "deli_note": "Mechy's Deli: southern fried chicken, classic meatloaf, rice & mushroom stuffed capons and breaded chicken cutlets all $10.99/lb; sides (Israeli couscous, yellow rice, garlic pasta, mashed sweet potatoes) $7.99/lb; all wraps buy 2 get 1 free."
+}
