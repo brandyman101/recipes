@@ -1593,7 +1593,8 @@ input[type="range"].mood-range::-moz-range-thumb {
 /* "Start cooking" sits at the end of the Instructions section. */
 .cook-start-wrap { margin-top: 1rem; }
 
-/* Secret code button in the header (next to the dark-mode switch). */
+/* Secret code button — in the footer since 2026-11-25 (Avi's request; was in the header). */
 .code-btn { background: none; border: 1px solid var(--line); border-radius: 8px;
   padding: 0.3rem 0.5rem; font-size: 1.05rem; line-height: 1; cursor: pointer; flex: none; }
 .code-btn.has-code { border-color: var(--accent); background: var(--cream); }
+.site-footer .code-btn { display: block; margin: 0.6rem auto 0; }
