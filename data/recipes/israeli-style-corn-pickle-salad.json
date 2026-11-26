@@ -1,0 +1,150 @@
+{
+  "banner_image": "assets/images/israeli-style-corn-pickle-salad.jpg",
+  "categories": [
+    "Salads"
+  ],
+  "cook_minutes": 0,
+  "id": "israeli-style-corn-pickle-salad",
+  "ingredients": [
+    {
+      "items": [
+        {
+          "item": "canned corn",
+          "prep": "drained very well",
+          "qty": "3",
+          "unit": "cup"
+        },
+        {
+          "item": "dill pickles",
+          "prep": "finely diced",
+          "qty": "3–4",
+          "unit": ""
+        },
+        {
+          "item": "red bell pepper",
+          "prep": "finely diced",
+          "qty": "1/2",
+          "unit": ""
+        },
+        {
+          "item": "small red onion",
+          "prep": "finely diced",
+          "qty": "1/4",
+          "unit": ""
+        },
+        {
+          "item": "fresh parsley",
+          "prep": "chopped",
+          "qty": "2",
+          "unit": "tbsp"
+        }
+      ],
+      "section": "Salad"
+    },
+    {
+      "items": [
+        {
+          "item": "mayonnaise",
+          "prep": "",
+          "qty": "1/3",
+          "unit": "cup"
+        },
+        {
+          "item": "pickle juice",
+          "prep": "",
+          "qty": "1",
+          "unit": "tbsp"
+        },
+        {
+          "item": "Dijon mustard",
+          "prep": "",
+          "qty": "1",
+          "unit": "tsp"
+        },
+        {
+          "item": "garlic powder",
+          "prep": "",
+          "qty": "1/2",
+          "unit": "tsp"
+        },
+        {
+          "item": "black pepper",
+          "prep": "",
+          "qty": "1/4",
+          "unit": "tsp"
+        },
+        {
+          "item": "salt",
+          "prep": "",
+          "qty": "1",
+          "unit": "pinch"
+        },
+        {
+          "item": "sugar",
+          "optional": true,
+          "prep": "",
+          "qty": "1/2",
+          "unit": "tsp"
+        }
+      ],
+      "section": "Dressing"
+    }
+  ],
+  "instructions": [
+    "Drain the corn really well so the salad doesn't become watery.",
+    "Finely dice the pickles, red bell pepper, and red onion.",
+    "In a small bowl, mix the mayonnaise, pickle juice, Dijon mustard, garlic powder, black pepper, salt, and sugar.",
+    "Add the dressing to the corn and vegetables.",
+    "Mix everything together and fold in the parsley.",
+    "Refrigerate for at least 30–60 minutes before serving."
+  ],
+  "kosher_for_passover": false,
+  "kosher_status": "pareve",
+  "leftover_friendly": true,
+  "notes": "No cooking required — just chop, mix, and chill. 3 cups of corn is about 2 cans. The submitter recommends regular full-fat Hellmann's mayo and crunchy kosher dill pickles for a deli-style result. The 30–60 minute chill is passive time, not counted in prep. The banner photo is a web photo of Israeli corn pickle salad (Debra Klein, debraklein.com).",
+  "pdf": "pdfs/israeli-style-corn-pickle-salad.pdf",
+  "photo_generated": false,
+  "prep_minutes": 15,
+  "search_text": "israeli-style corn pickle salad pareve salads corn pickles red bell pepper red onion parsley mayonnaise no-cook",
+  "servings": "8",
+  "source": "Pasted text submission",
+  "tags": [
+    "corn",
+    "pickles",
+    "salad",
+    "red pepper",
+    "parsley",
+    "no-cook"
+  ],
+  "tags_need_review": false,
+  "tips": [
+    {
+      "text": "Chop the pickles very small so you get a little pickle in every bite.",
+      "title": "Chop the pickles small"
+    },
+    {
+      "text": "The pickle juice is what makes the dressing — don't skip it.",
+      "title": "Don't skip the pickle juice"
+    },
+    {
+      "text": "Start with 1/4 cup mayo and add more if you want it creamier.",
+      "title": "Adjust the mayo"
+    },
+    {
+      "text": "Make it a few hours ahead of time. It tastes even better once chilled.",
+      "title": "Make it ahead"
+    }
+  ],
+  "title": "Israeli-Style Corn & Pickle Salad",
+  "history": [
+    {
+      "ts": "2026-11-26T16:41:04.532Z",
+      "actor": "sous-chef",
+      "action": "intake",
+      "changes": [
+        "Created recipe"
+      ],
+      "reasoning": "Initial intake"
+    }
+  ]
+}
