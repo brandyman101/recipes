@@ -114,15 +114,18 @@ body {
   text-decoration: none;
   margin-right: auto;
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
 }
 
-/* Brand badge (Avi's logo, words removed) left of the title — 2026-11-25. */
+/* Brand badge (Avi's logo, words removed) left of the title — 2026-11-25.
+   Enlarged + title vertically centered against it, same day at Avi's request. */
 .site-logo {
-  height: 2.1rem;
-  width: 2.1rem;
-  border-radius: 7px;
-  vertical-align: -0.55rem;
-  margin-right: 0.5rem;
+  height: 2.75rem;
+  width: 2.75rem;
+  border-radius: 8px;
+  margin-right: 0.55rem;
+  flex: none;
 }
 
 .main-nav { display: flex; gap: 0.25rem; }
@@ -1207,6 +1210,7 @@ input[type="range"].mood-range::-moz-range-thumb {
     padding: 0.55rem 0.75rem;
   }
   .site-title { font-size: 1.45rem; }
+  .site-logo { height: 2.3rem; width: 2.3rem; margin-right: 0.45rem; }
   .edit-toggle {
     padding: 0.35rem 0.6rem;
     font-size: 0.78rem;
