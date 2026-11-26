@@ -7,11 +7,11 @@
    - Bridge GETs (recipe data) are network-first with a cache fallback,
      so the last-loaded recipes still show offline.
    - POSTs are never cached and always go to the network. */
-var CACHE = 'brandel-recipes-v20261125c';
+var CACHE = 'brandel-recipes-v20261125d';
 var SHELL = [
   './',
   'index.html',
-  'styles.css?v=20261125b',
+  'styles.css?v=20261125c',
   'app.js?v=20261115a',
   'manifest.json',
   'assets/images/logo-v2-192.png',
